@@ -95,6 +95,7 @@ public class UUserVORowImpl extends BaseViewRowImpl {
         CompanyName,
         CanBeSearch,
         DefaultRole,
+        Status,
         UserSkill,
         UserEducation,
         UserLocationList,
@@ -185,6 +186,7 @@ public class UUserVORowImpl extends BaseViewRowImpl {
     public static final int COMPANYNAME = AttributesEnum.CompanyName.index();
     public static final int CANBESEARCH = AttributesEnum.CanBeSearch.index();
     public static final int DEFAULTROLE = AttributesEnum.DefaultRole.index();
+    public static final int STATUS = AttributesEnum.Status.index();
     public static final int USERSKILL = AttributesEnum.UserSkill.index();
     public static final int USEREDUCATION = AttributesEnum.UserEducation.index();
     public static final int USERLOCATIONLIST = AttributesEnum.UserLocationList.index();
@@ -1090,6 +1092,22 @@ public class UUserVORowImpl extends BaseViewRowImpl {
      */
     public void setDefaultRole(String value) {
         setAttributeInternal(DEFAULTROLE, value);
+    }
+
+    /**
+     * Gets the attribute value for STATUS using the alias name Status.
+     * @return the STATUS
+     */
+    public String getStatus() {
+        return (String) getAttributeInternal(STATUS);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for STATUS using the alias name Status.
+     * @param value value to set the STATUS
+     */
+    public void setStatus(String value) {
+        setAttributeInternal(STATUS, value);
     }
 
     /**
