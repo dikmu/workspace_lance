@@ -7,8 +7,11 @@ import com.lance.model.vo.PostJobDiscussVORowImpl;
 import com.lance.model.vo.PostJobsVOImpl;
 import com.lance.model.vo.PostJobsVORowImpl;
 import com.lance.view.rest.project.ContractResource;
+import com.lance.view.rest.uuser.CacheResource;
+import com.lance.view.rest.uuser.UserResource;
 import com.lance.view.util.LUtil;
 
+import com.zngh.platform.front.core.model.cache.AuthCache;
 import com.zngh.platform.front.core.view.BaseRestResource;
 
 import javax.ws.rs.Consumes;
@@ -314,7 +317,15 @@ public class PostJobResource extends BaseRestResource {
         LanceRestAMImpl am = LUtil.findLanceAM();
         PostJobsVOImpl vo = am.getPostJobs1();
         PostJobsVORowImpl row = this.findPostJobById(postJobId, vo);
-        return this.convertRowToJsonObject(row, POST_JOB_VO_ATTR_GET);
+        JSONObject json = this.convertRowToJsonObject(row, POST_JOB_VO_ATTR_GET);
+        json.put("Img", AuthCache.getUserById(json.getString("CreateBy")).get("Img"));
+        JSONObject userJson = new UserResource().findUserById(json.getString("CreateBy"));
+        String location = userJson.has("LocationA") ? userJson.getString("LocationA") : (userJson.has("LocationB") ? userJson.getString("LocationB") : "");
+        json.put("Location", location);
+        json.put("Location", (location==null && location.length() == 0) ? "江西 吉安" : location);
+        json.put("WorkCategory", new CacheResource().getJobCategoryNameFromCache(json.getString("WorkCategory")));
+        json.put("WorkSubcategory", new CacheResource().getJobSubCategoryNameFromCache(json.getString("WorkSubcategory")));
+        return json;
     }
 
     /**
@@ -442,15 +453,79 @@ public class PostJobResource extends BaseRestResource {
     @GET
     @Path("{postJobId}/discuss")
     @Produces(MediaType.APPLICATION_JSON)
-    public JSONObject getJobDiscuss(@PathParam("postJobId") String jobId) throws JSONException {
+    public JSONArray getJobDiscuss(@PathParam("postJobId") String jobId) throws JSONException {
+//        LanceRestAMImpl am = LUtil.findLanceAM();
+//        PostJobsVOImpl vo = am.getPostJobs1();
+//        findPostJobById(jobId, vo);
+//        System.out.println(vo.getCurrentRow());
+//        PostJobDiscussVOImpl vo2 = am.getPostJobDiscuss1();
+//        vo2.executeQuery();
+//        System.out.println(vo2.getEstimatedRowCount());
+//        getJobDiscussTree(jobId)
+//        return this.packViewObject(vo2, null, null, POST_JOB_DISCUSS_VO_ATTR_READ);
+        return getJobDiscussTree(jobId,null);
+    }
+    
+    @GET
+    @Path("{postJobId}/{type}/discuss")
+    @Produces(MediaType.APPLICATION_JSON)
+    public JSONArray getJobDiscuss(@PathParam("postJobId") String jobId,@PathParam("type")String type) throws JSONException {
+        
+      return getJobDiscussTree(jobId,type);
+    }
+    
+    public PostJobDiscussVOImpl getParentDiscuss(LanceRestAMImpl am,String jobid,String type) throws JSONException {
+        PostJobDiscussVOImpl vo = am.getPostJobDiscussVO1();
+        vo.setApplyViewCriteriaName("FindParentDiscussVC");
+        vo.setapplyflag(null);
+        vo.setuName(null);
+        if("apply".equals(type)){
+            //申请
+            vo.setapplyflag("Y");
+         }else if("second".equals(type)){
+           //备选
+            
+         }else if("owner".equals(type)){
+            //查看与自己相关的
+            vo.setuName(this.findCurrentUserName());
+         }
+        vo.setpJobId(jobid);
+        vo.setRangeSize(-1);
+        vo.setOrderByClause("CREATE_ON desc");
+        vo.executeQuery();
+System.out.println("vo.getQuery():"+vo.getQuery());
+        vo.removeApplyViewCriteriaName("FindParentDiscussVC");
+        System.out.println("vo.getQuery()2:"+vo.getQuery());
+        return vo;
+    }
+    
+    public PostJobDiscussVOImpl getDiscussByPid(LanceRestAMImpl am,String pid){
+        PostJobDiscussVOImpl vo = am.getPostJobDiscuss2();
+        vo.setApplyViewCriteriaName("findDiscussByParentID");
+        vo.setpId(pid);
+        vo.setRangeSize(-1);
+        vo.setOrderByClause("CREATE_ON");
+        vo.executeQuery();
+        vo.removeApplyViewCriteriaName("findDiscussByParentID");
+        return vo;
+    }
+    
+    public JSONArray getJobDiscussTree(String jobId,String type) throws JSONException {
         LanceRestAMImpl am = LUtil.findLanceAM();
-        PostJobsVOImpl vo = am.getPostJobs1();
-        findPostJobById(jobId, vo);
-        System.out.println(vo.getCurrentRow());
-        PostJobDiscussVOImpl vo2 = am.getPostJobDiscuss1();
-        vo2.executeQuery();
-        System.out.println(vo2.getEstimatedRowCount());
-        return this.packViewObject(vo2, null, null, POST_JOB_DISCUSS_VO_ATTR_READ);
+        JSONArray arr = new JSONArray();
+        PostJobDiscussVOImpl vo2 = getParentDiscuss(am, jobId,type);
+        for(Row r :  vo2.getAllRowsInRange()){
+            JSONObject json = this.convertRowToJsonObject(vo2, r, POST_JOB_DISCUSS_VO_ATTR_READ);
+            json.put("Img", AuthCache.getUserById(json.getString("CreateBy")).get("Img"));
+            JSONObject userJson = new UserResource().findUserById(json.getString("CreateBy"));
+            String location = userJson.has("LocationA") ? userJson.getString("LocationA") : (userJson.has("LocationB") ? userJson.getString("LocationB") : "");
+            json.put("Location", location);
+            PostJobDiscussVORowImpl _r = (PostJobDiscussVORowImpl)r;
+            PostJobDiscussVOImpl cvo = getDiscussByPid(am, _r.getUuid());
+            json.put("children", this.convertVoToJsonArray(cvo, POST_JOB_DISCUSS_VO_ATTR_READ));
+            arr.put(json);
+        }
+        return arr;
     }
 
     /**

@@ -48,7 +48,7 @@
                                     邮件发送中...
                                 </span>
                             {{/if}}
-                         </script>
+                    </script>
                     <div class="share" id="share-area">
                         将Lance分享给你的好友<br /><br />
                         <!-- JiaThis Button BEGIN -->

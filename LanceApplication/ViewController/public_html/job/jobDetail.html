@@ -93,76 +93,107 @@
                     <h2 class="lan-font-green">Google眼睛系统发开</h2>
                     
                     <ol class="breadcrumb">
-                        <li><a href="#">项目分类1</a></li>
-                        <li><a href="#">项目分类2</a></li>
+                        <li><a href="#" id="WorkCategory">项目分类1</a></li>
+                        <li><a href="#" id="WorkSubcategory">项目分类2</a></li>
                     </ol>
                     
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <table border="0" width="100%" class="title-info">
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-time"></span> 发布时间：2015-01-23
-                                    </td>
-                                    <td>
-                                        <span class="glyphicon glyphicon-time"></span> 时新：2015-01-23
-                                    </td>
-                                    <td>
-                                        <span class="glyphicon glyphicon-time"></span> 剩余时间：2015-01-23
-                                    </td>
-                                    <td>
-                                        <span class="glyphicon glyphicon-time"></span> 工作周期：2015-01-23
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-time"></span> 每周工作时间：2015-01-23
-                                    </td>
-                                    <td>
-                                        <span class="glyphicon glyphicon-time"></span> 工作地点：2015-01-23
-                                    </td>
-                                    <td>
-                                        <span class="glyphicon glyphicon-time"></span> 项目开始时间：2015-01-23
-                                    </td>
-                                    <td>
-                                        
-                                    </td>
-                                </tr>
-                            </table>
+                                  <table border="0" width="100%" class="title-info">
+                                    <tbody id="job-msg-area">
+                                       <script id="job-msg-sp1" type="text/html">
+                                        {{if status=="fixed"}}
+                                             <tr>
+                                                <td>
+                                                    <span class="glyphicon glyphicon-time"></span> 价格：<span id="Fixed-Pay"></span>
+                                                </td>
+                                                 <td>
+                                                    <span class="glyphicon glyphicon-time"></span> 项目周期：<span id="Duration"></span>
+                                                </td>
+                                                <td>
+                                                    <span class="glyphicon glyphicon-time"></span> 工作地点：<span id="IndexLocation"></span>
+                                                </td>
+                                                 <td>
+                                                    <span class="glyphicon glyphicon-time"></span> 发布时间：<span id="CreateOn">2015-01-23</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                   <span class="glyphicon glyphicon-time"></span> 每周工作时间：<span id="WeeklyHours"></span>
+                                                </td>
+                                                <td>
+                                                  <span class="glyphicon glyphicon-time"></span> 办公方式：<span id="FixedLocation"></span>
+                                                </td>
+                                                <td>
+                                                  <span class="glyphicon glyphicon-time"></span> 项目开始时间：<span id="PostJobDateStart"></span>
+                                                </td>
+                                                <td>
+                                                   <span class="glyphicon glyphicon-time"></span> 项目结束时间：<span id="PostJobDateEnd"></span>
+                                                </td>
+                                            </tr>
+                                         {{else if status=="hourly"}} 
+                                             <tr>
+                                                <td>
+                                                    <span class="glyphicon glyphicon-time"></span> 价格：<span id="hourly-Pay"></span>
+                                                </td>
+                                                <td>
+                                                    <span class="glyphicon glyphicon-time"></span> 工作周期：<span id="Duration"></span>
+                                                </td>
+                                                <td>
+                                                    <span class="glyphicon glyphicon-time"></span> 工作地点：<span id="IndexLocation"></span>
+                                                </td>
+                                                <td>
+                                                    <span class="glyphicon glyphicon-time"></span> 发布时间：<span id="CreateOn">2015-01-23</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span class="glyphicon glyphicon-time"></span> 每周工作时间：<span id="WeeklyHours"></span>
+                                                </td>
+                                                <td>
+                                                    <span class="glyphicon glyphicon-time"></span> 项目开始时间：<span id="PostJobDateStart"></span>
+                                                </td>
+                                                <td>
+                                                    <span class="glyphicon glyphicon-time"></span> 项目结束时间：<span id="PostJobDateEnd"></span>
+                                                </td>
+                                                <td>
+                                                </td>
+                                             </tr>
+                                           {{/if}}
+                                       </script>
+                                    </tbody>
+                                </table>
                             
-                            <hr class="dotline" align="center" />
-                            
-                            <div class="media lan-bg-f5">
-                                <div class="media-left media-middle">
-                                    <a href="#" class="thumbnail">
-                                        <img width="60px" src="/lance/resources/image/jpg/login.jpg" class="media-object" alt="" />
-                                    </a>
+                                <hr class="dotline" align="center" />
+                                <div class="media lan-bg-f5">
+                                    <div class="media-left media-middle">
+                                        <a href="#" class="thumbnail">
+                                            <img width="60px" id="thu-img" src="/lance/resources/image/jpg/login.jpg" class="media-object" alt="" />
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">客户信息 | <span id="IndexLocation"></span></h4>
+                                        <span class="glyphicon glyphicon-star lan-font-yellow"></span>
+                                        <span class="glyphicon glyphicon-star lan-font-yellow"></span>
+                                        <span class="glyphicon glyphicon-star lan-font-yellow"></span>
+                                        <span class="glyphicon glyphicon-star lan-font-yellow"></span>
+                                        <span class="glyphicon glyphicon-star-empty lan-font-yellow"></span>
+                                    </div>
                                 </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">客户信息 | <span>北京市 通州区</span></h4>
-                                    <span class="glyphicon glyphicon-star lan-font-yellow"></span>
-                                    <span class="glyphicon glyphicon-star lan-font-yellow"></span>
-                                    <span class="glyphicon glyphicon-star lan-font-yellow"></span>
-                                    <span class="glyphicon glyphicon-star lan-font-yellow"></span>
-                                    <span class="glyphicon glyphicon-star-empty lan-font-yellow"></span>
+                                
+                                <p class="pre-txt">
+                                   <span id="Brief"></span>
+                                </p>
+                                <br /><br /><br />
+                                <div class="exp-skill" id="skill-cnt">
+                                    <script id="skill-cnt-sp1" type="text/html">
+                                        <b>期望的技能：</b>
+                                        {{each list as data i}}
+                                           <span class="label label-info">{{data}}</span>
+                                        {{/each}}
+                                     </script>
                                 </div>
                             </div>
-                            
-                            <p class="pre-txt">
-                                通过缩略图组件扩展 Bootstrap 的 栅格系统，可以很容易地展示栅格样式的图像、视频、文本等内容。
-
-                                如果你想实现一个类似 Pinterest 的页面效果（不同高度和/宽度的缩略图顺序排列）的话，你需要使用一个第三方插件，比如 Masonry、Isotope 或 Salvattore。
-                            </p>
-                            <br /><br /><br />
-                            <div class="exp-skill">
-                                <b>期望的技能：</b>
-                                <span class="label label-info">HTML</span>
-                                <span class="label label-info">CSS</span>
-                                <span class="label label-info">JAVASCRIPT</span>
-                                <span class="label label-info">PHP</span>
-                            </div>
-                            
-                        </div>
                         <div class="panel-footer" align="right">
                             <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#post_ques">留言</button>
                             <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#post_apply">申请</button>
@@ -183,34 +214,37 @@
                         
                     </div>
                     
-                    <div class="list-mods">
-                        <div class="media">
-                            <div class="media-left media-middle list-img">
-                                <a href="#" class="thumbnail">
-                                    <img width="60px" src="/lance/resources/image/jpg/login.jpg" class="media-object" alt="" />
-                                </a>
+                    <div class="list-mods" id="list-discuss">
+                        <script id="list-discuss-sp1" type="text/html"> 
+                            <div class="media">
+                                <div class="media-left media-middle list-img">
+                                    <a href="#" class="thumbnail">
+                                        <img width="60px" src="/lance/resources/image/jpg/login.jpg" class="media-object" alt="" />
+                                    </a>
+                                </div>
+                                <div class="media-body qmedia">
+                                    <h4 class="media-heading lan-font-green"><span id="u-name"> | <span id="u-address">北京市 通州区</span></h4>
+                                    <span id="u-discuss">{{data.}}</span>
+                                    <br />
+                                    <div class="exa-intro">
+                                        <b>报价：￥50000</b> | <span>可开始工作时间：立即</span> | <span>可否现场办公：可以</span>
+                                    </div>
+                                    <div>
+                                        <button type="button" class="btn btn-success btn-xs">加入备选</button>
+                                        <button type="button" class="btn btn-danger btn-xs">拒绝</button>
+                                    </div>
+                                    <div class="lan-bg-f5 lan-ov-hid">
+                                        <h4 class="media-heading lan-font-green">贝吉塔 | <span>北京市 通州区</span></h4>
+                                        超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人
+                                    </div>
+                                    <div class="lan-bg-f5 lan-ov-hid">
+                                        <h4 class="media-heading lan-font-green">12贝吉塔 | <span>北京市 通州区</span></h4>
+                                        超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人
+                                    </div>
+                                </div>
                             </div>
-                            <div class="media-body qmedia">
-                                <h4 class="media-heading lan-font-green">贝吉塔 | <span>北京市 通州区</span></h4>
-                                超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人
-                                <br />
-                                <div class="exa-intro">
-                                    <b>报价：￥50000</b> | <span>可开始工作时间：立即</span> | <span>可否现场办公：可以</span>
-                                </div>
-                                <div>
-                                    <button type="button" class="btn btn-success btn-xs">加入备选</button>
-                                    <button type="button" class="btn btn-danger btn-xs">拒绝</button>
-                                </div>
-                                <div class="lan-bg-f5 lan-ov-hid">
-                                    <h4 class="media-heading lan-font-green">贝吉塔 | <span>北京市 通州区</span></h4>
-                                    超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人
-                                </div>
-                                <div class="lan-bg-f5 lan-ov-hid">
-                                    <h4 class="media-heading lan-font-green">12贝吉塔 | <span>北京市 通州区</span></h4>
-                                    超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人超级赛亚人
-                                </div>
-                            </div>
-                        </div>
+                        </script>
+                        
                         
                         <div class="media">
                             <div class="media-left media-middle list-img">
@@ -235,14 +269,9 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        
                     </div>
-                    
                 </div>
-                
             </div>
-            
         </div>
     </div>
     
@@ -418,14 +447,7 @@
                             <textarea class="form-control" rows="3" style="width:557px;"></textarea>
                             <span class="glyphicon glyphicon-ok form-control-feedback"></span>
                         </div>
-                        
-                        
-                        
-                        
-                        
-                        
                     </form>
-                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -435,19 +457,13 @@
         </div>
     </div>
     
-    
-    
-    
-    
-    
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="/lance/resources/js/jquery-1.9.1.min.js" type="text/javascript"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/lance/resources/js/bootstrap.min.js" type="text/javascript"></script>
-    
+    <script type="text/javascript" src="/lance/resources/js/template.js"></script>
     <script src="/lance/resources/js/core.js" type="text/javascript"></script>
     <script src="/lance/resources/js/control/lan_check.js" type="text/javascript"></script>
-    <script type="text/javascript" src="/lance/resources/js/page/main.js"></script>
-    
+    <script type="text/javascript" src="/lance/resources/js/page/postJobDetail.js"></script>
 </body>
 </html>

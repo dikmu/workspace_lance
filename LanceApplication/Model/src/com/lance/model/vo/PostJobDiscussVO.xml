@@ -31,6 +31,14 @@
     Name="pCreator"
     Kind="viewcriteria"
     Type="java.lang.String"/>
+  <Variable
+    Name="applyflag"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="uName"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="UUserVO1"
     ViewObjectName="com.lance.model.user.vo.UUserVO"
@@ -309,6 +317,114 @@
         Conjunction="AND"
         Value=":pId"
         IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="FindParentDiscussVC"
+    ViewObjectName="com.lance.model.vo.PostJobDiscussVO"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="PostJobDiscussVOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="PostJobId"
+        ViewAttribute="PostJobId"
+        Operator="="
+        Conjunction="AND"
+        Value=":pJobId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="IsApply"
+        ViewAttribute="IsApply"
+        Operator="="
+        Conjunction="AND"
+        Value=":applyflag"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="ParentDiscussId"
+        ViewAttribute="ParentDiscussId"
+        Operator="ISBLANK"
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Status"
+        ViewAttribute="Status"
+        Operator="="
+        Conjunction="AND"
+        Value="display"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="CreateBy"
+        ViewAttribute="CreateBy"
+        Operator="="
+        Conjunction="AND"
+        Value=":uName"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="findDiscussByParentID"
+    ViewObjectName="com.lance.model.vo.PostJobDiscussVO"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="PostJobDiscussVOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="ParentDiscussId"
+        ViewAttribute="ParentDiscussId"
+        Operator="="
+        Conjunction="AND"
+        Value=":pId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Status"
+        ViewAttribute="Status"
+        Operator="="
+        Conjunction="AND"
+        Value="display"
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>

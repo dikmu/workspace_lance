@@ -27,6 +27,7 @@ $(function(){
                     tmp.addClass("first");
                 }
                 tmp.find(".name").html(dat[i].Name);
+                tmp.find(".name").attr("href","/lance/pages/jobDetail/"+dat[i].Uuid);
                 if(dat[i].Postform == 1){
                     tmp.find(".jtfix").remove();
                     tmp.find(".s1").html("Hourly rate: " + (dat[i].HourlyPayMin ? (dat[i].HourlyPayMin + "-" + dat[i].HourlyPayMax) : "Not sure"));

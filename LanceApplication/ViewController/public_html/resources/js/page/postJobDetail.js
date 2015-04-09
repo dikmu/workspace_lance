@@ -1,22 +1,368 @@
 $(function () {
-     
+    var jobId = Data.jobId;
+    if(jobId == null){
+       return;
+    }
+    initPostJobData(jobId);
     
-    
+    $(".inp_date").datepicker({dateFormat : "yy-mm-dd"});
 });
 
-function initData(){
-  var jobId = getUrlParam("jobId");
-  if(jobId == null){
-     return;
-  }
-  
-  jQuery.ajax( {
+//初始化招聘信息数据
+function initPostJobData(jobId){
+  jQuery.ajax({
         url : '/lance/res/postJob/'+ jobId, type : 'get', success : function (data) {
+            $("#job-msg-area").html(template('job-msg-sp1',{'status' : data["Postform"]}));
+            var skills=new Array();
+            var attrs =new Array("A","B","C","D","E","F","G");
+            var i = 0;
+            for(var t=0;t<attrs.length;t++){
+                if(data["SpecificSkill"+attrs[t]] != null){
+                    skills[i]=data["SpecificSkill"+attrs[t]];
+                    i++;
+                }
+            }
+            $("#skill-cnt").html(template('skill-cnt-sp1',{'list' : skills}));
+            if(data.hasOwnProperty("IndexLocation") && data["IndexLocation"] != null){
+                data["IndexLocation"] = data["IndexLocation"].replace(";"," ")
+            }
+            if(data.hasOwnProperty("FixedLocation")){
+               if("Y" == data["FixedLocation"]){
+                   data["FixedLocation"] = data["FixedLocation"].replace("Y","现场办公");
+               }else{
+                   data["FixedLocation"] = data["FixedLocation"].replace("N","远程办公")
+               }
+            }
+            if(data.hasOwnProperty("Img")){
+               $("#thu-img").attr("src",data["Img"]);
+            }
+            if(data.hasOwnProperty("DurationMin")){
+                var dur = data["DurationMin"];
+                if(data.hasOwnProperty("DurationMax")){
+                    dur = dur +"~"+ data["DurationMax"]+"周";
+                }
+                $("#Duration").html(dur);
+            }
             
+            if(data.hasOwnProperty("HourlyPayMin")){
+                var dur1 = data["HourlyPayMin"];
+                if(data.hasOwnProperty("HourlyPayMax")){
+                    dur1 = "￥"+dur1 +"~"+ data["HourlyPayMax"]+"元";
+                }
+                $("#hourly-Pay").html(dur1);
+            }
+            
+            if(data.hasOwnProperty("FixedPayMin")){
+                var dur = data["FixedPayMin"];
+                if(data.hasOwnProperty("FixedPayMax")){
+                    dur = "￥"+dur +"~"+ data["FixedPayMax"]+"元";
+                }
+                $("#Fixed-Pay").html(dur);
+            }
+           
+            for(var key in data){
+                if($("#"+key).length > 0){
+                    $("#"+key).html(data[key]);
+                }
+            }
+            //判断按钮加载
+            if(User.UserName == data["CreateBy"]){
+                $("#btn-area").hide();
+                $("#btn-area").html(template('btn-area-sp1',{'show' : "N"}));
+                $("#radio-area").html(template('radio-area-sp1',{'pid' : "client"}));
+            }else{
+                $("#btn-area").show();
+                $("#btn-area").html(template('btn-area-sp1',{'show' : "Y"}));
+                $("#radio-area").html(template('radio-area-sp1',{'pid' : "lancer"}));
+            }
+            
+            quesSubmit(jobId,data["CreateBy"]);
+            replaySubmit(jobId,data["CreateBy"]);
+            disDel(jobId,data["CreateBy"]);
+            jfjgChange(jobId,true,data["CreateBy"]);
+            submitApply(jobId,data["CreateBy"]);
+            initPostDiscussData(jobId,data["CreateBy"])
         },
         error : function (msg) {
         }
    });
+}
+
+//初始化提问申请列表
+function initPostDiscussData(jobId,publisher){
+    jQuery.ajax({
+        url : '/lance/res/postJob/'+jobId+'/discuss?random='+Math.random(), type : 'get', success : function (data) {
+           $("#list-discuss").html(template('list-discuss-sp1',{'list' : data,"User":User,"Publisher":publisher}));
+        },
+        error : function (msg) {
+        }
+   });
+}
+
+//初始化提问申请列表
+function initPostDiscussData2(jobId,publisher,type){
+    jQuery.ajax({
+        url : '/lance/res/postJob/'+jobId+'/'+type+'/discuss?random='+Math.random(), type : 'get', success : function (data) {
+           $("#list-discuss").html(template('list-discuss-sp1',{'list' : data,"User":User,"Publisher":publisher}));
+        },
+        error : function (msg) {
+        }
+   });
+}
+
+//留言
+function quesSubmit(jobId,publisher){
+  $("#ques-submit").click(function(){
+     var ckCt = $("#ques-content").lanCheck('notEmpty');
+     var paCt = $("#ques-content").closest('.form-group');
+     if(!ckCt){
+        paCt.addClass("has-error");
+        return false;
+    }else{
+        paCt.removeClass("has-error");
+    }
+    var param = {"Content" : $("#ques-content").val(),"IsApply":"N"};
+     jQuery.ajax({
+          url : '/lance/res/postJob/'+jobId+'/discuss', 
+          type : 'post',
+          contentType : 'application/json',
+          data:jQuery.toJSON(param),
+          success: function(data){
+             $("#post_ques").modal('hide');
+             initPostDiscussData(jobId,publisher);
+        },error:function(msg){
+        }
+    });
+  });
+}
+
+//留言回复
+function replaySubmit(jobId,publisher){
+  var uuid = null;
+  //弹出框
+  $("#list-discuss").on("click", "button[name='ques-replay']", function(){
+      uuid = $(this).attr("uuid");
+      var paCt = $("#replay-content").closest('.form-group');
+      if(paCt.hasClass("has-error")){
+          paCt.removeClass("has-error");
+      }
+      $("#ques_modal").modal('show');
+  });
+
+  $("#replay-submit").click(function(){
+     var ckCt = $("#replay-content").lanCheck('notEmpty');
+     var paCt = $("#replay-content").closest('.form-group');
+     if(!ckCt){
+        paCt.addClass("has-error");
+        return false;
+    }else{
+        paCt.removeClass("has-error");
+    }
+    if(uuid == null){
+        return false;
+    }
+    var param = {"Content" : $("#replay-content").val(),"IsApply":"N","ParentDiscussId":uuid};
+     jQuery.ajax({
+          url : '/lance/res/postJob/'+jobId+'/discuss', 
+          type : 'post',
+          contentType : 'application/json',
+          data:jQuery.toJSON(param),
+          success: function(data){
+             $("#ques_modal").modal('hide');
+             initPostDiscussData(jobId,publisher);
+        },error:function(msg){
+        }
+    });
+  });
+}
+
+function disDel(jobId,publisher){
+  var uuid = null;
+  $("#list-discuss").on("click", "button[name='dis-del']", function(){
+      uuid = $(this).attr("uuid");
+      if(uuid != null){
+        if(confirm("是否确认删除该留言？")){
+            jQuery.ajax({
+                  url : '/lance/res/postJob/'+jobId+'/discuss/delete/'+uuid, 
+                  type : 'post',
+                  success: function(data){
+                     initPostDiscussData(jobId,publisher);
+                },error:function(msg){
+                }
+            });
+        }
+      }
+  });
+}
+
+function jfjgChange(jobId,init,publisher){
+   $("input[name='jkfs']").change(function(){
+        if(this.checked){
+             if("asj-jf" == $(this).attr("id")){
+                 $("#jffs-cnt").html(template('jffs-cnt-sp1',{'jffs' : "sjjf"}));
+                 $("#jffs-cnt").show();
+             }else if("gdjg-jf" == $(this).attr("id")){
+                $("#jffs-cnt").html(template('jffs-cnt-sp1',{'jffs' : "gdjg"}));
+                $("#jffs-cnt").show();
+             }else if("shqd-jf" == $(this).attr("id")){
+                $("#jffs-cnt").html(template('jffs-cnt-sp1',{'jffs' : "shqd"}));
+                $("#jffs-cnt").hide();
+             }
+        }
+    });
+    if(init){
+        $("#jffs-cnt").html(template('jffs-cnt-sp1',{'jffs' : "sjjf"}));
+        $("#jffs-cnt").show();
+    }
+    
+     //是否指定时间效果切换
+     $("input[name='jrsj']").change(function(){
+        if(this.checked){
+            if("shqd-sj" == $(this).attr("id")){
+                $("#sj-span").html(template('sj-span-sp1',{'jrsj' : "shqd"}));
+                $("#sj-span").hide();
+            }else if("zdrq-sj" == $(this).attr("id")){
+                $("#sj-span").html(template('sj-span-sp1',{'jrsj' : "zdsj"}));
+                $("#sj-span").show();
+            }
+        }
+    });
+    if(init){
+      $("#sj-span").html(template('sj-span-sp1',{'jrsj' : "zdsj"}));
+      $("#sj-span").show();
+    }
+    
+    $("input[name='wtlb']").change(function(){
+        if(this.checked){
+            if("all" == $(this).val()){
+               initPostDiscussData2(jobId,publisher,"all");
+            }else if("apply" == $(this).val()){
+               initPostDiscussData2(jobId,publisher,"apply");
+            }else if("second" == $(this).val()){
+               initPostDiscussData2(jobId,publisher,"second");
+            }else if("owner" == $(this).val()){
+               initPostDiscussData2(jobId,publisher,"owner");
+            }
+        }
+    });
+    //合同签订权限判断
+    if(!User.hasOwnProperty("CompanyName")){
+        $("#grmy-gs").attr("disabled","disabled");
+        $("#ht-comments").html("(注:个人信息中尚未完善所在公司信息,无法以公司名义签署)");
+    }
+}
+
+function submitApply(jobId,publisher){
+  $("#apply-submit").click(function(){
+     if(checkApply()){
+       var paraStr = "";
+       for(var t=0;t<attrs.length;t++){
+          paraStr+=attrs[t]+":"+datas[t];
+          if(t < (attrs.length-1)){
+             paraStr+=",";
+          }
+       }
+     var param = "{"+paraStr+"}";
+     jQuery.ajax({
+          url : '/lance/res/postJob/'+jobId+'/discuss', 
+          type : 'post',
+          contentType : 'application/json',
+          data:param,
+          success: function(data){
+            initPostDiscussData(jobId,publisher);
+        },error:function(msg){
+        }
+    });
+     }
+  });
+}
+var attrs = new Array();
+var datas = new Array();
+function checkApply(){
+  var htqs = $("input[name='htqs']:checked").val();
+  var ckHt = $("#HourlyPay").lanCheck('notEmpty');
+  if(!ckHt){
+       $("#ht-comments").html("请选择好合同签署方式");
+       return false;
+   }else{
+        attrs[0]="SignBy";
+        datas[0]=htqs;
+   }
+  
+  var jkfs = $("input[name='jkfs']:checked").val();
+  if("hourly" == jkfs){
+        attrs[1]="Postform";
+        datas[1]="hourly";
+        var ckHp = $("#HourlyPay").lanCheck('notEmpty');
+        var paHp = $("#HourlyPay").closest('.form-group');
+        if(!ckHp){
+            paHp.addClass("has-error");
+            return false;
+        }else{
+            paHp.removeClass("has-error");
+            attrs[2]="HourlyPay";
+            datas[2]=$("#HourlyPay").val();
+        }
+        
+        var ckWh = $("#Weekly-Hours").lanCheck('notEmpty');
+        var paWh = $("#Weekly-Hours").closest('.form-group');
+        if(!ckWh){
+            paWh.addClass("has-error");
+            return false;
+        }else{
+            paWh.removeClass("has-error");
+            attrs[3]="WeeklyHours";
+            datas[3]=$("#Weekly-Hours").val();
+        }
+  }else if("fixed" == jkfs){
+        attrs[1]="Postform";
+        datas[1]="fixed";
+        var ckFpn = $("#fixed_pay_min").lanCheck('notEmpty');
+        var paFpn = $("#fixed_pay_min").closest('.form-group');
+        if(!ckFpn){
+            paFpn.addClass("has-error");
+            return false;
+        }else{
+            paFpn.removeClass("has-error");
+            attrs[2]="FixedPayMin";
+            datas[2]=$("#fixed_pay_min").val();
+        }
+        
+        var ckFpx = $("#fixed_pay_max").lanCheck('notEmpty');
+        var paFpx = $("#fixed_pay_max").closest('.form-group');
+        if(!ckFpx){
+            paFpx.addClass("has-error");
+            return false;
+        }else{
+            paFpx.removeClass("has-error");
+            attrs[3]="FixedPayMax";
+            datas[3]=$("#fixed_pay_max").val();
+        }
+  }
+  
+  var zdrq = $("input[name='jrsj']:checked").val();
+  if("date" == zdrq){
+    var ckSj = $("#entry_d").lanCheck('notEmpty');
+    if(!ckSj){
+        $("#err-date").html("制定日期时,日期必须选择!");
+        return false;
+    }else{
+        var reg = /^(\d{4})-(0\d{1}|1[0-2])-(0\d{1}|[12]\d{1}|3[01])$/;
+        if(!reg.test($("#entry_d").val())){
+            $("#err-date").html("时间格式错误!");
+            return false;
+        }else{
+            $("#err-date").html("");
+            attrs[4]="EnteryDate";
+            datas[4]=$("#entry_d").val();
+        }
+    }
+    attrs[5]="IsApply";
+    datas[5]="Y";
+    attrs[6]="Content";
+    datas[6]=$("#apply-content").val();
+  }
+ return true;
 }
 
 //获取url中的参数

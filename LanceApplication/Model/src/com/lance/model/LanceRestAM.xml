@@ -104,6 +104,9 @@
     <ViewUsage
         Name="RegEmailChk1"
         ViewObjectName="com.lance.model.vo.RegEmailChkVO"/>
+ <ViewUsage
+        Name="PostJobDiscuss2"
+        ViewObjectName="com.lance.model.vo.PostJobDiscussVO"/>
     <ViewUsage
         Name="JobSubCategory2"
         ViewObjectName="com.lance.model.vo.JobSubCategoryVO"/>

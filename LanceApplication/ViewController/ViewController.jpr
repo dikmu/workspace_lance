@@ -325,7 +325,6 @@
                </list>
             </hash>
             <hash>
-               <url n="content-folder-url" path="adfmsrc/META-INF/"/>
                <list n="pattern-filters">
                   <string v="+coherence-cache-config.xml"/>
                   <string v="+coherence-application.xml"/>
@@ -342,8 +341,9 @@
       <hash n="runConfigurationDefinitions">
          <hash n="Default">
             <value n="custom" v="false"/>
-            <value n="javaOptions" v="-Dtangosol.coherence.cacheconfig=&quot;/D:/workspace_lance5/LanceApplication/ViewController/adfmsrc/META-INF/coherence-cache-config.xml&quot;"/>
+            <value n="javaOptions" v=""/>
             <value n="name" v="Default"/>
+            <value n="targetURL"/>
          </hash>
       </hash>
    </hash>
@@ -942,6 +942,7 @@
       </list>
    </hash>
    <hash n="ResourceBundleOptions">
-      <value n="BundleCreationPolicy" v="2"/>
+      <value n="BundleCreationPolicy" v="0"/>
+      <list n="RegisteredResourceBundles"/>
    </hash>
 </jpr:project>
