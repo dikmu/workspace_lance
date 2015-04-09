@@ -131,6 +131,8 @@
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
     word-break:break-all;
     overflow:hidden;
+    background:#fff;
+    border:none;
 }
 
 #job-template{position:absolute;top:200px;right:-500px;display:none;width:350px;height:700px;}
@@ -168,5 +170,10 @@
 .rg-result .mod .skills{margin-top:10px;}
 .rg-result .mod .skills .btn-info{margin-right:5px;}
 .rg-result .get-more{margin-top:80px;font-size:14px;border-radius:0px;}
+.control-pd{padding-right:0px;}
+.has-feedback .form-control{padding-right:0px;}
 
-
+.step_sp{background:url(../../image/common/step.png) no-repeat 0 0;width:428px;height:55px;display:inline-block;position:relative;top:3px;}
+.one{background-position:0px 0px;}
+.two{background-position:0px -69px;}
+.three{background-position:0px -141px;}

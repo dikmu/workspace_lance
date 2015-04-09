@@ -50,14 +50,18 @@ function postJobLocation(){
         $("#sel_province").html(str);
         $("#sel_province").change();
     }, function(){});
-    $("#posjob_chk").click(function(){
-        var isChk = $(this)[0].checked;
-        if(isChk){
-            $(".sel-location").show();
-        }else{
-            $(".sel-location").hide();
+    
+    $("#job_yc").click(function(){
+        if($(this)[0].checked){
+            $(".sel-location").slideUp();
         }
     });
+    $("#job_xc").click(function(){
+        if($(this)[0].checked){
+            $(".sel-location").slideDown();
+        }
+    });
+    
     $("#sel_province").change(function(){
         var v = $(this).val();
         if(v != -1){
@@ -334,7 +338,7 @@ function init_click(){
     };
     
     var setArrange = function(m_param){
-        if(m_param.Postform == 1){//Hourly
+        if(m_param.Postform == "hourly"){//Hourly
             if($(".sx-start").val() != ""){
                 m_param.HourlyPayMin = $(".sx-start").val();
             }
@@ -374,7 +378,7 @@ function init_click(){
             m_param.JobVisibility = "private";
         }
         //set location
-        if($("#posjob_chk")[0].checked){
+        if($("#job_xc")[0].checked){
             m_param.FixedLocation = "Y";
             m_param.LocationProvince = $("#sel_province").val();
             m_param.LocationCity = $("#sel_city").val();
@@ -383,13 +387,13 @@ function init_click(){
                 m_param.LocationDesc = $("#inp_locDesc").val();
             }
         }else{
-            m_param.FixedLocation = 0;
+            m_param.FixedLocation = 'N';
         }
         return m_param;
     };
     
     
-    $(".btn_sace").click(function(){
+    $(".btn_sace,.btn_sace2").click(function(){
         var obj = $(this), type = obj.attr("data-val");
         
         if(basicRes.title && basicRes.content){
@@ -408,12 +412,17 @@ function init_click(){
             post_job_param = setOption(post_job_param);
             post_job_param.Status = type;
             
-            $(".step1").fadeOut(function(){$(".step2").fadeIn();});
-            
-            $(".step-xh small").removeClass("lan-font-green");
-            $(".step-xh small:eq(1)").addClass("lan-font-green");
-            //console.log(post_job_param);
-            
+            if(type == 'draft'){
+                postAjax(post_job_param, function(data){
+                   // obj.button("reset");
+                });     
+            }else{            
+                $(".step1").fadeOut(function(){$(".step2").fadeIn();$(".apply_temp").hide();$(".step_sp").removeClass("one").removeClass("two").removeClass("three").addClass("two");});
+                
+                $(".step-xh small").removeClass("lan-font-green");
+                $(".step-xh small:eq(1)").addClass("lan-font-green");
+                //console.log(post_job_param);
+            }
         }else{
             $("#inp_jobname,#inp_detail").blur();
         }
@@ -424,7 +433,7 @@ function initStep2(){
      $(".btn-select").click(function(){
         var type = $(this).attr("data-type"), trstr = "";
         
-        trstr += '<tr><td align="right" class="col1"><b>工作名称:</b></td><td class="col2">'+$("#inp_jobname").val()+'</td></tr>';
+        trstr += '<tr><td align="right" class="col1" width="100px"><b>工作名称:</b></td><td class="col2">'+$("#inp_jobname").val()+'</td></tr>';
         trstr += '<tr><td align="right" class="col1"><b>工作描述:</b></td><td class="col2"><pre>'+$("#inp_detail").val()+'</pre></td></tr>';
         trstr += '<tr><td align="right" class="col1"><b>工作类别:</b></td><td class="col2">'+$("#cate-lev1").find("option:selected").text()+' -- '+$("#cate-lev2").find("option:selected").text()+'</td></tr>';
         
@@ -457,33 +466,36 @@ function initStep2(){
         trstr += '<tr><td align="right" class="col1"><b>工作起止时间:</b></td><td class="col2">'+post_job_param.PostJobDateStart+' -- ' +post_job_param.PostJobDateEnd+ '</td></tr>';
         
         $(".job-preview").html(trstr);
-        $(".step2").fadeOut(function(){$(".step3").show();});
+        $(".step2").fadeOut(function(){$(".step3").show();$(".step_sp").removeClass("one").removeClass("two").removeClass("three").addClass("three");});
         $(".step-xh small").removeClass("lan-font-green");
         $(".step-xh small:eq(2)").addClass("lan-font-green");
     });
 }
 
+
+var postAjax = function(m_param, cback){
+    $.ax("post", "postJob", m_param, function(data){
+        //$.ae("OK");
+        alert("OK");
+        cback(data);
+    }, function(){
+        netWorkError();
+        cback(null);
+    }, "text");
+};
+
 function init_step3(){
     $(".btn_return").click(function(){
-        $(".step3").fadeOut(function(){$(".step1").show();});
+        $(".step3").fadeOut(function(){$(".step1").show();$(".apply_temp").show();$(".step_sp").removeClass("one").removeClass("two").removeClass("three").addClass("one");});
         $(".step-xh small").removeClass("lan-font-green");
         $(".step-xh small:eq(0)").addClass("lan-font-green");
     });
     
     
-    var postAjax = function(m_param, cback){
-        $.ax("post", "postJob", m_param, function(data){
-            $.ae("OK");
-            cback(data);
-        }, function(){
-            netWorkError();
-            cback(null);
-        }, "text");
-    };
     
     $("#btn_save_job").click(function(){
         var type = 2, obj = $(this);
-        post_job_param.Status = type;
+        post_job_param.Status = "posted";
         
         //obj.button('loading');
         
@@ -498,6 +510,12 @@ function init_step3(){
 function init_template(){
     $(".apply_temp").click(function(){
         $("#job-template").animate({"right" : "100px"}, 500).show();
+    });
+    
+    $("#job-template .btn-close").click(function(){
+        $("#job-template").animate({"right" : "-600px"}, 500, function(){
+            $(this).hide();
+        });
     });
     
     $("#tmp_cate").change(function(){
@@ -557,7 +575,7 @@ function init_template(){
                 $(".selected-title,.selected-tmp").fadeIn();
     
                 $("#inp_detail").val(obj.attr("data-desc"));
-                $(".cancle-temp").show();
+                //$(".cancle-temp").show();
                 //refreash body
                 /* $(".original").fadeOut(300, function () {
                     $(".undo").show();
@@ -596,6 +614,19 @@ function init_template(){
     };
 }
 
+function init_chk(){
+    $("#jprivate").click(function(){
+        if(this.checked){
+            $("#chk_search").attr("disabled", true)[0].checked = false;
+        }
+    });
+    $("#jpublic").click(function(){
+        if(this.checked){
+            $("#chk_search").attr("disabled", false)[0].checked = true;
+        }
+    });
+}
+
 $(function(){
     init_category();
     
@@ -619,4 +650,5 @@ $(function(){
     
     init_template();
     
+    init_chk();
 });

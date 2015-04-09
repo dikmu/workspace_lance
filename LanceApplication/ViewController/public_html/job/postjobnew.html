@@ -87,10 +87,11 @@
     <div class="container newjob">
         <div class="row">
             <div class="page-header">
-                <h1 class="step-xh">创建工作 &nbsp;&nbsp;
-                    <small class="lan-font-green">填写工作信息 >> </small>
+                <h1 class="step-xh">
+                    <span class="step_sp one"></span>
+                    <!--<small class="lan-font-green">填写工作信息 >> </small>
                     <small>选择发布类型 >> </small>
-                    <small>工作信息预览</small>
+                    <small>工作信息预览</small>-->
                     
                     <span class="apply_temp btn btn-primary btn-xs pull-right">应用模板</span>
                 </h1>
@@ -152,17 +153,17 @@
                     
                      
                     <select class="form-control lan-dis-iblock sml-sel sel-arrange">
-                        <option value="1">时薪</option>
-                        <option value="2">固定价格</option>
+                        <option value="hourly">时薪</option>
+                        <option value="fixed">固定价格</option>
                     </select>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <div class="sxfw" style="display:inline-block">
                         <span class="lbl-money">时薪范围：</span>
-                        <input value="" type="text" class="form-control sml-inp lan-dis-iblock sx-start" placeholder=""
+                        <input value="" type="text" class="form-control sml-inp lan-dis-iblock sx-start control-pd" placeholder=""
                             data-container="body" data-toggle="popover" data-placement="right" 
                             data-content="" data-trigger="manual" data-animation="false"/>
                         <span>元&nbsp;&nbsp;-&nbsp;&nbsp;</span>
-                        <input value="" type="text" class="form-control sml-inp lan-dis-iblock sx-end"  placeholder=""
+                        <input value="" type="text" class="form-control sml-inp lan-dis-iblock sx-end control-pd"  placeholder=""
                             data-container="body" data-toggle="popover" data-placement="right" 
                             data-content="" data-trigger="manual" data-animation="false"/>
                         <span>元</span>
@@ -200,24 +201,24 @@
                             </div>
                             <div class="checkbox" id="jpublic_chk" style="margin-left:21px;">
                                 <label>
-                                    <input type="checkbox" value="" checked="checked" />
+                                    <input id="chk_search" type="checkbox" value="" checked="checked" />
                                     搜索引擎可以搜索到我的信息
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
                                     <input type="radio" name="radvisible" id="jprivate" value="option2">
-                                    关闭—仅有我自己可以看到我的位置信息
+                                    私有— 无法被搜索到，仅我自己和我指定的人可以看到信息
                                 </label>
                             </div>
                             
                             <br />
                             <label for="exampleInputEmail1" class="control-label">
                             工作地点：</label><br />
-                            <div class="checkbox">
+                            <div class="radio">
                                 <label>
-                                    <input id="posjob_chk" type="checkbox" value="" checked="checked" />
-                                    是否需要到现场工作
+                                    <input id="job_xc" name="jobloc" type="radio" value="" checked="checked" />
+                                    到现场工作
                                 </label>
                             </div>
                             <select id="sel_province" class="form-control lan-dis-iblock sml-sel sel-location">
@@ -226,15 +227,22 @@
                             <select id="sel_city" class="form-control lan-dis-iblock sml-sel sel-location">
                                 <option value="-1">请选择</option>
                             </select>
-                            <br />
-                            <input value="" type="text" class="form-control" id="inp_locDesc" placeholder="请输入详细的地址"
+                            <br class="sel-location" />
+                            <input value="" type="text" class="form-control sel-location" id="inp_locDesc" placeholder="请输入详细的地址"
                             data-container="body" data-toggle="popover" data-placement="right" style="margin-top:5px;"
                             data-content="" data-trigger="manual" data-animation="false"/>
+                            
+                            <div class="radio">
+                                <label>
+                                    <input id="job_yc" name="jobloc" type="radio" value=""/>
+                                    远程办公
+                                </label>
+                            </div>
                             
                             <br />
                             <label for="exampleInputEmail1" class="control-label">
                             发布工作的时间：</label><br />
-                            <select id="add_days" class="form-control lan-dis-iblock sml-sel sel-location">
+                            <select id="add_days" class="form-control lan-dis-iblock sml-sel">
                                 <option value="15">15天</option>
                                 <option value="30">30天</option>
                                 <option value="45">45天</option>
@@ -246,13 +254,13 @@
                             工作的时间开始时间：</label>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="radtime" id="jim" value="option2">
+                                    <input checked="checked" type="radio" name="radtime" id="jim" value="option2">
                                     申请之后立即启动项目
                                 </label>
                             </div>
                             <div class="radio pull-left">
                                 <label>
-                                    <input type="radio" name="radtime" id="jsel" value="option2" checked="checked" />
+                                    <input type="radio" name="radtime" id="jsel" value="option2" />
                                     项目开始会在：
                                 </label>
                             </div>
@@ -266,41 +274,45 @@
                 </div>
                 
                 <div>
-                    <button data-val="2" autocomplete="off" data-loading-text="保存中..." type="button" class="btn btn-primary btn_sace">保存并继续</button>
-                    <button data-val="1" autocomplete="off" data-loading-text="保存中..." type="button" class="btn btn-default">保存草稿</button>
+                    <button data-val="posted" autocomplete="off" data-loading-text="保存中..." type="button" class="btn btn-primary btn_sace">保存并继续</button>
+                    <button data-val="draft" autocomplete="off" data-loading-text="保存中..." type="button" class="btn btn-default btn_sace2">保存草稿</button>
                 </div>
             </form>
             
             <form class="step2 col-md-12" style="margin-top:50px;display:none;" role="form" method="post" action="#">
-                <div class="thumbnail col-md-3 lan-bg-f5">
-                    <div class="caption" align="center">
-                        <h3>特色服务</h3>
-                        <p class="step-intro">
-                            <span class="glyphicon glyphicon-ok lan-font-green" aria-hidden="true"></span> Your job stands out with bold graphics and preferred placement <br />
-                            <span class="glyphicon glyphicon-ok lan-font-green" aria-hidden="true"></span> Get 30% more proposals <br />
-                            <span class="glyphicon glyphicon-ok lan-font-green" aria-hidden="true"></span> Invite unlimited candidates <br />
-                            <span class="glyphicon glyphicon-ok lan-font-green" aria-hidden="true"></span> Verification Seal*
-                        </p>
-                        <p align="center">
-                            <b>￥30</b><br />
-                            <a data-type="l1" href="#" class="btn btn-default sml-inp btn-select" role="button">选择</a> 
-                        </p>
-                    </div>
+                <div class="thumbnail col-md-3 lan-bg-f5" style="display:none;">
+                    <fieldset disabled="disabled">
+                        <div class="caption" align="center">
+                            <h3>特色服务</h3>
+                            <p class="step-intro">
+                                <span class="glyphicon glyphicon-ok lan-font-green" aria-hidden="true"></span> ???? ?? ??? ???? ????? ??????? <br />
+                                <span class="glyphicon glyphicon-ok lan-font-green" aria-hidden="true"></span> ??? ??% ???? ????????? <br />
+                                <span class="glyphicon glyphicon-ok lan-font-green" aria-hidden="true"></span> ?????? ????????? ?????????? <br />
+                                <span class="glyphicon glyphicon-ok lan-font-green" aria-hidden="true"></span> ??????????? ???????
+                            </p>
+                            <p align="center">
+                                <b>￥??</b><br />
+                                <a disabled="disabled" data-type="l1" href="#" class="btn btn-default sml-inp btn-select" role="button">选择</a> 
+                            </p>
+                        </div>
+                    </fieldset>
                 </div>
-                <div class="thumbnail col-md-3" style="height:330px;margin-top:-30px;">
-                    <div class="caption" align="center">
-                        <h3>基础服务</h3>
-                        <p class="step-intro">
-                            <span class="glyphicon glyphicon-ok lan-font-green" aria-hidden="true"></span> Verification Seal* will boost your job visibility <br />
-                            <span class="glyphicon glyphicon-ok lan-font-green" aria-hidden="true"></span> Show candidates you are committed
-                        </p>
-                        <p align="center">
-                            <b>￥5</b><br />
-                            <a data-type="l2" href="#" class="btn btn-success sml-inp btn-select" role="button">选择</a> 
-                        </p>
-                    </div>
+                <div class="thumbnail col-md-3" style="height:330px;margin-top:-30px;display:none;">
+                    <fieldset disabled="disabled">
+                        <div class="caption" align="center">
+                            <h3>基础服务</h3>
+                            <p class="step-intro">
+                                <span class="glyphicon glyphicon-ok lan-font-green" aria-hidden="true"></span> ???? ?? ??? ???? ????? ??????? <br />
+                                <span class="glyphicon glyphicon-ok lan-font-green" aria-hidden="true"></span> ??? ??% ???? ????????? <br />
+                            </p>
+                            <p align="center">
+                                <b>￥??</b><br />
+                                <a data-type="l2" href="#" class="btn btn-success sml-inp btn-select" role="button">选择</a> 
+                            </p>
+                        </div>
+                    </fieldset>
                 </div>
-                <div class="thumbnail col-md-3 lan-bg-f5">
+                <div class="thumbnail col-md-3 lan-bg-f5" style="margin-left:440px;">
                     <div class="caption" align="center">
                         <h3>免费服务</h3>
                         <p class="step-intro">
@@ -329,7 +341,9 @@
     <div id="job-template" class="panel panel-primary">
         <div class="panel-body">
             <b class="chfont">
-                所有的工作模板列表</b>
+                所有的工作模板列表
+                <span class="glyphicon glyphicon-remove btn-close"></span>
+                </b>
                 <br />
             <span class="chfont ntxt">使用模板快速建立自己的工作描述。</span>
              <br /> <br />

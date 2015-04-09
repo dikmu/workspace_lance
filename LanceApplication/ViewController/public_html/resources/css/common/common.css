@@ -58,11 +58,71 @@
 {
     color:#ffffff;
     font-weight: bold;
-    background: #67ab3a;
+    background: #50852c;
+    background-image:-webkit-linear-gradient(top,#50852c,#69ae3a);
+    background-image:-o-linear-gradient(top,#50852c,#69ae3a);
+    background-image:-ms-linear-gradient(top,#50852c,#69ae3a);
+    background-image:linear-gradient(top,#50852c,#69ae3a);
+    background-repeat: repeat-x;
 }
-.lan-main-menu li:hover a
-{
+.lan-main-menu .nav>li{margin-right:1px;}
+.lan-main-menu .nav>li>a:hover, .nav>li>a:focus{
+    background: #7e7e7e;
+    background-image:-webkit-linear-gradient(top,#666,#979797);
+    background-image:-o-linear-gradient(top,#666,#979797);
+    background-image:-ms-linear-gradient(top,#666,#979797);
+    background-image:linear-gradient(top,#666,#979797);
+    background-repeat: repeat-x;
+}
+
+.btn{border-radius:0;}
+
+.btn-success{
+    background: #50993d;
+    background-image:-webkit-linear-gradient(top,#58b046,#4a8737);
+    background-image:-o-linear-gradient(top,#58b046,#4a8737);
+    background-image:-ms-linear-gradient(top,#58b046,#4a8737);
+    background-image:linear-gradient(top,#58b046,#4a8737);
+    background-repeat: repeat-x;
+    border:none;
+}
+
+.lan-main-menu .search .btn-small{
+    background:#ebebeb;
+    border:solid 1px #ccc;;
     color:#333;
+    border-radius: 0;
+}
+.lan-main-menu .search .btn-small:hover{
+    background:#004486;
+    border:solid 1px #004486;
+    color:#fff;
+}
+
+.btn-success:hover{
+background:#004486;
+}
+.btn-primary{
+    background:#0567b1;
+    border-color:#0567b1;
+}
+
+.lan-main-menu .dropdown-menu{
+    background:#f5f5f5;
+}
+.lan-main-menu .dropdown-menu li a:hover{
+    background: #7e7e7e;
+    background-image:-webkit-linear-gradient(top,#666,#979797);
+    background-image:-o-linear-gradient(top,#666,#979797);
+    background-image:-ms-linear-gradient(top,#666,#979797);
+    background-image:linear-gradient(top,#666,#979797);
+    background-repeat: repeat-x;
+    color:#fff;
+}
+
+.lan-main-menu li:hover>a
+{
+    color:#fff;
 }
 .lan-main-menu .search
 {
