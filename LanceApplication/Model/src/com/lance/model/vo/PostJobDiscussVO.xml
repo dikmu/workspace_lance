@@ -371,9 +371,9 @@
       <ViewCriteriaItem
         Name="Status"
         ViewAttribute="Status"
-        Operator="="
+        Operator="&lt;>"
         Conjunction="AND"
-        Value="display"
+        Value="deleted"
         Required="Optional"/>
       <ViewCriteriaItem
         Name="CreateBy"
@@ -422,9 +422,9 @@
       <ViewCriteriaItem
         Name="Status"
         ViewAttribute="Status"
-        Operator="="
+        Operator="&lt;>"
         Conjunction="AND"
-        Value="display"
+        Value="deleted"
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>

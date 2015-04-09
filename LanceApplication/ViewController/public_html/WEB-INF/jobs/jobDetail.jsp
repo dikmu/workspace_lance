@@ -167,14 +167,14 @@
                             </label>
                             {{if pid=="client"}} 
                                 <label class="radio-inline">
-                                    <input type="radio" name="wtlb" id="rad-apply" value="apply"> 只看申请 （数量 2 ）
+                                    <input type="radio" name="wtlb" id="rad-apply" value="apply"> 只看申请
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="wtlb" id="rad-sec" value="second"> 查看备选 （数量 2 ）
+                                    <input type="radio" name="wtlb" id="rad-sec" value="second"> 查看备选 
                                 </label> 
                             {{else if pid == "lancer"}}
                                 <label class="radio-inline">
-                                    <input type="radio" name="wtlb" id="rad-owner" value="owner"> 与我相关 （数量 2 ）
+                                    <input type="radio" name="wtlb" id="rad-owner" value="owner"> 与我相关
                                 </label>
                             {{/if}}
                         </script>
@@ -196,14 +196,27 @@
                                     <br />
                                     {{if (data.IsApply=='Y')}}
                                         <div class="exa-intro">
-                                            <span>申请:{{if data.SignBy=='self'}} 个人承接 {{else}} 公司承接 {{/if}}</span> | <span>报价：{{if data.SignBy=='self'}} {{data.HourlyPay}}元/小时 {{else}} {{data.FixedPayMin}}元~{{data.FixedPayMax}}元 {{/if}}</span> | <span>申请时间：{{data.CreateOn}}</span>
+                                            <span>申请:{{if data.SignBy=='self'}} 个人承接 {{else}} 公司承接 {{/if}}</span> | 
+                                            <span>报价：
+                                            {{if (User.UserName==Publisher || User.UserName==data.CreateBy)}}
+                                                {{if data.SignBy=='self'}} 
+                                                      {{if data.HourlyPay !=null}} {{data.HourlyPay}}元/小时 
+                                                      {{else}} 面议 {{/if}} 
+                                                {{else}} 
+                                                  {{if data.FixedPayMin != null}} {{data.FixedPayMin}}元~{{data.FixedPayMax}}元 {{else}} 面议 {{/if}} 
+                                                {{/if}}
+                                            {{else}}
+                                                — 
+                                            {{/if}}
+                                            </span> |   {{if data.SignBy=='self'}} <span>每周工作时间：{{data.WeeklyHours}}小时</span> | {{/if}}
+                                            <span>申请时间：{{data.CreateOn}}</span>
                                         </div>
                                     {{/if}}
                                     <div>
                                         {{if (User.UserName==Publisher && data.IsApply=='Y')}}
                                             <button type="button" class="btn btn-success btn-xs">接受</button>
                                             <button type="button" class="btn btn-success btn-xs">加入备选</button>
-                                            <button type="button" class="btn btn-danger btn-xs">拒绝</button>
+                                            <button type="button" class="btn btn-danger btn-xs" uuid="{{data.Uuid}}" name="dis-del">删除</button>
                                         {{else if (User.UserName==Publisher && data.IsApply=='N')}}
                                            {{if data.children.length > 0}}
                                              <button type="button" class="btn btn-success btn-xs" uuid="{{data.Uuid}}" name="ques-replay">回复</button>
@@ -354,7 +367,7 @@
                             <script id="jffs-cnt-sp1" type="text/html">
                                 {{if jffs == 'sjjf'}}
                                     <div class="form-group">
-                                        <label for="inp_mail" class="control-label">报价</label>
+                                        <label for="inp_mail" class="control-label">请输入报价</label>
                                         <br />
                                         ￥<input type="text" class="form-control inp-txt" id="HourlyPay" placeholder=""
                                             data-container="body" data-animation="false"
@@ -363,7 +376,7 @@
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="form-group">
                                         <label for="inp_mail" class="control-label">
-                                            每周工作时间</label>
+                                            请输入每周工作时间</label>
                                         <br />
                                         <input type="text" class="form-control inp-txt" id="Weekly-Hours" placeholder=""
                                             data-container="body" data-toggle="popover" data-placement="right" 
@@ -372,7 +385,7 @@
                                     </div>
                                 {{else if jffs == 'gdjg'}}
                                     <div class="form-group">
-                                        <label for="inp_mail" class="control-label">项目预算</label>
+                                        <label for="inp_mail" class="control-label">请输入项目预算</label>
                                         <br />
                                         从&nbsp;&nbsp;￥<input type="text" class="form-control inp-txt" placeholder=""
                                             data-container="body" id="fixed_pay_min" data-animation="false" />元
@@ -400,12 +413,8 @@
                                 <input type="radio" name="jrsj" value="date" id="zdrq-sj" checked="checked"> 指定日期
                             </label>
                             <span id="sj-span">
-                                <script id="sj-span-sp1" type="text/html">
-                                   {{if jrsj == 'zdsj'}} 
-                                      <input type="text" id="entry_d" class="sml-input inp_date" />  
-                                   {{/if}}
-                                      <span id="err-date" style="color:Red;font-size:12px;"></span>
-                                </script>
+                                <input type="text" id="entry_d" class="sml-input" />
+                                <span id="err-date" style="color:Red;font-size:12px;"></span>
                             </span>
                         </div>
                         <br />

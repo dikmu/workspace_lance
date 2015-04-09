@@ -5,7 +5,7 @@ $(function () {
     }
     initPostJobData(jobId);
     
-    $(".inp_date").datepicker({dateFormat : "yy-mm-dd"});
+    $("#entry_d").datepicker({dateFormat : "yy-mm-dd"});
 });
 
 //初始化招聘信息数据
@@ -196,6 +196,7 @@ function disDel(jobId,publisher){
 }
 
 function jfjgChange(jobId,init,publisher){
+   
    $("input[name='jkfs']").change(function(){
         if(this.checked){
              if("asj-jf" == $(this).attr("id")){
@@ -219,18 +220,12 @@ function jfjgChange(jobId,init,publisher){
      $("input[name='jrsj']").change(function(){
         if(this.checked){
             if("shqd-sj" == $(this).attr("id")){
-                $("#sj-span").html(template('sj-span-sp1',{'jrsj' : "shqd"}));
                 $("#sj-span").hide();
             }else if("zdrq-sj" == $(this).attr("id")){
-                $("#sj-span").html(template('sj-span-sp1',{'jrsj' : "zdsj"}));
                 $("#sj-span").show();
             }
         }
     });
-    if(init){
-      $("#sj-span").html(template('sj-span-sp1',{'jrsj' : "zdsj"}));
-      $("#sj-span").show();
-    }
     
     $("input[name='wtlb']").change(function(){
         if(this.checked){
@@ -249,6 +244,16 @@ function jfjgChange(jobId,init,publisher){
     if(!User.hasOwnProperty("CompanyName")){
         $("#grmy-gs").attr("disabled","disabled");
         $("#ht-comments").html("(注:个人信息中尚未完善所在公司信息,无法以公司名义签署)");
+    }else{
+         $("input[name='htqs']").change(function(){
+         if(this.checked){
+             if("grmy-gr" == $(this).attr("id")){
+                 $("#ht-comments").html("");
+             }else if("grmy-gs" == $(this).attr("id")){
+                 $("#ht-comments").html("公司名称:"+User.CompanyName);
+             }
+          }
+        });
     }
 }
 
@@ -257,6 +262,9 @@ function submitApply(jobId,publisher){
      if(checkApply()){
        var paraStr = "";
        for(var t=0;t<attrs.length;t++){
+          if(attrs[t].length == 0){
+             continue;
+          }
           paraStr+=attrs[t]+":"+datas[t];
           if(t < (attrs.length-1)){
              paraStr+=",";
@@ -270,6 +278,7 @@ function submitApply(jobId,publisher){
           data:param,
           success: function(data){
             initPostDiscussData(jobId,publisher);
+            $("#post_apply").modal('hide');
         },error:function(msg){
         }
     });
@@ -280,7 +289,7 @@ var attrs = new Array();
 var datas = new Array();
 function checkApply(){
   var htqs = $("input[name='htqs']:checked").val();
-  var ckHt = $("#HourlyPay").lanCheck('notEmpty');
+  var ckHt = $("input[name='htqs']:checked").lanCheck('notEmpty');
   if(!ckHt){
        $("#ht-comments").html("请选择好合同签署方式");
        return false;
@@ -338,6 +347,13 @@ function checkApply(){
             attrs[3]="FixedPayMax";
             datas[3]=$("#fixed_pay_max").val();
         }
+  }else{
+    attrs[1]="";
+    datas[1]="";
+    attrs[2]="";
+    datas[2]="";
+    attrs[3]="";
+    datas[3]="";
   }
   
   var zdrq = $("input[name='jrsj']:checked").val();
@@ -357,11 +373,14 @@ function checkApply(){
             datas[4]=$("#entry_d").val();
         }
     }
-    attrs[5]="IsApply";
-    datas[5]="Y";
-    attrs[6]="Content";
-    datas[6]=$("#apply-content").val();
+  }else{
+    attrs[4]="";
+    datas[4]="";
   }
+  attrs[5]="IsApply";
+  datas[5]="Y";
+  attrs[6]="Content";
+  datas[6]=$("#apply-content").val();
  return true;
 }
 

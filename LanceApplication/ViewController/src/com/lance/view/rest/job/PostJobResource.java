@@ -321,7 +321,6 @@ public class PostJobResource extends BaseRestResource {
         json.put("Img", AuthCache.getUserById(json.getString("CreateBy")).get("Img"));
         JSONObject userJson = new UserResource().findUserById(json.getString("CreateBy"));
         String location = userJson.has("LocationA") ? userJson.getString("LocationA") : (userJson.has("LocationB") ? userJson.getString("LocationB") : "");
-        json.put("Location", location);
         json.put("Location", (location==null && location.length() == 0) ? "江西 吉安" : location);
         json.put("WorkCategory", new CacheResource().getJobCategoryNameFromCache(json.getString("WorkCategory")));
         json.put("WorkSubcategory", new CacheResource().getJobSubCategoryNameFromCache(json.getString("WorkSubcategory")));
@@ -441,7 +440,7 @@ public class PostJobResource extends BaseRestResource {
             return LUtil.createJsonMsg(contractId);
         }
     }
-
+    
     /**
      * 获取指定工作下的讨论信息
      * （不含工作信息本身，乙方查看甲方发布的PostJob页面应该用异步方式加载讨论信息）
@@ -475,26 +474,42 @@ public class PostJobResource extends BaseRestResource {
     }
     
     public PostJobDiscussVOImpl getParentDiscuss(LanceRestAMImpl am,String jobid,String type) throws JSONException {
+        StringBuffer whereclause = new StringBuffer();
         PostJobDiscussVOImpl vo = am.getPostJobDiscussVO1();
-        vo.setApplyViewCriteriaName("FindParentDiscussVC");
-        vo.setapplyflag(null);
-        vo.setuName(null);
+        vo.setWhereClause(null);
         if("apply".equals(type)){
             //申请
+            if(whereclause.length() > 0){
+                whereclause.append(" and ");
+            }
+            whereclause.append("IS_APPLY = 'Y'");
             vo.setapplyflag("Y");
          }else if("second".equals(type)){
            //备选
-            
-         }else if("owner".equals(type)){
+           if(whereclause.length() > 0){
+               whereclause.append(" and ");
+           }
+           whereclause.append("STATUS = '"+ConstantUtil.DISCUSS_STATUS_SECOND+"'");
+        }else if("owner".equals(type)){
             //查看与自己相关的
-            vo.setuName(this.findCurrentUserName());
-         }
-        vo.setpJobId(jobid);
+             if(whereclause.length() > 0){
+                 whereclause.append(" and ");
+             }
+             whereclause.append("CREATE_BY = '"+this.findCurrentUserName()+"'");
+        }else{
+            if(whereclause.length() > 0){
+                whereclause.append(" and ");
+            }
+            whereclause.append("STATUS <> '"+ConstantUtil.DISCUSS_STATUS_DELETED+"'");
+        }
+        if(whereclause.length() > 0){
+            whereclause.append(" and ");
+        }
+        whereclause.append("POST_JOB_ID = '"+jobid+"'");
+        vo.setWhereClause(whereclause.toString());
         vo.setRangeSize(-1);
         vo.setOrderByClause("CREATE_ON desc");
         vo.executeQuery();
-System.out.println("vo.getQuery():"+vo.getQuery());
-        vo.removeApplyViewCriteriaName("FindParentDiscussVC");
         System.out.println("vo.getQuery()2:"+vo.getQuery());
         return vo;
     }
@@ -571,7 +586,7 @@ System.out.println("vo.getQuery():"+vo.getQuery());
         PostJobDiscussVORowImpl discussRow;
         while (discussIt.hasNext()) {
             discussRow = (PostJobDiscussVORowImpl) discussIt.next();
-            discussRow.setStatus("deleted");
+            discussRow.setStatus(ConstantUtil.DISCUSS_STATUS_DELETED);
             if (postJobRow.getCreateBy().equals(currentUser)) {
                 discussRow.setStatusLog("此信息已被客户删除");
             } else {
