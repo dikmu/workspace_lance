@@ -14,6 +14,7 @@
         <link href="/lance/resources/css/common/common.css" rel="stylesheet" type="text/css"/>
         <link href="/lance/resources/css/control/main.css" rel="stylesheet" type="text/css"/>
         <link type="text/css" href="/lance/resources/css/postjob.css" rel="stylesheet" />
+        <link type="text/css" href="/lance/resources/css/control/report.css" rel="stylesheet" />
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -30,7 +31,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 jobDetail">
-                <a href="#"><span aria-hidden="true">&larr;</span> 返回搜索工作列表</a>
+                <a href="/lance/pages/MyHome"><span aria-hidden="true">&larr;</span> 返回搜索工作列表</a>
                 <br /><br />
                 
                 <div class="alert alert-info" role="alert">
@@ -54,10 +55,10 @@
                                         {{if status=="fixed"}}
                                              <tr>
                                                 <td>
-                                                    <span class="glyphicon glyphicon-time"></span> 价格：<span id="Fixed-Pay"></span>
+                                                    <span class="glyphicon glyphicon-time"></span> 项目总价：<span id="Fixed-Pay"></span>
                                                 </td>
                                                  <td>
-                                                    <span class="glyphicon glyphicon-time"></span> 项目周期：<span id="Duration"></span>
+                                                    <span class="glyphicon glyphicon-time"></span> 计费方式：固定价格
                                                 </td>
                                                 <td>
                                                     <span class="glyphicon glyphicon-time"></span> 工作地点：<span id="IndexLocation"></span>
@@ -68,9 +69,6 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                   <span class="glyphicon glyphicon-time"></span> 每周工作时间：<span id="WeeklyHours"></span>
-                                                </td>
-                                                <td>
                                                   <span class="glyphicon glyphicon-time"></span> 办公方式：<span id="FixedLocation"></span>
                                                 </td>
                                                 <td>
@@ -78,6 +76,9 @@
                                                 </td>
                                                 <td>
                                                    <span class="glyphicon glyphicon-time"></span> 项目结束时间：<span id="PostJobDateEnd"></span>
+                                                </td>
+                                                <td>
+                                                   
                                                 </td>
                                             </tr>
                                          {{else if status=="hourly"}} 
@@ -97,7 +98,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <span class="glyphicon glyphicon-time"></span> 每周工作时间：<span id="WeeklyHours"></span>
+                                                    <span class="glyphicon glyphicon-time"></span> 每周工作时间：<span id="Weekly-Hours"></span>
                                                 </td>
                                                 <td>
                                                     <span class="glyphicon glyphicon-time"></span> 项目开始时间：<span id="PostJobDateStart"></span>
@@ -151,7 +152,6 @@
                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#post_apply">申请</button> 
                                 {{/if}}
                             </script>
-                            
                         </div>
                     </div>
                 </div>
@@ -167,14 +167,17 @@
                             </label>
                             {{if pid=="client"}} 
                                 <label class="radio-inline">
-                                    <input type="radio" name="wtlb" id="rad-apply" value="apply"> 只看申请
+                                    <input type="radio" name="wtlb" id="rad-apply" value="apply" /> 只看申请 <span id="span-apply"></span>
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="wtlb" id="rad-sec" value="second"> 查看备选 
-                                </label> 
+                                    <input type="radio" name="wtlb" id="rad-sec" value="second"> 查看备选 <span id="span-option"></span>
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="wtlb" id="rad-agree" value="agree"> 已同意的申请 <span id="span-agree"></span>
+                                </label>
                             {{else if pid == "lancer"}}
                                 <label class="radio-inline">
-                                    <input type="radio" name="wtlb" id="rad-owner" value="owner"> 与我相关
+                                    <input type="radio" name="wtlb" id="rad-owner" value="owner"> 与我相关 <span id="span-owner"></span>
                                 </label>
                             {{/if}}
                         </script>
@@ -184,15 +187,28 @@
                     <div class="list-mods" id="list-discuss">
                         <script id="list-discuss-sp1" type="text/html"> 
                            {{each list as data i}}
-                            <div class="media">
+                             <div class="media">
                                 <div class="media-left media-middle list-img">
-                                    <a href="#" class="thumbnail">
-                                        <img width="60px" src="/lance/resources/image/jpg/login.jpg" class="media-object" alt="" />
-                                    </a>
+                                   {{if (data.Img != null && data.Img != "")}}
+                                       <a href="#" class="thumbnail">
+                                         <img width="60px" src="/lance/{{data.Img}}" class="media-object" alt="" />
+                                       </a>
+                                   {{else}}
+                                      <a href="#" class="thumbnail">
+                                         <img width="60px" src="/lance/resources/image/jpg/login.jpg" class="media-object" alt="" />
+                                       </a>
+                                   {{/if}}
                                 </div>
                                 <div class="media-body qmedia" style="width:100%;">
-                                    <h4 class="media-heading lan-font-green">{{data.CreateBy}} | <span id="u-address">{{data.Location}}</span></h4>
-                                    <span id="u-discuss">{{data.Content}}</span>
+                                    <h4 class="media-heading lan-font-green">{{data.CreateBy}} 
+                                      {{if (data.Location != null && data.Location != "")}} | {{data.Location}} {{/if}} 
+                                      {{if data.Status == 'agreed' && (User.UserName==Publisher || User.UserName==data.CreateBy)}}
+                                          <span class="tip-span">&nbsp;&nbsp;(接受申请√)</span>
+                                      {{else if data.Status == 'option' && (User.UserName==Publisher || User.UserName==data.CreateBy)}}
+                                          <span class="tip-span">&nbsp;&nbsp;(备选√)</span>
+                                      {{/if}}
+                                    </h4>
+                                    <span id="u-discuss">&nbsp;&nbsp;{{data.Content}}</span>
                                     <br />
                                     {{if (data.IsApply=='Y')}}
                                         <div class="exa-intro">
@@ -208,15 +224,20 @@
                                             {{else}}
                                                 — 
                                             {{/if}}
-                                            </span> |   {{if data.SignBy=='self'}} <span>每周工作时间：{{data.WeeklyHours}}小时</span> | {{/if}}
+                                            </span> | {{if data.SignBy=='self'}} <span>每周工作时间：{{data.WeeklyHours}}小时</span> | {{/if}}
                                             <span>申请时间：{{data.CreateOn}}</span>
                                         </div>
                                     {{/if}}
                                     <div>
                                         {{if (User.UserName==Publisher && data.IsApply=='Y')}}
-                                            <button type="button" class="btn btn-success btn-xs">接受</button>
-                                            <button type="button" class="btn btn-success btn-xs">加入备选</button>
-                                            <button type="button" class="btn btn-danger btn-xs" uuid="{{data.Uuid}}" name="dis-del">删除</button>
+                                           {{if data.Status == 'display'}}
+                                              <button type="button" name="btn-agree" uuid="{{data.Uuid}}" class="btn btn-success btn-xs">接受</button>
+                                              <button type="button" name="btn-option" uuid="{{data.Uuid}}" class="btn btn-success btn-xs">加入备选</button>
+                                              <button type="button" class="btn btn-danger btn-xs" uuid="{{data.Uuid}}" name="dis-del">删除</button>
+                                           {{else if data.Status == 'option'}}
+                                              <button type="button" name="btn-agree" uuid="{{data.Uuid}}" class="btn btn-success btn-xs">接受</button>
+                                              <button type="button" class="btn btn-danger btn-xs" uuid="{{data.Uuid}}" name="dis-del">删除</button>
+                                           {{/if}}
                                         {{else if (User.UserName==Publisher && data.IsApply=='N')}}
                                            {{if data.children.length > 0}}
                                              <button type="button" class="btn btn-success btn-xs" uuid="{{data.Uuid}}" name="ques-replay">回复</button>
@@ -226,7 +247,9 @@
                                            {{/if}}
                                         {{else if (User.UserName!=Publisher && data.CreateBy==User.UserName && (data.IsApply=='N' || data.IsApply=='Y'))}}
                                             {{if data.children.length == 0}}
-                                              <button type="button" class="btn btn-danger btn-xs" uuid="{{data.Uuid}}" name="dis-del">删除</button>
+                                               {{if data.Status == 'display'}}
+                                                  <button type="button" class="btn btn-danger btn-xs" uuid="{{data.Uuid}}" name="dis-del">删除</button>
+                                               {{/if}}
                                            {{else}}
                                               <button type="button" class="btn btn-success btn-xs" uuid="{{data.Uuid}}" name="ques-replay">留言</button>
                                            {{/if}}
@@ -235,7 +258,7 @@
                                     {{each data.children as cr i}}
                                         <div class="lan-bg-f5 lan-ov-hid">
                                             <span class="pull-left">
-                                               {{if (cr.CreateBy == data.CreateBy) }}
+                                               {{if (cr.CreateBy == Publisher) }}
                                                     甲方客户&nbsp;回复&nbsp;{{cr.CreateBy}}
                                                {{else}}
                                                     {{cr.CreateBy}}&nbsp;提问&nbsp;甲方客户

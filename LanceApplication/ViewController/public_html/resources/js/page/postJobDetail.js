@@ -12,6 +12,7 @@ $(function () {
 function initPostJobData(jobId){
   jQuery.ajax({
         url : '/lance/res/postJob/'+ jobId, type : 'get', success : function (data) {
+            console.log("输出:"+jQuery.toJSON(data));
             $("#job-msg-area").html(template('job-msg-sp1',{'status' : data["Postform"]}));
             var skills=new Array();
             var attrs =new Array("A","B","C","D","E","F","G");
@@ -47,19 +48,22 @@ function initPostJobData(jobId){
             if(data.hasOwnProperty("HourlyPayMin")){
                 var dur1 = data["HourlyPayMin"];
                 if(data.hasOwnProperty("HourlyPayMax")){
-                    dur1 = "￥"+dur1 +"~"+ data["HourlyPayMax"]+"元";
+                    dur1 = "￥"+dur1 +"~"+ data["HourlyPayMax"]+"元/小时";
                 }
                 $("#hourly-Pay").html(dur1);
             }
             
             if(data.hasOwnProperty("FixedPayMin")){
-                var dur = data["FixedPayMin"];
+                var pay = data["FixedPayMin"];
                 if(data.hasOwnProperty("FixedPayMax")){
-                    dur = "￥"+dur +"~"+ data["FixedPayMax"]+"元";
+                    dur = "￥"+pay +"~"+ data["FixedPayMax"]+"元";
                 }
                 $("#Fixed-Pay").html(dur);
             }
            
+           if(data.hasOwnProperty("WeeklyHours")){
+                $("#Weekly-Hours").html(data["WeeklyHours"]+"小时");
+            }
             for(var key in data){
                 if($("#"+key).length > 0){
                     $("#"+key).html(data[key]);
@@ -70,10 +74,12 @@ function initPostJobData(jobId){
                 $("#btn-area").hide();
                 $("#btn-area").html(template('btn-area-sp1',{'show' : "N"}));
                 $("#radio-area").html(template('radio-area-sp1',{'pid' : "client"}));
+                stat(jobId,"client");
             }else{
                 $("#btn-area").show();
                 $("#btn-area").html(template('btn-area-sp1',{'show' : "Y"}));
                 $("#radio-area").html(template('radio-area-sp1',{'pid' : "lancer"}));
+                stat(jobId,"lancer");
             }
             
             quesSubmit(jobId,data["CreateBy"]);
@@ -81,7 +87,9 @@ function initPostJobData(jobId){
             disDel(jobId,data["CreateBy"]);
             jfjgChange(jobId,true,data["CreateBy"]);
             submitApply(jobId,data["CreateBy"]);
-            initPostDiscussData(jobId,data["CreateBy"])
+            initPostDiscussData(jobId,data["CreateBy"]);
+            optionApply(jobId,data["CreateBy"]);
+            agree(jobId,data["CreateBy"]);
         },
         error : function (msg) {
         }
@@ -195,6 +203,54 @@ function disDel(jobId,publisher){
   });
 }
 
+//加入备选
+function optionApply(jobId,publisher){
+  var uuid = null;
+  $("#list-discuss").on("click", "button[name='btn-option']", function(){
+      uuid = $(this).attr("uuid");
+      if(uuid != null){
+         jQuery.ajax({
+              url : '/lance/res/postJob/'+jobId+'/optionDiscuss/'+uuid, 
+              type : 'post',
+              success: function(data){
+                 if(data.indexOf("ok") >= 0){
+                     initPostDiscussData(jobId,publisher);
+                 }else{
+                     alert(data.split(":")[1]);
+                 }
+            },error:function(msg){
+            }
+        });
+      }
+  });
+}
+
+//同意操作 
+function agree(jobId,publisher){
+  var uuid = null;
+  $("#list-discuss").on("click", "button[name='btn-agree']", function(){
+      uuid = $(this).attr("uuid");
+      alert(uuid);
+      if(uuid != null){
+         var param={};
+         jQuery.ajax({
+              url : '/lance/res/postJob/'+jobId+'/agreeDiscuss/'+uuid, 
+              type : 'post',
+              contentType : 'application/json',
+              data:jQuery.toJSON(param),
+              success: function(data){
+                 if(data.msg.indexOf("ok") >= 0){
+                     initPostDiscussData(jobId,publisher);
+                 }else{
+                     alert(data.msg.split(":")[1]);
+                 }
+            },error:function(msg){
+            }
+        });
+      }
+  });
+}
+
 function jfjgChange(jobId,init,publisher){
    
    $("input[name='jkfs']").change(function(){
@@ -216,8 +272,8 @@ function jfjgChange(jobId,init,publisher){
         $("#jffs-cnt").show();
     }
     
-     //是否指定时间效果切换
-     $("input[name='jrsj']").change(function(){
+    //是否指定时间效果切换
+    $("input[name='jrsj']").change(function(){
         if(this.checked){
             if("shqd-sj" == $(this).attr("id")){
                 $("#sj-span").hide();
@@ -237,6 +293,8 @@ function jfjgChange(jobId,init,publisher){
                initPostDiscussData2(jobId,publisher,"second");
             }else if("owner" == $(this).val()){
                initPostDiscussData2(jobId,publisher,"owner");
+            }else if("agree" == $(this).val()){
+               initPostDiscussData2(jobId,publisher,"agree");
             }
         }
     });
@@ -382,6 +440,31 @@ function checkApply(){
   attrs[6]="Content";
   datas[6]=$("#apply-content").val();
  return true;
+}
+
+function stat(jobId,type){
+    jQuery.ajax({
+          url : '/lance/res/postJob/'+jobId+'/stat/'+type, 
+          type : 'get',
+          success: function(data){
+            if("lancer" == type){
+                $("#span-owner").html("("+data.count+")");
+            }else if("client" == type){
+                $("#span-apply").html("("+data.apply+")");
+                if(data.hasOwnProperty("option")){
+                    $("#span-option").html("("+data.option+")");
+                }else{
+                    $("#span-option").html("(0)");
+                }
+                if(data.hasOwnProperty("agreed")){
+                    $("#span-agree").html("("+data.agreed+")");
+                }else{
+                    $("#span-agree").html("(0)");
+                }
+            }
+        },error:function(msg){
+        }
+    });
 }
 
 //获取url中的参数

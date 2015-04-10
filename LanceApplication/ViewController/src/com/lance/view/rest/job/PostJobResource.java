@@ -25,6 +25,8 @@ import javax.ws.rs.core.MediaType;
 import oracle.jbo.Row;
 import oracle.jbo.RowSetIterator;
 
+import oracle.jbo.server.ViewObjectImpl;
+
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -135,7 +137,7 @@ public class PostJobResource extends BaseRestResource {
         Version,Precision:0,JavaType:oracle.jbo.domain.Number
      */
     public static final String[] POST_JOB_DISCUSS_VO_ATTR_ALL = {
-        "Uuid", "PostJobId", "Content", "IsApply", "SignBy", "Postform", "HourlyPay", "FixedPayMax", "FixedPayMin",
+        "Uuid", "PostJobId", "Content", "IsApply","Status","SignBy", "Postform", "HourlyPay", "FixedPayMax", "FixedPayMin",
         "WeeklyHours", "EnteryDate", "ParentDiscussId", "CreateByName", "CreateBy", "CreateOn", "ModifyBy", "ModifyOn",
         "Version"
     };
@@ -324,6 +326,7 @@ public class PostJobResource extends BaseRestResource {
         json.put("Location", (location==null && location.length() == 0) ? "江西 吉安" : location);
         json.put("WorkCategory", new CacheResource().getJobCategoryNameFromCache(json.getString("WorkCategory")));
         json.put("WorkSubcategory", new CacheResource().getJobSubCategoryNameFromCache(json.getString("WorkSubcategory")));
+    System.out.println("--json--"+json);
         return json;
     }
 
@@ -393,7 +396,53 @@ public class PostJobResource extends BaseRestResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public JSONObject agreeApplyDiscuss(@PathParam("postJobId") String jobId, @PathParam("discussId") String discussId,
                                         JSONObject json) throws JSONException {
-        //获取postJob
+//        //获取postJob
+//        LanceRestAMImpl am = LUtil.findLanceAM();
+//        PostJobsVOImpl vo = am.getPostJobs1();
+//        findPostJobById(jobId, vo);
+//        //获取申请Discuss
+//        PostJobDiscussVOImpl vo2 = am.getPostJobDiscuss1();
+//        vo2.setApplyViewCriteriaName("FindByIdVC");
+//        vo2.setpId(discussId);
+//        vo2.executeQuery();
+//        PostJobDiscussVORowImpl row2 = (PostJobDiscussVORowImpl) vo2.first();
+//        vo2.removeApplyViewCriteriaName("FindByIdVC");
+//        //todo 为了测试方便 ，允许自己同意自己的申请
+//        if (!ConstantUtil.DEBUG_MODE)
+//            if (row2.getCreateBy().equals(this.findCurrentUserName())) {
+//                System.err.println("用户试图同意自己的申请" + this.findCurrentUserName());
+//                return LUtil.createJsonMsg("无法完成此操作");
+//            }
+//        if (!row2.getIsApply().equals("Y")) {
+//            System.err.println("这不是一个申请");
+//            return LUtil.createJsonMsg("这不是一个申请");
+//        }
+//        //反馈申请信息
+//        PostJobDiscussVOImpl vo3 = am.getPostJobDiscuss1();
+//        Row row = vo3.createRow();
+//        for (String attr : POST_JOB_DISCUSS_VO_ATTR_AGREE) {
+//            if (json.has(attr))
+//                row.setAttribute(attr, json.get(attr));
+//        }
+//        vo3.insertRow(row);
+//
+//        //创建合作合同
+//        System.out.println(" new ContractResource().createContractFn:" + row2.getCreateBy() + ";" +
+//                           this.findCurrentUserName() + "；" + jobId + "；" + discussId);
+//        String contractId =
+//            new ContractResource().createContractFn(am, row2.getCreateBy(), this.findCurrentUserName(), jobId,
+//                                                    discussId);
+//        if (contractId.length() == 32) { //返回的是32位，UUID的长度是32
+//            am.getDBTransaction().commit();
+//            JSONObject json2 = LUtil.createJsonSuccess();
+//            json2.put("contractId", contractId);
+//            json2.put("href", "/lance/pages/project/Contract/" + contractId);
+//            return json2;
+//        } else {
+//            //contractId异常，返回的是错误信息
+//            return LUtil.createJsonMsg(contractId);
+//        }
+                //获取postJob
         LanceRestAMImpl am = LUtil.findLanceAM();
         PostJobsVOImpl vo = am.getPostJobs1();
         findPostJobById(jobId, vo);
@@ -404,41 +453,23 @@ public class PostJobResource extends BaseRestResource {
         vo2.executeQuery();
         PostJobDiscussVORowImpl row2 = (PostJobDiscussVORowImpl) vo2.first();
         vo2.removeApplyViewCriteriaName("FindByIdVC");
-        //todo 为了测试方便 ，允许自己同意自己的申请
-        if (!ConstantUtil.DEBUG_MODE)
-            if (row2.getCreateBy().equals(this.findCurrentUserName())) {
-                System.err.println("用户试图同意自己的申请" + this.findCurrentUserName());
-                return LUtil.createJsonMsg("无法完成此操作");
-            }
+        
         if (!row2.getIsApply().equals("Y")) {
-            System.err.println("这不是一个申请");
-            return LUtil.createJsonMsg("这不是一个申请");
+            System.err.println("这不是一个申请,无法同意申请");
+            return LUtil.createJsonMsg("这不是一个申请,无法同意申请");
+        }   
+        PostJobsVORowImpl pjr = (PostJobsVORowImpl)vo.getCurrentRow();
+        if(pjr.getCreateBy().equals(this.findCurrentUserName())){
+            row2.setStatus(ConstantUtil.DISCUSS_STATUS_AGREED);
+            row2.setStatusLog("同意申请");
+        }else if (row2.getCreateBy().equals(this.findCurrentUserName())) {
+            System.err.println("用户试图同意自己的申请" + this.findCurrentUserName());
+            return LUtil.createJsonMsg("err:请勿将自己加入备选");
         }
-        //反馈申请信息
-        PostJobDiscussVOImpl vo3 = am.getPostJobDiscuss1();
-        Row row = vo3.createRow();
-        for (String attr : POST_JOB_DISCUSS_VO_ATTR_AGREE) {
-            if (json.has(attr))
-                row.setAttribute(attr, json.get(attr));
+        if("ok".equals(am.commit())){
+            return LUtil.createJsonMsg("ok");
         }
-        vo3.insertRow(row);
-
-        //创建合作合同
-        System.out.println(" new ContractResource().createContractFn:" + row2.getCreateBy() + ";" +
-                           this.findCurrentUserName() + "；" + jobId + "；" + discussId);
-        String contractId =
-            new ContractResource().createContractFn(am, row2.getCreateBy(), this.findCurrentUserName(), jobId,
-                                                    discussId);
-        if (contractId.length() == 32) { //返回的是32位，UUID的长度是32
-            am.getDBTransaction().commit();
-            JSONObject json2 = LUtil.createJsonSuccess();
-            json2.put("contractId", contractId);
-            json2.put("href", "/lance/pages/project/Contract/" + contractId);
-            return json2;
-        } else {
-            //contractId异常，返回的是错误信息
-            return LUtil.createJsonMsg(contractId);
-        }
+        return LUtil.createJsonMsg("err:保存失败!");
     }
     
     /**
@@ -465,6 +496,41 @@ public class PostJobResource extends BaseRestResource {
         return getJobDiscussTree(jobId,null);
     }
     
+    @POST
+    @Path("{postJobId}/optionDiscuss/{discussId}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.TEXT_PLAIN)
+    public String optionApplyDiscuss(@PathParam("postJobId") String jobId, @PathParam("discussId") String discussId){
+        //获取postJob
+        LanceRestAMImpl am = LUtil.findLanceAM();
+        PostJobsVOImpl vo = am.getPostJobs1();
+        findPostJobById(jobId, vo);
+        //获取申请Discuss
+        PostJobDiscussVOImpl vo2 = am.getPostJobDiscuss1();
+        vo2.setApplyViewCriteriaName("FindByIdVC");
+        vo2.setpId(discussId);
+        vo2.executeQuery();
+        PostJobDiscussVORowImpl row2 = (PostJobDiscussVORowImpl) vo2.first();
+        vo2.removeApplyViewCriteriaName("FindByIdVC");
+        
+        if (!row2.getIsApply().equals("Y")) {
+            System.err.println("这不是一个申请,无法加入备选");
+            return "err:这不是一个申请,无法加入备选";
+        }   
+        PostJobsVORowImpl pjr = (PostJobsVORowImpl)vo.getCurrentRow();
+        if(pjr.getCreateBy().equals(this.findCurrentUserName())){
+            row2.setStatus(ConstantUtil.DISCUSS_STATUS_OPTION);
+            row2.setStatusLog("备选");
+        }else if (row2.getCreateBy().equals(this.findCurrentUserName())) {
+            System.err.println("用户试图同意自己的申请" + this.findCurrentUserName());
+            return "err:请勿将自己加入备选";
+        }
+        if("ok".equals(am.commit())){
+            return "ok";
+        }
+        return "err:保存失败!";
+    }
+    
     @GET
     @Path("{postJobId}/{type}/discuss")
     @Produces(MediaType.APPLICATION_JSON)
@@ -483,25 +549,29 @@ public class PostJobResource extends BaseRestResource {
                 whereclause.append(" and ");
             }
             whereclause.append("IS_APPLY = 'Y'");
-            vo.setapplyflag("Y");
          }else if("second".equals(type)){
            //备选
            if(whereclause.length() > 0){
                whereclause.append(" and ");
            }
-           whereclause.append("STATUS = '"+ConstantUtil.DISCUSS_STATUS_SECOND+"'");
+           whereclause.append("STATUS = '"+ConstantUtil.DISCUSS_STATUS_OPTION+"'");
         }else if("owner".equals(type)){
             //查看与自己相关的
              if(whereclause.length() > 0){
                  whereclause.append(" and ");
              }
              whereclause.append("CREATE_BY = '"+this.findCurrentUserName()+"'");
-        }else{
+        }else if("agree".equals(type)){
+            //备选
             if(whereclause.length() > 0){
                 whereclause.append(" and ");
             }
-            whereclause.append("STATUS <> '"+ConstantUtil.DISCUSS_STATUS_DELETED+"'");
+            whereclause.append("STATUS = '"+ConstantUtil.DISCUSS_STATUS_AGREED+"'");
         }
+        if(whereclause.length() > 0){
+            whereclause.append(" and ");
+        }
+        whereclause.append("STATUS <> '"+ConstantUtil.DISCUSS_STATUS_DELETED+"'");
         if(whereclause.length() > 0){
             whereclause.append(" and ");
         }
@@ -510,7 +580,6 @@ public class PostJobResource extends BaseRestResource {
         vo.setRangeSize(-1);
         vo.setOrderByClause("CREATE_ON desc");
         vo.executeQuery();
-        System.out.println("vo.getQuery()2:"+vo.getQuery());
         return vo;
     }
     
@@ -523,6 +592,32 @@ public class PostJobResource extends BaseRestResource {
         vo.executeQuery();
         vo.removeApplyViewCriteriaName("findDiscussByParentID");
         return vo;
+    }
+    
+    public JSONObject getClientStat(LanceRestAMImpl am,String jobId) throws JSONException {
+      JSONObject json = new JSONObject();
+      String sql = "select p.STATUS,count(p.STATUS) co from POST_JOB_DISCUSS p where p.STATUS in ('"+ConstantUtil.DISCUSS_STATUS_AGREED+"','"+ConstantUtil.DISCUSS_STATUS_OPTION+"') and p.POST_JOB_ID='"+jobId+"' GROUP BY p.STATUS";
+      ViewObjectImpl vo = am.createDynamicViewObject("QueryPostJobDisVO", sql);
+      for(Row row : vo.getAllRowsInRange()){
+          json.put(row.getAttribute("STATUS").toString(), row.getAttribute("CO").toString());
+      }
+      sql ="select count(p.UUID) co from POST_JOB_DISCUSS p where p.STATUS <> '"+ConstantUtil.DISCUSS_STATUS_DELETED+"' and p.IS_APPLY='Y' and p.POST_JOB_ID='"+jobId+"'";
+        ViewObjectImpl vo2 = am.createDynamicViewObject("QueryPostJobApplyVO", sql);
+        if(vo2.first() != null){
+            json.put("apply", vo2.first().getAttribute("CO").toString());
+        }
+      return json;
+    }
+    
+    public JSONObject getLancerStat(LanceRestAMImpl am,String jobId) throws JSONException {
+      JSONObject json = new JSONObject();
+      String sql = "select count(p.STATUS) co from POST_JOB_DISCUSS p where p.STATUS <> '"+ConstantUtil.DISCUSS_STATUS_DELETED+"' and p.CREATE_BY='"+this.findCurrentUserName()+"' and p.POST_JOB_ID='"+jobId+"'";
+       ViewObjectImpl vo = am.createDynamicViewObject("QueryPostJobLanDisVO", sql);
+        if(vo.getEstimatedRowCount() == 0){
+            return json;
+        }
+        json.put("count", vo.first().getAttribute("CO").toString());
+      return json;
     }
     
     public JSONArray getJobDiscussTree(String jobId,String type) throws JSONException {
@@ -597,6 +692,19 @@ public class PostJobResource extends BaseRestResource {
 
         am.getDBTransaction().commit();
         return "ok";
+    }
+    
+    @GET
+    @Path("{postJobId}/stat/{type}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public JSONObject getDiscussStat(@PathParam("postJobId")String postJobId,@PathParam("type")String type) throws JSONException {
+        LanceRestAMImpl am = LUtil.findLanceAM();
+        if("client".equals(type)){
+          return this.getClientStat(am,postJobId);
+        }else if("lancer".equals(type)){
+          return this.getLancerStat(am, postJobId);
+        }
+        return null;
     }
 
     private PostJobDiscussVOImpl findDiscussByIdAndCreator(LanceRestAMImpl am, String discussId, String creator) {

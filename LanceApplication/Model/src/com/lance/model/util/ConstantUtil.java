@@ -121,5 +121,5 @@ public class ConstantUtil {
     public static final String DISCUSS_STATUS_AGREED = "agreed"; //同意
     public static final String DISCUSS_STATUS_DISPLAY = "display"; //显示
     public static final String DISCUSS_STATUS_DELETED = "deleted"; //删除
-    public static final String DISCUSS_STATUS_SECOND = "second"; //备选
+    public static final String DISCUSS_STATUS_OPTION = "option"; //备选
 }
