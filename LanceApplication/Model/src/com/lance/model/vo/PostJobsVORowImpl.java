@@ -842,8 +842,8 @@ public class PostJobsVORowImpl extends BaseViewRowImpl {
      * Gets the attribute value for CREATE_ON using the alias name CreateOn.
      * @return the CREATE_ON
      */
-    public Timestamp getCreateOn() {
-        return (Timestamp) getAttributeInternal(CREATEON);
+    public Date getCreateOn() {
+        return (Date) getAttributeInternal(CREATEON);
     }
 
     /**

@@ -323,10 +323,9 @@ public class PostJobResource extends BaseRestResource {
         json.put("Img", AuthCache.getUserById(json.getString("CreateBy")).get("Img"));
         JSONObject userJson = new UserResource().findUserById(json.getString("CreateBy"));
         String location = userJson.has("LocationA") ? userJson.getString("LocationA") : (userJson.has("LocationB") ? userJson.getString("LocationB") : "");
-        json.put("Location", (location==null && location.length() == 0) ? "江西 吉安" : location);
+        json.put("Location", location);
         json.put("WorkCategory", new CacheResource().getJobCategoryNameFromCache(json.getString("WorkCategory")));
         json.put("WorkSubcategory", new CacheResource().getJobSubCategoryNameFromCache(json.getString("WorkSubcategory")));
-    System.out.println("--json--"+json);
         return json;
     }
 

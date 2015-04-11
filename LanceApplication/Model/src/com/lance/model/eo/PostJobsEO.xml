@@ -339,7 +339,7 @@
     Name="CreateOn"
     ColumnName="CREATE_ON"
     SQLType="DATE"
-    Type="java.sql.Timestamp"
+    Type="oracle.jbo.domain.Date"
     ColumnType="DATE"
     TableName="POST_JOBS"
     IsUpdateable="while_insert"

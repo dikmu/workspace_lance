@@ -12,7 +12,6 @@ $(function () {
 function initPostJobData(jobId){
   jQuery.ajax({
         url : '/lance/res/postJob/'+ jobId, type : 'get', success : function (data) {
-            console.log("输出:"+jQuery.toJSON(data));
             $("#job-msg-area").html(template('job-msg-sp1',{'status' : data["Postform"]}));
             var skills=new Array();
             var attrs =new Array("A","B","C","D","E","F","G");
@@ -64,6 +63,10 @@ function initPostJobData(jobId){
            if(data.hasOwnProperty("WeeklyHours")){
                 $("#Weekly-Hours").html(data["WeeklyHours"]+"小时");
             }
+           if(data.hasOwnProperty("Location") && !("" == data["Location"])){
+                $("#client-location").html(" | "+data["Location"]);
+           }
+            
             for(var key in data){
                 if($("#"+key).length > 0){
                     $("#"+key).html(data[key]);
@@ -100,11 +103,17 @@ function initPostJobData(jobId){
 function initPostDiscussData(jobId,publisher){
     jQuery.ajax({
         url : '/lance/res/postJob/'+jobId+'/discuss?random='+Math.random(), type : 'get', success : function (data) {
+           console.log(jQuery.toJSON(data));
            $("#list-discuss").html(template('list-discuss-sp1',{'list' : data,"User":User,"Publisher":publisher}));
         },
         error : function (msg) {
         }
    });
+}
+
+function isNum(str){
+  var reg =/^[1-9]\d{0,2}$/;
+  return reg.test(str);
 }
 
 //初始化提问申请列表
@@ -366,20 +375,28 @@ function checkApply(){
             paHp.addClass("has-error");
             return false;
         }else{
+           if(!isNum($("#HourlyPay").val())){
+               paHp.addClass("has-error");
+               return false;
+           }
             paHp.removeClass("has-error");
             attrs[2]="HourlyPay";
             datas[2]=$("#HourlyPay").val();
         }
         
-        var ckWh = $("#Weekly-Hours").lanCheck('notEmpty');
-        var paWh = $("#Weekly-Hours").closest('.form-group');
+        var ckWh = $("#Weekly_Hours").lanCheck('notEmpty');
+        var paWh = $("#Weekly_Hours").closest('.form-group');
         if(!ckWh){
             paWh.addClass("has-error");
             return false;
         }else{
+            if(!isNum($("#Weekly_Hours").val())){
+               paWh.addClass("has-error");
+               return false;
+            }
             paWh.removeClass("has-error");
             attrs[3]="WeeklyHours";
-            datas[3]=$("#Weekly-Hours").val();
+            datas[3]=$("#Weekly_Hours").val();
         }
   }else if("fixed" == jkfs){
         attrs[1]="Postform";
@@ -390,6 +407,10 @@ function checkApply(){
             paFpn.addClass("has-error");
             return false;
         }else{
+            if(!isNum($("#fixed_pay_min").val())){
+               paFpn.addClass("has-error");
+               return false;
+            }
             paFpn.removeClass("has-error");
             attrs[2]="FixedPayMin";
             datas[2]=$("#fixed_pay_min").val();
@@ -401,6 +422,10 @@ function checkApply(){
             paFpx.addClass("has-error");
             return false;
         }else{
+            if(!isNum($("#fixed_pay_max").val())){
+               paFpx.addClass("has-error");
+               return false;
+            }
             paFpx.removeClass("has-error");
             attrs[3]="FixedPayMax";
             datas[3]=$("#fixed_pay_max").val();

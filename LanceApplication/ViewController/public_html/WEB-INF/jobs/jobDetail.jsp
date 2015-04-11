@@ -122,7 +122,7 @@
                                         </a>
                                     </div>
                                     <div class="media-body">
-                                        <h4 class="media-heading">客户信息 | <span id="Location"></span></h4>
+                                        <h4 class="media-heading">客户信息  <span id="client-location"></span></h4>
                                         <span class="glyphicon glyphicon-star lan-font-yellow"></span>
                                         <span class="glyphicon glyphicon-star lan-font-yellow"></span>
                                         <span class="glyphicon glyphicon-star lan-font-yellow"></span>
@@ -215,16 +215,16 @@
                                             <span>申请:{{if data.SignBy=='self'}} 个人承接 {{else}} 公司承接 {{/if}}</span> | 
                                             <span>报价：
                                             {{if (User.UserName==Publisher || User.UserName==data.CreateBy)}}
-                                                {{if data.SignBy=='self'}} 
+                                                {{if data.Postform=='hourly'}} 
                                                       {{if data.HourlyPay !=null}} {{data.HourlyPay}}元/小时 
                                                       {{else}} 面议 {{/if}} 
                                                 {{else}} 
-                                                  {{if data.FixedPayMin != null}} {{data.FixedPayMin}}元~{{data.FixedPayMax}}元 {{else}} 面议 {{/if}} 
+                                                      {{if data.FixedPayMin != null}} {{data.FixedPayMin}}元~{{data.FixedPayMax}}元 {{else}} 面议 {{/if}} 
                                                 {{/if}}
                                             {{else}}
                                                 — 
                                             {{/if}}
-                                            </span> | {{if data.SignBy=='self'}} <span>每周工作时间：{{data.WeeklyHours}}小时</span> | {{/if}}
+                                            </span> | {{if data.Postform=='hourly'}} <span>每周工作时间：{{data.WeeklyHours}}小时</span> | {{/if}}
                                             <span>申请时间：{{data.CreateOn}}</span>
                                         </div>
                                     {{/if}}
@@ -393,18 +393,16 @@
                                         <label for="inp_mail" class="control-label">请输入报价</label>
                                         <br />
                                         ￥<input type="text" class="form-control inp-txt" id="HourlyPay" placeholder=""
-                                            data-container="body" data-animation="false"
-                                        />元/小时
+                                            data-container="body" data-animation="false" />元/小时
                                     </div>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="form-group">
                                         <label for="inp_mail" class="control-label">
                                             请输入每周工作时间</label>
                                         <br />
-                                        <input type="text" class="form-control inp-txt" id="Weekly-Hours" placeholder=""
+                                        <input type="text" class="form-control inp-txt" id="Weekly_Hours" placeholder=""
                                             data-container="body" data-toggle="popover" data-placement="right" 
-                                            data-content="请输入正确的邮箱格式" data-trigger="manual" data-animation="false"
-                                        />小时
+                                            data-content="请输入正确的邮箱格式" data-trigger="manual" data-animation="false" />小时
                                     </div>
                                 {{else if jffs == 'gdjg'}}
                                     <div class="form-group">
