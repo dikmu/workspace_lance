@@ -12,13 +12,13 @@ import com.lance.model.vo.JobCategoryVOImpl;
 import com.lance.model.vo.JobSubCategoryExpertsVOImpl;
 import com.lance.model.vo.JobSubCategoryVOImpl;
 import com.lance.model.vo.JobTemplateVOImpl;
+import com.lance.model.vo.SkillSuperTypeVOImpl;
+import com.lance.model.vo.SkillsVOImpl;
 import com.lance.model.vo.SysCalendarVOImpl;
 import com.lance.model.vo.SysCalendarVORowImpl;
-
 import com.lance.model.vo.UserJobCategoryVOImpl;
 
 import com.zngh.platform.front.core.model.BaseApplicationModuleImpl;
-
 import com.zngh.platform.front.core.model.BaseViewObjectImpl;
 
 import java.text.SimpleDateFormat;
@@ -42,9 +42,21 @@ public class LanceAdminAMImpl extends BaseApplicationModuleImpl implements Lance
     public LanceAdminAMImpl() {
     }
 
-    public String findJobTemplate(String category, String subCategory,String attr1,String attr2) {
+    public String findJobSubCategoryById(String subCategoryId) {
+        System.out.println("findJobSubCategoryById:" + subCategoryId);
+        JobSubCategoryVOImpl vo2 = this.getJobSubCategory2();
+        vo2.setApplyViewCriteriaName("FindByIdVC");
+        vo2.setpUuid(subCategoryId);
+        vo2.executeQuery();
+        vo2.removeApplyViewCriteriaName("FindByIdVC");
+        vo2.setCurrentRow(vo2.first());
+
+        return null;
+    }
+
+    public String findJobTemplate(String category, String subCategory, String attr1, String attr2) {
         JobTemplateVOImpl vo = this.getJobTemplate1();
-        if(StringUtils.isNotBlank(category)){
+        if (StringUtils.isNotBlank(category)) {
             vo.setApplyViewCriteriaName("FindByCategoryVC");
             vo.setpJobCategoryId(category);
             vo.setpCreateBy(this.findCurrentUserId());
@@ -291,6 +303,46 @@ public class LanceAdminAMImpl extends BaseApplicationModuleImpl implements Lance
      */
     public UserJobCategoryVOImpl getUserJobCategory1() {
         return (UserJobCategoryVOImpl) findViewObject("UserJobCategory1");
+    }
+
+    /**
+     * Container's getter for SkillSuperType1.
+     * @return SkillSuperType1
+     */
+    public SkillSuperTypeVOImpl getSkillSuperType1() {
+        return (SkillSuperTypeVOImpl) findViewObject("SkillSuperType1");
+    }
+
+    /**
+     * Container's getter for Skills1.
+     * @return Skills1
+     */
+    public SkillsVOImpl getSkills1() {
+        return (SkillsVOImpl) findViewObject("Skills1");
+    }
+
+    /**
+     * Container's getter for SkillsSkillSuperTypeFk1VL1.
+     * @return SkillsSkillSuperTypeFk1VL1
+     */
+    public ViewLinkImpl getSkillsSkillSuperTypeFk1VL1() {
+        return (ViewLinkImpl) findViewLink("SkillsSkillSuperTypeFk1VL1");
+    }
+
+    /**
+     * Container's getter for JobSubCategory2.
+     * @return JobSubCategory2
+     */
+    public JobSubCategoryVOImpl getJobSubCategory2() {
+        return (JobSubCategoryVOImpl) findViewObject("JobSubCategory2");
+    }
+
+    /**
+     * Container's getter for Skills2.
+     * @return Skills2
+     */
+    public SkillsVOImpl getSkills2() {
+        return (SkillsVOImpl) findViewObject("Skills2");
     }
 }
 

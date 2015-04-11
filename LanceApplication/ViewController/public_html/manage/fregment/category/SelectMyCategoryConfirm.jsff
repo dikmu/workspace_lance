@@ -76,7 +76,11 @@
             <f:facet name="top">
                 <af:panelGroupLayout id="pgl3" layout="vertical">
                     <af:spacer width="10" height="20" id="s2"/>
-                    <af:train value="#{controllerContext.currentViewPort.taskFlowContext.trainModel}" id="t1"/>
+                    <af:train value="#{controllerContext.currentViewPort.taskFlowContext.trainModel}" id="t1">
+                        <f:facet name="nodeStamp">
+                            <af:commandNavigationItem id="cni1" action="next"/>
+                        </f:facet>
+                    </af:train>
                 </af:panelGroupLayout>
             </f:facet>
         </af:panelBorderLayout>

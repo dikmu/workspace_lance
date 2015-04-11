@@ -12,9 +12,13 @@
   BindingStyle="OracleName"
   CustomQuery="false"
   SelectAllAttributes="false"
-  RowClass="com.zngh.platform.front.core.model.BaseViewRowImpl"
-  ComponentClass="com.zngh.platform.front.core.model.BaseViewObjectImpl"
+  RowClass="com.lance.model.vo.SkillSuperTypeVORowImpl"
+  ComponentClass="com.lance.model.vo.SkillSuperTypeVOImpl"
   PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <EntityUsage
     Name="SkillSuperTypeEO"
     Entity="com.lance.model.eo.SkillSuperTypeEO"/>
@@ -30,40 +34,148 @@
     PrecisionRule="true"
     EntityAttrName="Name"
     EntityUsage="SkillSuperTypeEO"
-    AliasName="NAME"/>
+    AliasName="NAME">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.lance.model.vo.SkillSuperTypeVO.Name_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="NameCn"
+    PrecisionRule="true"
+    EntityAttrName="NameCn"
+    EntityUsage="SkillSuperTypeEO"
+    AliasName="NAME_CN">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.lance.model.vo.SkillSuperTypeVO.NameCn_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Description"
+    PrecisionRule="true"
+    EntityAttrName="Description"
+    EntityUsage="SkillSuperTypeEO"
+    AliasName="DESCRIPTION">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.lance.model.vo.SkillSuperTypeVO.Description_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="CreateBy"
     PrecisionRule="true"
     EntityAttrName="CreateBy"
     EntityUsage="SkillSuperTypeEO"
-    AliasName="CREATE_BY"/>
+    AliasName="CREATE_BY">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.lance.model.vo.SkillSuperTypeVO.CreateBy_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="CreateOn"
     PrecisionRule="true"
     EntityAttrName="CreateOn"
     EntityUsage="SkillSuperTypeEO"
-    AliasName="CREATE_ON"/>
+    AliasName="CREATE_ON">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.lance.model.vo.SkillSuperTypeVO.CreateOn_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="ModifyBy"
     PrecisionRule="true"
     EntityAttrName="ModifyBy"
     EntityUsage="SkillSuperTypeEO"
-    AliasName="MODIFY_BY"/>
+    AliasName="MODIFY_BY">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.lance.model.vo.SkillSuperTypeVO.ModifyBy_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="ModifyOn"
     PrecisionRule="true"
     EntityAttrName="ModifyOn"
     EntityUsage="SkillSuperTypeEO"
-    AliasName="MODIFY_ON"/>
+    AliasName="MODIFY_ON">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.lance.model.vo.SkillSuperTypeVO.ModifyOn_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Version"
     PrecisionRule="true"
     EntityAttrName="Version"
     EntityUsage="SkillSuperTypeEO"
-    AliasName="VERSION"/>
+    AliasName="VERSION">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.lance.model.vo.SkillSuperTypeVO.Version_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreateByName"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.lance.model.vo.SkillSuperTypeVO.CreateByName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ModifyByName"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.lance.model.vo.SkillSuperTypeVO.ModifyByName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewLinkAccessor
     Name="Skills"
     ViewLink="com.lance.model.vl.SkillsSkillSuperTypeFk1VL"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.lance.model.ModelBundle"/>
+  </ResourceBundle>
 </ViewObject>

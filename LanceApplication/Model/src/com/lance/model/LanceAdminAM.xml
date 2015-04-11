@@ -60,6 +60,18 @@
   <ViewUsage
     Name="UserJobCategory1"
     ViewObjectName="com.lance.model.vo.UserJobCategoryVO"/>
+  <ViewUsage
+    Name="SkillSuperType1"
+    ViewObjectName="com.lance.model.vo.SkillSuperTypeVO"/>
+  <ViewUsage
+    Name="Skills1"
+    ViewObjectName="com.lance.model.vo.SkillsVO"/>
+  <ViewUsage
+    Name="JobSubCategory2"
+    ViewObjectName="com.lance.model.vo.JobSubCategoryVO"/>
+  <ViewUsage
+    Name="Skills2"
+    ViewObjectName="com.lance.model.vo.SkillsVO"/>
   <ViewLinkUsage
     Name="JobTemplateJobCategoryFk1VL1"
     ViewLinkObjectName="com.lance.model.vl.JobTemplateJobCategoryFk1VL"
@@ -114,6 +126,12 @@
     SrcViewUsageName="com.lance.model.LanceAdminAM.JobSubCategory1"
     DstViewUsageName="com.lance.model.LanceAdminAM.JobSubCategorySubmit1"
     Reversed="false"/>
+  <ViewLinkUsage
+    Name="SkillsSkillSuperTypeFk1VL1"
+    ViewLinkObjectName="com.lance.model.vl.SkillsSkillSuperTypeFk1VL"
+    SrcViewUsageName="com.lance.model.LanceAdminAM.SkillSuperType1"
+    DstViewUsageName="com.lance.model.LanceAdminAM.Skills1"
+    Reversed="false"/>
   <ClientInterface
     Name="__clientInterface">
     <Method
@@ -146,6 +164,16 @@
         Type="java.lang.String"/>
       <Parameter
         Name="attr2"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="findJobSubCategoryById"
+      MethodName="findJobSubCategoryById">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="subCategoryId"
         Type="java.lang.String"/>
     </Method>
   </ClientInterface>

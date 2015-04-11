@@ -26,6 +26,16 @@
     <page path="/manage/fregment/category/PreviewAddSubCategory.jsff"
           usageId="com_lance_view_PreviewAddSubCategoryPageDef"/>
     <page path="/manage/fregment/category/AddCategorySuccess.jsff" usageId="com_lance_view_AddCategorySuccessPageDef"/>
+    <page path="/manage/Skills.jsf" usageId="com_lance_view_SkillsPageDef"/>
+    <page path="/manage/fregment/category/CategoryDetail.jsff" usageId="com_lance_view_CategoryDetailPageDef"/>
+    <page path="/WEB-INF/task/manage/category/edit-subcategory-task.xml#edit-subcategory-task@findJobSubCategoryById"
+          usageId="com_lance_view_edit_subcategory_task_edit_subcategory_task_findJobSubCategoryByIdPageDef"/>
+    <page path="/manage/fregment/skill/ViewSkill.jsff" usageId="com_lance_view_ViewSkillPageDef"/>
+    <page path="/WEB-INF/task/manage/skill/create-skill-task.xml#create-skill-task@CreateInsert"
+          usageId="com_lance_view_create_skill_task_create_skill_task_CreateInsertPageDef"/>
+    <page path="/manage/fregment/skill/EditSkill.jsff" usageId="com_lance_view_EditSkillPageDef"/>
+    <page path="/manage/fregment/skill/ApplyNewSkillSuperType2.jsff"
+          usageId="com_lance_view_ApplyNewSkillSuperType2PageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="com_lance_view_TestPageDef" path="com.lance.view.pageDefs.TestPageDef"/>
@@ -47,6 +57,16 @@
     <page id="com_lance_view_PreviewAddSubCategoryPageDef"
           path="manage.fregment.category.PreviewAddSubCategoryPageDef"/>
     <page id="com_lance_view_AddCategorySuccessPageDef" path="manage.fregment.category.AddCategorySuccessPageDef"/>
+    <page id="com_lance_view_SkillsPageDef" path="manage.SkillsPageDef"/>
+    <page id="com_lance_view_CategoryDetailPageDef" path="manage.fregment.category.CategoryDetailPageDef"/>
+    <page id="com_lance_view_edit_subcategory_task_edit_subcategory_task_findJobSubCategoryByIdPageDef"
+          path="task.manage.category.edit_subcategory_task_edit_subcategory_task_findJobSubCategoryByIdPageDef"/>
+    <page id="com_lance_view_ViewSkillPageDef" path="manage.fregment.skill.ViewSkillPageDef"/>
+    <page id="com_lance_view_create_skill_task_create_skill_task_CreateInsertPageDef"
+          path="task.manage.skill.create_skill_task_create_skill_task_CreateInsertPageDef"/>
+    <page id="com_lance_view_EditSkillPageDef" path="manage.fregment.skill.EditSkillPageDef"/>
+    <page id="com_lance_view_ApplyNewSkillSuperType2PageDef"
+          path="manage.fregment.skill.ApplyNewSkillSuperType2PageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
      <BC4JDataControl id="TemplateAMDataControl" Package="org.agileofm.template.model"

@@ -46,7 +46,7 @@
       <property
          name="fromOutcome">addSubCategory</property>
       <property
-         name="sdm:polyPoints">R50,550.3506,281.44824,773.69727,221.79883,L50</property>
+         name="sdm:polyPoints">R46,550.3506,277.94824,773.69727,221.79883,L50</property>
    </ControlFlowCase>
    <View
       id="View5">
@@ -84,5 +84,32 @@
          name="fromOutcome">viewCategory</property>
       <property
          name="sdm:polyPoints">L50,788.7051,374.74707,550.3506,284.94824,R54</property>
+   </ControlFlowCase>
+   <TaskFlowCall
+      id="TaskFlowCall12">
+      <property
+         name="taskFlowId">edit-subcategory-task</property>
+      <property
+         name="activityId">edit-subcategory-task</property>
+      <property
+         name="documentReference">/WEB-INF/task/manage/category/edit-subcategory-task.xml</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>edit-subcategory-task&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">274.39648</property>
+      <property
+         name="x">238.36035</property>
+   </TaskFlowCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase13"
+      from="View7"
+      to="TaskFlowCall12">
+      <property
+         name="fromOutcome">edit</property>
+      <property
+         name="sdm:polyPoints">L50,468.3506,281.44824,279.36035,274.0459,R50</property>
    </ControlFlowCase>
 </SDM>

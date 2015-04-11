@@ -23,11 +23,26 @@
     <view id="AddCategorySuccess">
       <page>/manage/fregment/category/AddCategorySuccess.jsff</page>
     </view>
+    <task-flow-call id="edit-subcategory-task">
+      <task-flow-reference>
+        <document>/WEB-INF/task/manage/category/edit-subcategory-task.xml</document>
+        <id>edit-subcategory-task</id>
+      </task-flow-reference>
+      <input-parameter id="__9">
+        <name>subCategoryId</name>
+        <value>#{pageFlowScope.subId}</value>
+        <pass-by-value/>
+      </input-parameter>
+    </task-flow-call>
     <control-flow-rule id="__4">
       <from-activity-id>ViewCategory</from-activity-id>
       <control-flow-case id="__5">
         <from-outcome>addSubCategory</from-outcome>
         <to-activity-id>add-subcategory-task</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__8">
+        <from-outcome>edit</from-outcome>
+        <to-activity-id>edit-subcategory-task</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__1">

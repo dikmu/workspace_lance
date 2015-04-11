@@ -19,6 +19,10 @@
     <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
     <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
+  <Variable
+    Name="pUuid"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="UUserVO1"
     ViewObjectName="com.lance.model.user.vo.UUserVO"
@@ -208,6 +212,43 @@
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewCriteria
+    Name="FindByIdVC"
+    ViewObjectName="com.lance.model.vo.JobCategoryVO"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="JobCategoryVOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Uuid"
+        ViewAttribute="Uuid"
+        Operator="="
+        Conjunction="AND"
+        Value=":pUuid"
+        UpperColumns="0"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="JobTemplate"
     ViewLink="com.lance.model.vl.JobTemplateJobCategoryFk1VL"

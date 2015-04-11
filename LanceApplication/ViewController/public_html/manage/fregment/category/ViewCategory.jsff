@@ -18,40 +18,33 @@
                             </f:facet>
                         </af:panelGroupLayout>
                     </f:facet>
-                    <af:listView value="#{bindings.JobCategory1.treeModel}" var="item"
-                                 emptyText="#{bindings.JobCategory1.viewable ? 'No data to display.' : 'Access Denied.'}"
-                                 fetchSize="#{bindings.JobCategory1.rangeSize}" id="lv1" selection="single">
-                        <af:listItem id="li1">
-                            <af:panelGroupLayout layout="horizontal" id="pgl2">
+                    <af:listView value="#{bindings.JobCategory11.treeModel}" var="item"
+                                 emptyText="#{bindings.JobCategory11.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                 fetchSize="#{bindings.JobCategory11.rangeSize}" id="lv2">
+                        <af:listItem id="li3">
+                            <af:panelGroupLayout layout="horizontal" id="pgl5">
                                 <f:facet name="separator">
-                                    <af:spacer width="10" id="s1"/>
+                                    <af:spacer width="10" id="s4"/>
                                 </f:facet>
-                                <af:outputFormatted value="#{item.bindings.Name.inputValue}" id="of1"/>
-                                <af:outputFormatted value="#{item.bindings.CreateByName.inputValue}" id="of2"/>
-                                <af:outputFormatted value="#{item.bindings.CreateOn.inputValue}" id="of3">
-                                    <af:convertDateTime pattern="#{bindings.JobCategory1.hints.CreateOn.format}"/>
-                                </af:outputFormatted>
-                                <af:outputFormatted value="#{item.bindings.ModifyByName.inputValue}" id="of4"/>
-                                <af:outputFormatted value="#{item.bindings.ModifyOn.inputValue}" id="of5">
-                                    <af:convertDateTime pattern="#{bindings.JobCategory1.hints.ModifyOn.format}"/>
-                                </af:outputFormatted>
+                                <af:outputFormatted value="#{item.bindings.Name.inputValue}" id="of12"/>
+                                <af:outputFormatted value="#{item.bindings.NameCn.inputValue}" id="of13"/>
+                                <af:outputFormatted value="#{item.bindings.Uuid.inputValue}" id="of14"
+                                                    rendered="false"/>
+                                <af:outputFormatted value="#{item.bindings.CreateByName.inputValue}" id="of15"/>
+                                <af:link text="edit" id="l2" action="edit">
+                                    <af:setActionListener to="#{pageFlowScope.subId}"
+                                                          from="#{item.bindings.Uuid.inputValue}"/>
+                                </af:link>
                             </af:panelGroupLayout>
                         </af:listItem>
                         <f:facet name="groupHeaderStamp">
-                            <af:listItem id="li2">
-                                <af:panelGroupLayout layout="horizontal" id="pgl3">
+                            <af:listItem id="li4">
+                                <af:panelGroupLayout layout="horizontal" id="pgl6">
                                     <f:facet name="separator">
-                                        <af:spacer width="10" id="s2"/>
+                                        <af:spacer width="10" id="s5"/>
                                     </f:facet>
-                                    <af:outputFormatted value="#{item.bindings.NameCn.inputValue}" id="of6"/>
-                                    <af:outputFormatted value="#{item.bindings.CreateByName.inputValue}" id="of7"/>
-                                    <af:outputFormatted value="#{item.bindings.CreateOn.inputValue}" id="of8">
-                                        <af:convertDateTime pattern="#{bindings.JobCategory1.hints.CreateOn.format}"/>
-                                    </af:outputFormatted>
-                                    <af:outputFormatted value="#{item.bindings.ModifyByName.inputValue}" id="of9"/>
-                                    <af:outputFormatted value="#{item.bindings.ModifyOn.inputValue}" id="of10">
-                                        <af:convertDateTime pattern="#{bindings.JobCategory1.hints.ModifyOn.format}"/>
-                                    </af:outputFormatted>
+                                    <af:outputFormatted value="#{item.bindings.NameEn.inputValue}" id="of16"/>
+                                    <af:outputFormatted value="#{item.bindings.NameCn.inputValue}" id="of17"/>
                                 </af:panelGroupLayout>
                             </af:listItem>
                         </f:facet>

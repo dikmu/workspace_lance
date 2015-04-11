@@ -17,7 +17,7 @@
                             <af:selectBooleanCheckbox text="属于具有竞争力的专业领域（有一定经验后，日薪可达￥700以上）"
                                                       id="sbc1" binding="#{CategoryBean.agreementChk1}"
                                                       autoSubmit="true" value="#{pageFlowScope.vchk1}"/>
-                            <af:selectBooleanCheckbox text="#{viewcontrollerBundle._U5C5E_U4E8E_U5E02_U573A_U7ADE_U4E89_U884C_U4E1A}"
+                            <af:selectBooleanCheckbox text="属于市场竞争行业"
                                                       id="sbc2" binding="#{CategoryBean.agreementChk2}"
                                                       autoSubmit="true" value="#{pageFlowScope.vchk2}"/>
                             <af:selectBooleanCheckbox text="尚未被现有系统收录且属于合法的专业"
@@ -46,7 +46,10 @@
                                 <af:spacer width="10" height="20" id="s3"/>
                                 <af:train value="#{controllerContext.currentViewPort.taskFlowContext.trainModel}"
                                           id="t1" var="v" varStatus="vs">
-                                    <f:facet name="nodeStamp"/>
+                                    <f:facet name="nodeStamp">
+                                        <af:commandNavigationItem id="cni1"
+                                                                  action="#{CategoryBean.agreeAgreement_action}"/>
+                                    </f:facet>
                                 </af:train>
                             </af:panelGroupLayout>
                         </f:facet>

@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelBorderLayout id="pbl1">
+        <af:panelGroupLayout id="pgl2" layout="vertical">
+        <af:selectBooleanCheckbox text="属于合法的专业技能"
+                                                      id="sbc2" binding="#{SkillBean.agreementChk1}"
+                                                      autoSubmit="true" value="#{pageFlowScope.vchk1}"/>
+            <af:selectBooleanCheckbox text="尚未被现有系统收录" id="sbc3" binding="#{SkillBean.agreementChk3}"
+                                      autoSubmit="true" value="#{pageFlowScope.vchk3}"/>
+            <af:selectBooleanCheckbox text="您所添加的专业领域会立即生效，之后也可能被撤回，但您基于此领域发布的相关信息将保留60天" id="sbc4"
+                                      binding="#{SkillBean.agreementChk4}" autoSubmit="true"
+                                      value="#{pageFlowScope.vchk4}"/>
+            <af:selectBooleanCheckbox text="本网站具有最终解释权" id="sbc1"
+                                      binding="#{SkillBean.agreementChk1}" autoSubmit="true"
+                                      value="#{pageFlowScope.vchk1}"/>
+            <f:facet name="separator">
+                <af:spacer width="10" height="10" id="s1"/>
+            </f:facet>
+        </af:panelGroupLayout>
+        <f:facet name="start"/>
+        <f:facet name="bottom">
+              <af:panelGroupLayout id="pgl3" layout="horizontal" halign="center">
+                                <af:button text="下一步" id="b1" action="#{SkillBean.agreeAgreement_action}"
+                                           disabled="false" partialTriggers="pgl2"/>
+                                <af:button text="取消" id="b2" action="cancel"/>
+                                <f:facet name="separator">
+                                    <af:spacer width="10" height="10" id="s2"/>
+                                </f:facet>
+                            </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="end"/>
+        <f:facet name="top">
+            <af:train value="#{controllerContext.currentViewPort.taskFlowContext.trainModel}" id="t1">
+                <f:facet name="nodeStamp">
+                    <af:commandNavigationItem id="cni1"/>
+                </f:facet>
+            </af:train>
+        </f:facet>
+    </af:panelBorderLayout>
+</ui:composition>

@@ -11,7 +11,7 @@
                         <f:facet name="buttonBar"/>
                     </af:dialog>
                 </af:popup>
-                <af:button text="提交" id="b2">
+                <af:button text="提交" id="b2" action="commit">
                     <af:showPopupBehavior popupId="p1"/>
                 </af:button>
                 <f:facet name="separator">
@@ -24,7 +24,11 @@
         </f:facet>
         <f:facet name="end"/>
         <f:facet name="top">
-            <af:train value="#{controllerContext.currentViewPort.taskFlowContext.trainModel}" id="t1"/>
+            <af:train value="#{controllerContext.currentViewPort.taskFlowContext.trainModel}" id="t1">
+                <f:facet name="nodeStamp">
+                    <af:commandNavigationItem id="cni1" action="goBack"/>
+                </f:facet>
+            </af:train>
         </f:facet>
         <af:panelFormLayout id="pfl1">
             <af:inputText value="#{bindings.Name.inputValue}" label="#{bindings.Name.hints.label}"

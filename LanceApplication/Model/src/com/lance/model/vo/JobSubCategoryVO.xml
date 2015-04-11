@@ -19,6 +19,10 @@
     <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
     <Attr Name="_isCodegen" Value="true"/>
   </DesignTime>
+  <Variable
+    Name="pUuid"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="UUserVO1"
     ViewObjectName="com.lance.model.user.vo.UUserVO"
@@ -184,7 +188,14 @@
     PrecisionRule="true"
     EntityAttrName="Version"
     EntityUsage="JobSubCategoryEO"
-    AliasName="VERSION"/>
+    AliasName="VERSION">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.lance.model.vo.JobSubCategoryVO.Version_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="CreateByName"
     IsUpdateable="false"
@@ -221,6 +232,43 @@
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewCriteria
+    Name="FindByIdVC"
+    ViewObjectName="com.lance.model.vo.JobSubCategoryVO"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="JobSubCategoryVOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Uuid"
+        ViewAttribute="Uuid"
+        Operator="="
+        Conjunction="AND"
+        Value=":pUuid"
+        UpperColumns="0"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="JobSubCategorySubmit"
     ViewLink="com.lance.model.vl.JobSubCategory_SubCategorySubmitVL"

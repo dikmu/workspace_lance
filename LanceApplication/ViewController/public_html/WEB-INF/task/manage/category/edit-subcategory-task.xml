@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="edit-subcategory-task">
+    <default-activity>findJobSubCategoryById</default-activity>
+    <transaction>
+      <new-transaction/>
+    </transaction>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
+    <input-parameter-definition id="__6">
+      <name>subCategoryId</name>
+      <value>#{pageFlowScope.subId}</value>
+      <class>java.lang.String</class>
+      <required/>
+    </input-parameter-definition>
+    <managed-bean id="__7">
+      <managed-bean-name>CategoryBean</managed-bean-name>
+      <managed-bean-class>com.lance.view.bean.CategoryBean</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <view id="CategoryDetail">
+      <page>/manage/fregment/category/CategoryDetail.jsff</page>
+    </view>
+    <method-call id="findJobSubCategoryById">
+      <method>#{bindings.findJobSubCategoryById.execute}</method>
+      <outcome>
+        <fixed-outcome>findJobSubCategoryById</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="commit">
+      <outcome>
+        <name>commit</name>
+        <commit/>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="rollback">
+      <outcome>
+        <name>rollback</name>
+        <rollback/>
+      </outcome>
+    </task-flow-return>
+    <control-flow-rule id="__1">
+      <from-activity-id>findJobSubCategoryById</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>findJobSubCategoryById</from-outcome>
+        <to-activity-id>CategoryDetail</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__3">
+      <from-activity-id>CategoryDetail</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>commit</from-outcome>
+        <to-activity-id>commit</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__5">
+        <from-outcome>rollback</from-outcome>
+        <to-activity-id>rollback</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

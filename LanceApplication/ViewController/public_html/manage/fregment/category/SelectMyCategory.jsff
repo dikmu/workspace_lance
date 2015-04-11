@@ -42,7 +42,12 @@
                             <af:panelGroupLayout id="pgl4" layout="vertical">
                                 <af:spacer width="50" height="20" id="s3"/>
                                 <af:train value="#{controllerContext.currentViewPort.taskFlowContext.trainModel}"
-                                          id="t1"/>
+                                          id="t1" var="node" varStatus="vs">
+                                    <f:facet name="nodeStamp">
+                                        <af:commandNavigationItem id="cni1"
+                                                                  action="#{CategoryBean.selectMyCategory_action}"/>
+                                    </f:facet>
+                                </af:train>
                             </af:panelGroupLayout>
                         </f:facet>
                     </af:panelBorderLayout>

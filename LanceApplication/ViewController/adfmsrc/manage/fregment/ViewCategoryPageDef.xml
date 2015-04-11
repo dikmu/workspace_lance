@@ -7,26 +7,22 @@
     <iterator Binds="JobCategory1" RangeSize="100" DataControl="LanceAdminAMDataControl" id="JobCategory1Iterator"/>
   </executables>
   <bindings>
-    <tree IterBinding="JobCategory1Iterator" id="JobCategory1">
-      <nodeDefinition DefName="com.lance.model.vo.JobCategoryVO" Name="JobCategory10">
+    <tree IterBinding="JobCategory1Iterator" id="JobCategory11">
+      <nodeDefinition DefName="com.lance.model.vo.JobCategoryVO" Name="JobCategory110">
         <AttrNames>
+          <Item Value="NameEn"/>
           <Item Value="NameCn"/>
-          <Item Value="CreateByName"/>
-          <Item Value="CreateOn"/>
-          <Item Value="ModifyByName"/>
-          <Item Value="ModifyOn"/>
         </AttrNames>
         <Accessors>
           <Item Value="JobSubCategory"/>
         </Accessors>
       </nodeDefinition>
-      <nodeDefinition DefName="com.lance.model.vo.JobSubCategoryVO" Name="JobCategory11">
+      <nodeDefinition DefName="com.lance.model.vo.JobSubCategoryVO" Name="JobCategory111">
         <AttrNames>
           <Item Value="Name"/>
+          <Item Value="NameCn"/>
+          <Item Value="Uuid"/>
           <Item Value="CreateByName"/>
-          <Item Value="CreateOn"/>
-          <Item Value="ModifyByName"/>
-          <Item Value="ModifyOn"/>
         </AttrNames>
       </nodeDefinition>
     </tree>

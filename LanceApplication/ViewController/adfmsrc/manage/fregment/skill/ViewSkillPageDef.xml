@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.2.36" id="ViewSkillPageDef"
+                Package="manage.fregment.skill">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Skills2" RangeSize="25" DataControl="LanceAdminAMDataControl" id="Skills2Iterator"/>
+    <searchRegion Binds="Skills2Iterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="Skills2Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="Skills2Iterator" id="Skills2">
+      <nodeDefinition DefName="com.lance.model.vo.SkillsVO" Name="Skills20">
+        <AttrNames>
+          <Item Value="SuperTypeId"/>
+          <Item Value="Name"/>
+          <Item Value="NameCn"/>
+          <Item Value="Description"/>
+          <Item Value="CreateByName"/>
+          <Item Value="CreateOn"/>
+          <Item Value="ModifyByName"/>
+          <Item Value="ModifyOn"/>
+          <Item Value="Version"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

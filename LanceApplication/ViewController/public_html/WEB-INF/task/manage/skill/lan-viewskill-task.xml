@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="lan-viewskill-task">
+    <default-activity>ViewSkill</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <view id="ViewSkill">
+      <page>/manage/fregment/skill/ViewSkill.jsff</page>
+    </view>
+    <task-flow-call id="create-skill-task">
+      <task-flow-reference>
+        <document>/WEB-INF/task/manage/skill/create-skill-task.xml</document>
+        <id>create-skill-task</id>
+      </task-flow-reference>
+    </task-flow-call>
+    <task-flow-call id="create-skill-type-task">
+      <task-flow-reference>
+        <document>/WEB-INF/task/manage/skill/create-skill-type-task.xml</document>
+        <id>create-skill-type-task</id>
+      </task-flow-reference>
+    </task-flow-call>
+    <view id="createSkillSuccess"></view>
+    <task-flow-call id="edit-skill-type-task">
+      <task-flow-reference>
+        <document>/WEB-INF/task/manage/skill/edit-skill-type-task.xml</document>
+        <id>edit-skill-type-task</id>
+      </task-flow-reference>
+    </task-flow-call>
+    <task-flow-call id="edit-skill-task">
+      <task-flow-reference>
+        <document>/WEB-INF/task/manage/skill/edit-skill-task.xml</document>
+        <id>edit-skill-task</id>
+      </task-flow-reference>
+    </task-flow-call>
+    <view id="editSkillSuccess"></view>
+    <control-flow-rule id="__1">
+      <from-activity-id>ViewSkill</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>createSkill</from-outcome>
+        <to-activity-id>create-skill-task</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__3">
+        <from-outcome>createSkillType</from-outcome>
+        <to-activity-id>create-skill-type-task</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__8">
+        <from-outcome>editSkillType</from-outcome>
+        <to-activity-id>edit-skill-type-task</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__9">
+        <from-outcome>editSkill</from-outcome>
+        <to-activity-id>edit-skill-task</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__4">
+      <from-activity-id>create-skill-task</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>ok</from-outcome>
+        <to-activity-id>createSkillSuccess</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>create-skill-type-task</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>ok</from-outcome>
+        <to-activity-id>createSkillSuccess</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__10">
+      <from-activity-id>edit-skill-type-task</from-activity-id>
+      <control-flow-case id="__11">
+        <from-outcome>ok</from-outcome>
+        <to-activity-id>editSkillSuccess</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__12">
+      <from-activity-id>edit-skill-task</from-activity-id>
+      <control-flow-case id="__13">
+        <from-outcome>ok</from-outcome>
+        <to-activity-id>editSkillSuccess</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__14">
+      <from-activity-id>editSkillSuccess</from-activity-id>
+      <control-flow-case id="__15">
+        <from-outcome>viewSkill</from-outcome>
+        <to-activity-id>ViewSkill</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__16">
+      <from-activity-id>createSkillSuccess</from-activity-id>
+      <control-flow-case id="__17">
+        <from-outcome>viewSkill</from-outcome>
+        <to-activity-id>ViewSkill</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelBox text="修改领域信息" id="pb1" showHeader="always" showDisclosure="false">
+        <f:facet name="toolbar"/>
+        <af:spacer width="10" height="10" id="s2"/>
+        <af:separator id="s5"/>
+        <af:panelGroupLayout id="pgl3" layout="horizontal">
+            <af:spacer width="30" height="10" id="s6"/>
+            <af:outputFormatted value="作为内容贡献人，您所做的修改会在系统中立即生效&lt;br>只有内容创建人可以修改此信息" id="of1"/>
+        </af:panelGroupLayout>
+        <af:separator id="s4"/>
+        <af:spacer width="10" height="10" id="s3"/>
+        <af:panelFormLayout id="pfl1">
+            <af:panelLabelAndMessage label="#{bindings.Name.hints.label}" id="plam1">
+                <af:outputText value="#{bindings.Name.inputValue}" shortDesc="#{bindings.Name.hints.tooltip}" id="ot1"/>
+            </af:panelLabelAndMessage>
+            <af:panelLabelAndMessage label="#{bindings.NameCn.hints.label}" id="plam2">
+                <af:outputText value="#{bindings.NameCn.inputValue}" shortDesc="#{bindings.NameCn.hints.tooltip}"
+                               id="ot2"/>
+            </af:panelLabelAndMessage>
+            <af:inputText value="#{bindings.Description.inputValue}" label="#{bindings.Description.hints.label}"
+                          required="#{bindings.Description.hints.mandatory}" columns="30"
+                          maximumLength="#{bindings.Description.hints.precision}"
+                          shortDesc="#{bindings.Description.hints.tooltip}" id="it1" rows="10"
+                          readOnly="#{securityContext.userName == bindings.CreateOn.inputValue}">
+                <f:validator binding="#{bindings.Description.validator}"/>
+            </af:inputText>
+            <af:panelLabelAndMessage label="#{bindings.CreateByName.hints.label}" id="plam3">
+                <af:outputText value="#{bindings.CreateByName.inputValue}"
+                               shortDesc="#{bindings.CreateByName.hints.tooltip}" id="ot3"/>
+            </af:panelLabelAndMessage>
+            <af:panelLabelAndMessage label="#{bindings.CreateOn.hints.label}" id="plam4">
+                <af:outputText value="#{bindings.CreateOn.inputValue}" shortDesc="#{bindings.CreateOn.hints.tooltip}"
+                               id="ot4">
+                    <af:convertDateTime pattern="#{bindings.CreateOn.format}"/>
+                </af:outputText>
+            </af:panelLabelAndMessage>
+            <af:panelLabelAndMessage label="#{bindings.ModifyByName.hints.label}" id="plam5">
+                <af:outputText value="#{bindings.ModifyByName.inputValue}"
+                               shortDesc="#{bindings.ModifyByName.hints.tooltip}" id="ot5"/>
+            </af:panelLabelAndMessage>
+            <af:panelLabelAndMessage label="#{bindings.ModifyOn.hints.label}" id="plam6">
+                <af:outputText value="#{bindings.ModifyOn.inputValue}" shortDesc="#{bindings.ModifyOn.hints.tooltip}"
+                               id="ot6">
+                    <af:convertDateTime pattern="#{bindings.ModifyOn.format}" type="both"/>
+                </af:outputText>
+            </af:panelLabelAndMessage>
+            <af:panelLabelAndMessage label="#{bindings.Version.hints.label}" id="plam7">
+                <af:outputText value="#{bindings.Version.inputValue}" shortDesc="#{bindings.Version.hints.tooltip}"
+                               id="ot7">
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.Version.format}"/>
+                </af:outputText>
+            </af:panelLabelAndMessage>
+            <f:facet name="footer"/>
+            <af:panelGroupLayout id="pgl2" layout="horizontal">
+                <af:button text="保存" disabled="false" id="b1" action="#{CategoryBean.commit_action2}"/>
+                <af:button text="返回" disabled="false" immediate="true"
+                           id="b2" action="rollback">
+                    <af:resetActionListener/>
+                </af:button>
+                <f:facet name="separator">
+                    <af:spacer width="10" height="10" id="s1"/>
+                </f:facet>
+            </af:panelGroupLayout>
+        </af:panelFormLayout>
+    </af:panelBox>
+</ui:composition>

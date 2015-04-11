@@ -227,4 +227,14 @@ public class CategoryBean extends BaseManagedBean {
     }
 
 
+    public String commit_action2() {
+        BindingContainer bindings = getBindings();
+        OperationBinding operationBinding = bindings.getOperationBinding("Commit");
+        Object result = operationBinding.execute();
+        if (!operationBinding.getErrors().isEmpty()) {
+            return null;
+        }
+        this.appendScript("alert('保存成功')");
+        return null;
+    }
 }

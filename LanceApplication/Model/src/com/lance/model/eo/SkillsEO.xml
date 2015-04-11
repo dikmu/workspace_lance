@@ -11,7 +11,8 @@
   AliasName="SkillsEO"
   BindingStyle="OracleName"
   RowClass="com.zngh.platform.front.core.model.BaseEntityImpl"
-  CollClass="com.zngh.platform.front.core.model.BaseEntityCache">
+  CollClass="com.zngh.platform.front.core.model.BaseEntityCache"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
   <Attribute
     Name="Uuid"
     IsNotNull="true"
@@ -45,10 +46,17 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="SKILLS">
+    TableName="SKILLS"
+    IsNotNull="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="50"/>
     </DesignTime>
+    <validation:PreDefinedValidationBean
+      Name="NameMandatory0"
+      ResId="SkillNameCantBeNull"
+      Description="Mandatory"
+      ValName="Mandatory"
+      Subtype="MANDATORY"/>
   </Attribute>
   <Attribute
     Name="CreateBy"
@@ -102,6 +110,30 @@
     ColumnType="NUMBER"
     TableName="SKILLS"
     HistoryColumn="VersionHistory"/>
+  <Attribute
+    Name="NameCn"
+    Precision="20"
+    ColumnName="NAME_CN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="SKILLS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Description"
+    Precision="800"
+    ColumnName="DESCRIPTION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="SKILLS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="800"/>
+    </DesignTime>
+  </Attribute>
   <AccessorAttribute
     Name="SkillSuperType"
     Association="com.lance.model.as.SkillsSkillSuperTypeFk1AS"
@@ -109,6 +141,40 @@
     AssociationOtherEnd="com.lance.model.as.SkillsSkillSuperTypeFk1AS.Skills"
     Type="com.zngh.platform.front.core.model.BaseEntityImpl"
     IsUpdateable="true"/>
+  <Key
+    Name="NameCnUniqueKey"
+    AltKey="true">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="SKILLS"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.lance.model.eo.SkillsEO.NameCn"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="NameUniqueKey"
+    AltKey="true">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="SKILLS"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.lance.model.eo.SkillsEO.Name"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SkillsNameCheck">
+    <DesignTime>
+      <Attr Name="_isNotNull" Value="true"/>
+      <Attr Name="_DBObjectName" Value="SKILLS_NAME_CHECK"/>
+      <Attr Name="_checkCondition" Value='"NAME" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.lance.model.eo.SkillsEO.Name"/>
+    </AttrArray>
+  </Key>
   <Key
     Name="SkillsPk"
     PrimaryKey="true">
@@ -130,4 +196,26 @@
       <Item Value="com.lance.model.eo.SkillsEO.SuperTypeId"/>
     </AttrArray>
   </Key>
+  <validation:UniqueKeyValidationBean
+    Name="SkillsEORule0"
+    ResId="SkillNameExists"
+    KeyName="NameCnUniqueKey">
+    <validation:OnAttributes>
+      <validation:Item
+        Value="NameCn"/>
+    </validation:OnAttributes>
+  </validation:UniqueKeyValidationBean>
+  <validation:UniqueKeyValidationBean
+    Name="SkillsEORule1"
+    ResId="SkillNameExists"
+    KeyName="NameUniqueKey">
+    <validation:OnAttributes>
+      <validation:Item
+        Value="Name"/>
+    </validation:OnAttributes>
+  </validation:UniqueKeyValidationBean>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.lance.model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>

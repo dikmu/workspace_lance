@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.2.36" id="SkillsPageDef" Package="manage">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <page path="org.agileofm.template.view.pageDefs.TabletSupportTemplatePageDef" id="ptb1" Refresh="ifNeeded"/>
+    <taskFlow id="lanviewskilltask1" taskFlowId="/WEB-INF/task/manage/skill/lan-viewskill-task.xml#lan-viewskill-task"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+  </executables>
+  <bindings/>
+</pageDefinition>

@@ -9,5 +9,7 @@ public interface LanceAdminAM extends ApplicationModule {
     String createSysCalendarDates(Integer start, Integer end);
 
     String findJobTemplate(String category, String subCategory, String attr1, String attr2);
+
+    String findJobSubCategoryById(String subCategoryId);
 }
 

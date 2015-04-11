@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelBorderLayout id="pbl1">
+        <f:facet name="start"/>
+        <af:table value="#{bindings.Skills2.collectionModel}" var="row" rows="#{bindings.Skills2.rangeSize}"
+                  emptyText="#{bindings.Skills2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0" fetchSize="#{bindings.Skills2.rangeSize}" id="t1" columnStretching="column:c9"
+                  filterModel="#{bindings.Skills2Query.queryDescriptor}"
+                  queryListener="#{bindings.Skills2Query.processQuery}" filterVisible="true" varStatus="vs">
+            <af:column id="c10" width="25" filterable="true">
+                <af:panelGroupLayout id="pgl1" layout="horizontal">
+                    <af:link text="编辑" id="l1" visible="#{row.CreateBy == securityContext.userName}"/>
+                </af:panelGroupLayout>
+            </af:column>
+            <af:column headerText="#{bindings.Skills2.hints.SuperTypeId.label}" id="c1"
+                       sortProperty="#{bindings.Skills2.hints.SuperTypeId.name}" filterable="true">
+                <af:selectOneChoice value="#{row.bindings.SuperTypeId.inputValue}"
+                                    label="#{row.bindings.SuperTypeId.label}"
+                                    required="#{bindings.Skills2.hints.SuperTypeId.mandatory}"
+                                    shortDesc="#{bindings.Skills2.hints.SuperTypeId.tooltip}" readOnly="true" id="soc1">
+                    <f:selectItems value="#{row.bindings.SuperTypeId.items}" id="si1"/>
+                    <f:validator binding="#{row.bindings.SuperTypeId.validator}"/>
+                </af:selectOneChoice>
+            </af:column>
+            <af:column headerText="#{bindings.Skills2.hints.Name.label}" id="c2"
+                       sortProperty="#{bindings.Skills2.hints.Name.name}" filterable="true">
+                <af:outputText value="#{row.Name}" shortDesc="#{bindings.Skills2.hints.Name.tooltip}" id="ot1"/>
+            </af:column>
+            <af:column headerText="#{bindings.Skills2.hints.NameCn.label}" id="c3"
+                       sortProperty="#{bindings.Skills2.hints.NameCn.name}" filterable="true">
+                <af:outputText value="#{row.NameCn}" shortDesc="#{bindings.Skills2.hints.NameCn.tooltip}" id="ot2"/>
+            </af:column>
+            <af:column headerText="#{bindings.Skills2.hints.Description.label}" id="c9"
+                       sortProperty="#{bindings.Skills2.hints.Description.name}" filterable="true">
+                <af:outputText value="#{row.Description}" shortDesc="#{bindings.Skills2.hints.Description.tooltip}"
+                               id="ot8"/>
+            </af:column>
+            <af:column headerText="#{bindings.Skills2.hints.CreateByName.label}" id="c4"
+                       sortProperty="#{bindings.Skills2.hints.CreateByName.name}" filterable="true">
+                <af:outputText value="#{row.CreateByName}" shortDesc="#{bindings.Skills2.hints.CreateByName.tooltip}"
+                               id="ot3"/>
+            </af:column>
+            <af:column headerText="#{bindings.Skills2.hints.CreateOn.label}" id="c5"
+                       sortProperty="#{bindings.Skills2.hints.CreateOn.name}" filterable="true">
+                <af:outputText value="#{row.CreateOn}" shortDesc="#{bindings.Skills2.hints.CreateOn.tooltip}" id="ot4">
+                    <af:convertDateTime pattern="#{bindings.Skills2.hints.CreateOn.format}"/>
+                </af:outputText>
+                <f:facet name="filter">
+                    <af:inputDate value="#{bindings.Skills2Query.queryDescriptor.filterConjunctionCriterion.criterionMap.CreateOn.value}"
+                                  id="id2">
+                        <af:convertDateTime pattern="#{bindings.Skills2.hints.CreateOn.format}"/>
+                    </af:inputDate>
+                </f:facet>
+            </af:column>
+            <af:column headerText="#{bindings.Skills2.hints.ModifyByName.label}" id="c6"
+                       sortProperty="#{bindings.Skills2.hints.ModifyByName.name}" filterable="true">
+                <af:outputText value="#{row.ModifyByName}" shortDesc="#{bindings.Skills2.hints.ModifyByName.tooltip}"
+                               id="ot5"/>
+            </af:column>
+            <af:column headerText="#{bindings.Skills2.hints.ModifyOn.label}" id="c7"
+                       sortProperty="#{bindings.Skills2.hints.ModifyOn.name}" filterable="true">
+                <af:outputText value="#{row.ModifyOn}" shortDesc="#{bindings.Skills2.hints.ModifyOn.tooltip}" id="ot6">
+                    <af:convertDateTime pattern="#{bindings.Skills2.hints.ModifyOn.format}"/>
+                </af:outputText>
+                <f:facet name="filter">
+                    <af:inputDate value="#{bindings.Skills2Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ModifyOn.value}"
+                                  id="id1">
+                        <af:convertDateTime pattern="#{bindings.Skills2.hints.ModifyOn.format}"/>
+                    </af:inputDate>
+                </f:facet>
+            </af:column>
+            <af:column headerText="#{bindings.Skills2.hints.Version.label}" id="c8"
+                       sortProperty="#{bindings.Skills2.hints.Version.name}" filterable="true">
+                <af:outputText value="#{row.Version}" shortDesc="#{bindings.Skills2.hints.Version.tooltip}" id="ot7">
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.Skills2.hints.Version.format}"/>
+                </af:outputText>
+            </af:column>
+        </af:table>
+        <f:facet name="bottom"/>
+        <f:facet name="end"/>
+        <f:facet name="top">
+            <af:panelGroupLayout id="pgl2" layout="horizontal" halign="right">
+                <af:button text="添加新技能" id="b1" action="createSkill"/>
+            </af:panelGroupLayout>
+        </f:facet>
+    </af:panelBorderLayout>
+</ui:composition>
