@@ -237,4 +237,6 @@ public class CategoryBean extends BaseManagedBean {
         this.appendScript("alert('保存成功')");
         return null;
     }
+
+
 }

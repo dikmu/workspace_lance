@@ -11,5 +11,7 @@ public interface LanceAdminAM extends ApplicationModule {
     String findJobTemplate(String category, String subCategory, String attr1, String attr2);
 
     String findJobSubCategoryById(String subCategoryId);
+
+    String findJobCategoryById(String categoryId);
 }
 

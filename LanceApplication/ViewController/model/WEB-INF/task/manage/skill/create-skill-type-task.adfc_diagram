@@ -38,9 +38,9 @@
       <property
          name="y">266.39648</property>
       <property
-         name="pageFragment">true</property>
-      <property
          name="x">602.70703</property>
+      <property
+         name="pageFragment">true</property>
    </View>
    <ControlFlowCase
       islink="true"
@@ -67,9 +67,9 @@
       <property
          name="y">264.39648</property>
       <property
-         name="pageFragment">true</property>
-      <property
          name="x">854.70703</property>
+      <property
+         name="pageFragment">true</property>
    </View>
    <ControlFlowCase
       islink="true"
@@ -139,7 +139,7 @@
       <property
          name="fromOutcome">commit</property>
       <property
-         name="sdm:polyPoints">R50,895.70703,264.0459,1024.0,191.59766,L50</property>
+         name="sdm:polyPoints">R46,895.70703,260.5459,1024.0,191.59766,L50</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"

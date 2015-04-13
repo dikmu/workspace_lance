@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.2.36"
+                id="edit_category_task_edit_category_task_findJobCategoryByIdPageDef" Package="task.manage.category"
+                SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="findJobCategoryById" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="findJobCategoryById" IsViewObjectMethod="false" DataControl="LanceAdminAMDataControl"
+                  InstanceName="data.LanceAdminAMDataControl.dataProvider"
+                  ReturnName="data.LanceAdminAMDataControl.methodResults.findJobCategoryById_LanceAdminAMDataControl_dataProvider_findJobCategoryById_result">
+      <NamedData NDName="categoryId" NDValue="#{pageFlowScope.cid}" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

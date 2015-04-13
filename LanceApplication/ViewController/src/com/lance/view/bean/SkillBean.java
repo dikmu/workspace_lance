@@ -5,6 +5,7 @@ import com.zngh.platform.front.core.view.BaseManagedBean;
 import javax.faces.application.FacesMessage;
 
 import oracle.adf.view.rich.component.rich.input.RichSelectBooleanCheckbox;
+import oracle.adf.view.rich.component.rich.nav.RichButton;
 import oracle.adf.view.rich.event.DialogEvent;
 
 public class SkillBean extends BaseManagedBean {
@@ -12,6 +13,7 @@ public class SkillBean extends BaseManagedBean {
     private RichSelectBooleanCheckbox agreementChk1;
     private RichSelectBooleanCheckbox agreementChk2;
     private RichSelectBooleanCheckbox agreementChk3;
+    private RichButton applyCategoryCommitBtn;
 
     public String agreeAgreement_action() {
         if (agreementChk1.getValue().equals(true) && agreementChk2.getValue().equals(true) &&
@@ -63,4 +65,13 @@ public class SkillBean extends BaseManagedBean {
     public void submitSkillEdit(DialogEvent dialogEvent) {
         // Add event code here...
     }
+
+    public void setApplyCategoryCommitBtn(RichButton applyCategoryCommitBtn) {
+        this.applyCategoryCommitBtn = applyCategoryCommitBtn;
+    }
+
+    public RichButton getApplyCategoryCommitBtn() {
+        return applyCategoryCommitBtn;
+    }
+    
 }

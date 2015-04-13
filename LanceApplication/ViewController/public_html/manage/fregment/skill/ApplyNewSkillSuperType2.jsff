@@ -38,7 +38,15 @@
                 <af:convertDateTime pattern="#{bindings.CreateOn.format}"/>
             </af:inputDate>
         </af:panelFormLayout>
-        <f:facet name="bottom"/>
+        <f:facet name="bottom">
+            <af:panelGroupLayout id="pgl1" layout="horizontal" halign="center">
+                <af:button text="预览" id="b1" action="next"/>
+                <af:button text="上一步" id="b2" immediate="true" action="back"/>
+                <f:facet name="separator">
+                    <af:spacer width="10" height="10" id="s1"/>
+                </f:facet>
+            </af:panelGroupLayout>
+        </f:facet>
         <f:facet name="end"/>
         <f:facet name="top"/>
     </af:panelBorderLayout>

@@ -112,6 +112,45 @@
     EntityUsage="JobCategoryEO"
     AliasName="DISPLAY"/>
   <ViewAttribute
+    Name="Description"
+    PrecisionRule="true"
+    EntityAttrName="Description"
+    EntityUsage="JobCategoryEO"
+    AliasName="DESCRIPTION">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.lance.model.vo.JobCategoryVO.Description_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RejectReason"
+    PrecisionRule="true"
+    EntityAttrName="RejectReason"
+    EntityUsage="JobCategoryEO"
+    AliasName="REJECT_REASON">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.lance.model.vo.JobCategoryVO.RejectReason_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ApplyReason"
+    PrecisionRule="true"
+    EntityAttrName="ApplyReason"
+    EntityUsage="JobCategoryEO"
+    AliasName="APPLY_REASON">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.lance.model.vo.JobCategoryVO.ApplyReason_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
     Name="CreateBy"
     IsUpdateable="false"
     PrecisionRule="true"
@@ -175,7 +214,14 @@
     PrecisionRule="true"
     EntityAttrName="Version"
     EntityUsage="JobCategoryEO"
-    AliasName="VERSION"/>
+    AliasName="VERSION">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.lance.model.vo.JobCategoryVO.Version_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="CreateByName"
     IsUpdateable="false"

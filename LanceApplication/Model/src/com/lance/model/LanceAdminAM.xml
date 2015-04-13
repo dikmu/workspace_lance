@@ -176,5 +176,15 @@
         Name="subCategoryId"
         Type="java.lang.String"/>
     </Method>
+    <Method
+      Name="findJobCategoryById"
+      MethodName="findJobCategoryById">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="categoryId"
+        Type="java.lang.String"/>
+    </Method>
   </ClientInterface>
 </AppModule>

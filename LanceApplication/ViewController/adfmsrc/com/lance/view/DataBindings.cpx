@@ -36,6 +36,13 @@
     <page path="/manage/fregment/skill/EditSkill.jsff" usageId="com_lance_view_EditSkillPageDef"/>
     <page path="/manage/fregment/skill/ApplyNewSkillSuperType2.jsff"
           usageId="com_lance_view_ApplyNewSkillSuperType2PageDef"/>
+    <page path="/manage/fregment/skill/ApplyNewSkillSuperType3.jsff"
+          usageId="com_lance_view_ApplyNewSkillSuperType3PageDef"/>
+    <page path="/manage/fregment/category/ApplyCategory.jsff" usageId="com_lance_view_ApplyCategoryPageDef"/>
+    <page path="/WEB-INF/task/manage/category/apply-category-task.xml#apply-category-task@CreateInsert"
+          usageId="com_lance_view_apply_category_task_apply_category_task_CreateInsertPageDef"/>
+    <page path="/WEB-INF/task/manage/category/edit-category-task.xml#edit-category-task@findJobCategoryById"
+          usageId="com_lance_view_edit_category_task_edit_category_task_findJobCategoryByIdPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="com_lance_view_TestPageDef" path="com.lance.view.pageDefs.TestPageDef"/>
@@ -67,6 +74,13 @@
     <page id="com_lance_view_EditSkillPageDef" path="manage.fregment.skill.EditSkillPageDef"/>
     <page id="com_lance_view_ApplyNewSkillSuperType2PageDef"
           path="manage.fregment.skill.ApplyNewSkillSuperType2PageDef"/>
+    <page id="com_lance_view_ApplyNewSkillSuperType3PageDef"
+          path="manage.fregment.skill.ApplyNewSkillSuperType3PageDef"/>
+    <page id="com_lance_view_ApplyCategoryPageDef" path="manage.fregment.category.ApplyCategoryPageDef"/>
+    <page id="com_lance_view_apply_category_task_apply_category_task_CreateInsertPageDef"
+          path="task.manage.category.apply_category_task_apply_category_task_CreateInsertPageDef"/>
+    <page id="com_lance_view_edit_category_task_edit_category_task_findJobCategoryByIdPageDef"
+          path="task.manage.category.edit_category_task_edit_category_task_findJobCategoryByIdPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
      <BC4JDataControl id="TemplateAMDataControl" Package="org.agileofm.template.model"

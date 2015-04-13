@@ -17,9 +17,9 @@
       <property
          name="y">278.74707</property>
       <property
-         name="x">455.5</property>
-      <property
          name="pageFragment">true</property>
+      <property
+         name="x">455.5</property>
    </View>
    <TaskFlowCall
       id="TaskFlowCall3">
@@ -86,9 +86,9 @@
       <property
          name="y">273.84473</property>
       <property
-         name="pageFragment">true</property>
-      <property
          name="x">949.0</property>
+      <property
+         name="pageFragment">true</property>
    </View>
    <ControlFlowCase
       islink="true"
@@ -155,9 +155,9 @@
       <property
          name="y">286.5459</property>
       <property
-         name="pageFragment">true</property>
-      <property
          name="x">18.0</property>
+      <property
+         name="pageFragment">true</property>
    </View>
    <ControlFlowCase
       islink="true"
@@ -167,7 +167,7 @@
       <property
          name="fromOutcome">editSkillType</property>
       <property
-         name="sdm:polyPoints">L46,414.5,274.89648,258.01172,169.39648,R50</property>
+         name="sdm:polyPoints">L42,414.5,271.39648,258.01172,169.39648,R50</property>
    </ControlFlowCase>
    <ControlFlowCase
       islink="true"

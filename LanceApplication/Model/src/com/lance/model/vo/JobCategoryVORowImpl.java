@@ -29,6 +29,9 @@ public class JobCategoryVORowImpl extends BaseViewRowImpl {
         NameEn,
         NameCn,
         Display,
+        Description,
+        RejectReason,
+        ApplyReason,
         CreateBy,
         CreateOn,
         ModifyBy,
@@ -69,6 +72,9 @@ public class JobCategoryVORowImpl extends BaseViewRowImpl {
     public static final int NAMEEN = AttributesEnum.NameEn.index();
     public static final int NAMECN = AttributesEnum.NameCn.index();
     public static final int DISPLAY = AttributesEnum.Display.index();
+    public static final int DESCRIPTION = AttributesEnum.Description.index();
+    public static final int REJECTREASON = AttributesEnum.RejectReason.index();
+    public static final int APPLYREASON = AttributesEnum.ApplyReason.index();
     public static final int CREATEBY = AttributesEnum.CreateBy.index();
     public static final int CREATEON = AttributesEnum.CreateOn.index();
     public static final int MODIFYBY = AttributesEnum.ModifyBy.index();
@@ -157,6 +163,54 @@ public class JobCategoryVORowImpl extends BaseViewRowImpl {
      */
     public void setDisplay(String value) {
         setAttributeInternal(DISPLAY, value);
+    }
+
+    /**
+     * Gets the attribute value for DESCRIPTION using the alias name Description.
+     * @return the DESCRIPTION
+     */
+    public String getDescription() {
+        return (String) getAttributeInternal(DESCRIPTION);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for DESCRIPTION using the alias name Description.
+     * @param value value to set the DESCRIPTION
+     */
+    public void setDescription(String value) {
+        setAttributeInternal(DESCRIPTION, value);
+    }
+
+    /**
+     * Gets the attribute value for REJECT_REASON using the alias name RejectReason.
+     * @return the REJECT_REASON
+     */
+    public String getRejectReason() {
+        return (String) getAttributeInternal(REJECTREASON);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for REJECT_REASON using the alias name RejectReason.
+     * @param value value to set the REJECT_REASON
+     */
+    public void setRejectReason(String value) {
+        setAttributeInternal(REJECTREASON, value);
+    }
+
+    /**
+     * Gets the attribute value for APPLY_REASON using the alias name ApplyReason.
+     * @return the APPLY_REASON
+     */
+    public String getApplyReason() {
+        return (String) getAttributeInternal(APPLYREASON);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for APPLY_REASON using the alias name ApplyReason.
+     * @param value value to set the APPLY_REASON
+     */
+    public void setApplyReason(String value) {
+        setAttributeInternal(APPLYREASON, value);
     }
 
     /**

@@ -11,7 +11,8 @@
   AliasName="JobCategoryEO"
   BindingStyle="OracleName"
   RowClass="com.zngh.platform.front.core.model.BaseEntityImpl"
-  CollClass="com.zngh.platform.front.core.model.BaseEntityCache">
+  CollClass="com.zngh.platform.front.core.model.BaseEntityCache"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
   <Attribute
     Name="Uuid"
     IsNotNull="true"
@@ -110,6 +111,42 @@
     ColumnType="NUMBER"
     TableName="JOB_CATEGORY"
     HistoryColumn="VersionHistory"/>
+  <Attribute
+    Name="Description"
+    Precision="1200"
+    ColumnName="DESCRIPTION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="JOB_CATEGORY">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1200"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ApplyReason"
+    Precision="900"
+    ColumnName="APPLY_REASON"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="JOB_CATEGORY">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="900"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="RejectReason"
+    Precision="900"
+    ColumnName="REJECT_REASON"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="JOB_CATEGORY">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="900"/>
+    </DesignTime>
+  </Attribute>
   <AccessorAttribute
     Name="JobTemplate"
     Association="com.lance.model.as.JobTemplateJobCategoryFk1AS"
@@ -117,6 +154,28 @@
     AssociationOtherEnd="com.lance.model.as.JobTemplateJobCategoryFk1AS.JobCategory"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <Key
+    Name="AltKey"
+    AltKey="true">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="JOB_CATEGORY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.lance.model.eo.JobCategoryEO.NameCn"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="AltKey1"
+    AltKey="true">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="JOB_CATEGORY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.lance.model.eo.JobCategoryEO.NameEn"/>
+    </AttrArray>
+  </Key>
   <Key
     Name="JobCategoryPk"
     PrimaryKey="true">
@@ -127,4 +186,26 @@
       <Item Value="com.lance.model.eo.JobCategoryEO.Uuid"/>
     </AttrArray>
   </Key>
+  <validation:UniqueKeyValidationBean
+    Name="JobCategoryEORule0"
+    ResId="com.lance.model.eo.JobCategoryEO_Rule_0"
+    KeyName="AltKey">
+    <validation:OnAttributes>
+      <validation:Item
+        Value="NameCn"/>
+    </validation:OnAttributes>
+  </validation:UniqueKeyValidationBean>
+  <validation:UniqueKeyValidationBean
+    Name="JobCategoryEORule1"
+    ResId="com.lance.model.eo.JobCategoryEO_Rule_1"
+    KeyName="AltKey1">
+    <validation:OnAttributes>
+      <validation:Item
+        Value="NameEn"/>
+    </validation:OnAttributes>
+  </validation:UniqueKeyValidationBean>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.lance.model.ModelBundle"/>
+  </ResourceBundle>
 </Entity>

@@ -41,6 +41,17 @@ public class LanceAdminAMImpl extends BaseApplicationModuleImpl implements Lance
      */
     public LanceAdminAMImpl() {
     }
+    
+    public String findJobCategoryById(String categoryId) {
+        System.out.println("findJobCategoryById:" + categoryId);
+        JobCategoryVOImpl vo2 = this.getJobCategory1();
+        vo2.setApplyViewCriteriaName("FindByIdVC");
+        vo2.setpUuid(categoryId);
+        vo2.executeQuery();
+        vo2.removeApplyViewCriteriaName("FindByIdVC");
+        vo2.setCurrentRow(vo2.first());
+        return null;
+    }
 
     public String findJobSubCategoryById(String subCategoryId) {
         System.out.println("findJobSubCategoryById:" + subCategoryId);

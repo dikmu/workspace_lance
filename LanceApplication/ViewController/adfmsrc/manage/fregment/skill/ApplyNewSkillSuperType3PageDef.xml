@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.2.36" id="ApplyNewSkillSuperType3PageDef"
+                Package="manage.fregment.skill">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SkillSuperType1" RangeSize="25" DataControl="LanceAdminAMDataControl"
+              id="SkillSuperType1Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="SkillSuperType1Iterator" id="Name">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SkillSuperType1Iterator" id="NameCn">
+      <AttrNames>
+        <Item Value="NameCn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SkillSuperType1Iterator" id="Description">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SkillSuperType1Iterator" id="CreateByName">
+      <AttrNames>
+        <Item Value="CreateByName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SkillSuperType1Iterator" id="CreateOn">
+      <AttrNames>
+        <Item Value="CreateOn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SkillSuperType1Iterator" id="ModifyByName">
+      <AttrNames>
+        <Item Value="ModifyByName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SkillSuperType1Iterator" id="ModifyOn">
+      <AttrNames>
+        <Item Value="ModifyOn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SkillSuperType1Iterator" id="Version">
+      <AttrNames>
+        <Item Value="Version"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>
