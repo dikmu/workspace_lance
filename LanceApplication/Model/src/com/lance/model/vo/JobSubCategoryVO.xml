@@ -23,6 +23,10 @@
     Name="pUuid"
     Kind="viewcriteria"
     Type="java.lang.String"/>
+  <Variable
+    Name="cid"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="UUserVO1"
     ViewObjectName="com.lance.model.user.vo.UUserVO"
@@ -265,6 +269,42 @@
         Conjunction="AND"
         Value=":pUuid"
         UpperColumns="0"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="findByCatId"
+    ViewObjectName="com.lance.model.vo.JobSubCategoryVO"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="JobSubCategoryVOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="JobSubCategoryVOCriteria_JobSubCategoryVOCriteria_row_0_CategoryId"
+        ViewAttribute="CategoryId"
+        Operator="="
+        Conjunction="AND"
+        Value=":cid"
         IsBindVarValue="true"
         Required="Optional"/>
     </ViewCriteriaRow>

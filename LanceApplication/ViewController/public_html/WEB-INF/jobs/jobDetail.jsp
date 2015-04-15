@@ -31,7 +31,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 jobDetail">
-                <a href="/lance/pages/MyHome"><span aria-hidden="true">&larr;</span> 返回搜索工作列表</a>
+                <a href="/lance/page/MyHome/jobs"><span aria-hidden="true">&larr;</span> 返回搜索工作列表</a>
                 <br /><br />
                 
                 <div class="alert alert-info" role="alert">

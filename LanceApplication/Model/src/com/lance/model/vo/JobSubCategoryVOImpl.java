@@ -30,5 +30,21 @@ public class JobSubCategoryVOImpl extends BaseViewObjectImpl {
     public void setpUuid(String value) {
         ensureVariableManager().setVariableValue("pUuid", value);
     }
+
+    /**
+     * Returns the variable value for cid.
+     * @return variable value for cid
+     */
+    public String getcid() {
+        return (String) ensureVariableManager().getVariableValue("cid");
+    }
+
+    /**
+     * Sets <code>value</code> for variable cid.
+     * @param value value to bind as cid
+     */
+    public void setcid(String value) {
+        ensureVariableManager().setVariableValue("cid", value);
+    }
 }
 

@@ -27,6 +27,8 @@ import oracle.jbo.server.ViewRowImpl;
 
 import org.apache.commons.lang.StringUtils;
 
+import org.codehaus.jettison.json.JSONArray;
+
 @Path("cache")
 public class CacheResource extends BaseRestResource {
 

@@ -119,17 +119,15 @@
                 </ul>
                 <div class="search-bar">
                     <div class="search" tabindex="-1">
-                        <span class="title">项目
-                            <span class="icon-sj"></span></span>
+                        <span class="title">工作
+                            <span class="icon-sj"></span>
+                        </span>
                         <div class="drop-list">
-                            <span class="dlist">项目
-                                <span class="icon-sj"></span></span>
-                             
-                            <span class="dlist">作品展示</span>
-                             
+                            <span class="dlist">工作
+                                <span class="icon-sj"></span>
+                            </span>
                             <span class="dlist">自由工作者</span>
-                             
-                            <span class="dlist">My Jobs</span>
+                            <span class="dlist">作品展示</span>
                         </div>
                         <input type="text" value=""/>
                     </div>

@@ -3,12 +3,16 @@ package com.lance.view.rest.job;
 import com.lance.model.LanceRestAMImpl;
 import com.lance.model.user.vo.UUserVOImpl;
 import com.lance.model.user.vo.UUserVORowImpl;
+import com.lance.model.vo.JobCategoryVOImpl;
+import com.lance.model.vo.JobCategoryVORowImpl;
+import com.lance.model.vo.JobSubCategoryVOImpl;
 import com.lance.model.vo.PostJobsVOImpl;
 import com.lance.model.vo.PostJobsVORowImpl;
 import com.lance.view.util.LUtil;
 
 import com.zngh.platform.front.core.view.BaseRestResource;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -19,6 +23,7 @@ import oracle.jbo.RowSetIterator;
 
 import org.apache.commons.lang.StringUtils;
 
+import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
@@ -439,6 +444,40 @@ public class SearchResource extends BaseRestResource {
         //处理位置信息
         JSONObject data = this.packViewObject(vo, null, null, ATTR_SEARCH_LANCER);
         return data;
+    }
+    
+    /**
+     *获取工作分类大类
+     * @return
+     * @throws JSONException
+     */
+    @GET
+    @Path("/JobCat")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public JSONArray getJobCategory() throws JSONException {
+        LanceRestAMImpl am = LUtil.findLanceAM();
+        JobCategoryVOImpl vo1 = am.getJobCategory1();
+        String[] attrs = {"Uuid","NameEn","NameCn"};
+       return this.convertVoToJsonArray(vo1, attrs);
+    }
+    
+    /**
+     *根据工作分类(大类)，查找工作分类(小类)
+     * @param pid
+     * @return
+     * @throws JSONException
+     */
+    @GET
+    @Path("{catid}/JobScat")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public JSONArray getJobSubCategory(@PathParam("catid")String catid) throws JSONException {
+        LanceRestAMImpl am = LUtil.findLanceAM();
+        JobSubCategoryVOImpl vo = am.getJobSubCategory2();
+        vo.setApplyViewCriteriaName("findByCatId");
+        vo.setcid(catid);
+        vo.setOrderByClause("NAME,NAME_CN");
+        String[] attrs = {"Uuid","NameEn","NameCn"};
+       return this.convertVoToJsonArray(vo, attrs);
     }
 
     /**

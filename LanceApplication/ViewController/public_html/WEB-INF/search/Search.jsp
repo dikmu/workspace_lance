@@ -21,17 +21,17 @@
             <div class="min-width">
                 <div class="con">
                     <div>
-                        <input class="inp-search" type="text"/>
+                        <input class="inp-search" id="key-word-inp" type="text"/>
                          
                         <a href="#" class="hire-icon hicon-sea btn-search-job"></a>
                     </div>
                     <div class="bot">
                         <div class="nav-text f-left">
-                            <a href="#">Freelancers</a>
+                            <a href="/lance/page/MyHome/contractors" id="search-ct">Freelancers</a>
                              
                             <span class="sep">|</span>
                              
-                            <a href="#" class="sel">Jobs</a>
+                            <a href="/lance/page/MyHome/jobs" class="sel" id="search-jobs">Jobs</a>
                         </div>
                         <a href="#" class="btn-green f-right">Post Your Job</a>
                     </div>
@@ -733,6 +733,7 @@
         </div>
         <script src="/lance/resources/js/jquery-1.9.1.min.js" type="text/javascript"></script>
         <script src="/lance/resources/js/bootstrap.min.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/lance/resources/js/jquery.json-2.4.js"></script>
         <script src="/lance/resources/js/core.js" type="text/javascript"></script>
         <script src="/lance/resources/js/profile.js" type="text/javascript"></script>
         <script src="/lance/resources/js/searchjob.js" type="text/javascript"></script>
