@@ -67,4 +67,16 @@ $(function(){
         window.location.href = href;
     });
     
+    $("#inp_emil").keydown(function(e){
+        if(e.keyCode == 13){
+            $("#btn_login").click();
+        }
+    });
+    
+    $("#inp_pass").keydown(function(e){
+        if(e.keyCode == 13){
+            $("#btn_login").click();
+        }
+    });
+    
 });
