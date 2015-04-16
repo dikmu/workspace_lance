@@ -96,6 +96,7 @@ public class UUserVORowImpl extends BaseViewRowImpl {
         CanBeSearch,
         DefaultRole,
         Status,
+        IndexSkill,
         UserSkill,
         UserEducation,
         UserLocationList,
@@ -187,6 +188,7 @@ public class UUserVORowImpl extends BaseViewRowImpl {
     public static final int CANBESEARCH = AttributesEnum.CanBeSearch.index();
     public static final int DEFAULTROLE = AttributesEnum.DefaultRole.index();
     public static final int STATUS = AttributesEnum.Status.index();
+    public static final int INDEXSKILL = AttributesEnum.IndexSkill.index();
     public static final int USERSKILL = AttributesEnum.UserSkill.index();
     public static final int USEREDUCATION = AttributesEnum.UserEducation.index();
     public static final int USERLOCATIONLIST = AttributesEnum.UserLocationList.index();
@@ -1111,6 +1113,22 @@ public class UUserVORowImpl extends BaseViewRowImpl {
     }
 
     /**
+     * Gets the attribute value for INDEX_SKILL using the alias name IndexSkill.
+     * @return the INDEX_SKILL
+     */
+    public String getIndexSkill() {
+        return (String) getAttributeInternal(INDEXSKILL);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for INDEX_SKILL using the alias name IndexSkill.
+     * @param value value to set the INDEX_SKILL
+     */
+    public void setIndexSkill(String value) {
+        setAttributeInternal(INDEXSKILL, value);
+    }
+
+    /**
      * Gets the associated <code>RowIterator</code> using master-detail link UserSkill.
      */
     public RowIterator getUserSkill() {
@@ -1197,7 +1215,7 @@ public class UUserVORowImpl extends BaseViewRowImpl {
 
         this.setIndexAll(new ClobDomain(this.getKeywords() + ";" + this.getTagline() + ";" +
                                         this.getServiceDescription() + ";" + this.getOverview() + ";" +
-                                        this.getLocationAIndex() + ";" + this.getLocationBIndex() + ";"));
+                                        this.getLocationAIndex() + ";" + this.getLocationBIndex() + ";"+this.getIndexSkill()+";"));
     }
 
     public void findLocationName(String region, String country, String province, String city, StringBuffer sb) {

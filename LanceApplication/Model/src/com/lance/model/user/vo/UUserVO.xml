@@ -4,7 +4,7 @@
 <ViewObject
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="UUserVO"
-  Version="12.1.3.10.8"
+  Version="12.1.3.2.36"
   InheritPersonalization="merge"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -455,6 +455,12 @@
     EntityAttrName="Status"
     EntityUsage="UUserEO"
     AliasName="STATUS"/>
+  <ViewAttribute
+    Name="IndexSkill"
+    PrecisionRule="true"
+    EntityAttrName="IndexSkill"
+    EntityUsage="UUserEO"
+    AliasName="INDEX_SKILL"/>
   <ViewCriteria
     Name="FindByUserNameVC"
     ViewObjectName="com.lance.model.user.vo.UUserVO"
@@ -605,6 +611,12 @@
     <PropertiesBundle
       PropertiesFile="com.lance.model.ModelBundle"/>
   </ResourceBundle>
+  <SortCriteria>
+    <Sort
+      Attribute="Rank"/>
+    <Sort
+      Attribute="ModifyOn"/>
+  </SortCriteria>
   <SortCriteria>
     <Sort
       Attribute="Rank"/>

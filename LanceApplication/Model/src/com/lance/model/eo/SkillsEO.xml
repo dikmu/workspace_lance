@@ -112,7 +112,7 @@
     HistoryColumn="VersionHistory"/>
   <Attribute
     Name="NameCn"
-    Precision="20"
+    Precision="120"
     ColumnName="NAME_CN"
     SQLType="VARCHAR"
     Type="java.lang.String"
@@ -158,18 +158,6 @@
     <DesignTime>
       <Attr Name="_isUnique" Value="true"/>
       <Attr Name="_DBObjectName" Value="SKILLS"/>
-    </DesignTime>
-    <AttrArray Name="Attributes">
-      <Item Value="com.lance.model.eo.SkillsEO.Name"/>
-    </AttrArray>
-  </Key>
-  <Key
-    Name="SkillsNameCheck">
-    <DesignTime>
-      <Attr Name="_isNotNull" Value="true"/>
-      <Attr Name="_DBObjectName" Value="SKILLS_NAME_CHECK"/>
-      <Attr Name="_checkCondition" Value='"NAME" IS NOT NULL'/>
-      <Attr Name="_isCheck" Value="true"/>
     </DesignTime>
     <AttrArray Name="Attributes">
       <Item Value="com.lance.model.eo.SkillsEO.Name"/>

@@ -594,7 +594,8 @@ public class PostJobsVORowImpl extends BaseViewRowImpl {
      * @return the WORK_CATEGORY
      */
     public String getWorkCategory() {
-        return (String) getAttributeInternal(WORKCATEGORY);
+//        return (String) getAttributeInternal(WORKCATEGORY);
+        return this.getJobcategoryName((String) getAttributeInternal(WORKCATEGORY));
     }
 
     /**
@@ -610,7 +611,8 @@ public class PostJobsVORowImpl extends BaseViewRowImpl {
      * @return the WORK_SUBCATEGORY
      */
     public String getWorkSubcategory() {
-        return (String) getAttributeInternal(WORKSUBCATEGORY);
+//        return (String) getAttributeInternal(WORKSUBCATEGORY);
+        return this.getJobSubCategoryName((String) getAttributeInternal(WORKSUBCATEGORY));
     }
 
     /**
@@ -1067,6 +1069,24 @@ public class PostJobsVORowImpl extends BaseViewRowImpl {
                                                                                                                             city }),
                                                                                                                     1)[0];
             sb.append(row.getCityName() + ";");
+        }
+    }
+    
+    private String getJobcategoryName(String id){
+        JobCategoryVORowImpl row = (JobCategoryVORowImpl) this.getJobCategoryVO1().getViewObject().findByKey(new Key(new Object[] {id }),1)[0];
+        if(row.getNameCn() != null && !"".equals(row.getNameCn())){
+            return row.getNameCn();
+        }else{
+            return row.getNameEn();
+        }
+    }
+    
+    private String getJobSubCategoryName(String subId){
+        JobSubCategoryVORowImpl row = (JobSubCategoryVORowImpl) this.getJobSubCategoryVO1().getViewObject().findByKey(new Key(new Object[] {subId }), 1)[0];
+        if(row.getNameCn() != null && !"".equals(row.getNameCn())){
+            return row.getNameCn();
+        }else{
+           return row.getName();    
         }
     }
 

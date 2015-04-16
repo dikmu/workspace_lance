@@ -8,12 +8,15 @@ import com.lance.model.vo.JobCategoryVORowImpl;
 import com.lance.model.vo.JobSubCategoryVOImpl;
 import com.lance.model.vo.PostJobsVOImpl;
 import com.lance.model.vo.PostJobsVORowImpl;
+import com.lance.model.vo.SkillsVOImpl;
+import com.lance.view.rest.location.CountryResource;
 import com.lance.view.util.LUtil;
 
 import com.zngh.platform.front.core.view.BaseRestResource;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.MatrixParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -218,7 +221,7 @@ public class SearchResource extends BaseRestResource {
 
 
     /**
-     * 根据关键词查询
+     * 根据关键词查询  
      * 关键词：工作名，简介，技能，地点，分类
      * 只搜索：STATUS = 'posted' AND JOB_VISIBILITY = 'public'
      *
@@ -232,28 +235,76 @@ public class SearchResource extends BaseRestResource {
      * @throws JSONException
      */
     @GET
-    @Path("postJob/keyword/{keyword}")
-    public JSONObject searchJobs(@PathParam("keyword") String keyword) throws JSONException {
-
-        if (StringUtils.isBlank(keyword) || keyword.length() < 2) {
-            JSONObject res = new JSONObject();
-            res.put("msg", "输入2个字符后开始查询");
-            return res;
-        }
-
+    @Path("jobs")
+    public JSONObject searchJobs(@MatrixParam("keyword") String keyword,@MatrixParam("category") String category,@MatrixParam("subcategory") String subcategory
+                                 ,@MatrixParam("postform") String postform,@MatrixParam("country") String country,@MatrixParam("skill") String skill,
+                                 @MatrixParam("budget")String budget,@MatrixParam("hourlyPay")String hourlyPay,@MatrixParam("postedDate")String postedDate,@MatrixParam("timeLeft")String timeLeft) throws JSONException {
         LanceRestAMImpl am = LUtil.findLanceAM();
         PostJobsVOImpl vo = am.getPostJobs1();
-
-        StringBuffer sb = new StringBuffer(" STATUS = 'posted' AND JOB_VISIBILITY = 'public' ");
-        String[] sps = splitKeyword(keyword); //根据空格分隔
-        for (String sp : sps) {
-            sb.append(" AND upper(INDEX_ALL_META_INFO) like '%" + sp.toUpperCase() + "%'");
+        
+         StringBuffer sb = new StringBuffer(" STATUS = 'posted' AND JOB_VISIBILITY = 'public' ");
+         if(keyword != null){
+            String[] sps = splitKeyword(keyword); //根据空格分隔
+            for (String sp : sps) {
+                sb.append(" AND INSTR(upper(INDEX_ALL_META_INFO),'"+sp.toUpperCase()+"') > 0 ");
+            }
+         }
+         if(category != null){
+            //工作分类大类查询
+            sb.append(" AND INSTR(upper(INDEX_WORK_CATEGORYS),'"+category.toUpperCase()+"') > 0 ");
+         }
+        if(subcategory != null){
+            //工作分类小类查询
+            String[] scts = subcategory.split(",");
+            for (String sct : scts) {
+                sb.append(" AND INSTR(upper(INDEX_WORK_CATEGORYS),'"+sct.toUpperCase()+"') > 0 ");
+            }
         }
-        vo.setWhereClause(sb.toString());
-        vo.executeQuery();
-        System.out.println(vo.getQuery());
+        if(postform != null){
+           //工作类型查询 hourly时薪/fixed固定价格
+           sb.append(" AND POSTFORM = '"+postform+"' ");
+         }
+        if(country != null){
+           String[] locs = country.split(">");
+           for (String loc : locs) {
+               sb.append(" AND INSTR(upper(INDEX_LOCATION),'"+loc.toUpperCase()+"') > 0 ");
+           }
+        }
+       if(skill != null){
+           //技能
+           String[] skills = skill.split(",");
+           for (String s : skills) {
+               sb.append(" AND INSTR(upper(INDEX_SKILLS),'"+s.toUpperCase()+"') > 0 ");
+           }
+        }
+        if(budget != null){
+            //固定价格预算
+           String[] bgs = budget.split(",");
+           if(bgs.length == 1){
+               sb.append(" AND FIXED_PAY_MIN >= "+bgs[0]);
+           }else if(bgs.length == 2){
+               sb.append(" AND FIXED_PAY_MIN >= "+bgs[0]+" and FIXED_PAY_MAX <= "+bgs[1]);
+           }
+        }
+        if(hourlyPay != null){
+            //小时工资
+            String[] hps = hourlyPay.split(",");
+            if(hps.length == 1){
+               sb.append(" AND HOURLY_PAY_MIN >= "+hps[0]);
+            }else if(hps.length == 2){
+               sb.append(" AND HOURLY_PAY_MIN >= "+hps[0]+" and HOURLY_PAY_MAX <= "+hps[1]);
+            }
+        }
+        if(postedDate != null){
+            sb.append(" AND CREATE_ON >= (TRUNC(SYSDATE) - "+postedDate+")");
+        }
+        if(timeLeft != null){
+            sb.append(" AND POST_JOB_DATE_END <= (TRUNC(SYSDATE) - "+timeLeft+")");
+        }
         vo.setWhereClause(null);
-
+        vo.setWhereClause(sb.toString());
+        vo.executeQuery();        
+System.out.println("查询sql："+vo.getQuery());
         return this.packViewObject(vo, null, null, POST_JOB_SEARCH_FIELD);
     }
 
@@ -415,7 +466,6 @@ public class SearchResource extends BaseRestResource {
     @Path("/user/{userType}/{keyword}")
     public JSONObject searchLancer4Job(@PathParam("userType") String userType,
                                        @PathParam("keyword") String keyword) throws JSONException {
-
         if (StringUtils.isNotBlank(userType) && "lancer,company,client".indexOf(userType) != -1) {
         } else {
             throw new RuntimeException("User Type is undefined");
@@ -430,14 +480,16 @@ public class SearchResource extends BaseRestResource {
 
         //查询算法
         StringBuilder sb = new StringBuilder();
-        if (StringUtils.isNotBlank(userType)) {
-            sb.append(" ROLE_NAME = '" + userType + "' ");
-        }
+//        if (StringUtils.isNotBlank(userType)) {
+//            sb.append(" ROLE_NAME = '" + userType + "' ");
+//        }
 
         String[] sps = this.splitKeyword(keyword); //根据空格分隔
         for (String sp : sps) {
-            sb.append(" AND upper(INDEX_ALL) like '%" + sp.toUpperCase() + "%'");
+            sb.append(" upper(INDEX_ALL) like '%" + sp.toUpperCase() + "%'");
         }
+        
+        
         vo.setWhereClause(sb.toString());
         vo.executeQuery();
 
@@ -476,8 +528,32 @@ public class SearchResource extends BaseRestResource {
         vo.setApplyViewCriteriaName("findByCatId");
         vo.setcid(catid);
         vo.setOrderByClause("NAME,NAME_CN");
-        String[] attrs = {"Uuid","NameEn","NameCn"};
+        String[] attrs = {"Uuid","Name","NameCn"};
        return this.convertVoToJsonArray(vo, attrs);
+    }
+    
+    @GET
+    @Path("skills")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public JSONArray getSkills() throws JSONException {
+        LanceRestAMImpl am = LUtil.findLanceAM();
+        SkillsVOImpl vo = am.getSkills1();
+        vo.setWhereClause(null);
+        vo.setOrderByClause("Name");
+        vo.executeQuery();
+        String[] attrs = {"Uuid","Name","NameCn"};
+       return this.convertVoToJsonArray(vo, attrs);
+    } 
+    
+    @GET
+    @Path("left/datas")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public JSONObject getleftDatas() throws JSONException {
+        JSONObject json = new JSONObject();
+        json.put("cateory", getJobCategory());
+        json.put("skills", getSkills());
+        json.put("country", new CountryResource().getAllCountry());
+       return json;
     }
 
     /**
