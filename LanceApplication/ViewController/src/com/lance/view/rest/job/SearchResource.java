@@ -109,7 +109,7 @@ public class SearchResource extends BaseRestResource {
         {
             "Uuid" : "test9",
             "Brief" : "工作说明9",
-            "DurationMax" : 9,
+            "Durationlx" : 9,
             "DurationMin" : 100,
             "FixedLocation" : 1,
             "FixedPayMax" : 200,
@@ -178,6 +178,14 @@ public class SearchResource extends BaseRestResource {
         JSONObject data = this.packViewObject(vo, null, null, POST_JOB_SEARCH_FIELD);
         return data;
     }
+    
+    private void nextPage(int curPage){
+        if(curPage == 1){
+            this.start =0;
+        }else {
+            this.start = (curPage-1) * this.limit;    
+        }
+    }
 
     /**
      * 重新建立索引字段
@@ -238,10 +246,10 @@ public class SearchResource extends BaseRestResource {
     @Path("jobs")
     public JSONObject searchJobs(@MatrixParam("keyword") String keyword,@MatrixParam("category") String category,@MatrixParam("subcategory") String subcategory
                                  ,@MatrixParam("postform") String postform,@MatrixParam("country") String country,@MatrixParam("skill") String skill,
-                                 @MatrixParam("budget")String budget,@MatrixParam("hourlyPay")String hourlyPay,@MatrixParam("postedDate")String postedDate,@MatrixParam("timeLeft")String timeLeft) throws JSONException {
+                                 @MatrixParam("budget")String budget,@MatrixParam("hourlyPay")String hourlyPay,@MatrixParam("postedDate")String postedDate,@MatrixParam("timeLeft")String timeLeft
+                                 ,@MatrixParam("pageNum") String pageNum) throws JSONException {
         LanceRestAMImpl am = LUtil.findLanceAM();
         PostJobsVOImpl vo = am.getPostJobs1();
-        
          StringBuffer sb = new StringBuffer(" STATUS = 'posted' AND JOB_VISIBILITY = 'public' ");
          if(keyword != null){
             String[] sps = splitKeyword(keyword); //根据空格分隔
@@ -303,8 +311,9 @@ public class SearchResource extends BaseRestResource {
         }
         vo.setWhereClause(null);
         vo.setWhereClause(sb.toString());
-        vo.executeQuery();        
-System.out.println("查询sql："+vo.getQuery());
+        vo.executeQuery();        //estimated
+        this.estimated="Y";
+        this.nextPage(Integer.parseInt(pageNum));
         return this.packViewObject(vo, null, null, POST_JOB_SEARCH_FIELD);
     }
 
