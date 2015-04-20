@@ -20,6 +20,7 @@ import com.lance.model.vo.LocationProvinceVOImpl;
 import com.lance.model.vo.PostJobDiscussVOImpl;
 import com.lance.model.vo.PostJobsVOImpl;
 import com.lance.model.vo.RegEmailChkVOImpl;
+import com.lance.model.vo.SkillSuperTypeVOImpl;
 import com.lance.model.vo.SkillsVOImpl;
 import com.lance.model.vo.SpreadHeardFromVOImpl;
 import com.lance.model.vvo.ContractClientReportVVOImpl;
@@ -431,6 +432,14 @@ public class LanceRestAMImpl extends BaseApplicationModuleImpl {
      */
     public JobSubCategoryVOImpl getJobSubCategory2() {
         return (JobSubCategoryVOImpl) findViewObject("JobSubCategory2");
+    }
+
+    /**
+     * Container's getter for SkillSuperType1.
+     * @return SkillSuperType1
+     */
+    public SkillSuperTypeVOImpl getSkillSuperType1() {
+        return (SkillSuperTypeVOImpl) findViewObject("SkillSuperType1");
     }
 }
 

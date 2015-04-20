@@ -230,7 +230,7 @@ public class SearchResource extends BaseRestResource {
      * 关键词：工作名，简介，技能，地点，分类
      * 只搜索：STATUS = 'posted' AND JOB_VISIBILITY = 'public'
      *
-     * http://localhost:7101/lance/res/search/postJob/keyword/{keyword}
+     * http://localhost:7101/lance/res/search/postJob/keyword/{keyword}?city=beijing
      *
      * http://localhost:7101/lance/res/search/postJob/keyword/说明
      * http://localhost:7101/lance/res/search/postJob/keyword/XML

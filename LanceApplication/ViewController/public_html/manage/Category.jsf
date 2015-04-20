@@ -16,6 +16,7 @@
                 </f:facet>
                 <f:facet name="start"/>
                 <f:facet name="end"/>
+                <f:attribute name="logoImagePath" value="/resources/image/common/logo.png"/>
             </af:pageTemplate>
         </af:form>
     </af:document>

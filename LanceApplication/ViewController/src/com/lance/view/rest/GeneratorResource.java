@@ -22,6 +22,9 @@ import javax.ws.rs.Path;
 import oracle.jbo.AttributeDef;
 import oracle.jbo.ViewObject;
 
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
 @Path("generate")
 public class GeneratorResource {
     public GeneratorResource() {
@@ -30,12 +33,12 @@ public class GeneratorResource {
     @GET
     public String generateAttributes() {
         LanceRestAMImpl am = LUtil.findLanceAM();
-//        outputAttrTypes(am.getPostJobs1());
+        //        outputAttrTypes(am.getPostJobs1());
         outputAttrTypes(am.getUUser1());
-//        outputAttrTypes(am.get);
-//        outputAttrTypes(am);
-//        outputAttrTypes(am);
-//        outputAttrTypes(am);
+        //        outputAttrTypes(am.get);
+        //        outputAttrTypes(am);
+        //        outputAttrTypes(am);
+        //        outputAttrTypes(am);
         return "ok";
     }
 
@@ -96,6 +99,15 @@ public class GeneratorResource {
             ne.printStackTrace();
         }
         return "ok";
+    }
+
+    @Path("testPost")
+    @POST
+    public JSONObject testPost(JSONObject in) throws JSONException {
+        System.out.println(in);
+        JSONObject j = new JSONObject();
+        j.put("msg", "ok");
+        return j;
     }
     
 }

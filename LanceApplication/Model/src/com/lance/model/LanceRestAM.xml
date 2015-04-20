@@ -110,6 +110,9 @@
     <ViewUsage
         Name="JobSubCategory2"
         ViewObjectName="com.lance.model.vo.JobSubCategoryVO"/>
+    <ViewUsage
+        Name="SkillSuperType1"
+        ViewObjectName="com.lance.model.vo.SkillSuperTypeVO"/>
     <ViewLinkUsage
       Name="JobCategory_SubCategoryVL1"
       ViewLinkObjectName="com.lance.model.vl.JobCategory_SubCategoryVL"

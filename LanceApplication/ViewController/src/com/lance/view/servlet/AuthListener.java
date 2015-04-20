@@ -1,5 +1,7 @@
 package com.lance.view.servlet;
 
+import com.zngh.platform.front.core.model.cache.CacheUtil;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,7 +25,7 @@ public class AuthListener implements ServletContextListener {
 
     private ServletContext context = null;
     private int failedCount = 0;
-    private Timer timer = null;
+    private static Timer timer = null;
     //    private Timer timer2 = null;
     //    private Timer timer3 = null;
     //    private String host3 = null;
@@ -35,7 +37,7 @@ public class AuthListener implements ServletContextListener {
 
     /**
      * 启动时调用刷新用户到缓存接口
-     * 每隔10秒调用一次，直到成功
+     * 
      *
      * @param event
      */
@@ -51,7 +53,6 @@ public class AuthListener implements ServletContextListener {
                 //如果刷新成功，则改为10分钟刷新一次
                 if (refreshUserInfoCache()) {
                     //                if (refreshUserInfoCache() && refreshInitConfigMap()) {
-                    System.out.println("Coherence初始化成功，改为10分钟刷新一次");
                     timer.cancel();
                 } else {
                     System.out.println("将在10秒钟内重试...");
@@ -65,30 +66,6 @@ public class AuthListener implements ServletContextListener {
             }
         };
         timer.schedule(tt, 10000, 10000); //从启动开始，10秒钟刷新一次
-
-
-        //        timer2 = new Timer();
-        //        TimerTask tt2 = new TimerTask() {
-        //            @Override
-        //            public void run() {
-        //                System.out.println("Coherence正在刷新用户，每10分钟执行一次");
-        //                //如果刷新成功，则改为5分钟刷新一次
-        //                refreshUserInfoCache();
-        //            }
-        //        };
-        //        timer2.scheduleAtFixedRate(tt2, 600000, 600000); //10分钟刷新一次用户
-
-        //        host3 = event.getServletContext().getInitParameter("server.app.host_name");
-        //        timer3 = new Timer();
-        //        TimerTask tt3 = new TimerTask() {
-        //            @Override
-        //            public void run() {
-        //                System.out.println("测试"+host3);
-        //                //如果刷新成功，则改为5分钟刷新一次
-        //            }
-        //        };
-        //        timer3.scheduleAtFixedRate(tt3, 5000, 5000); //10分钟刷新一次用户
-
     }
 
     public boolean refreshUserInfoCache() {
@@ -100,7 +77,7 @@ public class AuthListener implements ServletContextListener {
             HttpResponse responese = (HttpResponse) sendHttpGet(refreshCacheUrl);
             String res = getStringFromResponse(responese);
             System.out.println("尝试缓存......" + hostName);
-            if (res.indexOf("success") != -1) {
+            if (res.equals("done")) {
                 System.out.println("缓存成功");
                 return true;
             }
