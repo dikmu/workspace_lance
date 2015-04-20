@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import javax.servlet.http.HttpSession;
+
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
@@ -60,6 +62,16 @@ public class LoginServlet extends HttpServlet {
 
             System.out.println("doLogin:" + acceptjson);
             //        JSONObject res = new JSONObject();
+            String code = jo.getString("vcode");
+            HttpSession session = request.getSession(true);  
+            if(!code.equalsIgnoreCase((String)session.getAttribute("verifyCode"))){
+                response.setContentType(CONTENT_TYPE);
+                PrintWriter out = response.getWriter();
+                out.println("error:vcode"); //用户名或密码错误
+                out.close();
+                return;
+            }
+            
             String un = jo.getString("name");
             byte[] pw = jo.getString("pass").getBytes();
             String optype = null;

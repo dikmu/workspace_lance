@@ -180,7 +180,7 @@ public class SearchResource extends BaseRestResource {
         if(curPage == 1){
             this.start =0;
         }else {
-            this.start = (curPage-1) * this.limit;    
+            this.start = ((curPage-1) * this.limit)+1;    
         }
     }
 

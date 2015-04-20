@@ -57,6 +57,10 @@
     <servlet-name>DirectServlet</servlet-name>
     <servlet-class>com.lance.view.servlet.DirectServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>AuthImageServlet</servlet-name>
+    <servlet-class>com.lance.view.servlet.AuthImageServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>/faces/*</url-pattern>
@@ -112,6 +116,10 @@
   <servlet-mapping>
     <servlet-name>DirectServlet</servlet-name>
     <url-pattern>/page/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AuthImageServlet</servlet-name>
+    <url-pattern>/authimageservlet</url-pattern>
   </servlet-mapping>
   <filter>
     <filter-name>JpsFilter</filter-name>

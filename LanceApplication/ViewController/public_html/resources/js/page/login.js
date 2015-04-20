@@ -6,6 +6,9 @@ $(function(){
         var paEmail = $("#inp_emil").closest('.form-group');
         var paPass = $("#inp_pass").closest('.form-group');
         
+        var paCode = $("#inp_verCode").lanCheck('notEmpty');
+        var codePass = $("#inp_verCode").closest('.form-group');
+        
         var err = $(".err-tip");
         
         if(!ckEmail){
@@ -13,6 +16,13 @@ $(function(){
             return false;
         }else{
             paEmail.removeClass("has-error");
+        }
+        
+        if(!paCode){
+            codePass.addClass("has-error");
+            return false;
+        }else{
+            codePass.removeClass("has-error");
         }
         
         if(!ckPass){
@@ -25,10 +35,11 @@ $(function(){
     };
     
     var go_login = function(pabut){
-        var lname = $("#inp_emil").val(), lpass = $("#inp_pass").val();
+        var lname = $("#inp_emil").val(), lpass = $("#inp_pass").val(),v_code=$("#inp_verCode").val();
         var param={
             name : lname,
-            pass : lpass
+            pass : lpass,
+            vcode:v_code
         };
         param = JSON.stringify(param);
         
@@ -37,10 +48,14 @@ $(function(){
                 var url = data.split(":")[1];
 //                alert(url);
                 window.location.href = url;
-            }else{
-                $("#inp_emil,#inp_pass").closest(".form-group").addClass("has-error");
-                $(".err-tip").html("用户名或密码错误");
-                pabut.button('reset');
+            }else if(data.indexOf("vcode") >= 0){
+               $("#inp_verCode").closest(".form-group").addClass("has-error");
+               $(".err-tip").html("验证码错误");
+               pabut.button('reset');
+            }else if(data.indexOf("name|pass") >= 0){
+               $("#inp_emil,#inp_pass").closest(".form-group").addClass("has-error");
+               $(".err-tip").html("用户名或密码错误");
+               pabut.button('reset');
             }
         }, "text");
         
@@ -79,4 +94,7 @@ $(function(){
         }
     });
     
+    $("#change_img").click(function(){
+       $("#code_img").attr("src","/lance/authimageservlet?r="+Math.random());
+    });
 });
