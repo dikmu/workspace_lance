@@ -11,10 +11,66 @@
   RowClass="com.lance.model.user.vo.UUserVORowImpl"
   ComponentClass="com.lance.model.user.vo.UUserVOImpl"
   PageIterMode="Full"
-  SelectListFlags="1"
-  FromListFlags="1"
-  WhereFlags="1"
-  SelectAllAttributes="false">
+  SelectList="UUserEO.USER_NAME, 
+       UUserEO.TRUE_NAME, 
+       UUserEO.DISPLAY_NAME, 
+       UUserEO.EMAIL, 
+       UUserEO.PASSWORD, 
+       UUserEO.IMG, 
+       UUserEO.COUNTRY, 
+       UUserEO.COMPANY_ID, 
+       UUserEO.PHONE_NUMBER, 
+       UUserEO.ATTACH, 
+       UUserEO.JOB_TITLE, 
+       UUserEO.VIDEO, 
+       UUserEO.DESCRIPTION, 
+       UUserEO.WEBSITE_URL, 
+       UUserEO.IM_NUMBER_A, 
+       UUserEO.IM_TYPE_A, 
+       UUserEO.IM_NUMBER_B, 
+       UUserEO.IM_TYPE_B, 
+       UUserEO.IM_NUMBER_C, 
+       UUserEO.IM_TYPE_C, 
+       UUserEO.LOCATION_A, 
+       UUserEO.LOCATION_A_REGION, 
+       UUserEO.LOCATION_A_PROVINCE, 
+       UUserEO.LOCATION_A_CITY, 
+       UUserEO.LOCATION_A_COUNTRY, 
+       UUserEO.LOCATION_A_DETAIL, 
+       UUserEO.LOCATION_A_INDEX, 
+       UUserEO.LOCATION_B, 
+       UUserEO.LOCATION_B_REGION, 
+       UUserEO.LOCATION_B_PROVINCE, 
+       UUserEO.LOCATION_B_COUNTRY, 
+       UUserEO.LOCATION_B_CITY, 
+       UUserEO.LOCATION_B_DETAIL, 
+       UUserEO.LOCATION_B_INDEX, 
+       UUserEO.TAGLINE, 
+       UUserEO.HOURLY_RATE, 
+       UUserEO.CHARGE_RATE, 
+       UUserEO.OVERVIEW, 
+       UUserEO.SERVICE_DESCRIPTION, 
+       UUserEO.PAYMENT_TERMS, 
+       UUserEO.KEYWORDS, 
+       UUserEO.ADDRESS_DISPLAY, 
+       UUserEO.CONTACT_INFO, 
+       UUserEO.IDENTITY_TYPE, 
+       UUserEO.IDENTITY_NO, 
+       UUserEO.RANK, 
+       UUserEO.RANK_DESC, 
+       UUserEO.INDEX_ALL, 
+       UUserEO.CREATE_BY, 
+       UUserEO.CREATE_ON, 
+       UUserEO.MODIFY_BY, 
+       UUserEO.MODIFY_ON, 
+       UUserEO.VERSION, 
+       UUserEO.LAST_LOGIN_TIME, 
+       UUserEO.CAN_BE_SEARCH, 
+       UUserEO.DEFAULT_ROLE, 
+       UUserEO.STATUS, 
+       UUserEO.INDEX_SKILL"
+  FromList="U_USER UUserEO"
+  OrderBy="UUserEO.RANK,UUserEO.MODIFY_ON">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
     <Attr Name="_isCodegen" Value="true"/>
@@ -611,28 +667,4 @@
     <PropertiesBundle
       PropertiesFile="com.lance.model.ModelBundle"/>
   </ResourceBundle>
-  <SortCriteria>
-    <Sort
-      Attribute="Rank"/>
-    <Sort
-      Attribute="ModifyOn"/>
-  </SortCriteria>
-  <SortCriteria>
-    <Sort
-      Attribute="Rank"/>
-    <Sort
-      Attribute="ModifyOn"/>
-  </SortCriteria>
-  <SortCriteria>
-    <Sort
-      Attribute="Rank"/>
-    <Sort
-      Attribute="ModifyOn"/>
-  </SortCriteria>
-  <SortCriteria>
-    <Sort
-      Attribute="Rank"/>
-    <Sort
-      Attribute="ModifyOn"/>
-  </SortCriteria>
 </ViewObject>

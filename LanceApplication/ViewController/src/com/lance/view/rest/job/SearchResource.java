@@ -74,12 +74,9 @@ public class SearchResource extends BaseRestResource {
         "IndexWorkCategorys", "SignBy", "CreateBy", "CreateOn", "ModifyBy", "ModifyOn", "Version", "CreateByName"
     };
 
-    public static final String[] ATTR_SEARCH_LANCER = {
-        "Uuid", "ChargeRate", "HourlyRate", "Overview", "Tagline", "Video", "VideoUrl", "UserAccountType",
-        "UserCountry", "UserDisplayName", "UserImg", "UserLocationA", "UserLocationB"
-    };
+    public static final String[] ATTR_SEARCH_LANCER = {"UserName", "TrueName", "DisplayName", "Email", "Img", "Country", "CompanyId", "PhoneNumber", "Attach", "JobTitle", "Video", "Description", "WebsiteUrl", "ImNumberA", "ImTypeA", "ImNumberB", "ImTypeB", "ImNumberC", "ImTypeC", "LocationA", "LocationARegion", "LocationAProvince", "LocationACity", "LocationACountry", "LocationADetail", "LocationAIndex", "LocationB", "LocationBRegion", "LocationBProvince", "LocationBCountry", "LocationBCity", "LocationBDetail", "HourlyRate", "ChargeRate", "Overview", "ServiceDescription", "PaymentTerms", "Keywords", "AddressDisplay", "ContactInfo", "IdentityType", "IdentityNo", "Rank", "RankDesc", "CompanyName"};
 
-    public static final String[] ATTR_SEARCH_LANCER_NAME = { "Uuid", "DisplayName" };
+    public static final String[] ATTR_SEARCH_LANCER_NAME = { "UserName", "DisplayName" };
 
     public SearchResource() {
     }
@@ -312,8 +309,10 @@ public class SearchResource extends BaseRestResource {
         vo.setWhereClause(null);
         vo.setWhereClause(sb.toString());
         vo.executeQuery();        //estimated
-        this.estimated="Y";
-        this.nextPage(Integer.parseInt(pageNum));
+        if(pageNum != null){
+            this.estimated="Y";
+            this.nextPage(Integer.parseInt(pageNum));
+        }
         return this.packViewObject(vo, null, null, POST_JOB_SEARCH_FIELD);
     }
 
@@ -472,39 +471,67 @@ public class SearchResource extends BaseRestResource {
      * @throws JSONException
      */
     @GET
-    @Path("/user/{userType}/{keyword}")
-    public JSONObject searchLancer4Job(@PathParam("userType") String userType,
-                                       @PathParam("keyword") String keyword) throws JSONException {
-        if (StringUtils.isNotBlank(userType) && "lancer,company,client".indexOf(userType) != -1) {
-        } else {
-            throw new RuntimeException("User Type is undefined");
-        }
-
-        if (StringUtils.isBlank(keyword) || keyword.length() < 2) {
-            throw new RuntimeException("输入2个字符后开始查询");
-        }
-
+    @Path("contractors")
+    public JSONObject searchLancer4Job(@MatrixParam("keyword") String keyword,@MatrixParam("userType") String userType,@MatrixParam("country") String country,@MatrixParam("skill") String skill
+                                       ,@MatrixParam("budget")String budget,@MatrixParam("hourlyPay")String hourlyPay,@MatrixParam("pageNum") String pageNum) throws JSONException {
+//        if (StringUtils.isNotBlank(userType) && "lancer,company,client".indexOf(userType) != -1) {
+//        } else {
+//            throw new RuntimeException("User Type is undefined");
+//        }
         LanceRestAMImpl am = LUtil.findLanceAM();
         UUserVOImpl vo = am.getUUser1();
 
         //查询算法
         StringBuilder sb = new StringBuilder();
-//        if (StringUtils.isNotBlank(userType)) {
-//            sb.append(" ROLE_NAME = '" + userType + "' ");
-//        }
-
-        String[] sps = this.splitKeyword(keyword); //根据空格分隔
-        for (String sp : sps) {
-            sb.append(" upper(INDEX_ALL) like '%" + sp.toUpperCase() + "%'");
+        sb.append("STATUS = 'active'");
+        if(keyword != null){
+            String[] sps = this.splitKeyword(keyword); //根据空格分隔
+            for (String sp : sps) {
+                sb.append(" AND INSTR(upper(INDEX_ALL),'"+sp.toUpperCase()+"') > 0");
+            }
         }
-        
-        
+        if (StringUtils.isNotBlank(userType)) {
+            sb.append(" AND upper(DEFAULT_ROLE) = '" + userType.toUpperCase() + "' ");
+        }
+       if(country != null){
+           String[] locs = country.split(">");
+           for (String loc : locs) {
+               sb.append(" AND (INSTR(upper(LOCATION_A_INDEX),'"+loc.toUpperCase()+"') > 0 OR INSTR(upper(LOCATION_B_INDEX),'"+loc.toUpperCase()+"') > 0) ");
+           }
+       }
+       if(skill != null){
+            //技能
+            String[] skills = skill.split(",");
+            for (String s : skills) {
+                sb.append(" AND INSTR(upper(INDEX_SKILL),'"+s.toUpperCase()+"') > 0 ");
+            }
+        }
+       if(budget != null){
+            //固定价格预算
+           String[] bgs = budget.split(",");
+           if(bgs.length == 1){
+               sb.append(" AND CHARGE_RATE >= "+bgs[0]);
+           }else if(bgs.length == 2){
+               sb.append(" AND CHARGE_RATE >= "+bgs[0]+" and CHARGE_RATE <= "+bgs[1]);
+           }
+        }
+       if(hourlyPay != null){
+            //小时工资
+            String[] hps = hourlyPay.split(",");
+            if(hps.length == 1){
+               sb.append(" AND HOURLY_RATE >= "+hps[0]);
+            }else if(hps.length == 2){
+               sb.append(" AND HOURLY_RATE >= "+hps[0]+" and HOURLY_RATE <= "+hps[1]);
+            }
+        }
+        vo.setWhereClause(null);
         vo.setWhereClause(sb.toString());
         vo.executeQuery();
-
-        //处理位置信息
-        JSONObject data = this.packViewObject(vo, null, null, ATTR_SEARCH_LANCER);
-        return data;
+        if(pageNum != null){
+            this.estimated="Y";
+            this.nextPage(Integer.parseInt(pageNum));
+        }
+        return this.packViewObject(vo, null, null, ATTR_SEARCH_LANCER);
     }
     
     /**
