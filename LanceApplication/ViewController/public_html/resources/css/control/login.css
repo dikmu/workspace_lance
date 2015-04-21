@@ -46,3 +46,7 @@
 
 .glyphicon{display:none;}
 .has-feedback .glyphicon{display:block;}
+
+@media (max-width:480px){
+   .lancer-div{display: none;}
+}
