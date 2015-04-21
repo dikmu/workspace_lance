@@ -27,7 +27,7 @@
         </div>
         
         <div id="t_con" class="row">
-            <jsp:include page="/WEB-INF/common/TobBar2.jsp"/>
+            <jsp:include page="/WEB-INF/common/TopBar.jsp"/>
             <div id="content" class="min-width">
                 <div class="reg-success">
                     <div class="title">注册成功！<span>请前往邮箱激活。</span></div>
@@ -66,6 +66,6 @@
     <script src="/lance/resources/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="/lance/resources/js/core.js" type="text/javascript"></script>
     <script src="/lance/resources/js/page/registSuccess.js" type="text/javascript"></script>
-    <jsp:include page="/WEB-INF/common/BottomBar2.jsp"/>
+    <jsp:include page="/WEB-INF/common/BottomBar.jsp"/>
     </body>
 </html>

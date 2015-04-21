@@ -170,6 +170,11 @@ public class UserResource extends BaseRestResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public String createNewUser(JSONObject json) throws JSONException {
+        String vcode = (String)this.request.getSession().getAttribute("verifyCode");
+        if(!(json.has("vcode") && json.getString("vcode").equalsIgnoreCase(vcode))){
+            return "err:vcode"; //返回新增记录的ID
+        }
+        
         System.out.println("createNewUser");
         System.out.println(json);
         LanceRestAMImpl am = LUtil.findLanceAM();
@@ -421,6 +426,17 @@ public class UserResource extends BaseRestResource {
             return "true"; //用户已注册
         }
         return "false"; //用户不存在
+    }
+    
+    @GET
+    @Path("check/{vcode}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String checkVcode(@PathParam("vcode") String vcode) throws JSONException {
+        String _vcode = (String)this.request.getSession().getAttribute("verifyCode");
+        if(vcode.equalsIgnoreCase(_vcode)){
+            return "true"; 
+        } 
+        return "false"; 
     }
 
 }

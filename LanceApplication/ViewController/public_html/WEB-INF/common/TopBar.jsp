@@ -20,7 +20,7 @@
                     </li>
                     <li role="presentation" class="divider"></li>
                     <li>
-                        <a href="/lance/adfAuthentication?logout=true&amp;end_url=/lance/login.htm">退出</a>
+                        <a href="/lance/adfAuthentication?logout=true&amp;end_url=login.htm">退出</a>
                     </li>
                 </ul>
             </li>

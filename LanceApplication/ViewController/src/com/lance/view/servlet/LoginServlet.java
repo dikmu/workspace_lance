@@ -59,9 +59,6 @@ public class LoginServlet extends HttpServlet {
             br.close();
             acceptjson = sb.toString();
             JSONObject jo = new JSONObject(acceptjson);
-
-            System.out.println("doLogin:" + acceptjson);
-            //        JSONObject res = new JSONObject();
             String code = jo.getString("vcode");
             HttpSession session = request.getSession(true);  
             if(!code.equalsIgnoreCase((String)session.getAttribute("verifyCode"))){
@@ -70,8 +67,8 @@ public class LoginServlet extends HttpServlet {
                 out.println("error:vcode"); //用户名或密码错误
                 out.close();
                 return;
-            }
-            
+            }   
+            System.out.println("doLogin:" + acceptjson);
             String un = jo.getString("name");
             byte[] pw = jo.getString("pass").getBytes();
             String optype = null;
@@ -87,7 +84,7 @@ public class LoginServlet extends HttpServlet {
             PrintWriter out = response.getWriter();
             if(optype != null){
                 if("regist".equals(optype)){
-                   out.println("ok:/lance/pages/UserRegSuccess1/"+un); //成功，跳转页面
+                   out.println("ok:/lance/pages/UserRegSuccess1"); //成功，跳转页面
                 }
             }else{
                 out.println("ok:/lance/pages/MyHome"); //成功，跳转页面

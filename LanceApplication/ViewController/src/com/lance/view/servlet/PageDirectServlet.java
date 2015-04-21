@@ -61,7 +61,7 @@ public class PageDirectServlet extends HttpServlet {
                 //获取值集——公司规模
                 data.put("Lookup_CompNumGrade", new LookupsResource().getLookupsByType("CompNumGrade"));
 
-                toPage(request, response, "/WEB-INF/search/Search.jsp", data);
+                toPage(request, response, "/WEB-INF/search/searchjob.jsp", data);
 
             } else if ("/lance/pages/DefaultPage".equals(uri) || "/lance/pages/Search".equals(uri)) {
                 JSONArray data = new JSONArray();
@@ -95,7 +95,7 @@ public class PageDirectServlet extends HttpServlet {
                 String param = uri.substring(uri.lastIndexOf("/"), uri.length()-1);
                 JSONObject json = new JSONObject();
                 json.put("uuid", param);
-                toPage(request, response, "/WEB-INF/profile/UserRegSuccess1.jsp?uuid="+param, json);
+                toPage(request, response, "/WEB-INF/profile/UserRegSuccess1.jsp", json);
             } else if ("/lance/pages/UserRegSuccess2".equals(uri)){
                 toPage(request, response, "/WEB-INF/profile/UserRegSuccess2.jsp", new JSONObject());
                 

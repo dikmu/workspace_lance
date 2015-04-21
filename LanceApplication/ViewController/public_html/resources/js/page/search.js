@@ -1,6 +1,6 @@
-function setJobModel(title, price, stime, etime, acount, detail, cate1, cate2, form, skills, score, location){
+function setJobModel(uuid,title, price, stime, etime, acount, detail, cate1, cate2, form, skills, score, location){
     var item = $(".jobs .hidemod").clone().removeClass("hidemod");
-    item.find(".title-in").html(title);
+    item.find(".title-in").html(title).attr('href','/lance/page/jobDetail/'+uuid);
     item.find(".price").html(price == "" ? '价格：不确定' : '价格：' + price);
     item.find(".stime").html('开始时间：' + stime);
     item.find(".etime").html('结束时间：' + etime);
@@ -154,7 +154,7 @@ $(function(){
                     if(dom.FixedLocation == 'Y'){
                         location = dom.IndexLocation;
                     }
-                    tmp = setJobModel(dom.Name, dom.FixedPayMin + '-' + dom.FixedPayMax, dom.PostJobDateStart, dom.PostJobDateEnd, 0, 
+                    tmp = setJobModel(dom.Uuid,dom.Name, dom.FixedPayMin + '-' + dom.FixedPayMax, dom.PostJobDateStart, dom.PostJobDateEnd, 0, 
                     dom.BriefShort, dom.IndexWorkCategorys.split('>')[0], dom.IndexWorkCategorys.split('>')[1], dom.Postform, 
                     dom.IndexSkills, 5, location);
                     pa.append(tmp);
