@@ -207,6 +207,12 @@
             $("#login.clickable").click();
         }
     });
+    
+    $("#inp_pass").keydown(function(e){
+        if(e.keyCode == 13){
+            $("#btn_login").click();
+        }
+    });
 
 });
 

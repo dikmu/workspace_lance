@@ -169,7 +169,7 @@
 .rg-result .mod .uinfo p{margin-bottom:2px;line-height:20px;}
 .rg-result .mod .skills{margin-top:10px;}
 .rg-result .mod .skills .btn-info{margin-right:5px;}
-.rg-result .get-more{margin-top:80px;font-size:14px;border-radius:0px;}
+.rg-result .get-more,.rg-result .no-more{margin-top:80px;font-size:14px;border-radius:0px;}
 .control-pd{padding-right:0px;}
 .has-feedback .form-control{padding-right:0px;}
 

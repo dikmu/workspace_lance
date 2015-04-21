@@ -246,11 +246,14 @@ background:#004486;
 }
 .lan-dl{margin:20px 0 0 20px;}
 .lan-dl dt{margin-bottom:10px;padding-left:3px;}
-.lan-dl a{padding:0px;font-size:14px;}
-.lan-dl dt a{font-weight:bold;color:#50852C;}
+.lan-dl a,.lan-dl dt a{padding:0px;font-size:14px;color:#333;}
+.lan-dl a.sel{font-weight:bold;color:#50852C;}
 .lan-dl dd{padding:3px 5px;}
 .lan-dl dd a{color:#333;}
-.lan-dl dd:hover{background-color:#5cb85c;}
-.lan-dl dd:hover a{color:#fff;}
+.lan-dl dd:hover a,.lan-dl dd a.more{color:#50852C;}
+.lan-dl input{width:50px;}
+.lan-dl .btn{padding:2px 12px;position:relative;top:-1px;}
+
+.hidemod{display:none;}
 
 
