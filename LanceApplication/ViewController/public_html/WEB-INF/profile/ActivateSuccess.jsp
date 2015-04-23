@@ -44,13 +44,13 @@
                                 <span>激活邮件已过期？</span>
                                 <a href="#" id="act-email">重新发送激活邮件</a>
                                 <span id="act-sending" style="display: none;color:Red;font-size:12px;">
-                                   <img src="../../resources/image/loading.gif" alt="" height="16" width="16"/>
+                                   <img src="../../resources/image/loading.gif" alt="载入中" height="16" width="16"/>
                                     邮件发送中...
                                 </span>
                             {{/if}}
                     </script>
                     <div class="share" id="share-area">
-                        将Lance分享给你的好友<br /><br />
+                        将驻才网分享给你的好友<br /><br />
                         <!-- JiaThis Button BEGIN -->
                         <div class="jiathis_style_32x32">
                             <a class="jiathis_button_qzone"></a>

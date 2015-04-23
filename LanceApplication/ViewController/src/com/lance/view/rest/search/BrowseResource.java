@@ -19,6 +19,11 @@ public class BrowseResource extends BaseRestResource {
     public BrowseResource() {
     }
 
+    /**
+     * http://localhost:7101/lance/res/browse/skill/all
+     * @return
+     * @throws JSONException
+     */
     @GET
     @Path("skill/all")
     public JSONObject getBrowseSkill() throws JSONException {
@@ -27,6 +32,11 @@ public class BrowseResource extends BaseRestResource {
         return new JSONObject(skills);
     }
 
+    /**
+     * http://localhost:7101/lance/res/browse/category/all
+     * @return
+     * @throws JSONException
+     */
     @GET
     @Path("category/all")
     public JSONObject getBrowseJobCategory() throws JSONException {

@@ -108,7 +108,7 @@ public class CacheResource extends BaseRestResource {
             row1 = (JobCategoryVORowImpl) it1.next();
             row1.getUuid();
             //添加到缓存
-            cache.put(row1.getUuid(), new String[] { row1.getNameEn(), row1.getNameCn() });
+            cache.put(row1.getUuid(), new String[] { row1.getNameEn(), row1.getNameCn(), row1.getUuid() });
             //添加到json
             JSONArray data = new JSONArray();
             data.put(row1.getNameEn());
@@ -226,7 +226,7 @@ public class CacheResource extends BaseRestResource {
         while (it1.hasNext()) {
             row1 = (SkillSuperTypeVORowImpl) it1.next();
             //添加到缓存
-            cache1.put(row1.getUuid(), new String[] { row1.getName(), row1.getNameCn() });
+            cache1.put(row1.getUuid(), new String[] { row1.getName(), row1.getNameCn(), row1.getUuid() });
             //添加到json
             JSONArray data = new JSONArray();
             data.put(row1.getName());

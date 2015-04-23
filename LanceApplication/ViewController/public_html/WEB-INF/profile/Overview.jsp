@@ -38,11 +38,11 @@
             </div>
             <div class="col-md-9 lan-main-right">
                 <div class="alert alert-info" role="alert">
-                    <span class="lan-font-22 lan-font-green uname">孙悟空</span>
+                    <span class="lan-font-22 lan-font-green uname"></span>
                     <br />
-                    <span class="lan-font-16 lan-font-black utitle">Expert PHP Developer</span>
+                    <span class="lan-font-16 lan-font-black utitle"></span>
                     <br /><br />
-                    <span class="lan-font-14 lan-font-black uloc">中国，北京，北京</span>
+                    <span class="lan-font-14 lan-font-black uloc"></span>
                     <br />
                     <button type="button" class="btn btn-info btn-edit">编辑</button>
                 </div>
