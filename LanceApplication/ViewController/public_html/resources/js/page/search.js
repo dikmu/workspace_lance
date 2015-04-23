@@ -49,7 +49,7 @@ function setCategory(){
         $.each(datas, function(i, dom){
             if(i < 5){
                 tmpName = dom.NameCn == "" ? dom.NameEn : dom.NameCn;
-                str = '<dd><a data-val="' + dom.Uuid + '" class="btn btn-link">' + tmpName + '</a></dd>';
+                str = '<dd><a data-val="' + tmpName + '" class="btn btn-link">' + tmpName + '</a></dd>';
                 $('#cates').append(str);
             }
             if(i == 5){
@@ -57,7 +57,7 @@ function setCategory(){
             }
             if(i >= 5 && i < 11){
                 tmpName = dom.NameCn == "" ? dom.NameEn : dom.NameCn;
-                str = '<dd class="hidemod"><a data-val="' + dom.tmpName + '" class="btn btn-link">' + tmpName + '</a></dd>';
+                str = '<dd class="hidemod"><a data-val="' + tmpName + '" class="btn btn-link">' + tmpName + '</a></dd>';
                 $('#cates .more').parent().before(str);
             }
         });
@@ -80,7 +80,7 @@ function setCategory(){
     $.ax("get", "location/province", null, function(data){
         var len = data.length, i = 0, str = "";
         for(i=0;i<len;i++){
-            str += '<option value="'+data[i].ProvinceName+'">'+data[i].ProvinceName+'</option>';
+            str += '<option value="'+data[i].Uuid+'">'+data[i].ProvinceName+'</option>';
         }
         $("#sel_province").html(str);
         $("#sel_province").change();
@@ -94,7 +94,7 @@ function setCategory(){
                  var len = data.length, i = 0, str = "";
                  str += '<option value="-1">请选择</option>';
                 for(i=0;i<len;i++){
-                    str += '<option value="'+data[i].CityName+'">'+data[i].CityName+'</option>';
+                    str += '<option value="'+data[i].Uuid+'">'+data[i].CityName+'</option>';
                 }
                 $("#sel_city").html(str);
             }, function(){});
@@ -366,10 +366,12 @@ $(function(){
     });
     $("#speskil").click(function(){
         $("#sel_skill").change();
-        $("#sel_skill").attr("disabled", false);
+        //$("#sel_skill").attr("disabled", false);
+        $(".dd-speskil").slideDown();
     });
     $("#allskil").click(function(){
-        $("#sel_skill").attr("disabled", true).val(-1);
+        $("#sel_skill").val(-1);
+        $(".dd-speskil").slideUp();
         
         var type = 'skill', value = $("#sel_skill").val();
         method = getMothodParam(type, null);
@@ -386,7 +388,7 @@ $(function(){
     //地理信息筛选
     $("#sel_city").change(function(){
         if($("#sel_city").val() == "-1") return;
-        var type = 'country', val = '中国>' + $("#sel_province").val() + '>' + $("#sel_city").val();
+        var type = 'country', val = '中国>' + $("#sel_province option:selected").text() + '>' + $("#sel_city option:selected").text();
         method = getMothodParam(type, val);
         if(method.indexOf(type) < 0){
             method += ';' + type + '=' + val;
@@ -402,11 +404,13 @@ $(function(){
         }
     });
     $("#speloc").click(function(){
-        $("#sel_province, #sel_city").attr("disabled", false);
+        //$("#sel_province, #sel_city").attr("disabled", false);
+        $(".dd-speloc").slideDown();
         $("#sel_city").change();
     });
     $("#allloc").click(function(){
-        $("#sel_province, #sel_city").attr("disabled", true).val(-1);
+        $("#sel_province, #sel_city").val(-1);
+        $(".dd-speloc").slideUp();
         var type = 'country', val = '中国>' + $("#sel_province").val() + '>' + $("#sel_city").val();
         method = getMothodParam(type, null);
         
@@ -467,11 +471,13 @@ $(function(){
         }
     });
     $("#spejg").click(function(){
-        $("#but_cmoney").attr("disabled", false);
+        //$("#but_cmoney").attr("disabled", false);
+        $(".dd-spejg").slideDown();
     });
     $("#alljg").click(function(){
         $("#smoney, #emoney").val("");
-        $("#but_cmoney").attr("disabled", true);
+        //$("#but_cmoney").attr("disabled", true);
+        $(".dd-spejg").slideUp();
         var val = null, type = 'hourlyPay';
         method = getMothodParam(type, val);
         if(_STYPE == 'JOB'){
