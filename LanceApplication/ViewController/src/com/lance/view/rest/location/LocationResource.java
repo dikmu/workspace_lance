@@ -74,12 +74,21 @@ public class LocationResource extends BaseRestResource {
      */
     @GET
     @Path("cityByProvince/{provinceId}")
-    public JSONArray getAllCityByProvince(@PathParam("provinceId") String provinceId) throws JSONException {
+    public JSONArray getAllCityByProvince(@PathParam("provinceId") String provinceId){
+        try {
         LanceRestAMImpl am = LUtil.findLanceAM();
         ViewObject vo = am.getLocationProvince1();
-        Row row = vo.findByKey(new Key(new Object[] { provinceId }), 1)[0];
-        vo.setCurrentRow(row);
-        ViewObject vo2 = am.getLocationCity1();
-        return this.convertVoToJsonArray(vo2, this.ATTR_GET_CITY);
+        
+            Row row = vo.findByKey(new Key(new Object[] { provinceId }), 1)[0];
+            if (row == null) {
+                return new JSONArray();
+            }
+            vo.setCurrentRow(row);
+            ViewObject vo2 = am.getLocationCity1();
+            return this.convertVoToJsonArray(vo2, this.ATTR_GET_CITY);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new JSONArray();
+        }
     }
 }

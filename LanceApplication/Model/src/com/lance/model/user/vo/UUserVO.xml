@@ -655,6 +655,11 @@
     ViewLink="com.lance.model.vl.UUser_CompanyVL"
     Type="oracle.jbo.Row"
     IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="UserNotification"
+    ViewLink="com.lance.model.user.vl.User_NotificationVL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
   <LOVUIHints
     ListType="108"
     MRUCount="0"

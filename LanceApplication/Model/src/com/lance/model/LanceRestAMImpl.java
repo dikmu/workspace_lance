@@ -441,5 +441,37 @@ public class LanceRestAMImpl extends BaseApplicationModuleImpl {
     public SkillSuperTypeVOImpl getSkillSuperType1() {
         return (SkillSuperTypeVOImpl) findViewObject("SkillSuperType1");
     }
+
+    /**
+     * Container's getter for UserNotification1.
+     * @return UserNotification1
+     */
+    public BaseViewObjectImpl getUserNotification1() {
+        return (BaseViewObjectImpl) findViewObject("UserNotification1");
+    }
+
+    /**
+     * Container's getter for User_NotificationVL1.
+     * @return User_NotificationVL1
+     */
+    public ViewLinkImpl getUser_NotificationVL1() {
+        return (ViewLinkImpl) findViewLink("User_NotificationVL1");
+    }
+
+    /**
+     * Container's getter for UserNotification2.
+     * @return UserNotification2
+     */
+    public BaseViewObjectImpl getUserNotificationUnread() {
+        return (BaseViewObjectImpl) findViewObject("UserNotificationUnread");
+    }
+
+    /**
+     * Container's getter for User_NotificationVL2.
+     * @return User_NotificationVL2
+     */
+    public ViewLinkImpl getUser_NotificationVL2() {
+        return (ViewLinkImpl) findViewLink("User_NotificationVL2");
+    }
 }
 

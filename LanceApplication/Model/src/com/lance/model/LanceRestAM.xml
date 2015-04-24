@@ -113,6 +113,16 @@
     <ViewUsage
         Name="SkillSuperType1"
         ViewObjectName="com.lance.model.vo.SkillSuperTypeVO"/>
+    <ViewUsage
+        Name="UserNotification1"
+        ViewObjectName="com.lance.model.user.vo.UserNotificationVO"/>
+    <ViewUsage
+        Name="UserNotificationUnread"
+        ViewObjectName="com.lance.model.user.vo.UserNotificationVO">
+        <ViewCriteriaUsage
+            Name="FindUnreadVC"
+            FullName="com.lance.model.user.vo.UserNotificationVO.FindUnreadVC"/>
+    </ViewUsage>
     <ViewLinkUsage
       Name="JobCategory_SubCategoryVL1"
       ViewLinkObjectName="com.lance.model.vl.JobCategory_SubCategoryVL"
@@ -172,6 +182,18 @@
         ViewLinkObjectName="com.lance.model.vl.ContractLogContractVL"
         SrcViewUsageName="com.lance.model.LanceRestAM.ContractVO1"
         DstViewUsageName="com.lance.model.LanceRestAM.ContractLog1"
+        Reversed="false"/>
+    <ViewLinkUsage
+        Name="User_NotificationVL1"
+        ViewLinkObjectName="com.lance.model.user.vl.User_NotificationVL"
+        SrcViewUsageName="com.lance.model.LanceRestAM.UUser1"
+        DstViewUsageName="com.lance.model.LanceRestAM.UserNotification1"
+        Reversed="false"/>
+    <ViewLinkUsage
+        Name="User_NotificationVL2"
+        ViewLinkObjectName="com.lance.model.user.vl.User_NotificationVL"
+        SrcViewUsageName="com.lance.model.LanceRestAM.UUser1"
+        DstViewUsageName="com.lance.model.LanceRestAM.UserNotificationUnread"
         Reversed="false"/>
     <ResourceBundle>
         <PropertiesBundle

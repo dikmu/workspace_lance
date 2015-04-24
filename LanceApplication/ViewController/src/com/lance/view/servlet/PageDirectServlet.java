@@ -2,12 +2,9 @@ package com.lance.view.servlet;
 
 //import com.lance.view.rest.user.LancerProfileResource;
 import com.lance.view.rest.job.SearchResource;
-import com.lance.view.rest.project.ContractResource;
 import com.lance.view.rest.uuser.LookupsResource;
-import com.lance.view.rest.uuser.UserEducationResource;
-import com.lance.view.rest.uuser.UserLocationListResource;
+import com.lance.view.rest.uuser.UserNotificationResource;
 import com.lance.view.rest.uuser.UserResource;
-import com.lance.view.rest.uuser.UserSkillResource;
 
 import java.io.IOException;
 
@@ -106,6 +103,10 @@ public class PageDirectServlet extends HttpServlet {
                 JSONObject json = new JSONObject();
                 json.put("jobId", param);
                 toPage(request, response, "/WEB-INF/jobs/jobDetail.jsp", json);
+            } else if (uri.startsWith("/lance/pages/MyMessage")) {
+                JSONObject json = new JSONObject();
+                json.put("datas", new UserNotificationResource().findAllNoftification());
+                toPage(request, response, "/WEB-INF/profile/MyMessage.jsp", json);
             }
 //            else if (uri.startsWith("/lance/pages/project/Contract/")) { //uri:http://localhost:7101/lance/pages/project/Contact/157e69a513f942c7bb895e7dddd01a56
 //                //读取合同
@@ -127,15 +128,17 @@ public class PageDirectServlet extends HttpServlet {
             ADFContext adfctx = ADFContext.getCurrent();
             JSONObject userData = null;
             if(adfctx.getSecurityContext().isAuthenticated()){
-                String user = adfctx.getSecurityContext().getUserPrincipal().getName();
+            String user = adfctx.getSecurityContext().getUserPrincipal().getName();
                 userData = new UserResource().findSimpleUserByName(user);
                 userData.put("logined", true);
-                String[] roles = adfctx.getSecurityContext().getUserRoles();
-                JSONArray roleArr = new JSONArray();
-                for (String role : roles) {
-                    roleArr.put(role);
-                }
-                userData.put("roles", roleArr); 
+            String notiCount = new UserNotificationResource().findNotificationCount();
+            userData.put("notification", notiCount);
+            String[] roles = adfctx.getSecurityContext().getUserRoles();
+            JSONArray roleArr = new JSONArray();
+            for (String role : roles) {
+                roleArr.put(role);
+            }
+            userData.put("roles", roleArr);
             }else{
                 userData = new JSONObject();
                 userData.put("logined", false);
@@ -157,15 +160,17 @@ public class PageDirectServlet extends HttpServlet {
             ADFContext adfctx = ADFContext.getCurrent();
             JSONObject userData = null;
             if(adfctx.getSecurityContext().isAuthenticated()){
-                String user = adfctx.getSecurityContext().getUserPrincipal().getName();
+            String user = adfctx.getSecurityContext().getUserPrincipal().getName();
                 userData = new UserResource().findSimpleUserByName(user);
                 userData.put("logined", true);
-                String[] roles = adfctx.getSecurityContext().getUserRoles();
-                JSONArray roleArr = new JSONArray();
-                for (String role : roles) {
-                    roleArr.put(role);
-                }
-                userData.put("roles", roleArr); 
+            String notiCount = new UserNotificationResource().findNotificationCount();
+            userData.put("notification", notiCount);
+            String[] roles = adfctx.getSecurityContext().getUserRoles();
+            JSONArray roleArr = new JSONArray();
+            for (String role : roles) {
+                roleArr.put(role);
+            }
+            userData.put("roles", roleArr);
             }else{
                 userData = new JSONObject();
                 userData.put("logined", false);

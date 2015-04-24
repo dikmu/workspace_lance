@@ -101,6 +101,7 @@ public class UUserVORowImpl extends BaseViewRowImpl {
         UserEducation,
         UserLocationList,
         Company,
+        UserNotification,
         LocationRegionVO1,
         LocationCountryVO1,
         LocationProvinceVO1,
@@ -193,6 +194,7 @@ public class UUserVORowImpl extends BaseViewRowImpl {
     public static final int USEREDUCATION = AttributesEnum.UserEducation.index();
     public static final int USERLOCATIONLIST = AttributesEnum.UserLocationList.index();
     public static final int COMPANY = AttributesEnum.Company.index();
+    public static final int USERNOTIFICATION = AttributesEnum.UserNotification.index();
     public static final int LOCATIONREGIONVO1 = AttributesEnum.LocationRegionVO1.index();
     public static final int LOCATIONCOUNTRYVO1 = AttributesEnum.LocationCountryVO1.index();
     public static final int LOCATIONPROVINCEVO1 = AttributesEnum.LocationProvinceVO1.index();
@@ -1162,6 +1164,13 @@ public class UUserVORowImpl extends BaseViewRowImpl {
      */
     public void setCompany(Row value) {
         setAttributeInternal(COMPANY, value);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link UserNotification.
+     */
+    public RowIterator getUserNotification() {
+        return (RowIterator) getAttributeInternal(USERNOTIFICATION);
     }
 
     /**

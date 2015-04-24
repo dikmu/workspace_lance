@@ -5,31 +5,31 @@
         <ol class="breadcrumb pull-right" id="top_bc"></ol>
         <script id="bc-cnt-sp1" type="text/html">
              {{if logined == 'true'}}
-                  <li>
-                    <a class="lan-font-bold" data-toggle="dropdown" aria-expanded="false" href="#">
+            <li>
+                <a class="lan-font-bold" data-toggle="dropdown" aria-expanded="false" href="#">
                        <span id="gbuname">{{userName}}</span>
                     </a>
-                    <span class="caret"></span>
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <a href="#">个人信息</a>
-                        </li>
-                        <li>
-                            <a href="#">个人简历</a>
-                        </li>
-                        <li>
-                            <a href="#">个人设置</a>
-                        </li>
-                        <li role="presentation" class="divider"></li>
-                        <li>
-                            <a href="/lance/adfAuthentication?logout=true&amp;end_url=login.htm">退出</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">收件箱
-                        <span class="label label-danger">1</span></a>
-                </li>
+                <span class="caret"></span>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <a href="#">个人信息</a>
+                    </li>
+                    <li>
+                        <a href="#">个人简历</a>
+                    </li>
+                    <li>
+                        <a href="#">个人设置</a>
+                    </li>
+                    <li role="presentation" class="divider"></li>
+                    <li>
+                        <a href="/lance/adfAuthentication?logout=true&amp;end_url=login.htm">退出</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="/lance/pages/MyMessage">收件箱
+                    <span id="inbox" class="label label-danger"></span></a>
+            </li>
              {{else}}
                  <li>
                   <a href="/lance/login.htm">登陆</a></li>
@@ -41,11 +41,6 @@
              </li>
         </script>
     </div>
-    <!--<script>
-      if(User.logined){
-         document.getElementById("gbuname").innerHTML = User.UserName;
-      }
-    </script>-->
 </div>
 <div class="lan-main-menu">
     <div class="container">
@@ -176,4 +171,10 @@
 <script src="/lance/resources/js/jquery-1.9.1.min.js" type="text/javascript"></script>
 <script src="/lance/resources/js/template.js" type="text/javascript"></script>
 <script src="/lance/resources/js/page/topBar.js" type="text/javascript"></script>
-    
+<script>
+//      if(User.logined){
+//      document.getElementById("gbuname").innerHTML = User.UserName;
+//      }
+       document.getElementById("inbox").innerHTML = User.notification;
+       alert(User.notification);
+</script>    
