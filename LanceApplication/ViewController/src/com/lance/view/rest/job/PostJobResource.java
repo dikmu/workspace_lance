@@ -320,10 +320,12 @@ public class PostJobResource extends BaseRestResource {
         PostJobsVOImpl vo = am.getPostJobs1();
         PostJobsVORowImpl row = this.findPostJobById(postJobId, vo);
         JSONObject json = this.convertRowToJsonObject(row, POST_JOB_VO_ATTR_GET);
-        json.put("Img", AuthCache.getUserById(json.getString("CreateBy")).get("Img"));
-        JSONObject userJson = new UserResource().findUserById(json.getString("CreateBy"));
-        String location = userJson.has("LocationA") ? userJson.getString("LocationA") : (userJson.has("LocationB") ? userJson.getString("LocationB") : "");
-        json.put("Location", location);
+        if(json.has("CreateBy") && AuthCache.getUserById(json.getString("CreateBy")) != null){
+            json.put("Img", AuthCache.getUserById(json.getString("CreateBy")).get("Img"));
+            JSONObject userJson = new UserResource().findUserById(json.getString("CreateBy"));
+            String location = userJson.has("LocationA") ? userJson.getString("LocationA") : (userJson.has("LocationB") ? userJson.getString("LocationB") : "");
+            json.put("Location", location);
+        }
         json.put("WorkCategory", new CacheResource().getJobCategoryNameFromCache(json.getString("WorkCategory")));
         json.put("WorkSubcategory", new CacheResource().getJobSubCategoryNameFromCache(json.getString("WorkSubcategory")));
         return json;
@@ -625,7 +627,9 @@ public class PostJobResource extends BaseRestResource {
         PostJobDiscussVOImpl vo2 = getParentDiscuss(am, jobId,type);
         for(Row r :  vo2.getAllRowsInRange()){
             JSONObject json = this.convertRowToJsonObject(vo2, r, POST_JOB_DISCUSS_VO_ATTR_READ);
-            json.put("Img", AuthCache.getUserById(json.getString("CreateBy")).get("Img"));
+            if(AuthCache.getUserById(json.getString("CreateBy")) != null){
+                json.put("Img", AuthCache.getUserById(json.getString("CreateBy")).get("Img"));
+            }
             JSONObject userJson = new UserResource().findUserById(json.getString("CreateBy"));
             String location = userJson.has("LocationA") ? userJson.getString("LocationA") : (userJson.has("LocationB") ? userJson.getString("LocationB") : "");
             json.put("Location", location);

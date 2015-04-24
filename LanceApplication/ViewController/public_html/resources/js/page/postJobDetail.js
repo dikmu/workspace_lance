@@ -73,16 +73,19 @@ function initPostJobData(jobId){
                 }
             }
             //判断按钮加载
-            if(User.UserName == data["CreateBy"]){
+            if(User.logined && User.UserName == data["CreateBy"]){
                 $("#btn-area").hide();
                 $("#btn-area").html(template('btn-area-sp1',{'show' : "N"}));
-                $("#radio-area").html(template('radio-area-sp1',{'pid' : "client"}));
+                alert((!User.logined));
+                $("#radio-area").html(template('radio-area-sp1',{'pid' : "client","u_sta":!User.logined}));
                 stat(jobId,"client");
             }else{
-                $("#btn-area").show();
-                $("#btn-area").html(template('btn-area-sp1',{'show' : "Y"}));
-                $("#radio-area").html(template('radio-area-sp1',{'pid' : "lancer"}));
-                stat(jobId,"lancer");
+                if(User.logined){
+                    $("#btn-area").show();
+                    $("#btn-area").html(template('btn-area-sp1',{'show' : "Y"}));
+                    $("#radio-area").html(template('radio-area-sp1',{'pid' : "lancer","u_sta":!User.logined}));
+                    stat(jobId,"lancer");
+                }
             }
             
             quesSubmit(jobId,data["CreateBy"]);
@@ -110,8 +113,8 @@ function initPostDiscussData(jobId,publisher){
    });
 }
 
-function isNum(str){
-  var reg =/^[1-9]\d{0,2}$/;
+function isNum1(str){
+  var reg =/^[1-9]*[1-9][0-9]*$/;
   return reg.test(str);
 }
 
@@ -155,6 +158,26 @@ function quesSubmit(jobId,publisher){
 //留言回复
 function replaySubmit(jobId,publisher){
   var uuid = null;
+  $(".panel-footer").on("click", "button[name='btn_note']", function(){
+      if(!User.logined){
+         alert("请登录后留言!");
+         return;
+      }
+      var paCt = $("#ques-content").closest('.form-group');
+      if(paCt.hasClass("has-error")){
+          paCt.removeClass("has-error");
+      }
+      $("#post_ques").modal('show');
+  });
+ 
+  $(".panel-footer").on("click", "button[name='btn_apply']", function(){
+      if(!User.logined){
+         alert("请登录后再发起申请!");
+         return;
+      }
+      $("#post_apply").modal('show');
+  });
+  
   //弹出框
   $("#list-discuss").on("click", "button[name='ques-replay']", function(){
       uuid = $(this).attr("uuid");
@@ -374,7 +397,8 @@ function checkApply(){
             paHp.addClass("has-error");
             return false;
         }else{
-           if(!isNum($("#HourlyPay").val())){
+           if(!isNum1($("#HourlyPay").val())){
+               showWarn("报价必须为正整数!");
                paHp.addClass("has-error");
                return false;
            }
@@ -389,9 +413,16 @@ function checkApply(){
             paWh.addClass("has-error");
             return false;
         }else{
-            if(!isNum($("#Weekly_Hours").val())){
+            if(!isNum1($("#Weekly_Hours").val())){
+               showWarn("每周工作时间必须为正整数!");
                paWh.addClass("has-error");
                return false;
+            }else{
+               if(parseInt($("#Weekly_Hours").val()) > (7*24)){
+                   showWarn("每周工作时间不能超过"+(7*24));
+                   paWh.addClass("has-error");
+                   return false;
+               }
             }
             paWh.removeClass("has-error");
             attrs[3]="WeeklyHours";
@@ -406,8 +437,9 @@ function checkApply(){
             paFpn.addClass("has-error");
             return false;
         }else{
-            if(!isNum($("#fixed_pay_min").val())){
+            if(!isNum1($("#fixed_pay_min").val())){
                paFpn.addClass("has-error");
+               showWarn("项目预算为正整数!");
                return false;
             }
             paFpn.removeClass("has-error");
@@ -421,9 +453,17 @@ function checkApply(){
             paFpx.addClass("has-error");
             return false;
         }else{
-            if(!isNum($("#fixed_pay_max").val())){
+            if(!isNum1($("#fixed_pay_max").val())){
                paFpx.addClass("has-error");
+               showWarn("项目预算为正整数!");
                return false;
+            }else{
+               if(parseInt($("#fixed_pay_min").val()) > parseInt($("#fixed_pay_max").val())){
+                   paFpx.addClass("has-error");
+                   paFpn.addClass("has-error");
+                   showWarn("项目预算起始值不能大于预算最大值!");
+                   return false;
+               }
             }
             paFpx.removeClass("has-error");
             attrs[3]="FixedPayMax";
@@ -436,6 +476,11 @@ function checkApply(){
     datas[2]="";
     attrs[3]="";
     datas[3]="";
+  }
+  
+  function showWarn(msg){
+    $("#lancerMsg").show();
+    $("#lan-msg").html(msg);
   }
   
   var zdrq = $("input[name='jrsj']:checked").val();

@@ -148,8 +148,8 @@
                         <div class="panel-footer" align="right" id="btn-area">
                             <script id="btn-area-sp1" type="text/html">
                                 {{if show=="Y"}} 
-                                   <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#post_ques">留言</button>
-                                   <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#post_apply">申请</button> 
+                                   <button type="button" class="btn btn-warning btn-sm" name="btn_note">留言</button>
+                                   <button type="button" class="btn btn-success btn-sm" name="btn_apply">申请</button> 
                                 {{/if}}
                             </script>
                         </div>
@@ -163,11 +163,11 @@
                         <span id="radio-area">
                         <script id="radio-area-sp1" type="text/html">
                              <label class="radio-inline">
-                                <input type="radio" name="wtlb" id="rad-all" value="all" checked="checked"> 全部
+                                <input type="radio" name="wtlb" id="rad-all" value="all" checked="checked" > 全部
                             </label>
                             {{if pid=="client"}} 
                                 <label class="radio-inline">
-                                    <input type="radio" name="wtlb" id="rad-apply" value="apply" /> 只看申请 <span id="span-apply"></span>
+                                    <input type="radio" name="wtlb" id="rad-apply" value="apply"/> 只看申请 <span id="span-apply"></span>
                                 </label>
                                 <label class="radio-inline">
                                     <input type="radio" name="wtlb" id="rad-sec" value="second"> 查看备选 <span id="span-option"></span>
@@ -447,6 +447,10 @@
                         </div>
                     </form>
                 </div>
+                 <div id="lancerMsg" class="alert alert-warning alert-dismissible" role="alert" style="display:none;">
+                   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                   <strong style="color:Red;">系统提示:</strong><span id="lan-msg" style="color:Red;"></span>
+                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                     <button type="button" class="btn btn-primary" id="apply-submit">确认</button>
