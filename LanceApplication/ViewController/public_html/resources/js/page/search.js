@@ -42,6 +42,44 @@ function setPersonModel(uname, title, location, money, acount, earn, txt, skills
     return item;
 }
 
+//获取GET 参数
+function getPar(par){
+    //获取当前URL
+    var local_url = document.location.href; 
+    //获取要取得的get参数位置
+    var get = local_url.indexOf(par +"=");
+    if(get == -1){
+        return false;   
+    }   
+    //截取字符串
+    var get_par = local_url.slice(par.length + get + 1);    
+    //判断截取后的字符串是否还有其他get参数
+    var nextPar = get_par.indexOf("&");
+    if(nextPar != -1){
+        get_par = get_par.slice(0, nextPar);
+    }
+    return get_par;
+}
+function initParam(){
+    var curType = getPar('type'), curVal = getPar('val'), param = '';
+    if(curType && curVal){
+        param = ';' + curType + '=' + curVal;
+        method += param;
+        _INITJOBS('');
+        if(curType == 'category'){
+            var curDom = $("#cates .btn-link[data-val='" + curVal + "']");
+            if(curDom.length > 0){
+                $("#cates .btn-link").removeClass("sel")
+                curDom.addClass("sel");
+            }
+        }else if(curType == 'skill'){
+            $("#jbskill").val(curVal);
+        }
+    }else{
+        _INITJOBS('');
+    }
+}
+
 //设置搜索条件信息
 function setCategory(){
     var setCate = function(datas){
@@ -71,8 +109,10 @@ function setCategory(){
         var tmpName = '', str = '';
         str += '<option value="-1">请选择</option>';
         $("#sel_skill").append(str);
+        $("#jbskill").append('<option value="-1">全部技能</option>');
+        
         $.each(datas, function(i, dom){
-            $("#sel_skill").append('<option value="'+(dom.NameCn || dom.Name)+'">' + (dom.NameCn || dom.Name) + '</option>')
+            $("#sel_skill,#jbskill").append('<option value="'+(dom.NameCn || dom.Name)+'">' + (dom.NameCn || dom.Name) + '</option>')
         });
     };
     
@@ -107,11 +147,14 @@ function setCategory(){
         setCate(cates);
         setSkills(skills);
         
+        initParam();
+        
     }, function(){});
 }
 //全局变量 JOB PEOPLE THUMB
 var _STYPE = 'JOB';
 var _INITPERSON = null;
+var _INITJOBS = null;
 var method = '';
 //search 
 $(function(){
@@ -119,10 +162,12 @@ $(function(){
     
     var clearJobs = function(){
         $(".jobs .mod").not(".hidemod").remove();
+        $(".get-more").data("page", 1);
     };
     
     var clearPeoples = function(){
         $(".persons .mod").not(".hidemod").remove();
+        $(".get-more").data("page", 1);
     };
     
     var getDatas = function(param){
@@ -229,8 +274,9 @@ $(function(){
     };
     
     _INITPERSON = getDatasForPeople;
+    _INITJOBS = getDatas;
     
-    getDatas('');
+    //getDatas('');
     
     
     
@@ -282,12 +328,26 @@ $(function(){
         $(".get-more").data("page", 1);
         if(_STYPE == 'JOB'){
             var keyword = $("#input_search").val();
-            method = 'search/jobs' + ';keyword=' + keyword;
+            method = getMothodParam('keyword', keyword);
+            if($.trim(keyword) != ''){
+                if(method.indexOf('keyword') < 0){
+                    method += ';keyword=' + keyword;
+                }
+            }else{
+                //method = 'search/jobs';
+            }
             clearJobs();
             getDatas('');
         }else if(_STYPE == 'PEOPLE'){
             var keyword = $("#input_search").val();
-            method = 'search/contractors' + ';keyword=' + keyword;
+            method = getMothodParam('keyword', keyword);
+            if($.trim(keyword) != ''){
+                if(method.indexOf('keyword') < 0){
+                    method += ';keyword=' + keyword;
+                }
+            }else{
+                //method = 'search/contractors';
+            }
             clearPeoples();
             getDatasForPeople('');
         }else if(_STYPE == 'THUMB'){
@@ -306,7 +366,7 @@ $(function(){
         $.each(arr_methods, function(i, dom){
             if(i == 0){
                 strTmp = dom;
-            }else if(dom != "" && dom.indexOf('pageNum') < 0 && dom.indexOf('keyword') < 0){
+            }else if(dom != "" && dom.indexOf('pageNum') < 0){
                 if(dom.indexOf(type) >= 0){
                     if(val){
                         strTmp += ';' + type + '=' + val;
@@ -344,6 +404,23 @@ $(function(){
                 
             }
         }
+    });
+    //技能筛选-job
+    $("#jbskill").change(function(){
+         if($(this).val() == "-1"){
+            //全部
+            method = getMothodParam('skill', null);
+            clearJobs();
+            getDatas('');
+         }else{
+              var type = 'skill', val = $(this).val();
+              method = getMothodParam(type, val);
+              if(method.indexOf(type) < 0){
+                method += ';' + type + '=' + val;
+              }
+              clearJobs();
+              getDatas('');
+         }
     });
     //技能筛选
     $("#sel_skill").change(function(){
@@ -573,6 +650,7 @@ $(function(){
         }else if(type == 'jobs'){
             _STYPE = 'JOB';
             method = 'search/jobs';
+            _INITJOBS('');
         }else if(type == 'thumbs'){
             _STYPE = 'THUMB';
             //TODO

@@ -256,4 +256,7 @@ background:#004486;
 
 .hidemod{display:none;}
 
+.lan-tab{margin-top:20px;}
+.lan-tab label{font-size:30px;color:#666;}
+.lan-tab label:hover,.lan-tab label.active{color:#50852C;text-decoration:underline;}
 
