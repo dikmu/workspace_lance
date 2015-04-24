@@ -103,7 +103,6 @@ function initPostJobData(jobId){
 function initPostDiscussData(jobId,publisher){
     jQuery.ajax({
         url : '/lance/res/postJob/'+jobId+'/discuss?random='+Math.random(), type : 'get', success : function (data) {
-           console.log(jQuery.toJSON(data));
            $("#list-discuss").html(template('list-discuss-sp1',{'list' : data,"User":User,"Publisher":publisher}));
         },
         error : function (msg) {

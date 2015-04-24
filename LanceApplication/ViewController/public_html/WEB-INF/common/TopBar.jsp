@@ -1,33 +1,42 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="lan-header-main">
     <div class="container">
         <img class="pull-left logo" src="\lance\resources\image\common\logo.png" alt=""/>
         <ol class="breadcrumb pull-right">
-            <li>
-                <a class="lan-font-bold" data-toggle="dropdown" aria-expanded="false" href="#">
-                    <span id="gbuname"></span></a>
-                 
-                <span class="caret"></span>
-                <ul class="dropdown-menu" role="menu">
-                    <li>
-                        <a href="#">个人信息</a>
-                    </li>
-                    <li>
-                        <a href="#">个人简历</a>
-                    </li>
-                    <li>
-                        <a href="#">个人设置</a>
-                    </li>
-                    <li role="presentation" class="divider"></li>
-                    <li>
-                        <a href="/lance/adfAuthentication?logout=true&amp;end_url=login.htm">退出</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">收件箱
-                    <span class="label label-danger">1</span></a>
-            </li>
+           <c:choose>
+              <c:when test="${User.logined}">
+                  <li>
+                    <a class="lan-font-bold" data-toggle="dropdown" aria-expanded="false" href="#">
+                       <span id="gbuname">${User.UserName}</span>
+                    </a>
+                    <span class="caret"></span>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="#">个人信息</a>
+                        </li>
+                        <li>
+                            <a href="#">个人简历</a>
+                        </li>
+                        <li>
+                            <a href="#">个人设置</a>
+                        </li>
+                        <li role="presentation" class="divider"></li>
+                        <li>
+                            <a href="/lance/adfAuthentication?logout=true&amp;end_url=login.htm">退出</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">收件箱
+                        <span class="label label-danger">1</span></a>
+                </li>
+              </c:when>
+              <c:otherwise>
+                <li>
+                  <a href="/lance/login.htm">登陆</a></li>
+              </c:otherwise>
+           </c:choose> 
             <li class="active">
                 <a class="lan-font-bold" data-toggle="dropdown" aria-expanded="false" href="#">帮助</a>
                  
@@ -35,9 +44,11 @@
             </li>
         </ol>
     </div>
-    <script>
-      document.getElementById("gbuname").innerHTML = User.UserName;
-    </script>
+    <!--<script>
+      if(User.logined){
+         document.getElementById("gbuname").innerHTML = User.UserName;
+      }
+    </script>-->
 </div>
 <div class="lan-main-menu">
     <div class="container">

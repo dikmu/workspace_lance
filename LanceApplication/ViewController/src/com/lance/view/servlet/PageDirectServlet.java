@@ -48,13 +48,15 @@ public class PageDirectServlet extends HttpServlet {
         ADFContext adfctx = ADFContext.getCurrent();
         try {
             //如果用户访问的是登录后(受保护)界面
-            if (uri.startsWith("/lance/pages/")) {
+            if(uri.startsWith("/lance/pages/search") || uri.startsWith("/lance/pages/jobDetail")){
+                //不做登陆拦截
+            }else if (uri.startsWith("/lance/pages/")) {
                 if (!adfctx.getSecurityContext().isAuthenticated()) {
                     response.sendRedirect("/lance/login.htm");
                 }
             }
             String user = adfctx.getSecurityContext().getUserPrincipal().getName();
-            if ("/lance/pages/MyHome".equals(uri)) {
+            if (uri.startsWith("/lance/pages/search")) {
                 JSONObject data = new JSONObject();
                 //获取值集——公司性质
                 data.put("Lookup_CompanyPorperty", new LookupsResource().getLookupsByType("CompanyProperty"));
@@ -99,7 +101,7 @@ public class PageDirectServlet extends HttpServlet {
             } else if ("/lance/pages/UserRegSuccess2".equals(uri)){
                 toPage(request, response, "/WEB-INF/profile/UserRegSuccess2.jsp", new JSONObject());
                 
-            }else if(uri.contains("/lance/pages/jobDetail")){
+            }else if(uri.startsWith("/lance/pages/jobDetail")){
                 String param = uri.substring(uri.lastIndexOf("/")+1, uri.length());
                 JSONObject json = new JSONObject();
                 json.put("jobId", param);
@@ -121,18 +123,23 @@ public class PageDirectServlet extends HttpServlet {
 
     public void toPage(HttpServletRequest request, HttpServletResponse response, String page,
                        JSONObject data) throws ServletException, IOException {
-        //JSONObject object = new JSONObject();
         try {
             ADFContext adfctx = ADFContext.getCurrent();
-            String user = adfctx.getSecurityContext().getUserPrincipal().getName();
-            JSONObject userData = new UserResource().findSimpleUserByName(user);
-            String[] roles = adfctx.getSecurityContext().getUserRoles();
-            JSONArray roleArr = new JSONArray();
-            for (String role : roles) {
-                roleArr.put(role);
+            JSONObject userData = null;
+            if(adfctx.getSecurityContext().isAuthenticated()){
+                String user = adfctx.getSecurityContext().getUserPrincipal().getName();
+                userData = new UserResource().findSimpleUserByName(user);
+                userData.put("logined", true);
+                String[] roles = adfctx.getSecurityContext().getUserRoles();
+                JSONArray roleArr = new JSONArray();
+                for (String role : roles) {
+                    roleArr.put(role);
+                }
+                userData.put("roles", roleArr); 
+            }else{
+                userData = new JSONObject();
+                userData.put("logined", false);
             }
-            userData.put("roles", roleArr);
-
             request.setAttribute("user", userData);
             request.setAttribute("data", data);
         } catch (JSONException jsone) {
@@ -148,16 +155,21 @@ public class PageDirectServlet extends HttpServlet {
                        JSONArray arr) throws ServletException, IOException {
         try {
             ADFContext adfctx = ADFContext.getCurrent();
-            String user = adfctx.getSecurityContext().getUserPrincipal().getName();
-            JSONObject userData = new UserResource().findSimpleUserByName(user);
-            String[] roles = adfctx.getSecurityContext().getUserRoles();
-            JSONArray roleArr = new JSONArray();
-            
-            for (String role : roles) {
-                roleArr.put(role);
+            JSONObject userData = null;
+            if(adfctx.getSecurityContext().isAuthenticated()){
+                String user = adfctx.getSecurityContext().getUserPrincipal().getName();
+                userData = new UserResource().findSimpleUserByName(user);
+                userData.put("logined", true);
+                String[] roles = adfctx.getSecurityContext().getUserRoles();
+                JSONArray roleArr = new JSONArray();
+                for (String role : roles) {
+                    roleArr.put(role);
+                }
+                userData.put("roles", roleArr); 
+            }else{
+                userData = new JSONObject();
+                userData.put("logined", false);
             }
-            userData.put("roles", roleArr);
-            System.out.println("roles:"+roleArr);
             
             request.setAttribute("user", userData);
             request.setAttribute("data", arr);

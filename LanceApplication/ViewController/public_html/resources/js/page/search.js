@@ -1,6 +1,6 @@
 function setJobModel(uuid,title, price, stime, etime, acount, detail, cate1, cate2, form, skills, score, location){
     var item = $(".jobs .hidemod").clone().removeClass("hidemod");
-    item.find(".title-in").html(title).attr('href','/lance/page/jobDetail/'+uuid);
+    item.find(".title-in").html(title).attr('href','/lance/pages/jobDetail/'+uuid);
     item.find(".price").html(price == "" ? '价格：不确定' : '价格：' + price);
     item.find(".stime").html('开始时间：' + stime);
     item.find(".etime").html('结束时间：' + etime);
@@ -586,6 +586,9 @@ $(function(){
     });
     
    
+   $("#post_job").click(function(){
+      location.href="/lance/pages/jobs/PostNewJob";
+   });
     
 });
 

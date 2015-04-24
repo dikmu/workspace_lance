@@ -313,6 +313,7 @@ public class SearchResource extends BaseRestResource {
             this.estimated="Y";
             this.nextPage(Integer.parseInt(pageNum));
         }
+        vo.setWhereClause(null);
         return this.packViewObject(vo, null, null, POST_JOB_SEARCH_FIELD);
     }
 
@@ -531,6 +532,7 @@ public class SearchResource extends BaseRestResource {
             this.estimated="Y";
             this.nextPage(Integer.parseInt(pageNum));
         }
+        vo.setWhereClause(null);
         return this.packViewObject(vo, null, null, ATTR_SEARCH_LANCER);
     }
     

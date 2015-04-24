@@ -111,7 +111,7 @@ public class SendActivateMail extends BaseRestResource{
             Session session = Session.getInstance(props, auth);
             session.setDebug(true);
             MimeMessage message = new MimeMessage(session);
-            Address addressFrom = new InternetAddress(PopupAuthenticator.mailuser + "@163.com", "驻才网！");
+            Address addressFrom = new InternetAddress(PopupAuthenticator.mailuser + "@163.com", "驻才网");
             Address addressTo = new InternetAddress(userEmail, ""); //接收邮箱和用户
             ///邮件的内容  validateCode通过MD5加密
             StringBuffer sb = new StringBuffer("点击下面链接激活账号，48小时生效，否则重新注册账号，链接只能使用一次，请尽快激活！</br>");

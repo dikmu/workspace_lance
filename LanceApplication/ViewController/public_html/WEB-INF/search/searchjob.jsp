@@ -21,7 +21,7 @@
     <body>
     <jsp:include page="/WEB-INF/common/TopBar.jsp"/>
      
-     <div class="lan-search">
+      <div class="lan-search">
         <div class="container">
             <div class="row">
                 <div class="col-md-offset-3 col-md-9 search-form">
@@ -35,13 +35,12 @@
                         <button data-cls="jobs" data-title="所有的工作" type="button" class="btn btn-link lan-font-black lan-font-16 sel-tab-type select">工作</button>
                         <!--<button data-cls="thumbs" data-title="所有的作品" type="button" class="btn btn-link lan-font-black lan-font-16 sel-tab-type">作品展示</button>-->
                         
-                        <button type="button" class="btn btn-success btn-middle pull-right">发布工作信息</button>
+                        <button type="button" class="btn btn-success btn-middle pull-right" id="post_job">发布工作信息</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
     
     <div class="container">
         <div class="row">
@@ -86,10 +85,10 @@
                     <dl class="lan-dl" data-pa="country">
                         <dt><a class="btn btn-link sel" id="allloc">所有地点</a></dt>
                         <dd><a class="btn btn-link" id="speloc">指定地点</a></dd>
-                        <dd>
-                            <select disabled="disabled" id="sel_province" style="width:100px;margin-left:12px;">
+                        <dd class="dd-speloc" style="display:none;">
+                            <select id="sel_province" style="width:100px;margin-left:12px;">
                             </select>
-                            <select disabled="disabled" id="sel_city" style="width:100px;">
+                            <select id="sel_city" style="width:100px;">
                             </select>
                         </dd>
                     </dl>
@@ -97,8 +96,8 @@
                     <dl class="lan-dl" data-pa="skill">
                         <dt><a class="btn btn-link sel" id="allskil">所有技能</a></dt>
                         <dd><a class="btn btn-link" id="speskil">指定技能</a></dd>
-                        <dd>
-                            <select id="sel_skill" disabled="disabled" style="width:204px;margin-left:12px;">
+                        <dd class="dd-speskil" style="display:none;">
+                            <select id="sel_skill" style="width:204px;margin-left:12px;">
                             </select>
                         </dd>
                     </dl>
@@ -106,10 +105,10 @@
                     <dl class="lan-dl" data-pa="budget">
                         <dt><a class="btn btn-link sel" id="alljg">所有价格</a></dt>
                         <dd><a class="btn btn-link" id="spejg">指定价格区间</a></dd>
-                        <dd>
+                        <dd class="dd-spejg" style="display:none;">
                             <span>￥</span><input id="smoney" type="text" value="" />&nbsp;<span>到</span>
                             <input type="text" value="" id="emoney" />
-                            <input type="button" class="btn btn-default" id="but_cmoney" disabled="disabled" value="确定" />
+                            <input type="button" class="btn btn-default" id="but_cmoney" value="确定" />
                         </dd>
                     </dl>
                     
@@ -137,21 +136,21 @@
             <div class="col-md-9 rg-result con">
                 <span class="all-count"><b class="lbl-search-title">所有的工作</b>（0 个）</span>
                 <p class="bg-info sea-result-info" style="display:none;">
-                    'df' 的搜索结果    共 359 个
+                    '' 的搜索结果    共 0 个
                 </p>
                 <div class="jobs">
                     <div class="mod hidemod">
                         <p class="title">
-                            <a href="#" class="btn btn-link title-in">网页制作中的CSS+DIV:dl,dt,dd分别表示什么意思啊?请说..._百度知道</a>
+                            <a href="#" class="btn btn-link title-in"></a>
                             <button type="button" class="btn btn-success btn-sm pull-right">申请</button>
                         </p>
                         <div>
-                            <span><b class="price">价格：不确定</b></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="stime">开始时间：2015年4月15日</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="etime">结束时间：2015年10月1日</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="acount">申请人数：9</span>
+                            <span><b class="price">价格：不确定</b></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="stime">开始时间：2015年4月15日</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="etime">结束时间：2015年10月1日</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="acount">申请人数：0</span>
                             <br class="clearfix" />
                             <p class="txt">
-                                爱词霸权威在线词典,为您提供proposal的中文意思,proposal的用法讲解,proposal的读音,proposal的同义词,proposal的反义词,proposal的例句等英语服务。爱词霸权威在线词典,为您提供proposal的中文意思,proposal的用法讲解,proposal的读音,proposal的同义词,proposal的反义词,proposal的例句等英语服务。爱词霸权威在线词典,为您提供proposal的中文意思,proposal的用法讲解,proposal的读音,proposal的同义词,proposal的反义词,proposal的例句等英语服务。
+                                
                             </p>
-                            <span class="cate1">工作分类：第一大类</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="cate2">工作分类：第二大类</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                            <span class="cate1">工作分类：</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="cate2">工作分类：</span>&nbsp;&nbsp;|&nbsp;&nbsp;
                         </div>
                         <div>
                             <table class="job-table" border="0">
@@ -165,7 +164,7 @@
                                     <td><b>评级</b></td>
                                     <td class="score"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></td>
                                     <td><b>地点</b></td>
-                                    <td class="location">不需要下现场办公</td>
+                                    <td class="location"></td>
                                 </tr>
                             </table>
                         </div>
@@ -186,13 +185,12 @@
                                 <button type="button" class="btn btn-success btn-sm pull-right">雇佣</button>
                             </p>
                             <p>
-                                <span class="lan-font-14 title">专业PHP工程师</span><br />
-                                <span class="location">所在地：北京市-通州区-XXXX</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="order">薪水要求：￥100</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="jobin">参加过 49 个工作</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="earn">总共获得 ￥890989</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                <span class="lan-font-14 title"></span><br />
+                                <span class="location">所在地：</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="order">薪水要求：</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="jobin">参加过 0 个工作</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="earn">总共获得 0</span>&nbsp;&nbsp;|&nbsp;&nbsp;
                                 <span class="glyphicon glyphicon-star lan-font-yellow"></span><span class="glyphicon glyphicon-star lan-font-yellow"></span><span class="glyphicon glyphicon-star lan-font-yellow"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span>
                             </p>
                             <p class="txt">
-                                我是一名应届毕业生，来自湖北武汉，农村生活铸就了我淳朴、诚实、善良的性格，培养了我不怕困难挫折，不服输的奋斗精神。我深知学习机会来之不易，在校期间非常重视计算机基础知识的学习，取得了良好的成绩。
-    基本上熟悉了pc机的原理与构造，能熟练地应用各种机床操作系统，通过了劳动部《模具设计师》高级级认证。在学习专业知识的同时，还十分重视培养自己的动手实践能力，利用暑假参加了长江融达企业给予的宝贵实习机会，了解的各式机床的操作，以及简单数控机床的编程及操作。
+                                
                             </p>
                             <p class="skills">
                                 <span class="liss">技能：</span>
@@ -209,7 +207,7 @@
             </div>
         </div>
     </div>
-       
+    
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="/lance/resources/js/jquery-1.9.1.min.js" type="text/javascript"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

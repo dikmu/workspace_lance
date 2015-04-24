@@ -4,7 +4,9 @@ import com.lance.view.rest.job.SearchResource;
 import com.lance.view.rest.uuser.LookupsResource;
 import com.lance.view.rest.uuser.UserResource;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 import javax.servlet.*;
@@ -28,7 +30,7 @@ public class DirectServlet extends HttpServlet {
         String uri = request.getRequestURI();
         ADFContext adfctx = ADFContext.getCurrent();
         try {
-            if ("/lance/page/MyHome".equals(uri)) {
+            if ("/lance/page/Search".equals(uri)) {
                 JSONObject data = new JSONObject();
                 //获取值集——公司性质
                 data.put("Lookup_CompanyPorperty", new LookupsResource().getLookupsByType("CompanyProperty"));
