@@ -1,14 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="lan-header-main">
     <div class="container">
         <img class="pull-left logo" src="\lance\resources\image\common\logo.png" alt=""/>
-        <ol class="breadcrumb pull-right">
-           <c:choose>
-              <c:when test="${User.logined}">
+        <ol class="breadcrumb pull-right" id="top_bc"></ol>
+        <script id="bc-cnt-sp1" type="text/html">
+             {{if logined == 'true'}}
                   <li>
                     <a class="lan-font-bold" data-toggle="dropdown" aria-expanded="false" href="#">
-                       <span id="gbuname">${User.UserName}</span>
+                       <span id="gbuname">{{userName}}</span>
                     </a>
                     <span class="caret"></span>
                     <ul class="dropdown-menu" role="menu">
@@ -31,18 +30,16 @@
                     <a href="#">收件箱
                         <span class="label label-danger">1</span></a>
                 </li>
-              </c:when>
-              <c:otherwise>
-                <li>
+             {{else}}
+                 <li>
                   <a href="/lance/login.htm">登陆</a></li>
-              </c:otherwise>
-           </c:choose> 
-            <li class="active">
+             {{/if}}
+             <li class="active">
                 <a class="lan-font-bold" data-toggle="dropdown" aria-expanded="false" href="#">帮助</a>
                  
                 <span class="caret"></span>
-            </li>
-        </ol>
+             </li>
+        </script>
     </div>
     <!--<script>
       if(User.logined){
@@ -175,3 +172,8 @@
     </div>
 </div>
 <br/>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/lance/resources/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/lance/resources/js/template.js" type="text/javascript"></script>
+<script src="/lance/resources/js/page/topBar.js" type="text/javascript"></script>
+    
