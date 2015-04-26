@@ -326,8 +326,6 @@ public class PostJobResource extends BaseRestResource {
             String location = userJson.has("LocationA") ? userJson.getString("LocationA") : (userJson.has("LocationB") ? userJson.getString("LocationB") : "");
             json.put("Location", location);
         }
-        json.put("WorkCategory", new CacheResource().getJobCategoryNameFromCache(json.getString("WorkCategory")));
-        json.put("WorkSubcategory", new CacheResource().getJobSubCategoryNameFromCache(json.getString("WorkSubcategory")));
         return json;
     }
 

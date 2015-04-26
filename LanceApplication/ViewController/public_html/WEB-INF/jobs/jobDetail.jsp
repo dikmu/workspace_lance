@@ -43,7 +43,7 @@
                 
                 <div>
                     <ol class="breadcrumb">
-                        <li><a href="/lance/pages/search?cat=123" id="WorkCategory"></a></li>
+                        <li><a href="#" id="WorkCategory"></a></li>
                         <li><a href="#" id="WorkSubcategory"></a></li>
                     </ol>
                     

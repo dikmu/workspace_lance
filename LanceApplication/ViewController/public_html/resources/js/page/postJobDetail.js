@@ -70,6 +70,9 @@ function initPostJobData(jobId){
             for(var key in data){
                 if($("#"+key).length > 0){
                     $("#"+key).html(data[key]);
+                    if("WorkCategory" == key){
+                        $("#"+key).attr("href","/lance/pages/search?type=category&val="+data[key]);
+                    }
                 }
             }
             //判断按钮加载
