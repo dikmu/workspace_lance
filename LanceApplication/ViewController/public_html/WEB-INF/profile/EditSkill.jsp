@@ -24,13 +24,13 @@
     <div class="container">
         <div class="row" id="t_con">
            <div class="col-md-3 lan-main-left">
-                <img width="200px" src="/lance/resources/image/jpg/avatar5.png" alt="" class="img-thumbnail">
 
                 <br /><br />
                 <ul class="nav nav-stacked">
-                    <li role="presentation" class="active"><a href="#">Home</a></li>
-                    <li role="presentation"><a href="#">Profile</a></li>
-                    <li role="presentation"><a href="#">Messages</a></li>
+                    <li role="presentation"><a href="./Overview">个人主页</a></li>
+                    <li role="presentation"><a href="./EditBasic">基本信息</a></li>
+                    <li role="presentation"><a href="./EditContact">联系信息</a></li>
+                    <li role="presentation" class="active"><a href="./EditSkill">我的技能</a></li>
                 </ul>
             </div>
             <div class="col-md-9 lan-main-right">

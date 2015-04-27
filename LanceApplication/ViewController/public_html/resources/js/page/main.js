@@ -8,11 +8,16 @@ $(function(){
         $(".uname").html(User.DisplayName + '-' + Data.User.User.JobTitle);
         $(".utitle").html(Data.User.User.Tagline);
         $(".uself").html(Data.User.User.Overview);
-        var loc = User.LocationAIndex || User.LocationBIndex;
-        var locDetail = Data.User.User.LocationADetail || Data.User.User.LocationBDetail || "";
-        if(loc){
-            loc = loc.replace(';', ' ');
-            $(".uloc").html(loc + "  " + locDetail);
+        var locDetail = "";
+        if(User.LocationAIndex !=null){
+            locDetail+="主要地址："+User.LocationAIndex+" "+Data.User.User.LocationADetail+"<br>";
+        }
+        if(User.LocationBIndex !=null){
+            locDetail+="第二地址："+User.LocationBIndex+" "+Data.User.User.LocationBDetail;
+        }
+        if(locDetail){
+            locDetail = locDetail.replace(/;/g, ' ');
+            $(".uloc").html(locDetail);
         }else{
             $(".uloc").html("您尚未填写位置信息");
         }

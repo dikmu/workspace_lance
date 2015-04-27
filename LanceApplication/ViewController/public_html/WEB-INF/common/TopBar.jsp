@@ -74,9 +74,9 @@
                     <li>
                         <a href="/lance/pages/profile/Overview">个人信息</a>
                     </li>
-                    <li>
+                    <!--<li>
                         <a href="#">关注列表</a>
-                    </li>
+                    </li>-->
                 </ul>
             </li>
             <li class="dropdown">
@@ -99,12 +99,12 @@
                     <li>
                         <a href="/lance/pages/profile/Overview">我的信息</a>
                     </li>
-                    <li>
+                    <!--<li>
                         <a href="#">关注列表</a>
-                    </li>
+                    </li>-->
                 </ul>
             </li>
-            <li class="dropdown">
+            <!--<li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">管理
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
@@ -125,8 +125,8 @@
                         <a href="#">团队信息</a>
                     </li>
                 </ul>
-            </li>
-            <li class="dropdown">
+            </li>-->
+            <!--<li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">帮助
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
@@ -144,7 +144,7 @@
                         <a href="#">联系客服</a>
                     </li>
                 </ul>
-            </li>
+            </li>-->
         </ul>
         <div class="pull-right search">
             <div class="input-group input-group-sm">
