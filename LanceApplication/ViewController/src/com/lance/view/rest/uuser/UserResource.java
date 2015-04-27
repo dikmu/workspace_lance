@@ -6,6 +6,7 @@ import com.lance.model.user.vo.UUserVORowImpl;
 import com.lance.model.user.vo.UserEducationVOImpl;
 import com.lance.model.user.vo.UserRoleGrantsVOImpl;
 import com.lance.model.user.vo.UserRoleGrantsVORowImpl;
+import com.lance.model.util.ConstantUtil;
 import com.lance.model.vo.RegEmailChkVOImpl;
 import com.lance.model.vo.RegEmailChkVORowImpl;
 import com.lance.view.rest.email.SendActivateMail;
@@ -438,5 +439,18 @@ public class UserResource extends BaseRestResource {
         } 
         return "false"; 
     }
-
+     
+    @GET
+    @Path("errInp/count")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String codeInpCount() {
+        int c = 0;
+        if (this.request.getSession().getAttribute(ConstantUtil.ERR_INP_COUNT) != null) {
+            c = Integer.parseInt(this.request.getSession().getAttribute(ConstantUtil.ERR_INP_COUNT).toString());
+        }
+        if(c >= 3){
+            return "inp:code";
+        }
+        return "";
+    }
 }

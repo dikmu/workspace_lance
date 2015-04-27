@@ -1,5 +1,7 @@
 package com.lance.view.servlet;
 
+import com.lance.model.util.ConstantUtil;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -59,15 +61,21 @@ public class LoginServlet extends HttpServlet {
             br.close();
             acceptjson = sb.toString();
             JSONObject jo = new JSONObject(acceptjson);
-            String code = jo.getString("vcode");
-            HttpSession session = request.getSession(true);  
-            if(!code.equalsIgnoreCase((String)session.getAttribute("verifyCode"))){
-                response.setContentType(CONTENT_TYPE);
-                PrintWriter out = response.getWriter();
-                out.println("error:vcode"); //用户名或密码错误
-                out.close();
-                return;
-            }   
+            int c = 0;
+            if(request.getSession().getAttribute(ConstantUtil.ERR_INP_COUNT) != null){
+                c = Integer.parseInt(request.getSession().getAttribute(ConstantUtil.ERR_INP_COUNT).toString());
+            }
+            if((jo.has("optype") || c >= 3)){
+                String code = jo.getString("vcode");
+                HttpSession session = request.getSession(true);  
+                if(!code.equalsIgnoreCase((String)session.getAttribute("verifyCode"))){
+                    response.setContentType(CONTENT_TYPE);
+                    PrintWriter out = response.getWriter();
+                    out.println("error:vcode"); //用户名或密码错误
+                    out.close();
+                    return;
+                }   
+            }
             System.out.println("doLogin:" + acceptjson);
             String un = jo.getString("name");
             byte[] pw = jo.getString("pass").getBytes();
@@ -78,8 +86,6 @@ public class LoginServlet extends HttpServlet {
             Subject subject = Authentication.login(new URLCallbackHandler(un, pw));
             weblogic.servlet.security.ServletAuthentication.runAs(subject, request);
             System.out.println(un + " 登录成功");
-            //            response.sendRedirect("/lance/pages/MyHome");
-            //            new PageDirectServlet().toPage(request, response, "/lance/pages/MyHome", new JSONObject());
             response.setContentType(CONTENT_TYPE);
             PrintWriter out = response.getWriter();
             if(optype != null){
@@ -92,9 +98,22 @@ public class LoginServlet extends HttpServlet {
             out.close(); 
             return;
         } catch (FailedLoginException fle) {
+            int c = 0;
+            if(request.getSession().getAttribute(ConstantUtil.ERR_INP_COUNT) != null){
+                c = Integer.parseInt(request.getSession().getAttribute(ConstantUtil.ERR_INP_COUNT).toString());
+                c++;
+                request.getSession().setAttribute(ConstantUtil.ERR_INP_COUNT,c);
+            }else{
+                c++;
+                request.getSession().setAttribute(ConstantUtil.ERR_INP_COUNT,c);
+            }
             response.setContentType(CONTENT_TYPE);
             PrintWriter out = response.getWriter();
-            out.println("error:name|pass"); //用户名或密码错误
+            if(c >= 3){
+                out.println("error:name|pass:vc"); //用户名或密码错误 
+            }else{
+               out.println("error:name|pass"); //用户名或密码错误
+            }
             out.close();
             return;
         } catch (LoginException le) {
@@ -103,6 +122,5 @@ public class LoginServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-
 
 }

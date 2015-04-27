@@ -15,6 +15,8 @@ public class ConstantUtil {
     public static final String ROOT_URL = "lance";
     //当前应用的REST根URL（桶URL）
     public static final String ROOT_REST_URL = "lance/res";
+    
+    public static final String ERR_INP_COUNT = "ERR_INP_COUNT";
 
     public static final String ROOT_HTTP_URL="http://www.zhucai.me";
     

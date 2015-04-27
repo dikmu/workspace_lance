@@ -6,9 +6,6 @@ $(function(){
         var paEmail = $("#inp_emil").closest('.form-group');
         var paPass = $("#inp_pass").closest('.form-group');
         
-        var paCode = $("#inp_verCode").lanCheck('notEmpty');
-        var codePass = $("#inp_verCode").closest('.form-group');
-        
         var err = $(".err-tip");
         
         if(!ckEmail){
@@ -16,13 +13,6 @@ $(function(){
             return false;
         }else{
             paEmail.removeClass("has-error");
-        }
-        
-        if(!paCode){
-            codePass.addClass("has-error");
-            return false;
-        }else{
-            codePass.removeClass("has-error");
         }
         
         if(!ckPass){
@@ -33,8 +23,19 @@ $(function(){
         }
         return true;
     };
-    
+    var vcode = null;
     var go_login = function(pabut){
+        if("code" == vcode){
+            var paCode = $("#inp_verCode").lanCheck('notEmpty');
+            var codePass = $("#inp_verCode").closest('.form-group');
+            if(!paCode){
+                codePass.addClass("has-error");
+                pabut.button('reset');
+                return false;
+            }else{
+                codePass.removeClass("has-error");
+            } 
+        }
         var lname = $("#inp_emil").val(), lpass = $("#inp_pass").val(),v_code=$("#inp_verCode").val();
         var param={
             name : lname,
@@ -42,15 +43,20 @@ $(function(){
             vcode:v_code
         };
         param = JSON.stringify(param);
-        
         $.post("/lance/login", param, function(data){
             if(data.indexOf("ok") >= 0){
                 var url = data.split(":")[1];
-//                alert(url);
                 window.location.href = url;
             }else if(data.indexOf("vcode") >= 0){
                $("#inp_verCode").closest(".form-group").addClass("has-error");
                $(".err-tip").html("验证码错误");
+               pabut.button('reset');
+            }else if(data.indexOf("name|pass:vc") >= 0){
+               if(vcode == null){
+                  $("#code-cnt").html(template('code-cnt-sp1',{'status' : "code"}));
+                  vcode = "code";
+               }
+               $(".err-tip").html("用户名或密码错误");
                pabut.button('reset');
             }else if(data.indexOf("name|pass") >= 0){
                $("#inp_emil,#inp_pass").closest(".form-group").addClass("has-error");
@@ -93,8 +99,19 @@ $(function(){
             $("#btn_login").click();
         }
     });
-    
-    $("#change_img").click(function(){
-       $("#code_img").attr("src","/lance/authimageservlet?r="+Math.random());
-    });
+   
+  $("#code-cnt").on("click", "#change_img", function(){
+     $("#code_img").attr("src","/lance/authimageservlet?r="+Math.random());
+  });
+
+  jQuery.ajax({
+    url : '/lance/res/user/errInp/count?random='+Math.random(), type : 'get', success : function (data) {
+        if(data.indexOf("inp:code") >= 0){
+            $("#code-cnt").html(template('code-cnt-sp1',{'status' : "code"}));
+            vcode = "code";
+        }
+    },
+    error : function (msg) {
+    }
+   });
 });
