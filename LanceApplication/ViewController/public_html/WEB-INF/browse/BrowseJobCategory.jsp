@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width; initial-scale=1.0" />
 
        <!-- Bootstrap -->
-        <link href="\lance\resources\css\bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="\lance\resources\css\common\common.css" rel="stylesheet" type="text/css" />
-        <link href="\lance\resources\css\control\main.css" rel="stylesheet" type="text/css" />
+        <link href="../resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="../resources/css/common/common.css" rel="stylesheet" type="text/css" />
+        <link href="../resources/css/control/main.css" rel="stylesheet" type="text/css" />
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -44,13 +44,13 @@
         </div>
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="\lance\resources\js\jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="../resources/js/jquery-1.9.1.min.js" type="text/javascript"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="\lance\resources\js\bootstrap.min.js" type="text/javascript"></script>
+    <script src="../resources/js/bootstrap.min.js" type="text/javascript"></script>
     
-    <script src="\lance\resources\js\core.js" type="text/javascript"></script>
-    <script src="\lance\resources\js\control\lan_check.js" type="text/javascript"></script>
-    <script type="text/javascript" src="\lance\resources\js\page\browser.js"></script>
+    <script src="../resources/js/core.js" type="text/javascript"></script>
+    <script src="../resources/js/control/lan_check.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../resources/js/page/browser.js"></script>
     <jsp:include page="/WEB-INF/common/BottomBar.jsp"/>
     </body>
 </html>

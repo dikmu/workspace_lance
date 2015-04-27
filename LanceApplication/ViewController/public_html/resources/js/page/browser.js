@@ -3,7 +3,7 @@ $(function(){
     $(".lan-tab .btn").click(function(){
         var type = $(this).attr('data-type');
         if(type == 'ljob'){
-            InitJob(Data);
+            InitJob(Data.JobCategories);
             type = 'category';
         }else if(type == 'lskil'){
             InitJob(Data.Skills);
