@@ -594,8 +594,8 @@ public class PostJobsVORowImpl extends BaseViewRowImpl {
      * @return the WORK_CATEGORY
      */
     public String getWorkCategory() {
-//        return (String) getAttributeInternal(WORKCATEGORY);
-        return this.getJobcategoryName((String) getAttributeInternal(WORKCATEGORY));
+        return (String) getAttributeInternal(WORKCATEGORY);
+//        return this.getJobcategoryName((String) getAttributeInternal(WORKCATEGORY));
     }
 
     /**
@@ -611,8 +611,8 @@ public class PostJobsVORowImpl extends BaseViewRowImpl {
      * @return the WORK_SUBCATEGORY
      */
     public String getWorkSubcategory() {
-//        return (String) getAttributeInternal(WORKSUBCATEGORY);
-        return this.getJobSubCategoryName((String) getAttributeInternal(WORKSUBCATEGORY));
+        return (String) getAttributeInternal(WORKSUBCATEGORY);
+//        return this.getJobSubCategoryName((String) getAttributeInternal(WORKSUBCATEGORY));
     }
 
     /**

@@ -161,7 +161,7 @@ function validateClientForm(){
 }
 
 function isNum(str){
-  var reg =/^[1-9]\d{0,2}$/;
+  var reg =/^[1-9]*[1-9][0-9]*$/;
   return reg.test(str);
 }
 

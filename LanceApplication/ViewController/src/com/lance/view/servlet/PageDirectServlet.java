@@ -45,7 +45,8 @@ public class PageDirectServlet extends HttpServlet {
         ADFContext adfctx = ADFContext.getCurrent();
         try {
             //如果用户访问的是登录后(受保护)界面
-            if(uri.startsWith("/lance/pages/search") || uri.startsWith("/lance/pages/jobDetail")){
+            if(uri.startsWith("/lance/pages/search") || uri.startsWith("/lance/pages/jobDetail")
+               || uri.startsWith("/lance/pages/browse")){
                 //不做登陆拦截
             }else if (uri.startsWith("/lance/pages/")) {
                 if (!adfctx.getSecurityContext().isAuthenticated()) {
@@ -107,6 +108,8 @@ public class PageDirectServlet extends HttpServlet {
                 JSONObject json = new JSONObject();
                 json.put("datas", new UserNotificationResource().findAllNoftification());
                 toPage(request, response, "/WEB-INF/profile/MyMessage.jsp", json);
+            }else if(uri.startsWith("/lance/pages/browse")){
+                toPage(request, response, "/WEB-INF/browse/BrowseJobCategory.jsp", new JSONObject());
             }
 //            else if (uri.startsWith("/lance/pages/project/Contract/")) { //uri:http://localhost:7101/lance/pages/project/Contact/157e69a513f942c7bb895e7dddd01a56
 //                //读取合同

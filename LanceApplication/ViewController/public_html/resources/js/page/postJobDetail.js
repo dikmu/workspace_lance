@@ -66,13 +66,16 @@ function initPostJobData(jobId){
            if(data.hasOwnProperty("Location") && !("" == data["Location"])){
                 $("#client-location").html(" | "+data["Location"]);
            }
-            
+           if(data.hasOwnProperty("WorkCategory")){
+               $("#cat_name").html(data["CatName"]);
+               $("#cat_name").attr("href","/lance/pages/search?type=category&val="+data["WorkCategory"]);
+           }
+           if(data.hasOwnProperty("WorkCategory")){
+               $("#subcat_name").html(data["SubCatName"]);
+           }
             for(var key in data){
                 if($("#"+key).length > 0){
                     $("#"+key).html(data[key]);
-                    if("WorkCategory" == key){
-                        $("#"+key).attr("href","/lance/pages/search?type=category&val="+data[key]);
-                    }
                 }
             }
             //判断按钮加载

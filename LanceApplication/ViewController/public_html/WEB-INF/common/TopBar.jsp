@@ -51,7 +51,7 @@
     <div class="container">
         <ul class="nav navbar-nav pull-left">
             <li class="active">
-                <a href="/lance/pages/MyHome">我的驻才网
+                <a href="/lance/pages/search">我的驻才网
                     <span class="sr-only">(current)</span></a>
             </li>
             <li class="dropdown">
@@ -62,7 +62,7 @@
                         <a href="/lance/pages/Search">搜索</a>
                     </li>
                     <li>
-                        <a href="#">浏览</a>
+                        <a href="/lance/pages/browse">浏览</a>
                     </li>
                     <li>
                         <a href="/lance/pages/jobs/PostNewJob">发布招聘信息</a>
@@ -87,7 +87,7 @@
                         <a href="/lance/pages/Search">搜索</a>
                     </li>
                     <li>
-                        <a href="#">浏览</a>
+                        <a href="/lance/pages/browse">浏览</a>
                     </li>
                     <li>
                         <a href="/lance/pages/Search">推荐给我的机会</a>

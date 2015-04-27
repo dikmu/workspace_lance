@@ -187,19 +187,37 @@ public class CacheResource extends BaseRestResource {
     @GET
     @Path("jobCategory/{categoryId}")
     public String getJobCategoryNameFromCache(@PathParam("categoryId") String categoryId) {
-        NamedCache cache = CacheUtil.getInstance(CacheUtil.KEY_JOB_CATEGORY);
-        String res = (String) cache.get(categoryId);
-        System.out.println(res);
-        return res;
+        try {
+            NamedCache cache = CacheUtil.getInstance(CacheUtil.KEY_JOB_CATEGORY);
+            String[] res = (String[]) cache.get(categoryId);
+            if (res[1] != null && "".equals(res[1])) {
+                return res[1];
+            } else {
+                return res[0];
+            }
+        } catch (Exception e) {
+            // TODO: Add catch code
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @GET
     @Path("jobSubCategory/{subCategoryId}")
     public String getJobSubCategoryNameFromCache(@PathParam("subCategoryId") String subCategoryId) {
-        NamedCache cache = CacheUtil.getInstance(CacheUtil.KEY_JOB_SUBCATEGORY);
-        String res = (String) cache.get(subCategoryId);
-        System.out.println(res);
-        return res;
+        try {
+            NamedCache cache = CacheUtil.getInstance(CacheUtil.KEY_JOB_SUBCATEGORY);
+            String[] res = (String[]) cache.get(subCategoryId);
+            if (res[1] != null && "".equals(res[1])) {
+                return res[1];
+            } else {
+                return res[0];
+            }
+        } catch (Exception e) {
+            // TODO: Add catch code
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @GET

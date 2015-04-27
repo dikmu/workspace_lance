@@ -15,7 +15,7 @@ $(function(){
     $(".borwser").on("click", "dd a", function(){
         if(!$(this).parent().hasClass('more')){
             var val = $(this).html();
-            window.location.href = '/lance/job/searchjob.js.html?type='+type+'&val='+val;
+            window.location.href = '/lance/pages/search?type='+type+'&val='+val;
         }
     });
 });

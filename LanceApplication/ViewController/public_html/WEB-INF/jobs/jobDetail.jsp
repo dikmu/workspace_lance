@@ -43,8 +43,8 @@
                 
                 <div>
                     <ol class="breadcrumb">
-                        <li><a href="#" id="WorkCategory"></a></li>
-                        <li><a href="#" id="WorkSubcategory"></a></li>
+                        <li><a href="#" id="cat_name"></a></li>
+                        <li><a href="#" id="subcat_name"></a></li>
                     </ol>
                     
                     <div class="panel panel-default">
