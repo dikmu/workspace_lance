@@ -79,7 +79,6 @@ function initPostJobData(jobId){
             if(User.logined && User.UserName == data["CreateBy"]){
                 $("#btn-area").hide();
                 $("#btn-area").html(template('btn-area-sp1',{'show' : "N"}));
-                alert((!User.logined));
                 $("#radio-area").html(template('radio-area-sp1',{'pid' : "client","u_sta":!User.logined}));
                 stat(jobId,"client");
             }else{
@@ -250,7 +249,7 @@ function optionApply(jobId,publisher){
                  if(data.indexOf("ok") >= 0){
                      initPostDiscussData(jobId,publisher);
                  }else{
-                     alert(data.split(":")[1]);
+//                     alert(data.split(":")[1]);
                  }
             },error:function(msg){
             }
@@ -264,7 +263,6 @@ function agree(jobId,publisher){
   var uuid = null;
   $("#list-discuss").on("click", "button[name='btn-agree']", function(){
       uuid = $(this).attr("uuid");
-      alert(uuid);
       if(uuid != null){
          var param={};
          jQuery.ajax({

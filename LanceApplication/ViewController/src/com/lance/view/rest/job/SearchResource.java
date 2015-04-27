@@ -256,14 +256,15 @@ public class SearchResource extends BaseRestResource {
          }
          if(category != null){
             //工作分类大类查询
-            sb.append(" AND INSTR(upper(INDEX_WORK_CATEGORYS),'"+category.toUpperCase()+"') > 0 ");
+            sb.append(" AND INSTR('"+category.toUpperCase()+"',upper(WORK_CATEGORY)) > 0 ");
          }
         if(subcategory != null){
             //工作分类小类查询
-            String[] scts = subcategory.split(",");
-            for (String sct : scts) {
-                sb.append(" AND INSTR(upper(INDEX_WORK_CATEGORYS),'"+sct.toUpperCase()+"') > 0 ");
-            }
+            sb.append(" AND INSTR('"+subcategory.toUpperCase()+"',upper(WORK_SUBCATEGORY)) > 0 ");
+//            String[] scts = subcategory.split(",");
+//            for (String sct : scts) {
+//                
+//            }
         }
         if(postform != null){
            //工作类型查询 hourly时薪/fixed固定价格
