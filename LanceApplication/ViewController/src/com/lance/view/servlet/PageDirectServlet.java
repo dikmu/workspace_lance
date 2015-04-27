@@ -2,6 +2,7 @@ package com.lance.view.servlet;
 
 //import com.lance.view.rest.user.LancerProfileResource;
 import com.lance.view.rest.job.SearchResource;
+import com.lance.view.rest.search.BrowseResource;
 import com.lance.view.rest.uuser.LookupsResource;
 import com.lance.view.rest.uuser.UserNotificationResource;
 import com.lance.view.rest.uuser.UserResource;
@@ -109,7 +110,11 @@ public class PageDirectServlet extends HttpServlet {
                 json.put("datas", new UserNotificationResource().findAllNoftification());
                 toPage(request, response, "/WEB-INF/profile/MyMessage.jsp", json);
             }else if(uri.startsWith("/lance/pages/browse")){
-                toPage(request, response, "/WEB-INF/browse/BrowseJobCategory.jsp", new JSONObject());
+              JSONObject json =  new JSONObject();
+              BrowseResource br=new BrowseResource();
+              json.put("JobCategories", br.getBrowseJobCategory());
+              json.put("Skills", br.getBrowseSkill());
+              toPage(request, response, "/WEB-INF/browse/BrowseJobCategory.jsp",json);
             }
 //            else if (uri.startsWith("/lance/pages/project/Contract/")) { //uri:http://localhost:7101/lance/pages/project/Contact/157e69a513f942c7bb895e7dddd01a56
 //                //读取合同

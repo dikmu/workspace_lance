@@ -6,7 +6,7 @@ $(function(){
             InitJob(Data);
             type = 'category';
         }else if(type == 'lskil'){
-            InitJob(Data2);
+            InitJob(Data.Skills);
             type = 'skill';
         }
     });
@@ -62,6 +62,6 @@ $(function(){
             $(this).html('<a>更多</a>');
         }
     });
-    InitJob(Data);
+    InitJob(Data.JobCategories);
 });
     
