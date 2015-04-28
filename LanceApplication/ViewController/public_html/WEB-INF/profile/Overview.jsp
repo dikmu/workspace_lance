@@ -43,7 +43,7 @@
                     <br /><br />
                     <span class="lan-font-14 lan-font-black uloc"></span>
                     <br />
-                    <button type="button" class="btn btn-info btn-edit">编辑</button>
+                    <button type="button" class="btn btn-info btn-edit" onclick="redirectPage('./EditBasic')">编辑</button>
                 </div>
 
                 <div class="well">
@@ -53,7 +53,7 @@
                         <div href="#" class="lan-font-12 uself">
                             
                         </div>
-                        <button type="button" class="btn btn-info btn-edit">编辑</button>
+                        <button type="button" class="btn btn-info btn-edit" onclick="redirectPage('./EditBasic')">编辑</button>
                     </div>
 
                     <div class="sep">
@@ -65,7 +65,7 @@
                         <div class="lan-font-12 uskill">
                             
                         </div>
-                        <button type="button" class="btn btn-info btn-edit">编辑</button>
+                        <button type="button" class="btn btn-info btn-edit" onclick="redirectPage('./EditSkill')">编辑</button>
                     </div>
 
                     <div class="sep">
@@ -106,5 +106,11 @@
     <script src="\lance\resources\js\control\lan_check.js" type="text/javascript"></script>
     <script type="text/javascript" src="\lance\resources\js\page\main.js"></script>
     <jsp:include page="/WEB-INF/common/BottomBar.jsp" />
+    
+    <script>
+        var redirectPage=function(url){
+            location.href=url;
+        }
+    </script>
     </body>
 </html>

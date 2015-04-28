@@ -40,15 +40,15 @@
                 <div class="alert alert-info" role="alert">
                     添加个人技能为了驻才网给您推荐合适的工作机会，同时也可以让公司很容易的看上你。<br />
                     <br />
-                    <b>注意：根据每个用户的级别，技能最先只能显示10条。</b>
+                    <b>最多添加10条。</b>
                 </div>
                 
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>顺序</th>
-                            <th>技能名称 <a class="btn-delete btn btn-xs btn-success" href="#" data-toggle="modal" data-target="#addSkill">添加技能</a></th>
-                            <th>是否显示</th>
+                            <th>技能名称 <a id="btn_addskill" class="btn-delete btn btn-xs btn-success" href="#" data-toggle="modal" data-target="#addSkill">添加技能</a></th>
+                            <!--<th>是否显示</th>-->
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -56,9 +56,9 @@
                         <tr class="mod-skill" style="display:none">
                             <td class="xh">1.</td>
                             <td><span class="skil">PHP5</span></td>
-                            <td>
+                            <!--<td>
                                 <input class="chk-icon" type="checkbox" value="" />
-                            </td>
+                            </td>-->
                             <td><a class="btn-delete btn btn-xs btn-danger" href="#">删除</a></td>
                         </tr>
                     </tbody>

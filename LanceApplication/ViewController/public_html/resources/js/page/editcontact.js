@@ -1,6 +1,5 @@
 $(function(){
 
-    
 
     Lancer.profile.getContactInfo(function(data){
         var user = data.User;
@@ -12,7 +11,25 @@ $(function(){
         $("#inp_contact1").val(user.ImNumberA);
         $("#inp_contact2").val(user.ImNumberB);
         $("#inp_contact3").val(user.ImNumberC);
-        //l
+        $("#inp_loc1").val(user.LocationADetail);
+        $("#inp_loc2").val(user.LocationBDetail);
+        //修改radio 地址显示级别
+        if(Data.User.User.AddressDisplay == 'city'){
+            $("#rad_city")[0].checked = true;
+        }else if(Data.User.User.AddressDisplay == 'all'){
+            $("#rad_all")[0].checked = true;
+        }else if(Data.User.User.AddressDisplay == 'no'){
+            $("#rad_no")[0].checked = true;
+        }
+        //修改radio 联系信息显示级别
+        if(Data.User.User.ContactInfo == 'city'){
+            $("#rad_per_city")[0].checked = true;
+        }else if(Data.User.User.AddressDisplay == 'all'){
+            $("#rad_per_all")[0].checked = true;
+        }else if(Data.User.User.AddressDisplay == 'no'){
+            $("#rad_per_no")[0].checked = true;
+        }
+        //
         var getCity = function(selId, proId, CurrentSelId){
             var cstr = "";
             $("#" + selId).html('<option class="tmp" selected="selected">请稍候...</option>');
@@ -21,6 +38,7 @@ $(function(){
                 for(i=0;i<len;i++){
                     cstr += '<option value="' + city_data[i].Uuid + '">' + city_data[i].CityName + '</option>';
                 }
+                //
                 //$("#" + selId).find(".tmp").remove();
                 //$("#" + selId).find("option").not(".mod").remove();
                 $("#" + selId).html(cstr);

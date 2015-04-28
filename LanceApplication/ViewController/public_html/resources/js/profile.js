@@ -16,8 +16,8 @@ function initMainInfo(data){
         $(".ov .num").html(resume.HourlyRate);
         $(".ov .oview").html(resume.Overview);
         
-        var serinfo = resume.ServiceDescriptionTxt || 'None',
-            payment = resume.PaymentTermsTxt || 'None';
+        var serinfo = resume.ServiceDescription || 'None',
+            payment = resume.PaymentTerms || 'None';
         $("#content .sdesc").html(serinfo);
         $("#content .payment").html(payment);
         
@@ -101,8 +101,8 @@ function setEditInfo(data){
             var param = {
                     "Keywords" : $("#inp_keyword").val(),
                     "Overview" : $("#inp_over").val(),
-                    "PaymentTermsTxt" : $("#inp_payment").val(),
-                    "ServiceDescriptionTxt" : $("#inp_service").val(),
+                    "PaymentTerms" : $("#inp_payment").val(),
+                    "ServiceDescription" : $("#inp_service").val(),
                     "Tagline" : $("#inp_tagline").val(),
                     "UserName" : profile.UserName,
                     "DisplayName" : $("#inp_dname").val(),

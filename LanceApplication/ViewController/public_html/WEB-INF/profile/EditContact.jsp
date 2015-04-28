@@ -116,19 +116,19 @@
                             地址显示选项：</label>
                         <div class="radio">
                             <label>
-                                <input type="radio" class="address_rads" name="optionloc" id="optionsRadios1" value="all" checked>
+                                <input type="radio" class="address_rads" name="optionloc" id="rad_all" value="all" checked>
                                 显示所有的地点信息
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input type="radio" class="address_rads" name="optionloc" id="optionsRadios1" value="city">
+                                <input type="radio" class="address_rads" name="optionloc" id="rad_city" value="city">
                                 仅仅显示城市，地区
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input type="radio" class="address_rads" name="optionloc" id="optionsRadios1" value="no">
+                                <input type="radio" class="address_rads" name="optionloc" id="rad_no" value="no">
                                 不显示地点信息
                             </label>
                         </div>
@@ -139,19 +139,19 @@
                             联系信息可见性：</label>
                         <div class="radio">
                             <label>
-                                <input type="radio" class="contact_rads" name="optionper" id="optionsRadios1" value="all" checked>
+                                <input type="radio" class="contact_rads" name="optionper" id="rad_per_all" value="all" checked>
                                 显示所有个人信息
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input type="radio" class="contact_rads" name="optionper" id="optionsRadios1" value="city">
+                                <input type="radio" class="contact_rads" name="optionper" id="rad_per_city" value="city">
                                 显示一般个人信息
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input type="radio" class="contact_rads" name="optionper" id="optionsRadios1" value="no">
+                                <input type="radio" class="contact_rads" name="optionper" id="rad_per_no" value="no">
                                 不显示个人信息
                             </label>
                         </div>

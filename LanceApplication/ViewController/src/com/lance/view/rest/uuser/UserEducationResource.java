@@ -44,13 +44,13 @@ import org.codehaus.jettison.json.JSONObject;
     DegreeType,Precision:45,JavaType:java.lang.String
     StartDate,Precision:0,JavaType:oracle.jbo.domain.Date
     EndDate,Precision:0,JavaType:oracle.jbo.domain.Date
-    Description,Precision:0,JavaType:oracle.jbo.domain.ClobDomain
+    Description,Precision:2000,JavaType:java.lang.String
     Attach1Link,Precision:500,JavaType:java.lang.String
     Attach2Link,Precision:500,JavaType:java.lang.String
     Attach3Link,Precision:500,JavaType:java.lang.String
-    TobeVerified,Precision:0,JavaType:java.math.BigDecimal
-    DoneVerified,Precision:0,JavaType:java.math.BigDecimal
-    Display,Precision:0,JavaType:java.math.BigDecimal
+    TobeVerified,Precision:1,JavaType:java.lang.String
+    DoneVerified,Precision:1,JavaType:java.lang.String
+    Display,Precision:1,JavaType:java.lang.String
     CreateBy,Precision:32,JavaType:java.lang.String
     CreateOn,Precision:0,JavaType:oracle.jbo.domain.Date
     ModifyBy,Precision:32,JavaType:java.lang.String
@@ -75,7 +75,8 @@ public class UserEducationResource extends BaseRestResource {
 
     public static final String[] ATTR_GET = {
         "Uuid", "UserName", "InstitutionName", "DegreeType", "StartDate", "EndDate", "Description", "Attach1Link",
-        "Attach2Link", "Attach3Link", "TobeVerified", "DoneVerified", "Display"
+        "Attach2Link", "Attach3Link", "TobeVerified", "DoneVerified", "Display", "CreateBy", "CreateOn", "ModifyBy",
+        "ModifyOn", "Version"
     };
 
     public static final String[] ATTR_UPDATE = {
@@ -108,8 +109,8 @@ public class UserEducationResource extends BaseRestResource {
     public String createUserEducationFn(String userName, JSONObject json, LanceRestAMImpl am) throws JSONException {
         LUtil.getUUserByName(userName, am);
         ViewObjectImpl vo = am.getUserEducation1();
-        if (vo.getRowCount() > 20) {
-            return "msg:学历信息不能大于20条";
+        if (vo.getRowCount() > 5) {
+            return "msg:学历信息不能大于5条";
         }
         Row row = LUtil.createInsertRow(vo);
         RestUtil.copyJsonObjectToRow(json, vo, row, this.ATTR_CREATE);

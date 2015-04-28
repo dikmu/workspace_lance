@@ -10,10 +10,10 @@ $(function(){
         $(".uself").html(Data.User.User.Overview);
         var locDetail = "";
         if(User.LocationAIndex !=null){
-            locDetail+="主要地址："+User.LocationAIndex+" "+Data.User.User.LocationADetail+"<br>";
+            locDetail+="地址1："+User.LocationAIndex+" "+Data.User.User.LocationADetail+"<br>";
         }
         if(User.LocationBIndex !=null){
-            locDetail+="第二地址："+User.LocationBIndex+" "+Data.User.User.LocationBDetail;
+            locDetail+="地址2："+User.LocationBIndex+" "+Data.User.User.LocationBDetail;
         }
         if(locDetail){
             locDetail = locDetail.replace(/;/g, ' ');
@@ -52,7 +52,6 @@ $(function(){
     initHeader();
     initUser();
 });
-
 
 
 

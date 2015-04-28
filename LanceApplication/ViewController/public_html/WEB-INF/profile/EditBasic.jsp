@@ -63,11 +63,11 @@
                             data-container="body" data-toggle="popover" data-placement="right" 
                             data-content="请输入正确的数字" data-trigger="manual" data-animation="false"/>
                     </div>
-                    <div class="form-group <!--has-error has-feedback-->">
+                    <!--<div class="form-group">
                         <label for="exampleInputEmail1" class="control-label">
                             驻才网向客户提出的时薪价格（元/小时）：</label>
                         <input readonly value="" type="text" class="form-control sml-inp" id="inp_hour2" placeholder="" />
-                    </div>
+                    </div>-->
                     
                     <div class="form-group <!--has-error has-feedback-->">
                         <label for="exampleInputEmail1" class="control-label">

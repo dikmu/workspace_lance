@@ -4,7 +4,7 @@
 <ViewObject
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="UserEducationVO"
-  Version="12.1.3.10.8"
+  Version="12.1.3.2.36"
   InheritPersonalization="merge"
   SelectListFlags="1"
   FromListFlags="1"
@@ -52,13 +52,31 @@
     PrecisionRule="true"
     EntityAttrName="StartDate"
     EntityUsage="UserEducationEO"
-    AliasName="START_DATE"/>
+    AliasName="START_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMAT
+          ResId="com.lance.model.user.vo.UserEducationVO.StartDate_FMT_FORMAT"/>
+        <FMT_FORMATTER
+          ResId="com.lance.model.user.vo.UserEducationVO.StartDate_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="EndDate"
     PrecisionRule="true"
     EntityAttrName="EndDate"
     EntityUsage="UserEducationEO"
-    AliasName="END_DATE"/>
+    AliasName="END_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMAT
+          ResId="com.lance.model.user.vo.UserEducationVO.EndDate_FMT_FORMAT"/>
+        <FMT_FORMATTER
+          ResId="com.lance.model.user.vo.UserEducationVO.EndDate_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Description"
     IsQueriable="false"
@@ -101,35 +119,45 @@
     PrecisionRule="true"
     EntityAttrName="Display"
     EntityUsage="UserEducationEO"
-    AliasName="DISPLAY"/>
+    AliasName="DISPLAY"
+    DefaultValue="Y"/>
   <ViewAttribute
     Name="CreateBy"
     PrecisionRule="true"
     EntityAttrName="CreateBy"
     EntityUsage="UserEducationEO"
-    AliasName="CREATE_BY"/>
+    AliasName="CREATE_BY"
+    IsUpdateable="false"/>
   <ViewAttribute
     Name="CreateOn"
     PrecisionRule="true"
     EntityAttrName="CreateOn"
     EntityUsage="UserEducationEO"
-    AliasName="CREATE_ON"/>
+    AliasName="CREATE_ON"
+    IsUpdateable="false"/>
   <ViewAttribute
     Name="ModifyBy"
     PrecisionRule="true"
     EntityAttrName="ModifyBy"
     EntityUsage="UserEducationEO"
-    AliasName="MODIFY_BY"/>
+    AliasName="MODIFY_BY"
+    IsUpdateable="false"/>
   <ViewAttribute
     Name="ModifyOn"
     PrecisionRule="true"
     EntityAttrName="ModifyOn"
     EntityUsage="UserEducationEO"
-    AliasName="MODIFY_ON"/>
+    AliasName="MODIFY_ON"
+    IsUpdateable="false"/>
   <ViewAttribute
     Name="Version"
     PrecisionRule="true"
     EntityAttrName="Version"
     EntityUsage="UserEducationEO"
-    AliasName="VERSION"/>
+    AliasName="VERSION"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.lance.model.ModelBundle"/>
+  </ResourceBundle>
 </ViewObject>

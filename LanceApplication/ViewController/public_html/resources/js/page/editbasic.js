@@ -9,7 +9,7 @@ $(function(){
         $("#inp_hour2").val(user.ChargeRate ? user.ChargeRate : "");
         $("#inp_website").val(user.WebsiteUrl ? user.WebsiteUrl : "");
         $("#inp_over").val(user.Overview ? user.Overview : "");
-        $("#inp_service").val(user.inp_service ? inp_service : "");
+        $("#inp_service").val(user.ServiceDescription ? user.ServiceDescription : "");
         $("#inp_payment").val(user.PaymentTerms ? user.PaymentTerms : "");
         $("#inp_keywords").val(user.Keywords ? user.Keywords : "");
     });
@@ -60,7 +60,7 @@ $(function(){
             
             if(hour.lanCheck('onlyNumber')){
                 hour.closest(".form-group").addClass("has-success").addClass("has-feedback");
-                var strjg = hour.val() * 1.05 + "";
+                var strjg = hour.val() * 1 + "";
                 if(strjg.indexOf(".") >= 0){
                     hour2.val(strjg.substring(0, strjg.indexOf(".") + 3));
                 }else{
@@ -100,8 +100,8 @@ $(function(){
             var param = {
                 "Keywords" : $("#inp_keywords").val(),
                 "Overview" : $("#inp_over").val(),
-                "PaymentTermsTxt" : $("#inp_payment").val(),
-                "ServiceDescriptionTxt" : $("#inp_service").val(),
+                "PaymentTerms" : $("#inp_payment").val(),
+                "ServiceDescription" : $("#inp_service").val(),
                 "Tagline" : $("#inp_tagline").val(),
                 "UserName" : User.UserName,
                 "DisplayName" : $("#inp_uname").val(),
@@ -112,7 +112,7 @@ $(function(){
             btn.button('loading');
             
             $.ax("post", "user/update/" + User.UserName, param, function(){
-                alert("修改成功！"); 
+                $.ae("保存成功!");
                 btn.button("reset");
             }, function(){
                 netWorkError();

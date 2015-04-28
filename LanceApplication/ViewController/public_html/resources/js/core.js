@@ -36,7 +36,7 @@ $.ae = function(err, callback){
          str += '</a><a class="btn-gray btn-cel">' + option.buttons[1] + '</a></div>';
     }
     str += '</div>';
-    $(".container-fluid").append(str);
+    $("body").append(str);
     $(".dialog_alert").animate({"top" : "200px"}, 500).show();
     
     if(option.showBut){
@@ -124,32 +124,49 @@ $.fn.postInputSearch = function(callback){
 
 var Lancer = {
     profile :　{
-        getStart : function(callback){
-            $.ax("get", "user/"+User.UserName, null, function(data){
-                callback(data);
-            }, netWorkError);
-        },
+//        getStart : function(callback){
+//            if(Data!=null){
+//                callback(Data.User);
+//            }else{
+//                $.ax("get", "user/"+User.UserName, null, function(data){
+//                    callback(data);
+//                }, netWorkError);
+//            }
+//        },
         getBasicInfo : function(callback){
-            $.ax("get", "user/"+User.UserName, null, function(data){
-                callback(data);
-            }, netWorkError);
+            if(Data!=null){
+                callback(Data.User);
+            }else{
+                $.ax("get", "user/"+User.UserName, null, function(data){
+                    callback(data);
+                }, netWorkError);
+            }
         },
         getSkillsInfo : function(callback, infor){
-            $.ax("get", "user/skill/all/"+User.UserName, null, function(data){
-                callback(data, infor);
-            }, netWorkError);
+            if(Data!=null){
+                callback(Data.User.Skill);
+            }else{
+                $.ax("get", "user/skill/all/"+User.UserName, null, function(data){
+                    callback(data, infor);
+                }, netWorkError);
+            }
         },
         getContactInfo : function(callback, infor){
-            $.ax("get", "user/"+User.UserName, null, function(data){
-                callback(data, infor);
-            }, netWorkError);
-        }
-    },
-    client : {
-        getHeaderInfor : function(callback){
-            $.ax("get", "user/muhongdi", null, function(data){
-                callback(data);
-            }, netWorkError);
+            if(Data!=null){
+                callback(Data.User);
+            }else{
+                $.ax("get", "user/"+User.UserName, null, function(data){
+                    callback(data, infor);
+                }, netWorkError);
+            }
         }
     }
+//    ,
+//    client : {
+//        getHeaderInfor : function(callback){
+//            $.ax("get", "user/muhongdi", null, function(data){
+//                callback(data);
+//            }, netWorkError);
+//        }
+//    }
 };

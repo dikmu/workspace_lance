@@ -4,6 +4,7 @@ package com.lance.view.servlet;
 import com.lance.view.rest.job.SearchResource;
 import com.lance.view.rest.search.BrowseResource;
 import com.lance.view.rest.uuser.LookupsResource;
+import com.lance.view.rest.uuser.UserEducationResource;
 import com.lance.view.rest.uuser.UserNotificationResource;
 import com.lance.view.rest.uuser.UserResource;
 
@@ -46,10 +47,11 @@ public class PageDirectServlet extends HttpServlet {
         ADFContext adfctx = ADFContext.getCurrent();
         try {
             //如果用户访问的是登录后(受保护)界面
-            if(uri.startsWith("/lance/pages/search") || uri.startsWith("/lance/pages/jobDetail")
-               || uri.startsWith("/lance/pages/browse")){
+            if (uri.startsWith("/lance/pages/search") || uri.startsWith("/lance/pages/jobDetail") ||
+                uri.startsWith("/lance/pages/browse")) {
                 //不做登陆拦截
-            }else if (uri.startsWith("/lance/pages/")) {
+
+            } else if (uri.startsWith("/lance/pages/")) {
                 if (!adfctx.getSecurityContext().isAuthenticated()) {
                     response.sendRedirect("/lance/login.htm");
                 }
@@ -92,16 +94,16 @@ public class PageDirectServlet extends HttpServlet {
             } else if ("/lance/pages/jobs/PostNewJob".equals(uri)) {
                 toPage(request, response, "/WEB-INF/jobs/PostNewJob.jsp", new JSONObject());
 
-            } else if (uri.contains("/lance/pages/UserRegSuccess1")){
-                String param = uri.substring(uri.lastIndexOf("/"), uri.length()-1);
+            } else if (uri.contains("/lance/pages/UserRegSuccess1")) {
+                String param = uri.substring(uri.lastIndexOf("/"), uri.length() - 1);
                 JSONObject json = new JSONObject();
                 json.put("uuid", param);
                 toPage(request, response, "/WEB-INF/profile/UserRegSuccess1.jsp", json);
-            } else if ("/lance/pages/UserRegSuccess2".equals(uri)){
+            } else if ("/lance/pages/UserRegSuccess2".equals(uri)) {
                 toPage(request, response, "/WEB-INF/profile/UserRegSuccess2.jsp", new JSONObject());
-                
-            }else if(uri.startsWith("/lance/pages/jobDetail")){
-                String param = uri.substring(uri.lastIndexOf("/")+1, uri.length());
+
+            } else if (uri.startsWith("/lance/pages/jobDetail")) {
+                String param = uri.substring(uri.lastIndexOf("/") + 1, uri.length());
                 JSONObject json = new JSONObject();
                 json.put("jobId", param);
                 toPage(request, response, "/WEB-INF/jobs/jobDetail.jsp", json);
@@ -109,21 +111,27 @@ public class PageDirectServlet extends HttpServlet {
                 JSONObject json = new JSONObject();
                 json.put("datas", new UserNotificationResource().findAllNoftification());
                 toPage(request, response, "/WEB-INF/profile/MyMessage.jsp", json);
-            }else if(uri.startsWith("/lance/pages/browse")){
-              JSONObject json =  new JSONObject();
-              BrowseResource br=new BrowseResource();
-              json.put("JobCategories", br.getBrowseJobCategory());
-              json.put("Skills", br.getBrowseSkill());
-              toPage(request, response, "/WEB-INF/browse/BrowseJobCategory.jsp",json);
+            } else if (uri.startsWith("/lance/pages/browse")) {
+                JSONObject json = new JSONObject();
+                BrowseResource br = new BrowseResource();
+                json.put("JobCategories", br.getBrowseJobCategory());
+                json.put("Skills", br.getBrowseSkill());
+                toPage(request, response, "/WEB-INF/browse/BrowseJobCategory.jsp", json);
+            } else if (uri.equals("/lance/pages/profile/EditEducation")) {
+                UserEducationResource uer = new UserEducationResource();
+                toPage(request, response, "/WEB-INF/profile/EditEducation.jsp", uer.findAllUserEducation(user));
+            } else if (uri.equals("/lance/pages/profile/EditJobHistory")) {
+                UserEducationResource uer = new UserEducationResource();
+                toPage(request, response, "/WEB-INF/profile/EditJobHistory.jsp", uer.findAllUserEducation(user));
             }
-//            else if (uri.startsWith("/lance/pages/project/Contract/")) { //uri:http://localhost:7101/lance/pages/project/Contact/157e69a513f942c7bb895e7dddd01a56
-//                //读取合同
-//                uri = uri.replaceFirst("/lance/pages/project/Contract/", "");
-//                String contractId = uri.substring(0, 32); //32位uuid
-//                System.out.println(contractId);
-//                toPage(request, response, "/WEB-INF/project/Contract.jsp",
-//                       new ContractResource().getContractById(contractId));
-//            }
+            //            else if (uri.startsWith("/lance/pages/project/Contract/")) { //uri:http://localhost:7101/lance/pages/project/Contact/157e69a513f942c7bb895e7dddd01a56
+            //                //读取合同
+            //                uri = uri.replaceFirst("/lance/pages/project/Contract/", "");
+            //                String contractId = uri.substring(0, 32); //32位uuid
+            //                System.out.println(contractId);
+            //                toPage(request, response, "/WEB-INF/project/Contract.jsp",
+            //                       new ContractResource().getContractById(contractId));
+            //            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -135,19 +143,19 @@ public class PageDirectServlet extends HttpServlet {
         try {
             ADFContext adfctx = ADFContext.getCurrent();
             JSONObject userData = null;
-            if(adfctx.getSecurityContext().isAuthenticated()){
-            String user = adfctx.getSecurityContext().getUserPrincipal().getName();
+            if (adfctx.getSecurityContext().isAuthenticated()) {
+                String user = adfctx.getSecurityContext().getUserPrincipal().getName();
                 userData = new UserResource().findSimpleUserByName(user);
                 userData.put("logined", true);
-            String notiCount = new UserNotificationResource().findNotificationCount();
-            userData.put("notification", notiCount);
-            String[] roles = adfctx.getSecurityContext().getUserRoles();
-            JSONArray roleArr = new JSONArray();
-            for (String role : roles) {
-                roleArr.put(role);
-            }
-            userData.put("roles", roleArr);
-            }else{
+                String notiCount = new UserNotificationResource().findNotificationCount();
+                userData.put("notification", notiCount);
+                String[] roles = adfctx.getSecurityContext().getUserRoles();
+                JSONArray roleArr = new JSONArray();
+                for (String role : roles) {
+                    roleArr.put(role);
+                }
+                userData.put("roles", roleArr);
+            } else {
                 userData = new JSONObject();
                 userData.put("logined", false);
             }
@@ -167,23 +175,23 @@ public class PageDirectServlet extends HttpServlet {
         try {
             ADFContext adfctx = ADFContext.getCurrent();
             JSONObject userData = null;
-            if(adfctx.getSecurityContext().isAuthenticated()){
-            String user = adfctx.getSecurityContext().getUserPrincipal().getName();
+            if (adfctx.getSecurityContext().isAuthenticated()) {
+                String user = adfctx.getSecurityContext().getUserPrincipal().getName();
                 userData = new UserResource().findSimpleUserByName(user);
                 userData.put("logined", true);
-            String notiCount = new UserNotificationResource().findNotificationCount();
-            userData.put("notification", notiCount);
-            String[] roles = adfctx.getSecurityContext().getUserRoles();
-            JSONArray roleArr = new JSONArray();
-            for (String role : roles) {
-                roleArr.put(role);
-            }
-            userData.put("roles", roleArr);
-            }else{
+                String notiCount = new UserNotificationResource().findNotificationCount();
+                userData.put("notification", notiCount);
+                String[] roles = adfctx.getSecurityContext().getUserRoles();
+                JSONArray roleArr = new JSONArray();
+                for (String role : roles) {
+                    roleArr.put(role);
+                }
+                userData.put("roles", roleArr);
+            } else {
                 userData = new JSONObject();
                 userData.put("logined", false);
             }
-            
+
             request.setAttribute("user", userData);
             request.setAttribute("data", arr);
         } catch (JSONException jsone) {
