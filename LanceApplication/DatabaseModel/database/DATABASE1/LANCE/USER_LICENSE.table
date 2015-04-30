@@ -1,6 +1,6 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <table xmlns="http://xmlns.oracle.com/jdeveloper/1211/offlinedb">
-  <name>USER_LESSIONS</name>
+  <name>USER_LICENSE</name>
   <columns>
     <column>
       <name>UUID</name>
@@ -57,17 +57,17 @@
       <properties>
         <entry>
           <key>Comment</key>
-          <value class="java.lang.String">课程名称</value>
+          <value class="java.lang.String">认证名称</value>
         </entry>
       </properties>
     </column>
     <column>
-      <name>CONTENT</name>
+      <name>REG_ORGANIZATION</name>
       <dataTypeUsage>
         <attributeValues>
           <entry>
             <key>size</key>
-            <value class="java.lang.Integer">200</value>
+            <value class="java.lang.Long">20</value>
           </entry>
           <entry>
             <key>unit</key>
@@ -82,7 +82,78 @@
       <properties>
         <entry>
           <key>Comment</key>
-          <value class="java.lang.String">课程内容（备注）</value>
+          <value class="java.lang.String">认证机构</value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <name>CONTENT</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Integer">1000</value>
+          </entry>
+          <entry>
+            <key>unit</key>
+            <value class="java.lang.String">CHAR</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <typeName>VARCHAR2</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">描述（备注）</value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <name>REG_NUMBER</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">20</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <typeName>VARCHAR2</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">认证号</value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <name>REG_ADDRESS</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Integer">500</value>
+          </entry>
+          <entry>
+            <key>unit</key>
+            <value class="java.lang.String">CHAR</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <typeName>VARCHAR2</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">认证网址</value>
         </entry>
       </properties>
     </column>
@@ -97,7 +168,7 @@
       <properties>
         <entry>
           <key>Comment</key>
-          <value class="java.lang.String">课程开始时间</value>
+          <value class="java.lang.String">有效期开始时间</value>
         </entry>
       </properties>
     </column>
@@ -112,7 +183,7 @@
       <properties>
         <entry>
           <key>Comment</key>
-          <value class="java.lang.String">课程结束时间</value>
+          <value class="java.lang.String">有效期结束时间</value>
         </entry>
       </properties>
     </column>
@@ -194,13 +265,39 @@
     </column>
   </columns>
   <constraints>
+    <constraint class="oracle.javatools.db.PKConstraint">
+      <name>USER_LESSIONS_PK</name>
+      <columnIDs>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>UUID</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>USER_LICENSE</name>
+            <schemaName>LANCE</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>LANCE</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+      </columnIDs>
+      <enabled>true</enabled>
+      <indexID class="oracle.javatools.db.NameBasedID">
+        <name>USER_LESSIONS_PK</name>
+        <parent class="oracle.javatools.db.NameBasedID">
+          <name>USER_LICENSE</name>
+          <schemaName>LANCE</schemaName>
+          <type>TABLE</type>
+        </parent>
+        <schemaName>LANCE</schemaName>
+        <type>INDEX</type>
+      </indexID>
+    </constraint>
     <constraint class="oracle.javatools.db.FKConstraint">
       <name>USER_LESSIONS_U_USER_FK1</name>
       <columnIDs>
         <columnID class="oracle.javatools.db.NameBasedID">
           <name>USER_NAME</name>
           <parent class="oracle.javatools.db.NameBasedID">
-            <name>USER_LESSIONS</name>
+            <name>USER_LICENSE</name>
             <schemaName>LANCE</schemaName>
             <type>TABLE</type>
           </parent>
@@ -219,32 +316,6 @@
         <schemaName>LANCE</schemaName>
         <type>CONSTRAINT</type>
       </referenceID>
-    </constraint>
-    <constraint class="oracle.javatools.db.PKConstraint">
-      <name>USER_LESSIONS_PK</name>
-      <columnIDs>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>UUID</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>USER_LESSIONS</name>
-            <schemaName>LANCE</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>LANCE</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-      </columnIDs>
-      <enabled>true</enabled>
-      <indexID class="oracle.javatools.db.NameBasedID">
-        <name>USER_LESSIONS_PK</name>
-        <parent class="oracle.javatools.db.NameBasedID">
-          <name>USER_LESSIONS</name>
-          <schemaName>LANCE</schemaName>
-          <type>TABLE</type>
-        </parent>
-        <schemaName>LANCE</schemaName>
-        <type>INDEX</type>
-      </indexID>
     </constraint>
   </constraints>
   <indexes>

@@ -195,6 +195,31 @@
       </properties>
     </column>
     <column>
+      <name>PROFESSIONAL</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Integer">30</value>
+          </entry>
+          <entry>
+            <key>unit</key>
+            <value class="java.lang.String">CHAR</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <typeName>VARCHAR2</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">专业名称</value>
+        </entry>
+      </properties>
+    </column>
+    <column>
       <name>DESCRIPTION</name>
       <dataTypeUsage>
         <attributeValues>
@@ -229,6 +254,56 @@
             </parent>
             <type>COLUMN</type>
           </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <name>STUDY_MARK</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">20</value>
+          </entry>
+          <entry>
+            <key>unit</key>
+            <value class="java.lang.String">CHAR</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <typeName>VARCHAR2</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">学习成绩</value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <name>CLUB_EVENTS</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Integer">100</value>
+          </entry>
+          <entry>
+            <key>unit</key>
+            <value class="java.lang.String">CHAR</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <typeName>VARCHAR2</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">社团活动</value>
         </entry>
       </properties>
     </column>
