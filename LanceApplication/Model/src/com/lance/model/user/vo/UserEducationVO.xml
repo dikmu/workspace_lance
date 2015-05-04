@@ -23,68 +23,6 @@
     Name="UserEducationEO"
     Entity="com.lance.model.user.eo.UserEducationEO"/>
   <ViewAttribute
-    Name="Uuid"
-    IsNotNull="true"
-    PrecisionRule="true"
-    EntityAttrName="Uuid"
-    EntityUsage="UserEducationEO"
-    AliasName="UUID"/>
-  <ViewAttribute
-    Name="UserName"
-    PrecisionRule="true"
-    EntityAttrName="UserName"
-    EntityUsage="UserEducationEO"
-    AliasName="USER_NAME"/>
-  <ViewAttribute
-    Name="InstitutionName"
-    PrecisionRule="true"
-    EntityAttrName="InstitutionName"
-    EntityUsage="UserEducationEO"
-    AliasName="INSTITUTION_NAME"/>
-  <ViewAttribute
-    Name="DegreeType"
-    PrecisionRule="true"
-    EntityAttrName="DegreeType"
-    EntityUsage="UserEducationEO"
-    AliasName="DEGREE_TYPE"/>
-  <ViewAttribute
-    Name="StartDate"
-    PrecisionRule="true"
-    EntityAttrName="StartDate"
-    EntityUsage="UserEducationEO"
-    AliasName="START_DATE">
-    <Properties>
-      <SchemaBasedProperties>
-        <FMT_FORMAT
-          ResId="com.lance.model.user.vo.UserEducationVO.StartDate_FMT_FORMAT"/>
-        <FMT_FORMATTER
-          ResId="com.lance.model.user.vo.UserEducationVO.StartDate_FMT_FORMATTER"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
-  <ViewAttribute
-    Name="EndDate"
-    PrecisionRule="true"
-    EntityAttrName="EndDate"
-    EntityUsage="UserEducationEO"
-    AliasName="END_DATE">
-    <Properties>
-      <SchemaBasedProperties>
-        <FMT_FORMAT
-          ResId="com.lance.model.user.vo.UserEducationVO.EndDate_FMT_FORMAT"/>
-        <FMT_FORMATTER
-          ResId="com.lance.model.user.vo.UserEducationVO.EndDate_FMT_FORMATTER"/>
-      </SchemaBasedProperties>
-    </Properties>
-  </ViewAttribute>
-  <ViewAttribute
-    Name="Description"
-    IsQueriable="false"
-    PrecisionRule="true"
-    EntityAttrName="Description"
-    EntityUsage="UserEducationEO"
-    AliasName="DESCRIPTION"/>
-  <ViewAttribute
     Name="Attach1Link"
     PrecisionRule="true"
     EntityAttrName="Attach1Link"
@@ -103,24 +41,11 @@
     EntityUsage="UserEducationEO"
     AliasName="ATTACH3_LINK"/>
   <ViewAttribute
-    Name="TobeVerified"
+    Name="ClubEvents"
     PrecisionRule="true"
-    EntityAttrName="TobeVerified"
+    EntityAttrName="ClubEvents"
     EntityUsage="UserEducationEO"
-    AliasName="TOBE_VERIFIED"/>
-  <ViewAttribute
-    Name="DoneVerified"
-    PrecisionRule="true"
-    EntityAttrName="DoneVerified"
-    EntityUsage="UserEducationEO"
-    AliasName="DONE_VERIFIED"/>
-  <ViewAttribute
-    Name="Display"
-    PrecisionRule="true"
-    EntityAttrName="Display"
-    EntityUsage="UserEducationEO"
-    AliasName="DISPLAY"
-    DefaultValue="Y"/>
+    AliasName="CLUB_EVENTS"/>
   <ViewAttribute
     Name="CreateBy"
     PrecisionRule="true"
@@ -136,6 +61,43 @@
     AliasName="CREATE_ON"
     IsUpdateable="false"/>
   <ViewAttribute
+    Name="DegreeType"
+    PrecisionRule="true"
+    EntityAttrName="DegreeType"
+    EntityUsage="UserEducationEO"
+    AliasName="DEGREE_TYPE"/>
+  <ViewAttribute
+    Name="Description"
+    IsQueriable="false"
+    PrecisionRule="true"
+    EntityAttrName="Description"
+    EntityUsage="UserEducationEO"
+    AliasName="DESCRIPTION"/>
+  <ViewAttribute
+    Name="Display"
+    PrecisionRule="true"
+    EntityAttrName="Display"
+    EntityUsage="UserEducationEO"
+    AliasName="DISPLAY"/>
+  <ViewAttribute
+    Name="DoneVerified"
+    PrecisionRule="true"
+    EntityAttrName="DoneVerified"
+    EntityUsage="UserEducationEO"
+    AliasName="DONE_VERIFIED"/>
+  <ViewAttribute
+    Name="EndDate"
+    PrecisionRule="true"
+    EntityAttrName="EndDate"
+    EntityUsage="UserEducationEO"
+    AliasName="END_DATE"/>
+  <ViewAttribute
+    Name="InstitutionName"
+    PrecisionRule="true"
+    EntityAttrName="InstitutionName"
+    EntityUsage="UserEducationEO"
+    AliasName="INSTITUTION_NAME"/>
+  <ViewAttribute
     Name="ModifyBy"
     PrecisionRule="true"
     EntityAttrName="ModifyBy"
@@ -149,6 +111,43 @@
     EntityUsage="UserEducationEO"
     AliasName="MODIFY_ON"
     IsUpdateable="false"/>
+  <ViewAttribute
+    Name="Professional"
+    PrecisionRule="true"
+    EntityAttrName="Professional"
+    EntityUsage="UserEducationEO"
+    AliasName="PROFESSIONAL"/>
+  <ViewAttribute
+    Name="StartDate"
+    PrecisionRule="true"
+    EntityAttrName="StartDate"
+    EntityUsage="UserEducationEO"
+    AliasName="START_DATE"/>
+  <ViewAttribute
+    Name="StudyMark"
+    PrecisionRule="true"
+    EntityAttrName="StudyMark"
+    EntityUsage="UserEducationEO"
+    AliasName="STUDY_MARK"/>
+  <ViewAttribute
+    Name="TobeVerified"
+    PrecisionRule="true"
+    EntityAttrName="TobeVerified"
+    EntityUsage="UserEducationEO"
+    AliasName="TOBE_VERIFIED"/>
+  <ViewAttribute
+    Name="UserName"
+    PrecisionRule="true"
+    EntityAttrName="UserName"
+    EntityUsage="UserEducationEO"
+    AliasName="USER_NAME"/>
+  <ViewAttribute
+    Name="Uuid"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Uuid"
+    EntityUsage="UserEducationEO"
+    AliasName="UUID"/>
   <ViewAttribute
     Name="Version"
     PrecisionRule="true"

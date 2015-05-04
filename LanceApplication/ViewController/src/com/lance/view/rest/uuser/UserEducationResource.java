@@ -65,23 +65,23 @@ public class UserEducationResource extends BaseRestResource {
     public static final String[] ATTR_ALL = {
         "Uuid", "UserName", "InstitutionName", "DegreeType", "StartDate", "EndDate", "Description", "Attach1Link",
         "Attach2Link", "Attach3Link", "TobeVerified", "DoneVerified", "Display", "CreateBy", "CreateOn", "ModifyBy",
-        "ModifyOn", "Version"
+        "ModifyOn", "Version","ClubEvents","StudyMark","Professional"
     };
 
     public static final String[] ATTR_CREATE = {
         "InstitutionName", "DegreeType", "StartDate", "EndDate", "Description", "Attach1Link", "Attach2Link",
-        "Attach3Link", "TobeVerified", "DoneVerified", "Display"
+        "Attach3Link", "TobeVerified", "DoneVerified", "Display","ClubEvents","StudyMark","Professional"
     };
 
     public static final String[] ATTR_GET = {
         "Uuid", "UserName", "InstitutionName", "DegreeType", "StartDate", "EndDate", "Description", "Attach1Link",
         "Attach2Link", "Attach3Link", "TobeVerified", "DoneVerified", "Display", "CreateBy", "CreateOn", "ModifyBy",
-        "ModifyOn", "Version"
+        "ModifyOn", "Version","ClubEvents","StudyMark","Professional"
     };
 
     public static final String[] ATTR_UPDATE = {
         "InstitutionName", "DegreeType", "StartDate", "EndDate", "Description", "Attach1Link", "Attach2Link",
-        "Attach3Link", "TobeVerified", "DoneVerified", "Display"
+        "Attach3Link", "TobeVerified", "DoneVerified", "Display","ClubEvents","StudyMark"
     };
 
 

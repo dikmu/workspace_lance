@@ -80,11 +80,10 @@
     Name="Description"
     IsQueriable="false"
     ColumnName="DESCRIPTION"
-    SQLType="VARCHAR"
-    Type="java.lang.String"
-    ColumnType="VARCHAR2"
-    TableName="USER_EDUCATION"
-    Precision="2000"/>
+    SQLType="CLOB"
+    Type="oracle.jbo.domain.ClobDomain"
+    ColumnType="CLOB"
+    TableName="USER_EDUCATION"/>
   <Attribute
     Name="Attach1Link"
     Precision="500"
@@ -197,6 +196,42 @@
     ColumnType="NUMBER"
     TableName="USER_EDUCATION"
     HistoryColumn="VersionHistory"/>
+  <Attribute
+    Name="Professional"
+    Precision="30"
+    ColumnName="PROFESSIONAL"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="USER_EDUCATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StudyMark"
+    Precision="20"
+    ColumnName="STUDY_MARK"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="USER_EDUCATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ClubEvents"
+    Precision="100"
+    ColumnName="CLUB_EVENTS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="USER_EDUCATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </Attribute>
   <AccessorAttribute
     Name="UUser"
     Association="com.lance.model.user.as.UserEducationUUserFk1AS"

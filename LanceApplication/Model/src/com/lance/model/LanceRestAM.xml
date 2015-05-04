@@ -123,6 +123,15 @@
             Name="FindUnreadVC"
             FullName="com.lance.model.user.vo.UserNotificationVO.FindUnreadVC"/>
     </ViewUsage>
+    <ViewUsage
+        Name="UserCompanyHistory1"
+        ViewObjectName="com.lance.model.vo.UserCompanyHistoryVO"/>
+    <ViewUsage
+        Name="UserLicense1"
+        ViewObjectName="com.lance.model.vo.UserLicenseVO"/>
+    <ViewUsage
+        Name="UserProjectHistory1"
+        ViewObjectName="com.lance.model.vo.UserProjectHistoryVO"/>
     <ViewLinkUsage
       Name="JobCategory_SubCategoryVL1"
       ViewLinkObjectName="com.lance.model.vl.JobCategory_SubCategoryVL"

@@ -23,6 +23,9 @@ import com.lance.model.vo.RegEmailChkVOImpl;
 import com.lance.model.vo.SkillSuperTypeVOImpl;
 import com.lance.model.vo.SkillsVOImpl;
 import com.lance.model.vo.SpreadHeardFromVOImpl;
+import com.lance.model.vo.UserCompanyHistoryVOImpl;
+import com.lance.model.vo.UserLicenseVOImpl;
+import com.lance.model.vo.UserProjectHistoryVOImpl;
 import com.lance.model.vvo.ContractClientReportVVOImpl;
 import com.lance.model.vvo.ContractReportVVOImpl;
 import com.lance.model.vvo.LocationCountryVVOImpl;
@@ -37,6 +40,7 @@ import com.zngh.platform.front.core.model.BaseApplicationModuleImpl;
 
 import com.zngh.platform.front.core.model.BaseViewObjectImpl;
 
+import oracle.jbo.server.ApplicationModuleImpl;
 import oracle.jbo.server.ViewLinkImpl;
 import oracle.jbo.server.ViewObjectImpl;
 // ---------------------------------------------------------------------
@@ -472,6 +476,30 @@ public class LanceRestAMImpl extends BaseApplicationModuleImpl {
      */
     public ViewLinkImpl getUser_NotificationVL2() {
         return (ViewLinkImpl) findViewLink("User_NotificationVL2");
+    }
+
+    /**
+     * Container's getter for UserCompanyHistory1.
+     * @return UserCompanyHistory1
+     */
+    public UserCompanyHistoryVOImpl getUserCompanyHistory1() {
+        return (UserCompanyHistoryVOImpl) findViewObject("UserCompanyHistory1");
+    }
+
+    /**
+     * Container's getter for UserLicense1.
+     * @return UserLicense1
+     */
+    public UserLicenseVOImpl getUserLicense1() {
+        return (UserLicenseVOImpl) findViewObject("UserLicense1");
+    }
+
+    /**
+     * Container's getter for UserProjectHistory1.
+     * @return UserProjectHistory1
+     */
+    public UserProjectHistoryVOImpl getUserProjectHistory1() {
+        return (UserProjectHistoryVOImpl) findViewObject("UserProjectHistory1");
     }
 }
 
