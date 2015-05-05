@@ -75,6 +75,7 @@
 .lan-main-right .well .mod .no-add{
     text-align:center;
     background:#ddd;
+    cursor:pointer;
 }
 .lan-main-right .well .mod .no-add:hover{
     border:solid 1px #fff;
@@ -186,9 +187,25 @@
 .borwser dd.more a{color:#333;font-size:12px;font-weight:bold;}
 .borwser dd.more a:hover{color:#0567b1;}
 
+.jobs .list-group-item .btn-xs,.edus .list-group-item .btn-xs,.works .list-group-item .btn-xs{display:none;}
+.jobs .list-group-item:hover .btn-xs,.edus .list-group-item:hover .btn-xs,.works .list-group-item:hover .btn-xs{display:block;}
 
+.edus .list-group-item-text{line-height:25px;}
+.edus .list-group-item-text .label{margin-right:5px;}
+.edus .list-group-item-text .txt{line-height:17px;display:inline-block;margin-top:7px;}
 
+.works .list-group-item-text .txt{line-height:17px;display:inline-block;margin-top:7px;}
+.jobs .list-group-item-text .txt{line-height:17px;display:inline-block;margin-top:7px;}
 
+.add-dialog{width:auto;}
+.add-dialog .txt-normal{width:90%;margin-left:15px;}
+.add-dialog .txt-normal2{width:44%;margin-left:15px;}
+.add-dialog .form-control{display:inline-block;}
+.add-dialog .buttons{margin-left:68px;}
+.add-dialog .buttons .btn{padding:3px 15px;}
+
+.list-group-item .progress{margin-bottom:5px;border-radius:0px;height:3px;}
+.list-group-item .btn-danger{margin-left:5px;height:20px;}
 
 
 
