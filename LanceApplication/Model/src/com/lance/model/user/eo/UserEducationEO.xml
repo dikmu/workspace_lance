@@ -80,10 +80,11 @@
     Name="Description"
     IsQueriable="false"
     ColumnName="DESCRIPTION"
-    SQLType="CLOB"
-    Type="oracle.jbo.domain.ClobDomain"
-    ColumnType="CLOB"
-    TableName="USER_EDUCATION"/>
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="USER_EDUCATION"
+    Precision="2000"/>
   <Attribute
     Name="Attach1Link"
     Precision="500"
