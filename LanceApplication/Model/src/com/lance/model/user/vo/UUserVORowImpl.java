@@ -1200,8 +1200,7 @@ public class UUserVORowImpl extends BaseViewRowImpl {
     public RowSet getLocationCityVO1() {
         return (RowSet) getAttributeInternal(LOCATIONCITYVO1);
     }
-
-
+    
     public void updateSearchIndex() {
         StringBuffer locSbA = new StringBuffer();
         findLocationName(this.getLocationARegion(), this.getLocationACountry(), this.getLocationAProvince(),

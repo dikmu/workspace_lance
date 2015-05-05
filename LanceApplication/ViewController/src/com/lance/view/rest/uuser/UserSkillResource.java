@@ -1,6 +1,7 @@
 package com.lance.view.rest.uuser;
 
 import com.lance.model.LanceRestAMImpl;
+import com.lance.model.user.vo.UUserVORowImpl;
 import com.lance.model.user.vo.UserSkillVOImpl;
 import com.lance.model.user.vo.UserSkillVORowImpl;
 
@@ -26,6 +27,8 @@ import oracle.jbo.Row;
 
 import oracle.jbo.server.RowImpl;
 import oracle.jbo.server.ViewObjectImpl;
+
+import org.apache.commons.lang.StringUtils;
 
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
@@ -94,15 +97,29 @@ public class UserSkillResource extends BaseRestResource {
                                     @PathParam("skillId") String skillId) throws JSONException {
         LanceRestAMImpl am = LUtil.findLanceAM();
         //find and set current parent row
-        LUtil.getUUserByName(userName, am);
+        UUserVORowImpl userr = LUtil.getUUserByName(userName, am);
 
         UserSkillVOImpl vo = am.getUserSkill1();
         Row row = vo.findByKey(new Key(new Object[] { skillId }), 1)[0];
         vo.setCurrentRow(row);
 
         vo.removeCurrentRow();
+        updateSkillIndex(vo, userr);
         am.getDBTransaction().commit();
         return "ok";
+    }
+    
+    private void updateSkillIndex(UserSkillVOImpl vo,UUserVORowImpl userr){
+        vo.setRangeSize(-1);
+        StringBuffer skills = new StringBuffer();
+        for(Row row : vo.getAllRowsInRange()){
+            UserSkillVORowImpl r = (UserSkillVORowImpl)row;
+            if(StringUtils.isNotBlank(r.getName())){
+                skills.append(r.getName()).append(";");
+            }
+        }
+        userr.setIndexSkill(skills.toString());
+        userr.updateSearchIndex();
     }
 
     /**
@@ -118,13 +135,15 @@ public class UserSkillResource extends BaseRestResource {
     public String createUserSkill(@PathParam("userName") String userName, JSONObject json) throws JSONException {
         LOGGER.log(LOGGER.NOTIFICATION, "createUserSkill");
         LanceRestAMImpl am = LUtil.findLanceAM();
-        LUtil.getUUserByName(userName, am);
+        UUserVORowImpl userr = LUtil.getUUserByName(userName, am);
         UserSkillVOImpl vo = am.getUserSkill1();
+        vo.setRangeSize(-1);
         if(vo.getRowCount()>=50){
             return "msg:技能不能大于50个";
         }
         UserSkillVORowImpl row = (UserSkillVORowImpl) LUtil.createInsertRow(vo);
         RestUtil.copyJsonObjectToRow(json, vo, row, this.ATTR_CREATE);
+        updateSkillIndex(vo, userr);
         String cm = am.commit();
         if (!"ok".equals(cm)) {
             return "error:"+cm;
@@ -171,10 +190,11 @@ public class UserSkillResource extends BaseRestResource {
 
     public String createMultiUserSkillsFn(String userName, JSONArray jarray, LanceRestAMImpl am) throws JSONException {
         //find and set current parent row
-        LUtil.getUUserByName(userName, am);
+        UUserVORowImpl userr = LUtil.getUUserByName(userName, am);
         List list = new ArrayList();
 
         UserSkillVOImpl vo = am.getUserSkill1();
+        vo.setRangeSize(-1);
         if (vo.getRowCount() > 50) {
             return "msg:技能不能大于50个";
         }
@@ -189,6 +209,7 @@ public class UserSkillResource extends BaseRestResource {
             row = LUtil.createInsertRow(vo);
             RestUtil.copyJsonObjectToRow(json, vo, row, this.ATTR_CREATE);
         }
+        updateSkillIndex(vo, userr);
         return "ok";
     }
 

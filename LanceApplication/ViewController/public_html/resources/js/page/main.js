@@ -5,7 +5,7 @@ $(function(){
     
     
     var initUser = function(){
-        $(".uname").html(User.DisplayName + '-' + Data.User.User.JobTitle);
+        $(".uname").html(User.DisplayName + (Data.User.User.hasOwnProperty("JobTitle") ? '-'+Data.User.User.JobTitle : ''));
         $(".utitle").html(Data.User.User.Tagline);
         $(".uself").html(Data.User.User.Overview);
         var locDetail = "";
