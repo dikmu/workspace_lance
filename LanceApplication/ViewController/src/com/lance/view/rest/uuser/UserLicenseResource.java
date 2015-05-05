@@ -39,7 +39,6 @@ public class UserLicenseResource extends BaseRestResource {
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
     public String createLiceenseHistory(JSONObject json) throws JSONException {
         LanceRestAMImpl am = LUtil.findLanceAM();
         String msg = createLicenseHistoryFn(json, am);
@@ -51,7 +50,6 @@ public class UserLicenseResource extends BaseRestResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
     @Path("update/{uuid}")
     public String updateUserLicenseHistory(@PathParam("uuid") String uuid,JSONObject json) throws JSONException {
         LanceRestAMImpl am = LUtil.findLanceAM();
@@ -67,7 +65,6 @@ public class UserLicenseResource extends BaseRestResource {
 
     @POST
     @Consumes(MediaType.TEXT_PLAIN)
-    @Produces(MediaType.TEXT_PLAIN)
     @Path("delete/{uuid}")
     public String deleteUserLicenseHistory(@PathParam("uuid") String uuid){
         LanceRestAMImpl am = LUtil.findLanceAM();

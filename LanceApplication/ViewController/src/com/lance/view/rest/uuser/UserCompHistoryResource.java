@@ -43,7 +43,6 @@ public class UserCompHistoryResource extends BaseRestResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
     public String createUserCompHistory(JSONObject json) throws JSONException {
         LanceRestAMImpl am = LUtil.findLanceAM();
         String msg = createCompHistoryFn(json, am);
@@ -55,7 +54,6 @@ public class UserCompHistoryResource extends BaseRestResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
     @Path("update/{uid}")
     public String updateUserCompHistory(@PathParam("uid") String uid,JSONObject json) throws JSONException {
         LanceRestAMImpl am = LUtil.findLanceAM();
@@ -70,8 +68,6 @@ public class UserCompHistoryResource extends BaseRestResource {
     }
 
     @POST
-    @Consumes(MediaType.TEXT_PLAIN)
-    @Produces(MediaType.TEXT_PLAIN)
     @Path("delete/{uid}")
     public String deleteUserCompHistory(@PathParam("uid") String uid){
         LanceRestAMImpl am = LUtil.findLanceAM();

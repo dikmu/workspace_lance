@@ -39,7 +39,6 @@ public class UserProjHistoryResource extends BaseRestResource {
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
     public String createProjHistory(JSONObject json) throws JSONException {
         LanceRestAMImpl am = LUtil.findLanceAM();
         String msg = createProjHistoryFn(json, am);
@@ -51,7 +50,6 @@ public class UserProjHistoryResource extends BaseRestResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
     @Path("update/{uuid}")
     public String updateProjHistory(@PathParam("uuid") String uuid,JSONObject json) throws JSONException {
         LanceRestAMImpl am = LUtil.findLanceAM();
@@ -66,8 +64,6 @@ public class UserProjHistoryResource extends BaseRestResource {
     }
 
     @POST
-    @Consumes(MediaType.TEXT_PLAIN)
-    @Produces(MediaType.TEXT_PLAIN)
     @Path("delete/{uuid}")
     public String deleteProjHistory(@PathParam("uuid") String uuid){
         LanceRestAMImpl am = LUtil.findLanceAM();
