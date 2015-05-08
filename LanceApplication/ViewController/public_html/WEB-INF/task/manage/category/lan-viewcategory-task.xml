@@ -34,6 +34,15 @@
         <pass-by-value/>
       </input-parameter>
     </task-flow-call>
+    <view id="RemoveCategory">
+      <page>/manage/fregment/category/RemoveCategory.jsff</page>
+    </view>
+    <method-call id="findJobSubCategoryById">
+      <method>#{bindings.findJobSubCategoryById.execute}</method>
+      <outcome>
+        <fixed-outcome>findJobSubCategoryById</fixed-outcome>
+      </outcome>
+    </method-call>
     <control-flow-rule id="__4">
       <from-activity-id>ViewCategory</from-activity-id>
       <control-flow-case id="__5">
@@ -43,6 +52,10 @@
       <control-flow-case id="__8">
         <from-outcome>edit</from-outcome>
         <to-activity-id>edit-subcategory-task</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__10">
+        <from-outcome>remove</from-outcome>
+        <to-activity-id>findJobSubCategoryById</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__1">
@@ -56,6 +69,20 @@
       <from-activity-id>AddCategorySuccess</from-activity-id>
       <control-flow-case id="__7">
         <from-outcome>viewCategory</from-outcome>
+        <to-activity-id>ViewCategory</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__11">
+      <from-activity-id>findJobSubCategoryById</from-activity-id>
+      <control-flow-case id="__12">
+        <from-outcome>findJobSubCategoryById</from-outcome>
+        <to-activity-id>RemoveCategory</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__13">
+      <from-activity-id>RemoveCategory</from-activity-id>
+      <control-flow-case id="__14">
+        <from-outcome>back</from-outcome>
         <to-activity-id>ViewCategory</to-activity-id>
       </control-flow-case>
     </control-flow-rule>

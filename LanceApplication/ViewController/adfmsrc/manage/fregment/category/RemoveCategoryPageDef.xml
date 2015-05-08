@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.2.36" id="RemoveCategoryPageDef"
+                Package="manage.fregment.category">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="JobSubCategory2" RangeSize="25" DataControl="LanceAdminAMDataControl"
+              id="JobSubCategory2Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="JobSubCategory2Iterator" id="Uuid">
+      <AttrNames>
+        <Item Value="Uuid"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="JobSubCategory2Iterator" id="Name">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="JobSubCategory2Iterator" id="NameCn">
+      <AttrNames>
+        <Item Value="NameCn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="JobSubCategory2Iterator" id="Description">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="JobSubCategory2Iterator" id="CreateOn">
+      <AttrNames>
+        <Item Value="CreateOn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="JobSubCategory2Iterator" id="ModifyOn">
+      <AttrNames>
+        <Item Value="ModifyOn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="JobSubCategory2Iterator" id="Version">
+      <AttrNames>
+        <Item Value="Version"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="JobSubCategory2Iterator" id="CreateByName">
+      <AttrNames>
+        <Item Value="CreateByName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="JobSubCategory2Iterator" id="ModifyByName">
+      <AttrNames>
+        <Item Value="ModifyByName"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="JobSubCategory2Iterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+  </bindings>
+</pageDefinition>

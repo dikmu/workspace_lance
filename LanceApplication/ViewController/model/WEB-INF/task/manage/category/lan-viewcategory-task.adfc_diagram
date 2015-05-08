@@ -17,9 +17,9 @@
       <property
          name="y">281.79883</property>
       <property
-         name="x">509.3506</property>
-      <property
          name="pageFragment">true</property>
+      <property
+         name="x">509.3506</property>
    </View>
    <TaskFlowCall
       id="TaskFlowCall5">
@@ -61,9 +61,9 @@
       <property
          name="y">375.09766</property>
       <property
-         name="x">829.7051</property>
-      <property
          name="pageFragment">true</property>
+      <property
+         name="x">829.7051</property>
    </View>
    <ControlFlowCase
       islink="true"
@@ -111,5 +111,65 @@
          name="fromOutcome">edit</property>
       <property
          name="sdm:polyPoints">L50,468.3506,281.44824,279.36035,274.0459,R50</property>
+   </ControlFlowCase>
+   <View
+      id="View11">
+      <property
+         name="activityId">RemoveCategory</property>
+      <property
+         name="page">/manage/fregment/category/RemoveCategory.jsff</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>RemoveCategory&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">566.99414</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">498.6875</property>
+   </View>
+   <MethodCall
+      id="MethodCall12">
+      <property
+         name="activityId">findJobSubCategoryById</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>findJobSubCategoryById&lt;/b>&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">480.74707</property>
+      <property
+         name="x">672.375</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase14"
+      from="View7"
+      to="MethodCall12">
+      <property
+         name="fromOutcome">remove</property>
+      <property
+         name="sdm:polyPoints">B56,512.8506,335.44824,672.375,427.09766,T50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase15"
+      from="MethodCall12"
+      to="View11">
+      <property
+         name="fromOutcome">findJobSubCategoryById</property>
+      <property
+         name="sdm:polyPoints">L50,631.375,480.39648,539.6875,566.64355,R50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase16"
+      from="View11"
+      to="View7">
+      <property
+         name="fromOutcome">back</property>
+      <property
+         name="sdm:polyPoints">T50,498.6875,512.64355,505.8506,335.44824,B44</property>
    </ControlFlowCase>
 </SDM>

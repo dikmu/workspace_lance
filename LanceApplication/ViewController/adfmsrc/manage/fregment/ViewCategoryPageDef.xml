@@ -5,6 +5,8 @@
   <executables>
     <variableIterator id="variables"/>
     <iterator Binds="JobCategory1" RangeSize="100" DataControl="LanceAdminAMDataControl" id="JobCategory1Iterator"/>
+    <iterator id="JobSubCategory2Iterator" Binds="JobSubCategory2" DataControl="LanceAdminAMDataControl"
+              RangeSize="25"/>
   </executables>
   <bindings>
     <tree IterBinding="JobCategory1Iterator" id="JobCategory11">
@@ -12,6 +14,18 @@
         <AttrNames>
           <Item Value="NameEn"/>
           <Item Value="NameCn"/>
+          <Item Value="Uuid"/>
+          <Item Value="ApplyReason"/>
+          <Item Value="CreateBy"/>
+          <Item Value="CreateByName"/>
+          <Item Value="CreateOn"/>
+          <Item Value="Description"/>
+          <Item Value="Display"/>
+          <Item Value="ModifyBy"/>
+          <Item Value="ModifyByName"/>
+          <Item Value="ModifyOn"/>
+          <Item Value="RejectReason"/>
+          <Item Value="Version"/>
         </AttrNames>
         <Accessors>
           <Item Value="JobSubCategory"/>
@@ -26,5 +40,12 @@
         </AttrNames>
       </nodeDefinition>
     </tree>
+    <methodAction id="findJobSubCategoryById" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="findJobSubCategoryById" IsViewObjectMethod="false" DataControl="LanceAdminAMDataControl"
+                  InstanceName="data.LanceAdminAMDataControl.dataProvider"
+                  ReturnName="data.LanceAdminAMDataControl.methodResults.findJobSubCategoryById_LanceAdminAMDataControl_dataProvider_findJobSubCategoryById_result">
+      <NamedData NDName="subCategoryId" NDValue="#{pageFlowScope.subId}" NDType="java.lang.String"/>
+    </methodAction>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="LanceAdminAMDataControl"/>
   </bindings>
 </pageDefinition>

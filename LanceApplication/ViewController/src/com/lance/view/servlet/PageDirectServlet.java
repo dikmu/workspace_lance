@@ -132,7 +132,6 @@ public class PageDirectServlet extends HttpServlet {
             //                toPage(request, response, "/WEB-INF/project/Contract.jsp",
             //                       new ContractResource().getContractById(contractId));
             //            }
-
         } catch (Exception e) {
             e.printStackTrace();
         }

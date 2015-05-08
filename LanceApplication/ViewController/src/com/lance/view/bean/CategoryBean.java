@@ -13,6 +13,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 
 import oracle.adf.model.BindingContext;
+import oracle.adf.view.rich.component.rich.RichPopup;
 import oracle.adf.view.rich.component.rich.data.RichListView;
 import oracle.adf.view.rich.component.rich.input.RichSelectBooleanCheckbox;
 import oracle.adf.view.rich.component.rich.nav.RichButton;
@@ -35,6 +36,8 @@ public class CategoryBean extends BaseManagedBean {
     private RichSelectBooleanCheckbox confirmMyCategory_SubscribeChk;
     private RichListView selectMyCategoryList;
     private RichButton toNextPageBtn;
+    private RichPopup deleteCategoryPopup;
+    private RichListView viewCategoryList;
 
     public CategoryBean() {
         super();
@@ -239,4 +242,57 @@ public class CategoryBean extends BaseManagedBean {
     }
 
 
+    //    public void deleteCategory(DialogEvent dialogEvent) {
+    //        //System.out.println(this.resolveELExpressionValue("#{pageFlowScope.ItemNameEn}"));
+    //        //System.out.println(this.resolveELExpressionValue("#{pageFlowScope.ItemNameCn}"));
+    //        String subId = (String) this.resolveELExpressionValue("#{pageFlowScope.subId}");
+    //        System.out.println(subId);
+    //        if (dialogEvent.getOutcome().equals(DialogEvent.Outcome.yes)) {
+    //            JobSubCategoryVOImpl vo =
+    //                (JobSubCategoryVOImpl) this.findViewObjectFromBindingIterator("JobSubCategory2Iterator");
+    //            vo.setApplyViewCriteriaName("FindByIdVC");
+    //            vo.setpUuid(subId);
+    //            vo.executeQuery();
+    //            vo.setCurrentRow(vo.first());
+    //            System.out.println(vo.first().getAttribute("Uuid"));
+    //            vo.removeCurrentRow();
+    //            vo.removeApplyViewCriteriaName("FindByIdVC");
+    //            commit_action();
+    //            //
+    //            this.findViewObjectFromBindingIterator("JobCategory1Iterator").executeQuery();
+    //            this.refreshComponents(this.viewCategoryList);
+    //        }
+    //    }
+
+    public String deleteCategory_action() {
+        RichPopup.PopupHints hints = new RichPopup.PopupHints();
+        deleteCategoryPopup.show(hints);
+        return null;
+    }
+
+    public void setDeleteCategoryPopup(RichPopup deleteCategoryPopup) {
+        this.deleteCategoryPopup = deleteCategoryPopup;
+    }
+
+    public RichPopup getDeleteCategoryPopup() {
+        return deleteCategoryPopup;
+    }
+
+    public String findJobSubCategoryById_action() {
+        BindingContainer bindings = getBindings();
+        OperationBinding operationBinding = bindings.getOperationBinding("findJobSubCategoryById");
+        Object result = operationBinding.execute();
+        if (!operationBinding.getErrors().isEmpty()) {
+            return null;
+        }
+        return null;
+    }
+
+    public void setViewCategoryList(RichListView viewCategoryList) {
+        this.viewCategoryList = viewCategoryList;
+    }
+
+    public RichListView getViewCategoryList() {
+        return viewCategoryList;
+    }
 }

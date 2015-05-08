@@ -7,7 +7,15 @@
                 <!-- Content -->
                 <af:panelBorderLayout id="pbl1">
                     <f:facet name="start"/>
-                    <f:facet name="bottom"/>
+                    <f:facet name="bottom">
+                        <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                                  binding="#{CategoryBean.deleteCategoryPopup}">
+                            <af:dialog id="d1" title="系统信息" dialogListener="#{CategoryBean.deleteCategory}">
+                                <f:facet name="buttonBar"/>
+                                <af:outputFormatted value="是否删除#{pageFlowScope.ItemNameEn} #{pageFlowScope.ItemNameCn}" id="of1"/>
+                            </af:dialog>
+                        </af:popup>
+                    </f:facet>
                     <f:facet name="end"/>
                     <f:facet name="top">
                         <af:panelGroupLayout id="pgl4" layout="horizontal" halign="right"
@@ -20,7 +28,8 @@
                     </f:facet>
                     <af:listView value="#{bindings.JobCategory11.treeModel}" var="item"
                                  emptyText="#{bindings.JobCategory11.viewable ? 'No data to display.' : 'Access Denied.'}"
-                                 fetchSize="#{bindings.JobCategory11.rangeSize}" id="lv2">
+                                 fetchSize="#{bindings.JobCategory11.rangeSize}" id="lv2"
+                                 binding="#{CategoryBean.viewCategoryList}">
                         <af:listItem id="li3">
                             <af:panelGroupLayout layout="horizontal" id="pgl5">
                                 <f:facet name="separator">
@@ -31,7 +40,12 @@
                                 <af:outputFormatted value="#{item.bindings.Uuid.inputValue}" id="of14"
                                                     rendered="false"/>
                                 <af:outputFormatted value="#{item.bindings.CreateByName.inputValue}" id="of15"/>
-                                <af:link text="edit" id="l2" action="edit">
+                                <af:outputFormatted value="#{item.bindings.Uuid.inputValue}" id="of2"/>
+                                <af:link text="编辑" id="l2" action="edit">
+                                    <af:setActionListener to="#{pageFlowScope.subId}"
+                                                          from="#{item.bindings.Uuid.inputValue}"/>
+                                </af:link>
+                                <af:link text="删除" id="l1" action="remove">
                                     <af:setActionListener to="#{pageFlowScope.subId}"
                                                           from="#{item.bindings.Uuid.inputValue}"/>
                                 </af:link>
@@ -45,6 +59,7 @@
                                     </f:facet>
                                     <af:outputFormatted value="#{item.bindings.NameEn.inputValue}" id="of16"/>
                                     <af:outputFormatted value="#{item.bindings.NameCn.inputValue}" id="of17"/>
+                                    <af:outputFormatted value="#{item.bindings.Uuid.inputValue}" id="of18"/>
                                 </af:panelGroupLayout>
                             </af:listItem>
                         </f:facet>
