@@ -5,6 +5,8 @@ import com.lance.model.vo.UserCompanyHistoryVOImpl;
 import com.lance.model.vo.UserLicenseVOImpl;
 import com.lance.view.util.LUtil;
 
+import com.lance.view.util.RestSecurityUtil;
+
 import com.zngh.platform.front.core.view.BaseRestResource;
 import com.zngh.platform.front.core.view.RestUtil;
 
@@ -58,6 +60,10 @@ public class UserLicenseResource extends BaseRestResource {
         if (row == null) {
             return "msg:记录不存在或已删除";
         }
+        if(!RestSecurityUtil.isOwner(row)){
+            String msg="您没有修改此记录的权限";
+            return "msg:"+msg;
+        }
         RestUtil.copyJsonObjectToRow(json, vo, row, this.ATTR_CREATE);
         am.getDBTransaction().commit();
         return "ok";
@@ -72,6 +78,10 @@ public class UserLicenseResource extends BaseRestResource {
         Row row = LUtil.getByKey(vo, uuid);
         if (row == null) {
             return "msg:记录不存在或已删除";
+        }
+        if(!RestSecurityUtil.isOwner(row)){
+            String msg="您没有删除此记录的权限";
+            return "msg:"+msg;
         }
         row.remove();
         am.getDBTransaction().commit();

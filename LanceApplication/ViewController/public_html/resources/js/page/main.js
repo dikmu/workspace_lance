@@ -349,7 +349,7 @@ $(function(){
     $(".edus .list-jobs").on("click", ".deledu", function(){
         var pa = $(this).closest('.list-group-item'), data = pa.data('data');
         $.ae("您确定要删除吗？", function(){
-            $.ax("post", "user/education/delete/anonymous/" + data.Uuid, null, function(data){}, function(data){});
+            $.ax("post", "user/education/delete/"+User.UserName+"/" + data.Uuid, null, function(data){}, function(data){});
             DeleteEduMod(data);
         });
     });
@@ -401,7 +401,7 @@ $(function(){
 
 $(function(){
     var init_licens = function(){
-        $.ax("get", "user/license/all/anonymous"/* + User.UserName*/, null, function(data){
+        $.ax("get", "user/license/all/"+ User.UserName+"?r="+Math.random(), null, function(data){
             if(data.length > 0){
                 $("#no_add_licen").hide();
                 $.each(data, function(i, dom){
@@ -415,7 +415,7 @@ $(function(){
     init_licens();
 
     var init_works = function(){
-        $.ax("get", "user/comp/all/anonymous"/* + User.UserName*/, null, function(data){
+        $.ax("get", "user/comp/all/"+ User.UserName+"?r="+Math.random(), null, function(data){
             if(data.length > 0){
                 $("#no_add_work").hide();
                 $.each(data, function(i, dom){
@@ -429,7 +429,7 @@ $(function(){
     init_works();
     
     var init_edus = function(){
-        $.ax("get", "user/education/anonymous"/* + User.UserName*/, null, function(data){
+        $.ax("get", "user/education/"+ User.UserName+"?r="+Math.random(), null, function(data){
             if(data.length > 0){
                 $("#no_add_edu").hide();
                 $.each(data, function(i, dom){
@@ -443,7 +443,7 @@ $(function(){
     init_edus();
     
     var init_jobs = function(){
-        $.ax("get", "user/proj/all/anonymous"/* + User.UserName*/, null, function(data){
+        $.ax("get", "user/proj/all/" + User.UserName+"?r="+Math.random(), null, function(data){
             if(data.length > 0){
                 $("#no_add_job").hide();
                 $.each(data, function(i, dom){
@@ -581,14 +581,14 @@ $(function(){
             };
             var type = $("#btn_add_edu_fin").attr("data-type");
             if(type == "add"){
-                $.ax("post", "user/education/anonymous" /*+ User.UserName */ , param, function(rid){
+                $.ax("post", "user/education/" + User.UserName , param, function(rid){
                     param.Uuid = rid;
                     InitEduMod(param);
                     $("#btn_cancel_edu").click();
                 }, function(){}, "text");
             }else if(type == "edit"){
                 param.Uuid = $("#btn_add_edu_fin").data("uuid");
-                $.ax("post", "user/education/update/anonymous/" /*+ User.UserName */ + param.Uuid, param, function(rid){
+                $.ax("post", "user/education/update/" + User.UserName + param.Uuid, param, function(rid){
                     $("#btn_cancel_edu").click();
                     UpdateEduMod(param);
                 }, function(){}, "text");

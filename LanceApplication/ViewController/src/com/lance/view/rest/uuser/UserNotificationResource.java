@@ -13,8 +13,10 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import oracle.adf.share.ADFContext;
 import oracle.adf.share.logging.ADFLogger;
 
 import oracle.jbo.Row;
@@ -85,6 +87,16 @@ public class UserNotificationResource extends BaseRestResource {
         vo.removeApplyViewCriteriaName("FindByUuidVC");
         return vo.first();
     }
+    
+    public Row[] findUserNotificationByIds(String ids, ViewObjectImpl vo, LanceRestAMImpl am) {
+        vo.setWhereClause(null);
+        vo.setWhereClause("INSTR('"+ids+"',UUID) > 0");
+        vo.setOrderByClause("READ");
+        vo.setRangeSize(-1);
+        vo.executeQuery();
+        vo.setWhereClause(null);
+        return vo.getAllRowsInRange();
+    }
 
     public String returnParamAfterCreate(Row row) {
         return (String) row.getAttribute("Uuid");
@@ -130,38 +142,69 @@ public class UserNotificationResource extends BaseRestResource {
     //    }
 
 
-    //    /**
-    //     * 更新
-    //     * @param UserNotificationId
-    //     * @param json
-    //     * @return
-    //     * @throws JSONException
-    //     */
-    //    @POST
-    //    @Path("update/{UserNotificationId}")
-    //    @Consumes(MediaType.APPLICATION_JSON)
-    //    public String updateUserNotification(@PathParam("UserNotificationId") String UserNotificationId, JSONObject json) throws JSONException {
-    //        LanceRestAMImpl am = LUtil.findLanceAM();
-    //        ViewObjectImpl vo = getUserNotificationFromAM(am);
-    //        Row row = findUserNotificationById(UserNotificationId, vo, am);
-    //
-    //        if (row == null) {
-    //            LOGGER.log(LOGGER.NOTIFICATION, findCurrentUserName() + "尝试修改通知" + UserNotificationId + "但此记录不存在");
-    //            return "msg:can't find UserNotification by id " + UserNotificationId;
-    //        }
-    //        if(!RestSecurityUtil.isOwner(row)){
-    //            String msg="您没有修改此记录的权限";
-    //            return "msg:"+msg;
-    //        }
-    //
-    //        RestUtil.copyJsonObjectToRow(json, vo, row, this.ATTR_UPDATE);
-    //        am.getDBTransaction().commit();
-    //
-    //        LOGGER.log(LOGGER.NOTIFICATION,
-    //                   findCurrentUserName() + "修改通知(" + UserNotificationId + ") 为：" +
-    //                   RestUtil.convertRowToJsonObject(vo, row, this.ATTR_ALL));
-    //        return "ok";
-    //    }
+        /**
+         * 更新
+         * @param UserNotificationId
+         * @param json
+         * @return
+         * @throws JSONException
+         */
+        @POST
+        @Path("update/{UserNotificationId}")
+        @Consumes(MediaType.APPLICATION_JSON)
+        public String updateUserNotification(@PathParam("UserNotificationId") String UserNotificationId, JSONObject json) throws JSONException {
+            LanceRestAMImpl am = LUtil.findLanceAM();
+            ViewObjectImpl vo = getUserNotificationFromAM(am);
+            Row row = findUserNotificationById(UserNotificationId, vo, am);
+    
+            if (row == null) {
+                LOGGER.log(LOGGER.NOTIFICATION, findCurrentUserName() + "尝试修改通知" + UserNotificationId + "但此记录不存在");
+                return "msg:can't find UserNotification by id " + UserNotificationId;
+            }
+            if(!isOwner(row)){
+                String msg="您没有修改此记录的权限";
+                return "msg:"+msg;
+            }
+    
+            RestUtil.copyJsonObjectToRow(json, vo, row, this.ATTR_UPDATE);
+            am.getDBTransaction().commit();
+    
+            LOGGER.log(LOGGER.NOTIFICATION,
+                       findCurrentUserName() + "修改通知(" + UserNotificationId + ") 为：" +
+                       RestUtil.convertRowToJsonObject(vo, row, this.ATTR_ALL));
+            return "ok";
+        }
+        
+    public static boolean isOwner(Row row) {
+        String curUser = ADFContext.getCurrent().getSecurityContext().getUserName();
+        String uname = (String) row.getAttribute("UserName");
+        if (uname.equals(curUser)) {
+            return true;
+        }
+        return false;
+    }
+        
+    @POST
+    @Path("batch/update")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String batchUpdateUserNotification(@QueryParam("ids") String ids, @QueryParam("read") String read) throws JSONException {
+        LanceRestAMImpl am = LUtil.findLanceAM();
+        String userName = this.findCurrentUserName();
+        findCurrentUserRow(userName, am);
+        ViewObjectImpl vo = getUserNotificationFromAM(am);
+        Row[] rows = findUserNotificationByIds(ids, vo, am);
+        if(rows != null && rows.length > 0){
+            for(Row r : rows){
+                if(!isOwner(r)){
+                    am.getDBTransaction().rollback();
+                    return "msg:修改的记录中存在无权修改的记录";
+                }
+                r.setAttribute("Read", read);
+             }
+            am.getDBTransaction().commit();
+        }
+       return "ok";
+    }
 
     /**
      * 创建通知
@@ -211,7 +254,7 @@ public class UserNotificationResource extends BaseRestResource {
         Row row = findUserNotificationById(UserNotificationId, vo, am);
         if (row != null) {
             //权限判断
-            if (!RestSecurityUtil.isOwner(row)) {
+            if (!isOwner(row)) {
                 String msg = findCurrentUserName() + "无删除通知" + UserNotificationId + "的权限";
                 LOGGER.log(LOGGER.WARNING, msg);
                 return "msg:" + msg;
@@ -224,6 +267,36 @@ public class UserNotificationResource extends BaseRestResource {
         } else {
             LOGGER.log(LOGGER.NOTIFICATION, findCurrentUserName() + "尝试删除通知" + UserNotificationId + "但此记录不存在");
         }
+        return "ok";
+    }
+    
+    @POST
+    @Path("batch/delete")
+    public String batchdelUserNotification(@QueryParam("ids") String ids) throws JSONException {
+        String userName = this.findCurrentUserName();
+        if (!CAN_DELETE) {
+            return "msg:此类记录无法被删除";
+        }
+        LanceRestAMImpl am = LUtil.findLanceAM();
+        findCurrentUserRow(userName, am);
+        ViewObjectImpl vo = getUserNotificationFromAM(am);
+        Row[] rows = this.findUserNotificationByIds(ids, vo, am);
+        for(Row row : rows){
+            if (row != null) {
+                //权限判断
+                if (!isOwner(row)) {
+                    String msg = findCurrentUserName() + "无删除通知" + ids + "的权限";
+                    LOGGER.log(LOGGER.WARNING, msg);
+                    am.getDBTransaction().rollback();
+                    return "msg:" + msg;
+                }
+                row.remove();
+                LOGGER.log(LOGGER.NOTIFICATION, findCurrentUserName() + "无法批量删除通知" + ids);
+            } else {
+                LOGGER.log(LOGGER.NOTIFICATION, findCurrentUserName() + "尝试删除通知" + ids + "但此记录不存在");
+            }
+        }
+        am.getDBTransaction().commit();
         return "ok";
     }
 

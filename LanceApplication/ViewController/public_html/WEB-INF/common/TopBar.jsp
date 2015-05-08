@@ -12,14 +12,11 @@
                     <span class="caret"></span>
                     <ul class="dropdown-menu" role="menu">
                         <li>
-                            <a href="#">个人信息</a>
+                            <a href="/lance/pages/profile/Overview">个人信息</a>
                         </li>
-                        <li>
-                            <a href="#">个人简历</a>
-                        </li>
-                        <li>
+                        <!--<li>
                             <a href="#">个人设置</a>
-                        </li>
+                        </li>-->
                         <li role="presentation" class="divider"></li>
                         <li>
                             <a href="/lance/adfAuthentication?logout=true&amp;end_url=login.htm">退出</a>
@@ -27,7 +24,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">收件箱
+                    <a href="/lance/pages/MyMessage">收件箱
                     <span class="label label-danger">{{u_noti}}</span></a>
                 </li>
              {{else}}
