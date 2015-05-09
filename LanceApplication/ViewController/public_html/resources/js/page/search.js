@@ -1,6 +1,19 @@
+//progress bar animate
+function startProgress(){
+    var bar = $(".sea-progress").show().find(".progress-bar").css("width", "0%");
+    bar.animate({"width" : "80%"}, 50, function(){});
+}
+function endProgress(callback){
+    var bar = $(".sea-progress .progress-bar");
+    bar.stop().animate({"width" : "100%"}, 100, function(){
+        $(".sea-progress").fadeOut();
+        callback();
+    });
+}
 function setJobModel(uuid,title, price, stime, etime, acount, detail, cate1, cate2, form, skills, score, location){
     var item = $(".jobs .hidemod").clone().removeClass("hidemod");
     item.find(".title-in").html(title).attr('href','/lance/pages/jobDetail/'+uuid);
+    item.find("a.btn-sm").attr("href", '/lance/pages/jobDetail/'+uuid);
     item.find(".price").html(price == "" ? '价格：不确定' : '价格：' + price);
     item.find(".stime").html('开始时间：' + stime);
     item.find(".etime").html('结束时间：' + etime);
@@ -25,7 +38,8 @@ function setJobModel(uuid,title, price, stime, etime, acount, detail, cate1, cat
 }
 function setPersonModel(uname, title, location, money, acount, earn, txt, skills){
     var item = $(".persons .hidemod").clone().removeClass("hidemod");
-    item.find(".uname").html(uname);
+    item.find(".uname").html(uname).attr("href", "/lance/pages/profile/Overview");
+    item.find("a.btn-sm").attr("href", "/lance/pages/profile/Overview");
     item.find(".title").html(title);
     item.find(".location").html('所在地：' + location);
     item.find(".order").html('薪水要求：￥' + money);
@@ -65,7 +79,7 @@ function initParam(){
     if(curType && curVal){
         param = ';' + curType + '=' + curVal;
         method += param;
-        _INITJOBS('');
+        _INITJOBS('first');
         if(curType == 'category'){
             var curDom = $("#cates .btn-link[data-val='" + curVal + "']");
             if(curDom.length > 0){
@@ -76,7 +90,7 @@ function initParam(){
             $("#jbskill").val(curVal);
         }
     }else{
-        _INITJOBS('');
+        _INITJOBS('first');
     }
 }
 
@@ -141,6 +155,7 @@ function setCategory(){
         }
     });
     
+    startProgress();
     $.ax('get', 'search/left/datas', null, function(data){
         var cates = data.cateory, skills = data.skills, country = data.country;
         
@@ -148,6 +163,8 @@ function setCategory(){
         setSkills(skills);
         
         initParam();
+        
+        $(".search-jobs").fadeIn();
         
     }, function(){});
 }
@@ -177,48 +194,60 @@ $(function(){
         }
         $('.no-more').hide();
         $(".sea-result-info").hide();
-        $.ax("get", method, null, function(data){
-            if(param != 'more'){
-                $(".wait").hide();
-                $(".con").show();
-            }
         
-            var pa = $(".jobs"), tmp = null, location = '远程办公';
-            var curPage = $(".get-more").data("page") || 1;
-            
-            if(data.count >= 1){
-                $(".get-more").show();
-                $(".get-more").data("page", curPage + 1);
-                
-                if(method.indexOf('keyword') > -1){
-                    var keyword = $("#input_search").val();
-                    $(".sea-result-info").show().html("'" + keyword + "' 的搜索结果    共 " + data.count + " 个");
+        //set default pageNum = 1;
+        if(method.indexOf("pageNum") < 0){
+            method += ';pageNum=1';
+        }
+        
+        if(param != 'first'){
+            startProgress();
+        }
+        
+        $.ax("get", method, null, function(data){
+            endProgress(function(){
+                if(param != 'more'){
+                    $(".wait").hide();
+                    $(".con").show();
                 }
+            
+                var pa = $(".jobs"), tmp = null, location = '远程办公';
+                var curPage = $(".get-more").data("page") || 1;
                 
-                $.each(data.data, function(i, dom){
-                    if(dom.FixedLocation == 'Y'){
-                        location = dom.IndexLocation;
+                if(data.count >= 1){
+                    $(".get-more").show();
+                    $(".get-more").data("page", curPage + 1);
+                    
+                    if(method.indexOf('keyword') > -1){
+                        var keyword = $("#input_search").val();
+                        $(".sea-result-info").show().html("'" + keyword + "' 的搜索结果    共 " + data.estimated + " 个");
                     }
-                    tmp = setJobModel(dom.Uuid,dom.Name, dom.FixedPayMin + '-' + dom.FixedPayMax, dom.PostJobDateStart, dom.PostJobDateEnd, 0, 
-                    dom.BriefShort, dom.IndexWorkCategorys.split('>')[0], dom.IndexWorkCategorys.split('>')[1], dom.Postform, 
-                    dom.IndexSkills, 5, location);
-                    pa.append(tmp);
-                });
-            }else{
-                if(curPage == 1){
-                    $(".sea-result-info").show().html("没有找到查询结果。");
-                    $('.get-more').hide();
-                }else {
-                    $('.get-more').hide();
-                    $('.no-more').show();
+                    
+                    $.each(data.data, function(i, dom){
+                        if(dom.FixedLocation == 'Y'){
+                            location = dom.IndexLocation;
+                        }
+                        tmp = setJobModel(dom.Uuid,dom.Name, dom.FixedPayMin + '-' + dom.FixedPayMax, dom.PostJobDateStart, dom.PostJobDateEnd, 0, 
+                        dom.BriefShort, dom.IndexWorkCategorys.split('>')[0], dom.IndexWorkCategorys.split('>')[1], dom.Postform, 
+                        dom.IndexSkills, 5, location);
+                        pa.append(tmp);
+                    });
+                }else{
+                    if(curPage == 1){
+                        $(".sea-result-info").show().html("没有找到查询结果。");
+                        $('.get-more').hide();
+                    }else {
+                        $('.get-more').hide();
+                        $('.no-more').show();
+                    }
                 }
-            }
-            if(curPage == 1){
-                $(".all-count").html('<b class="lbl-search-title">所有的工作</b>（' + data.count + ' 个）');
-            }
-            
-            $("#input_search").val('');
-            $(".get-more").button('reset');
+                if(curPage == 1){
+                    $(".all-count").html('<b class="lbl-search-title">所有的工作</b>（' + data.estimated + ' 个）');
+                }
+                
+                $("#input_search").val('');
+                $(".get-more").button('reset');
+            });
         }, function(){});
     };
     
@@ -229,47 +258,56 @@ $(function(){
         }
         $('.no-more').hide();
         $(".sea-result-info").hide();
+        
+        //set default pageNum = 1;
+        if(method.indexOf("pageNum") < 0){
+            method += ';pageNum=1';
+        }
+        startProgress();
         $.ax("get", method, null, function(data){
-            if(param != 'more'){
-                $(".wait").hide();
-                $(".con").show();
-            }
-            var pa = $(".persons"), tmp = null;
-            var curPage = $(".get-more").data("page") || 1;
-            
-            if(data.count >= 1){
-                $(".get-more").show();
-                $(".get-more").data("page", curPage + 1);
-                
-                if(param != '' && method.indexOf('keyword') > -1){
-                    var keyword = $("#input_search").val();
-                    $(".sea-result-info").show().html("'" + keyword + "' 的搜索结果    共 " + data.count + " 个");
+            endProgress(function(){
+                if(param != 'more'){
+                    $(".wait").hide();
+                    $(".con").show();
                 }
+                var pa = $(".persons"), tmp = null;
+                var curPage = $(".get-more").data("page") || 1;
                 
-                $.each(data.data, function(i, dom){
-                
-                    tmp = setPersonModel(dom.TrueName, dom.JobTitle, dom.LocationAIndex || '暂未填写', dom.HourlyRate || '暂未填写', 0, 
-                    0, dom.Overview || '暂未填写', dom.skills || '');
+                if(data.count >= 1){
+                    $(".get-more").show();
+                    $(".get-more").data("page", curPage + 1);
                     
-                    pa.append(tmp);
-                });
-                
-                
-            }else{
-                if(curPage == 1){
-                    $(".sea-result-info").show().html("没有找到查询结果。");
-                    $('.get-more').hide();
-                }else {
-                    $('.get-more').hide();
-                    $('.no-more').show();
+                    if(param != '' && method.indexOf('keyword') > -1){
+                        var keyword = $("#input_search").val();
+                        $(".sea-result-info").show().html("'" + keyword + "' 的搜索结果    共 " + data.estimated + " 个");
+                    }
+                    
+                    $.each(data.data, function(i, dom){
+                    
+                        tmp = setPersonModel(dom.TrueName, dom.JobTitle, dom.LocationAIndex || '暂未填写', dom.HourlyRate || '暂未填写', 0, 
+                        0, dom.Overview || '暂未填写', dom.skills || '');
+                        
+                        pa.append(tmp);
+                    });
+                    
+                    
+                }else{
+                    if(curPage == 1){
+                        $(".sea-result-info").show().html("没有找到查询结果。");
+                        $('.get-more').hide();
+                    }else {
+                        $('.get-more').hide();
+                        $('.no-more').show();
+                    }
                 }
-            }
-            if(curPage == 1){
-                $(".all-count").html('<b class="lbl-search-title">所有的自由人</b>（' + data.count + ' 个）');
-            }
+                if(curPage == 1){
+                    $(".all-count").html('<b class="lbl-search-title">所有的自由人</b>（' + data.estimated + ' 个）');
+                }
+                
+                $("#input_search").val('');
+                $(".get-more").button('reset');
+            });
             
-            $("#input_search").val('');
-            $(".get-more").button('reset');
         }, function(){});
     };
     
@@ -623,7 +661,11 @@ $(function(){
     
 });
 
+
 $(function(){
+    //startProgress();
+    $(".search-jobs").hide();
+    //初始化-设置左侧
     setCategory();
 
 

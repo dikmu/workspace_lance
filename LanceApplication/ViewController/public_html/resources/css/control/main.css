@@ -187,8 +187,8 @@
 .borwser dd.more a{color:#333;font-size:12px;font-weight:bold;}
 .borwser dd.more a:hover{color:#0567b1;}
 
-.jobs .list-group-item .btn-xs,.edus .list-group-item .btn-xs,.works .list-group-item .btn-xs{display:none;}
-.jobs .list-group-item:hover .btn-xs,.edus .list-group-item:hover .btn-xs,.works .list-group-item:hover .btn-xs{display:block;}
+.jobs .list-group-item .btn-xs,.edus .list-group-item .btn-xs,.works .list-group-item .btn-xs,.licens .list-group-item .btn-xs{display:none;}
+.jobs .list-group-item:hover .btn-xs,.edus .list-group-item:hover .btn-xs,.works .list-group-item:hover .btn-xs,.licens .list-group-item:hover .btn-xs{display:block;}
 
 .edus .list-group-item-text{line-height:25px;}
 .edus .list-group-item-text .label{margin-right:5px;}
@@ -207,7 +207,7 @@
 .list-group-item .progress{margin-bottom:5px;border-radius:0px;height:3px;}
 .list-group-item .btn-danger{margin-left:5px;height:20px;}
 
-
+.sea-progress{border-radius:0px;margin-bottom:0px;height:5px;position:relative;top:9px;diaplay:none;}
 
 
 
