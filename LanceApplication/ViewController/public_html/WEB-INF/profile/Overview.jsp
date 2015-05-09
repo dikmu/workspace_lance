@@ -58,6 +58,88 @@
 
                     <div class="sep">
                     </div>
+                    
+                    <div class="mod">
+                        <span class="lan-font-20 lan-font-green">基本信息</span>
+                        <br />
+                        <div href="#" class="lan-font-12 baseinfor">
+                            <table border="0" width="100%">
+                                <tr>
+                                    <td width="100px;">
+                                        我的期望时新：
+                                    </td>
+                                    <td align="left">
+                                        <b id="exp_money"></b>
+                                    </td>
+                                    <td width="100px;">
+                                        我的个人网站：
+                                    </td>
+                                    <td align="left">
+                                        <a id="mysite" href="#"></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="100px;">
+                                        可提供的服务：
+                                    </td>
+                                    <td align="left">
+                                        <span id="tgservice"></span>
+                                    </td>
+                                    <td width="100px;">
+                                        可支付的条件：
+                                    </td>
+                                    <td align="left">
+                                        <span id="paycondition" href="#"></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <button type="button" class="btn btn-info btn-edit" onclick="redirectPage('./EditBasic')">编辑</button>
+                    </div>
+                    
+                    <div class="sep">
+                    </div>
+                    
+                    <div class="mod">
+                        <span class="lan-font-20 lan-font-green">联系信息</span>
+                        <br />
+                        <div href="#" class="lan-font-12 contactinfor">
+                            <table border="0" width="100%">
+                                <tr>
+                                    <td width="100px;">
+                                        联系邮箱：
+                                    </td>
+                                    <td align="left">
+                                        <span id="contact_email"></span>
+                                    </td>
+                                    <td width="100px;">
+                                        联系QQ：
+                                    </td>
+                                    <td align="left">
+                                        <span id="contact_qq" href="#"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="100px;">
+                                        手机号码：
+                                    </td>
+                                    <td align="left">
+                                        <span id="cellphone"></span>
+                                    </td>
+                                    <td width="100px;">
+                                        其他联系方式：
+                                    </td>
+                                    <td align="left">
+                                        <span id="contact_other"></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <button type="button" class="btn btn-info btn-edit" onclick="redirectPage('./EditContact')">编辑</button>
+                    </div>
+
+                    <div class="sep">
+                    </div>
 
                     <div class="mod">
                         <span class="lan-font-20 lan-font-green">我的专长</span>

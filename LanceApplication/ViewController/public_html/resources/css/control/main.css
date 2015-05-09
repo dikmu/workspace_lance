@@ -97,7 +97,7 @@
 .jobDetail .title-info tr{height:30px;}
 .jobDetail .lan-bg-f5{padding:10px 10px 0 10px;}
 .jobDetail .media-body{padding-top: 10px;}
-.jobDetail .pre-txt{margin-top:10px;}
+.jobDetail .pre-txt{margin-top:10px;word-break: break-all}
 .jobDetail .lan-bg-e7{padding:10px;}
 .jobDetail .qmedia{padding:10px;}
 .jobDetail .list-mods{margin-top:10px;}

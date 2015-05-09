@@ -1,3 +1,11 @@
+$(function(){
+    if(!User.logined || User.UserName != Data.User.User.UserName){
+        $(".btn-edit,.btn-xs").remove();
+        $(".lan-main-left").remove();
+        $(".lan-main-right").removeClass("col-md-9").addClass("col-md-12").css("border-left", "none");
+    }
+});
+
 //init functions
 function InitLicenMod(dat){
     var pa = $(".licens .list-jobs"), tmp = null;
@@ -184,6 +192,17 @@ $(function(){
         $(".uname").html(User.DisplayName + (Data.User.User.hasOwnProperty("JobTitle") ? '-'+Data.User.User.JobTitle : ''));
         $(".utitle").html(Data.User.User.Tagline);
         $(".uself").html(Data.User.User.Overview);
+        
+        $("#exp_money").html(Data.User.User.HourlyRate || "尚未确定");
+        $("#mysite").html(Data.User.User.WebsiteUrl || "尚未填写");
+        $("#tgservice").html(Data.User.User.ServiceDescription || "尚未填写");
+        $("#paycondition").html(Data.User.User.PaymentTerms || "尚未填写");
+        
+        $("#contact_email").html(Data.User.User.ImNumberB || "尚未填写");
+        $("#contact_qq").html(Data.User.User.ImNumberA || "尚未填写");
+        $("#cellphone").html(Data.User.User.PhoneNumber || "尚未填写");
+        $("#contact_other").html(Data.User.User.ImNumberC || "尚未填写");
+        
         var locDetail = "";
         if(User.LocationAIndex !=null){
             locDetail+="地址1："+User.LocationAIndex+" "+Data.User.User.LocationADetail+"<br>";

@@ -77,6 +77,7 @@ function postJobLocation(){
     });
 }
 
+var sel_skills = "", sel_count = 0;;
 function initSearchSkills(){
     $("#inp_key_cate").postInputSearch(function(data){
         if(data != null){
@@ -88,7 +89,6 @@ function initSearchSkills(){
         }
     });
     
-    var sel_skills = "", sel_count = 0;;
     $(".list-search").on("click", "li", function(){
         var str = $(this).text();
         if(sel_count < 5 && sel_skills.indexOf(str) < 0){
@@ -366,9 +366,9 @@ function init_click(){
     };
     
     var setOption = function(m_param){
-        if($("#jpublic_chk")[0].checked){
+        if($("#jpublic")[0].checked){
             m_param.JobVisibility = "public";
-            if($("#jpublic_chk")[0].checked){
+            if($("#chk_search")[0].checked){
                 m_param.AllowSearchEngines = "Y";
             }else{
                 m_param.AllowSearchEngines = "N";
@@ -421,7 +421,6 @@ function init_click(){
                 
                 $(".step-xh small").removeClass("lan-font-green");
                 $(".step-xh small:eq(1)").addClass("lan-font-green");
-                //console.log(post_job_param);
             }
         }else{
             $("#inp_jobname,#inp_detail").blur();
@@ -475,13 +474,16 @@ function initStep2(){
 
 var postAjax = function(m_param, cback){
     $.ax("post", "postJob", m_param, function(data){
-        //$.ae("OK");
-        alert("OK");
+        $.ae("发布成功！");
+        $("#btn_return_job,#btn_save_job").hide();
+        setTimeout(function(){
+            window.location.href = '/lance/pages/jobDetail/'+data.result;
+        }, 1500);
         cback(data);
     }, function(){
         netWorkError();
         cback(null);
-    }, "text");
+    });
 };
 
 function init_step3(){

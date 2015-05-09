@@ -98,21 +98,37 @@
                 </ul>
             </div>
             <div class="col-md-9 lan-main-right">
-                 <br /><br />
-                <div class="alert alert-info" role="alert">
-                    <span class="lan-font-22 lan-font-green uname">公司名称公司名称</span>
-                </div>
-
-                <div class="well">
+<br /><br />
+                <div class="well" style="min-height:600px;">
                     <div class="mod">
-                        <span class="lan-font-20 lan-font-green">公司介绍</span>
+                        <span class="lan-font-26 lan-font-green">公司名称公司名称公司名称公司名</span>
                         <br />
-                        <div href="#" class="lan-font-12 uself">
+                        <div class="lan-font-12 uself">
                             公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍
                         </div>
-                        <button type="button" class="btn btn-info btn-edit" onclick="redirectPage('./EditBasic')">编辑</button>
+                        <button type="button" class="btn btn-info btn-edit">编辑</button>
+                        
+                        <br />
+                        <div class="add-dialog panel panel-default" style="display:none;">
+                            <div class="panel-heading">修改公司信息</div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label>公司名称</label>
+                                    <input class="form-control txt-normal" id="company_name" placeholder="请输入公司名称" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="lan-vt">公司简介</label>
+                                    <textarea id="gsjj" class="form-control txt-normal" cols="" rows="30"></textarea>
+                                </div>
+                                <div class=" buttons">
+                                    <a id="btn_add_company_fin" class="btn btn-primary btn-sm">确定</a>
+                                    <a id="btn_cancel_company" class="btn btn-default btn-sm">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
                     </div>
-
 
                     
                     

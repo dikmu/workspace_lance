@@ -18,7 +18,7 @@ null);
     //delete skill
     $("#gridtbody").on("click", ".btn-delete", function () {
         var obj = $(this), id = obj.data("id"), pa = obj.closest("tr");
-        if ($.cf("你确定要删除这个技能吗？")) {
+        $.ae("你确定要删除这个技能吗？", function(){
             $.ax("post", "user/skill/delete/" + User.UserName + "/" + id, null, function (data) {
                 pa.fadeOut(300, function () {
                     pa.remove();
@@ -32,7 +32,7 @@ null);
                 netWorkError();
             },
 "text");
-        }
+        });
     });
 
     var checkSkillExist = function(val){
@@ -59,7 +59,6 @@ null);
                 obj.val("");
             }
             else {
-                //                alert("“" + obj.val() + "”技能已经添加");
                 $.ae("“" + obj.val() + "”技能已经添加");
             }
         }
@@ -97,7 +96,7 @@ null);
         
         //ajax
         $.ax("post", "user/skill/batch/" + User.UserName, add_post_param, function (cdata) {
-            //            alert("添加成功");
+            
             $.ae("添加成功", function(){location.reload();});
             
         },

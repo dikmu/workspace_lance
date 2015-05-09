@@ -12,6 +12,14 @@ var BASEURL = "/lance/res/";
 //            "roles":["authenticated-role","anonymous-role"]
 //        };
 
+$(function(){
+    $(".lan-main-menu .nav > li").hover(function(){
+        $(this).addClass("open");
+    }, function(){
+        $(this).removeClass("open").blur();
+    });
+});
+
 function netWorkError(goPath){
     alert("网络错误，请稍后再试。");
     //todo
