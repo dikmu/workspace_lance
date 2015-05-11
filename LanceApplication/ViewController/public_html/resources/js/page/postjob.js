@@ -454,12 +454,12 @@ function initStep2(){
         if($(".work-zq").val() != ""){
             trstr += '<tr><td align="right" class="col1"><b>工作周期:</b></td><td class="col2">'+$(".work-zq").val()+' -- ' +$(".work-zq2").val()+ '</td></tr>';
         }
-        trstr += '<tr><td align="right" class="col1"><b>公开情况:</b></td><td class="col2">'+(post_job_param.JobVisibility == 1 ? '开放给所有驻才网用户' : '不要公开显示，只有被我邀请的候选人才能看到')+'</td></tr>';
-        if(post_job_param.JobVisibility == 1){
+        trstr += '<tr><td align="right" class="col1"><b>公开情况:</b></td><td class="col2">'+(post_job_param.JobVisibility == 'public' ? '开放给所有驻才网用户' : '不要公开显示，只有被我邀请的候选人才能看到')+'</td></tr>';
+        if(post_job_param.JobVisibility == 'public'){
             trstr += '<tr><td align="right" class="col1"><b>是否允许此信息出现在百度、谷歌等搜索引擎上:</b></td><td class="col2">'+(post_job_param.AllowSearchEngines == 1 ? '是' : '否')+'</td></tr>';
         }
-        trstr += '<tr><td align="right" class="col1"><b>是否需要到达现场进行工作:</b></td><td class="col2">'+(post_job_param.FixedLocation == 1 ? '是' : '否')+'</td></tr>';
-        if(post_job_param.FixedLocation == 1){
+        trstr += '<tr><td align="right" class="col1"><b>是否需要到达现场进行工作:</b></td><td class="col2">'+(post_job_param.FixedLocation == 'Y' ? '是' : '否')+'</td></tr>';
+        if(post_job_param.FixedLocation == 'Y'){
             trstr += '<tr><td align="right" class="col1"><b>工作地点:</b></td><td class="col2">'+$("#sel_province").find("option:selected").text()+' -- ' +$("#sel_city").find("option:selected").text()+ '<br />' +$("#inp_locDesc").val()+ '</td></tr>';
         }
         trstr += '<tr><td align="right" class="col1"><b>工作起止时间:</b></td><td class="col2">'+post_job_param.PostJobDateStart+' -- ' +post_job_param.PostJobDateEnd+ '</td></tr>';

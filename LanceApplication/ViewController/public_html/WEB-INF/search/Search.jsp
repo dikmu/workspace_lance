@@ -16,7 +16,7 @@
         </script>
     </head>
     <body>
-        <jsp:include page="/WEB-INF/common/TobBar2.jsp"/>
+        <jsp:include page="/WEB-INF/common/TopBar.jsp"/>
         <div id="search-header">
             <div class="min-width">
                 <div class="con">

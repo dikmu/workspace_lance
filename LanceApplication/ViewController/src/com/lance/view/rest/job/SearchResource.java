@@ -553,7 +553,7 @@ public class SearchResource extends BaseRestResource {
     }
     
     /**
-     *根据工作分类(大类)，查找工作分类(小类)
+     * 根据工作分类(大类)，查找工作分类(小类)
      * @param pid
      * @return
      * @throws JSONException
