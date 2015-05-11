@@ -243,7 +243,18 @@ public class UserResource extends BaseRestResource {
             return cm;
         }
         System.out.println("返回新增记录的ID " + json.getString("UserName"));
+        sendMsg(userName);
         return json.getString("UserName"); //返回新增记录的ID
+    }
+    
+    private void sendMsg(String uname) throws JSONException {
+        UserNotificationResource unr = new UserNotificationResource();
+        JSONObject json = new JSONObject();
+        json.put("Title", "注册成功提醒");
+        json.put("Content", "欢迎来到驻才网，驻才网是专门为中小型企业和自由职业者搭建的一款信息交流平台！");
+        json.put("Type", "通知");
+        json.put("UserName", uname);
+        unr.sendUserNotification(json);
     }
 
     @GET

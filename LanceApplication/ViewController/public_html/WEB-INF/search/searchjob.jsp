@@ -20,8 +20,7 @@
     </head>
     <body>
     <jsp:include page="/WEB-INF/common/TopBar.jsp"/>
-     
-      <div class="lan-search">
+     <div class="lan-search">
         <div class="container">
             <div class="row">
                 <div class="col-md-offset-3 col-md-9 search-form">
@@ -35,12 +34,18 @@
                         <button data-cls="jobs" data-title="所有的工作" type="button" class="btn btn-link lan-font-black lan-font-16 sel-tab-type select">工作</button>
                         <!--<button data-cls="thumbs" data-title="所有的作品" type="button" class="btn btn-link lan-font-black lan-font-16 sel-tab-type">作品展示</button>-->
                         
-                        <button type="button" class="btn btn-success btn-middle pull-right" id="post_job">发布工作信息</button>
+                        <button type="button" class="btn btn-success btn-middle pull-right">发布工作信息</button>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="progress sea-progress">
+            <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                <span class="sr-only"></span>
+            </div>
+        </div>
     </div>
+    
     
     <div class="container">
         <div class="row">
@@ -50,6 +55,15 @@
                         <dt><a class="btn btn-link sel">所有类别</a></dt>
                         
                     </dl>
+                    
+                    <dl class="lan-dl" data-pa="skill">
+                        <dt><a class="btn btn-link sel">所有技能</a></dt>
+                        <dd>
+                            <select id="jbskill" style="width:200px;margin-left:12px;">
+                            </select>
+                        </dd>
+                    </dl>
+                    
                     
                     <dl class="lan-dl" data-pa="postform">
                         <dt><a class="btn btn-link sel">所有支付类型</a></dt>
@@ -142,7 +156,7 @@
                     <div class="mod hidemod">
                         <p class="title">
                             <a href="#" class="btn btn-link title-in"></a>
-                            <button type="button" class="btn btn-success btn-sm pull-right">申请</button>
+                            <a type="button" class="btn btn-success btn-sm pull-right">申请</a>
                         </p>
                         <div>
                             <span><b class="price">价格：不确定</b></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="stime">开始时间：2015年4月15日</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="etime">结束时间：2015年10月1日</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="acount">申请人数：0</span>
@@ -182,7 +196,7 @@
                         <div class="uinfo">
                             <p>
                                 <a class="btn btn-link uname">Media heading</a>
-                                <button type="button" class="btn btn-success btn-sm pull-right">雇佣</button>
+                                <a type="button" class="btn btn-success btn-sm pull-right">雇佣</a>
                             </p>
                             <p>
                                 <span class="lan-font-14 title"></span><br />
@@ -200,7 +214,6 @@
                     
                 </div>               
                 
-                
                 <span style="display:none;" autocomplete="off" data-loading-text="获取数据中..." type="button" class="btn btn-default btn-lg btn-block get-more">点击加载更多</span>
                 <span style="display:none;" class="btn btn-default btn-lg btn-block no-more" disabled="disabled">没有更多了</span>
                 
@@ -208,6 +221,8 @@
         </div>
     </div>
     
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/lance/resources/js/jquery-1.9.1.min.js" type="text/javascript"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/lance/resources/js/bootstrap.min.js" type="text/javascript"></script>
     

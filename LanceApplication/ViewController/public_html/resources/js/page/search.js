@@ -36,10 +36,10 @@ function setJobModel(uuid,title, price, stime, etime, acount, detail, cate1, cat
     item.find(".score .glyphicon:lt(" + score + ")").addClass("lan-font-yellow");
     return item;
 }
-function setPersonModel(uname, title, location, money, acount, earn, txt, skills){
+function setPersonModel(uid,uname, title, location, money, acount, earn, txt, skills){
     var item = $(".persons .hidemod").clone().removeClass("hidemod");
-    item.find(".uname").html(uname).attr("href", "/lance/pages/profile/Overview");
-    item.find("a.btn-sm").attr("href", "/lance/pages/profile/Overview");
+    item.find(".uname").html(uname).attr("href", "/lance/pages/profile/Overview?uid="+uid);
+    item.find("a.btn-sm").attr("href", "/lance/pages/profile/Overview?uid="+uid);
     item.find(".title").html(title);
     item.find(".location").html('所在地：' + location);
     item.find(".order").html('薪水要求：￥' + money);
@@ -284,7 +284,7 @@ $(function(){
                     
                     $.each(data.data, function(i, dom){
                     
-                        tmp = setPersonModel(dom.TrueName, dom.JobTitle, dom.LocationAIndex || '暂未填写', dom.HourlyRate || '暂未填写', 0, 
+                        tmp = setPersonModel(dom.UserName,dom.TrueName, dom.JobTitle, dom.LocationAIndex || '暂未填写', dom.HourlyRate || '暂未填写', 0, 
                         0, dom.Overview || '暂未填写', dom.skills || '');
                         
                         pa.append(tmp);

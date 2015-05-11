@@ -232,6 +232,22 @@ public class UserNotificationResource extends BaseRestResource {
         LOGGER.log(LOGGER.NOTIFICATION, "UserNotification created by return :" + res);
         return res;
     }
+    
+    public String sendUserNotification(JSONObject json) throws JSONException {
+        LOGGER.log(LOGGER.NOTIFICATION, "create UserNotification");
+        LanceRestAMImpl am = LUtil.findLanceAM();
+        ViewObjectImpl vo = getUserNotificationFromAM(am);
+        RowImpl row = LUtil.createInsertRow(vo);
+        RestUtil.copyJsonObjectToRow(json, vo, row, this.ATTR_CREATE);
+        LOGGER.log(LOGGER.TRACE, "copyJsonObjectToRow :" + this.ATTR_CREATE);
+        String cm = am.commit();
+        if (!"ok".equals(cm)) {
+            return "error:" + cm;
+        }
+        String res = returnParamAfterCreate(row);
+        LOGGER.log(LOGGER.NOTIFICATION, "UserNotification created by return :" + res);
+        return res;
+    }
 
     /**
      * 删除
