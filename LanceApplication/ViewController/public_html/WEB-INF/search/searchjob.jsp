@@ -34,7 +34,7 @@
                         <button data-cls="jobs" data-title="所有的工作" type="button" class="btn btn-link lan-font-black lan-font-16 sel-tab-type select">工作</button>
                         <!--<button data-cls="thumbs" data-title="所有的作品" type="button" class="btn btn-link lan-font-black lan-font-16 sel-tab-type">作品展示</button>-->
                         
-                        <button type="button" class="btn btn-success btn-middle pull-right">发布工作信息</button>
+                        <a type="button" class="btn btn-success btn-middle pull-right" href="/lance/pages/jobs/PostNewJob">发布工作信息</a>
                     </div>
                 </div>
             </div>

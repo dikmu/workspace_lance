@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <div class="lan-header-main">
     <div class="container">
-        <img class="pull-left logo" src="\lance\resources\image\common\logo.png" alt=""/>
+        <a href="/lance/pages/search">
+        <img class="pull-left logo" src="\lance\resources\image\common\logo.png" alt=""/></a>
         <ol class="breadcrumb pull-right" id="top_bc"></ol>
         <script id="bc-cnt-sp1" type="text/html">
              {{if logined == 'true'}}
@@ -65,9 +66,9 @@
                         <a href="/lance/pages/jobs/PostNewJob">发布招聘信息</a>
                     </li>
                     <li class="divider"></li>
-                    <li>
+                    <!--<li>
                         <a href="#">引荐自由工作者</a>
-                    </li>
+                    </li>-->
                     <li>
                         <a href="/lance/pages/profile/Overview">个人信息</a>
                     </li>
@@ -86,13 +87,13 @@
                     <li>
                         <a href="/lance/pages/browse">浏览</a>
                     </li>
-                    <li>
+                    <!--<li>
                         <a href="/lance/pages/Search">推荐给我的机会</a>
-                    </li>
+                    </li>-->
                     <li class="divider"></li>
-                    <li>
+                    <!--<li>
                         <a href="/lance/pages/Search">推荐给团队的机会</a>
-                    </li>
+                    </li>-->
                     <li>
                         <a href="/lance/pages/profile/Overview">我的信息</a>
                     </li>
@@ -164,7 +165,7 @@
             </div>
             <button type="button" class="btn btn-primary btn-small">搜索</button>
              
-            <button type="button" class="btn btn-success btn-middle">发布工作信息</button>
+            <a type="button" class="btn btn-success btn-middle" href="/lance/pages/jobs/PostNewJob">发布工作信息</a>
         </div>
     </div>
 </div>

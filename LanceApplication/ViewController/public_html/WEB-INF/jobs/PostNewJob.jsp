@@ -23,71 +23,7 @@
         </script>
     </head>
     <body>
-    <div class="lan-header-main">
-        <div class="container">
-            <img class="pull-left logo" src="/lance/resources/image/common/logo.png" alt="" />
-
-            <ol class="breadcrumb pull-right">
-                <li>
-                    <a class="lan-font-bold" data-toggle="dropdown" aria-expanded="false" href="#">Yxdaye</a>
-                    <span class="caret"></span>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">个人信息</a></li>
-                        <li><a href="#">个人简历</a></li>
-                        <li><a href="#">个人设置</a></li>
-                        <li role="presentation" class="divider"></li>
-                        <li><a href="#">退出</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">收件箱 <span class="label label-danger">1</span></a></li>
-                <li class="active">
-                    <a class="lan-font-bold" data-toggle="dropdown" aria-expanded="false" href="#">帮助</a>
-                    <span class="caret"></span>
-                </li>
-            </ol>
-
-        </div>
-        
-    </div>
-
-    <div class="lan-main-menu">
-        <div id="t_con" class="container">
-            <ul class="nav navbar-nav pull-left">
-                <li class="active">
-                    <a href="#">首页<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">找人 <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </li>
-            </ul>
-
-            <div class="pull-right search">
-                <div class="input-group input-group-sm">
-                    <span data-toggle="dropdown" role="button" aria-expanded="false" class="input-group-addon" id="sizing-addon3">自由人<span class="caret"></span></span>
-                    <input type="text" class="form-control" placeholder="搜索" aria-describedby="sizing-addon3">
-
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">自由人</a></li>
-                        <li><a href="#">工作</a></li>
-                        <li><a href="#">团队</a></li>
-                    </ul>
-
-                </div>
-                <button type="button" class="btn btn-primary btn-small">搜索</button>
-
-                <button type="button" class="btn btn-success btn-middle">发布工作信息</button>
-            </div>
-
-        </div>
-    </div>
-
+    <jsp:include page="/WEB-INF/common/TopBar.jsp"/>  
     <br />
     <div class="container newjob">
         <div class="row">
@@ -155,7 +91,6 @@
                 <div class="form-group <!--has-error has-feedback-->">
                     <label for="exampleInputEmail1" class="control-label">
                         设置工作安排（可选）：</label><br />
-                    
                      
                     <select class="form-control lan-dis-iblock sml-sel sel-arrange">
                         <option value="hourly">时薪</option>
@@ -177,13 +112,13 @@
                     <br />
                     <div class="smlp">
                         <span>工作时间：</span>
-                        <input value="" type="text" class="form-control sml-inp2 lan-dis-iblock work-hour" id="inp_gdjg" placeholder=""
+                        <input value="40" type="text" class="form-control sml-inp2 lan-dis-iblock work-hour" id="inp_gdjg" placeholder=""
                             data-container="body" data-toggle="popover" data-placement="right" 
                             data-content="" data-trigger="manual" data-animation="false"/>
                         <span>小时/周</span>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <span>工作周期：</span>
-                        <input value="" type="text" class="form-control sml-inp lan-dis-iblock work-zq" id="inp_gdjg" placeholder=""
+                        <input value="" type="text" class="form-control sml-inp lan-dis-iblock work-zq" id="inp_gdjg1" placeholder=""
                             data-container="body" data-toggle="popover" data-placement="right" 
                             data-content="" data-trigger="manual" data-animation="false"/>
                         <span>周&nbsp;&nbsp;-&nbsp;&nbsp;</span>
@@ -222,7 +157,7 @@
                             工作地点：</label><br />
                             <div class="radio">
                                 <label>
-                                    <input id="job_xc" name="jobloc" type="radio" value="" checked="checked" />
+                                    <input id="job_xc" name="jobloc" type="radio" value="" />
                                     到现场工作
                                 </label>
                             </div>
@@ -239,7 +174,7 @@
                             
                             <div class="radio">
                                 <label>
-                                    <input id="job_yc" name="jobloc" type="radio" value=""/>
+                                    <input id="job_yc" name="jobloc" type="radio" value="" checked="checked"/>
                                     远程办公
                                 </label>
                             </div>
@@ -371,55 +306,6 @@
         </div>
     </div>
 
-    
-    <div class="lan-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-2">
-                    <img src="/lance/resources/image/common/logo.png" alt="" />
-                </div>
-                <div class="col-md-10">
-                    <dl class="pull-left">
-                        <dt>Research</dt>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Trends</a></dd>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Online Employment Report</a></dd>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Annual Impact Report</a></dd>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Global Business Survey</a></dd>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Global Freelancer Survey</a></dd>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Women in Technology</a></dd>
-                    </dl>
-                    <dl class="pull-left">
-                        <dt>Research</dt>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Trends</a></dd>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Online Employment Report</a></dd>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Annual Impact Report</a></dd>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Global Business Survey</a></dd>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Global Freelancer Survey</a></dd>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Women in Technology</a></dd>
-                    </dl>
-                    <dl class="pull-left">
-                        <dt>Research</dt>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Trends</a></dd>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Online Employment Report</a></dd>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Annual Impact Report</a></dd>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Global Business Survey</a></dd>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Global Freelancer Survey</a></dd>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Women in Technology</a></dd>
-                    </dl>
-                    <dl class="pull-left">
-                        <dt>Research</dt>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Trends</a></dd>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Online Employment Report</a></dd>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Annual Impact Report</a></dd>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Global Business Survey</a></dd>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Global Freelancer Survey</a></dd>
-                        <dd><a href="#" class="lan-font-black lan-font-12">Women in Technology</a></dd>
-                    </dl>
-                    <div class="copyright">© 1999 - 2014 Elance, Inc. All Rights Reserved. U.S. Patents 7,069,242, 8,073,762 and 8,380,709</div>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="/lance/resources/js/jquery-1.9.1.min.js" type="text/javascript"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -430,5 +316,6 @@
     <script src="/lance/resources/js/core.js" type="text/javascript"></script>
     <script src="/lance/resources/js/control/lan_check.js" type="text/javascript"></script>
     <script type="text/javascript" src="/lance/resources/js/page/postjob.js"></script>
-    </body>
+    <jsp:include page="/WEB-INF/common/BottomBar.jsp"/>
+  </body>
 </html

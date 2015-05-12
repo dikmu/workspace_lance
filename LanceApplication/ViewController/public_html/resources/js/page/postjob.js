@@ -51,6 +51,7 @@ function postJobLocation(){
         $("#sel_province").change();
     }, function(){});
     
+    $(".sel-location").hide();
     $("#job_yc").click(function(){
         if($(this)[0].checked){
             $(".sel-location").slideUp();
@@ -108,7 +109,7 @@ function initSearchSkills(){
 function init_workArrange(){
     $(".sel-arrange").change(function(){
         var value = $(this).val(), pa = $(this).parent();
-        if(value == 1){
+        if(value == 'hourly'){
             pa.find(".smlp").show();
             pa.find(".lbl-money").html("时薪范围：");
         }else{
@@ -121,7 +122,9 @@ function init_workArrange(){
 
 var basicRes = {
     "title" : false,
-    "content" : false
+    "content" : false,
+    "cate" : false,
+    "scate" : false
 };
 
 function checkForm(){
@@ -152,6 +155,35 @@ function checkForm(){
             udetail.attr("data-content", "工作内容不能少于50字").popover("show");
             udetail.closest(".form-group").addClass("has-error");
             basicRes.content = false;
+        }
+    });
+    
+    var cate = $("#cate-lev1");
+    cate.blur(function(){
+        cate.popover("hide");
+        cate.closest(".form-group").removeClass("has-error").removeClass("has-success").removeClass("has-feedback");
+        
+        if(cate.lanCheck('notEmpty') && !('-1' == cate.val())){
+            cate.closest(".form-group").addClass("has-success").addClass("has-feedback");
+            basicRes.cate = true;
+        }else{
+            cate.attr("data-content", "工作分类大类必须选择!").popover("show");
+            cate.closest(".form-group").addClass("has-error");
+            basicRes.cate = false;
+        }
+    });
+    
+    var cate_s = $("#cate-lev2");
+    cate_s.blur(function(){
+        cate_s.popover("hide");
+        cate_s.closest(".form-group").removeClass("has-error").removeClass("has-success").removeClass("has-feedback");
+        if(cate_s.lanCheck('notEmpty') && !('-1' == cate_s.val())){
+            cate_s.closest(".form-group").addClass("has-success").addClass("has-feedback");
+            basicRes.scate = true;
+        }else{
+            cate_s.attr("data-content", "工作分类大类必须选择!").popover("show");
+            cate_s.closest(".form-group").addClass("has-error");
+            basicRes.scate = false;
         }
     });
 }
@@ -286,8 +318,6 @@ function postJobInputCheck(){
     });
 }
 
-
-
 var post_job_param = {};
 var sel_skills = "", sel_count = 0;;
 function init_click(){
@@ -395,9 +425,8 @@ function init_click(){
     
     $(".btn_sace,.btn_sace2").click(function(){
         var obj = $(this), type = obj.attr("data-val");
-        
-        if(basicRes.title && basicRes.content){
-            //btn.button('loading');
+        if(basicRes.title && basicRes.content && basicRes.cate && basicRes.scate){
+//            btn.button('loading');
             var times = getPostDates();
             
             post_job_param.Name = $("#inp_jobname").val();
@@ -411,19 +440,20 @@ function init_click(){
             post_job_param = setArrange(post_job_param);
             post_job_param = setOption(post_job_param);
             post_job_param.Status = type;
-            
+            alert(post_job_param);
             if(type == 'draft'){
                 postAjax(post_job_param, function(data){
-                   // obj.button("reset");
+//                    obj.button("reset");
                 });     
-            }else{            
+            }else{  
+                 alert('---');
                 $(".step1").fadeOut(function(){$(".step2").fadeIn();$(".apply_temp").hide();$(".step_sp").removeClass("one").removeClass("two").removeClass("three").addClass("two");});
                 
                 $(".step-xh small").removeClass("lan-font-green");
                 $(".step-xh small:eq(1)").addClass("lan-font-green");
             }
         }else{
-            $("#inp_jobname,#inp_detail").blur();
+            $("#inp_jobname,#inp_detail,#cate-lev1,#cate-lev1").blur();
         }
     });
 }
