@@ -124,7 +124,9 @@ var basicRes = {
     "title" : false,
     "content" : false,
     "cate" : false,
-    "scate" : false
+    "scate" : false,
+    "money" : false,
+    "date" : false
 };
 
 function checkForm(){
@@ -186,6 +188,7 @@ function checkForm(){
             basicRes.scate = false;
         }
     });
+    
 }
 
 function postJobInputCheck(){
@@ -206,38 +209,44 @@ function postJobInputCheck(){
         show_err.popover("hide");
         show_err.closest(".sxfw").removeClass("has-error").removeClass("has-success").removeClass("has-feedback");
             
-        if(v != ""){
+        //if(v != ""){
             if(!regular.test(v)){
                 show_err.attr("data-content", "请输入正确的薪酬").popover("show");
                 show_err.closest(".sxfw").addClass("has-error");
+                basicRes.money = false;
             }else if(Number(v) < moneyMin){
                 show_err.attr("data-content", "薪酬不可小于" + moneyMin +  "元").popover("show");
                 show_err.closest(".sxfw").addClass("has-error");
+                basicRes.money = false;
             }else{
                 show_err.closest(".sxfw").addClass("has-success").addClass("has-feedback");
             }
-        }
-        if(ve != ""){
+        //}
+        //if(ve != ""){
             if(!regular.test(ve)){
                 show_err.attr("data-content", "请输入正确的薪酬").popover("show");
                 show_err.closest(".sxfw").addClass("has-error");
+                basicRes.money = false;
             }else if(Number(ve) < moneyMin){
                 show_err.attr("data-content", "薪酬不可小于" + moneyMin +  "元").popover("show");
                 show_err.closest(".sxfw").addClass("has-error");
+                basicRes.money = false;
             }else{
                 show_err.closest(".sxfw").addClass("has-success").addClass("has-feedback");
             }
-        }
-        if(v != "" && ve != ""){
+        //}
+        //if(v != "" && ve != ""){
             n1 = Number(v);
             n2 = Number(ve);
             if(n1 >= n2){
                 show_err.attr("data-content", "请输入正确的薪酬范围").popover("show");
                 show_err.closest(".sxfw").addClass("has-error");
+                basicRes.money = false;
             }else{
                 show_err.closest(".sxfw").addClass("has-success").addClass("has-feedback");
+                basicRes.money = true;
             }
-        }
+        //}
     };
     
     $(".sx-start, .sx-end").blur(function(){
@@ -251,32 +260,36 @@ function postJobInputCheck(){
         end.popover("hide");
         end.closest(".smlp").removeClass("has-error").removeClass("has-success").removeClass("has-feedback");
         
-        if(v != ""){
+        //if(v != ""){
             if(!regular.test(v)){
                 end.attr("data-content", "请输入正确的周期").popover("show");
                 end.closest(".smlp").addClass("has-error");
+                basicRes.date = false;
             }else{
                 end.closest(".smlp").addClass("has-success");
             }
-        }
-        if(ve != ""){
+        //}
+        //if(ve != ""){
             if(!regular.test(ve)){
                 end.attr("data-content", "请输入正确的周期").popover("show");
                 end.closest(".smlp").addClass("has-error");
+                basicRes.date = false;
             }else{
                 end.closest(".smlp").addClass("has-success");
             }
-        }
-        if(v != "" && ve != ""){
+        //}
+        //if(v != "" && ve != ""){
             n1 = Number(v);
             n2 = Number(ve);
             if(n1 >= n2){
                 end.attr("data-content", "请输入正确的周期范围").popover("show");
                 end.closest(".smlp").addClass("has-error");
+                basicRes.date = false;
             }else{
                 end.closest(".smlp").addClass("has-success");
+                basicRes.date = true;
             }
-        }
+        //}
     };
     
     $(".work-zq, .work-zq2").blur(function(){
@@ -425,7 +438,7 @@ function init_click(){
     
     $(".btn_sace,.btn_sace2").click(function(){
         var obj = $(this), type = obj.attr("data-val");
-        if(basicRes.title && basicRes.content && basicRes.cate && basicRes.scate){
+        if(basicRes.title && basicRes.content && basicRes.cate && basicRes.scate && basicRes.money){
 //            btn.button('loading');
             var times = getPostDates();
             
@@ -440,20 +453,40 @@ function init_click(){
             post_job_param = setArrange(post_job_param);
             post_job_param = setOption(post_job_param);
             post_job_param.Status = type;
-            alert(post_job_param);
-            if(type == 'draft'){
-                postAjax(post_job_param, function(data){
-//                    obj.button("reset");
-                });     
-            }else{  
-                 alert('---');
-                $(".step1").fadeOut(function(){$(".step2").fadeIn();$(".apply_temp").hide();$(".step_sp").removeClass("one").removeClass("two").removeClass("three").addClass("two");});
-                
-                $(".step-xh small").removeClass("lan-font-green");
-                $(".step-xh small:eq(1)").addClass("lan-font-green");
+            if($(".sel-arrange").val() == "hourly"){
+                if(basicRes.date){
+                    //alert(post_job_param);
+                    if(type == 'draft'){
+                        postAjax(post_job_param, function(data){
+        //                    obj.button("reset");
+                        });     
+                    }else{  
+                         alert('---');
+                        $(".step1").fadeOut(function(){$(".step2").fadeIn();$(".apply_temp").hide();$(".step_sp").removeClass("one").removeClass("two").removeClass("three").addClass("two");});
+                        
+                        $(".step-xh small").removeClass("lan-font-green");
+                        $(".step-xh small:eq(1)").addClass("lan-font-green");
+                    }
+                }else{
+                    $(".work-zq, .work-zq2").blur();
+                }
+            }else{
+                //alert(post_job_param);
+                if(type == 'draft'){
+                    postAjax(post_job_param, function(data){
+    //                    obj.button("reset");
+                    });     
+                }else{  
+                     //alert('---');
+                    $(".step1").fadeOut(function(){$(".step2").fadeIn();$(".apply_temp").hide();$(".step_sp").removeClass("one").removeClass("two").removeClass("three").addClass("two");});
+                    
+                    $(".step-xh small").removeClass("lan-font-green");
+                    $(".step-xh small:eq(1)").addClass("lan-font-green");
+                }
             }
         }else{
             $("#inp_jobname,#inp_detail,#cate-lev1,#cate-lev1").blur();
+            $(".sx-start, .sx-end").blur();
         }
     });
 }
