@@ -186,6 +186,7 @@
                     
                     <div class="list-mods" id="list-discuss">
                         <script id="list-discuss-sp1" type="text/html"> 
+                           {{if list.length == 0}}<div class="media-body qmedia" style="width:100%;">暂无评论</div>{{/if}}
                            {{each list as data i}}
                              <div class="media">
                                 <div class="media-left media-middle list-img">

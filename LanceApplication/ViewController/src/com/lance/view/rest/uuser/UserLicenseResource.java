@@ -70,7 +70,6 @@ public class UserLicenseResource extends BaseRestResource {
     }
 
     @POST
-    @Consumes(MediaType.TEXT_PLAIN)
     @Path("delete/{uuid}")
     public String deleteUserLicenseHistory(@PathParam("uuid") String uuid){
         LanceRestAMImpl am = LUtil.findLanceAM();
