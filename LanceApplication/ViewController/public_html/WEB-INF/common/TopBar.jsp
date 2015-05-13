@@ -163,7 +163,7 @@
                     </li>
                 </ul>
             </div>
-            <button type="button" class="btn btn-primary btn-small">搜索</button>
+            <a type="button" class="btn btn-primary btn-small" href="/lance/pages/search">搜索</a>
              
             <a type="button" class="btn btn-success btn-middle" href="/lance/pages/jobs/PostNewJob">发布工作信息</a>
         </div>
