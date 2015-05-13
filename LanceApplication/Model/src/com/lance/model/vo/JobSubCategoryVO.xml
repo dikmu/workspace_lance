@@ -35,6 +35,10 @@
     Name="UUserVO2"
     ViewObjectName="com.lance.model.user.vo.UUserVO"
     RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="JobCategoryVO1"
+    ViewObjectName="com.lance.model.vo.JobCategoryVO"
+    RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_CreateBy"
     ListVOName="UUserVO1"
@@ -73,6 +77,25 @@
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
+  <ListBinding
+    Name="LOV_CategoryId"
+    ListVOName="JobCategoryVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CategoryId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Uuid"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="NameEn"/>
+      <Item Value="NameCn"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
   <EntityUsage
     Name="JobSubCategoryEO"
     Entity="com.lance.model.eo.JobSubCategoryEO"/>
@@ -88,7 +111,15 @@
     PrecisionRule="true"
     EntityAttrName="CategoryId"
     EntityUsage="JobSubCategoryEO"
-    AliasName="CATEGORY_ID"/>
+    AliasName="CATEGORY_ID"
+    LOVName="LOV_CategoryId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Name"
     PrecisionRule="true"
@@ -317,6 +348,11 @@
   <ViewLinkAccessor
     Name="JobSubCategoryExperts"
     ViewLink="com.lance.model.vl.JobSubCategory_ExportsVL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="JobTemplate"
+    ViewLink="com.lance.model.vl.JobSubCategory_JobTemplateVL"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <ResourceBundle>

@@ -256,7 +256,7 @@
                     <div class="caption" align="center">
                         <h3>免费服务</h3>
                         <p class="step-intro">
-                             <span class="glyphicon glyphicon-ok lan-font-green" aria-hidden="true"></span> Find great freelancers on the world's top online workplace
+                             <span class="glyphicon glyphicon-ok lan-font-green" aria-hidden="true"></span> 自由职业者/自由顾问可查看及申请您发布的招聘需求
                         </p>
                         <p align="center">
                             <b>Free</b><br />

@@ -1,0 +1,281 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="CategoryAdmin.jsf" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/TabletSupportTemplate.jsf" value="#{bindings.ptb1}" id="pt1">
+                <f:facet name="center"/>
+                <f:facet name="east"/>
+                <f:facet name="header"/>
+                <f:facet name="status"/>
+                <f:facet name="appNav"/>
+                <f:facet name="globalLinks"/>
+                <f:facet name="footer"/>
+                <f:facet name="content">
+                    <af:panelBorderLayout id="pbl1">
+                        <f:facet name="start"/>
+                        <f:facet name="bottom">
+                            <af:panelGroupLayout id="pgl3" layout="vertical" halign="center">
+                                <af:spacer width="10" height="10" id="s2"/>
+                                <af:panelGroupLayout id="pgl4">
+                                    <af:button actionListener="#{bindings.Commit.execute}" text="Commit"
+                                               disabled="#{!bindings.Commit.enabled}" id="b6"/>
+                                    <af:button actionListener="#{bindings.Rollback.execute}" text="Rollback"
+                                               disabled="#{!bindings.Rollback.enabled}" immediate="true" id="b7">
+                                        <af:resetActionListener/>
+                                    </af:button>
+                                    <f:facet name="separator">
+                                        <af:spacer width="10" height="10" id="s3"/>
+                                    </f:facet>
+                                </af:panelGroupLayout>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="end"/>
+                        <f:facet name="top">
+                            <af:panelGroupLayout id="pgl5" layout="vertical">
+                                <af:panelFormLayout id="pfl3" rows="1" labelWidth="120">
+                                    <f:facet name="footer"/>
+                                    <af:inputText value="#{bindings.NameEn.inputValue}"
+                                                  label="#{bindings.NameEn.hints.label}"
+                                                  required="#{bindings.NameEn.hints.mandatory}" columns="20"
+                                                  maximumLength="#{bindings.NameEn.hints.precision}"
+                                                  shortDesc="#{bindings.NameEn.hints.tooltip}" id="it1">
+                                        <f:validator binding="#{bindings.NameEn.validator}"/>
+                                    </af:inputText>
+                                    <af:inputText value="#{bindings.NameCn.inputValue}"
+                                                  label="#{bindings.NameCn.hints.label}"
+                                                  required="#{bindings.NameCn.hints.mandatory}" columns="20"
+                                                  maximumLength="#{bindings.NameCn.hints.precision}"
+                                                  shortDesc="#{bindings.NameCn.hints.tooltip}" id="it2">
+                                        <f:validator binding="#{bindings.NameCn.validator}"/>
+                                    </af:inputText>
+                                    <af:inputText value="#{bindings.Display.inputValue}"
+                                                  label="#{bindings.Display.hints.label}"
+                                                  required="#{bindings.Display.hints.mandatory}"
+                                                  columns="#{bindings.Display.hints.displayWidth}"
+                                                  maximumLength="#{bindings.Display.hints.precision}"
+                                                  shortDesc="#{bindings.Display.hints.tooltip}" id="it3">
+                                        <f:validator binding="#{bindings.Display.validator}"/>
+                                    </af:inputText>
+                                </af:panelFormLayout>
+                                <af:spacer width="10" height="10" id="s5"/>
+                                <af:panelFormLayout id="pfl1" rows="4" labelWidth="120">
+                                    <af:inputText value="#{bindings.Description.inputValue}"
+                                                  label="#{bindings.Description.hints.label}"
+                                                  required="#{bindings.Description.hints.mandatory}" columns="50"
+                                                  maximumLength="#{bindings.Description.hints.precision}"
+                                                  shortDesc="#{bindings.Description.hints.tooltip}" id="it4" rows="5">
+                                        <f:validator binding="#{bindings.Description.validator}"/>
+                                    </af:inputText>
+                                    <f:facet name="footer"/>
+                                </af:panelFormLayout>
+                                <af:spacer width="10" height="10" id="s4"/>
+                                <af:panelFormLayout id="pfl2" rows="2" labelWidth="120">
+                                    <f:facet name="footer">
+                                        <af:panelGroupLayout layout="horizontal" id="pgl1">
+                                            <af:button actionListener="#{bindings.First.execute}" text="First"
+                                                       disabled="#{!bindings.First.enabled}" partialSubmit="true"
+                                                       id="b1"/>
+                                            <af:button actionListener="#{bindings.Previous.execute}" text="Previous"
+                                                       disabled="#{!bindings.Previous.enabled}" partialSubmit="true"
+                                                       id="b2"/>
+                                            <af:button actionListener="#{bindings.Next.execute}" text="Next"
+                                                       disabled="#{!bindings.Next.enabled}" partialSubmit="true"
+                                                       id="b3"/>
+                                            <af:button actionListener="#{bindings.Last.execute}" text="Last"
+                                                       disabled="#{!bindings.Last.enabled}" partialSubmit="true"
+                                                       id="b4"/>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                    <af:inputText value="#{bindings.CreateByName.inputValue}"
+                                                  label="#{bindings.CreateByName.hints.label}"
+                                                  required="#{bindings.CreateByName.hints.mandatory}"
+                                                  columns="#{bindings.CreateByName.hints.displayWidth}"
+                                                  maximumLength="#{bindings.CreateByName.hints.precision}"
+                                                  shortDesc="#{bindings.CreateByName.hints.tooltip}" id="it5">
+                                        <f:validator binding="#{bindings.CreateByName.validator}"/>
+                                    </af:inputText>
+                                    <af:inputDate value="#{bindings.CreateOn.inputValue}"
+                                                  label="#{bindings.CreateOn.hints.label}"
+                                                  required="#{bindings.CreateOn.hints.mandatory}"
+                                                  columns="#{bindings.CreateOn.hints.displayWidth}"
+                                                  shortDesc="#{bindings.CreateOn.hints.tooltip}" id="id1">
+                                        <f:validator binding="#{bindings.CreateOn.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.CreateOn.format}"/>
+                                    </af:inputDate>
+                                    <af:inputText value="#{bindings.ModifyByName.inputValue}"
+                                                  label="#{bindings.ModifyByName.hints.label}"
+                                                  required="#{bindings.ModifyByName.hints.mandatory}"
+                                                  columns="#{bindings.ModifyByName.hints.displayWidth}"
+                                                  maximumLength="#{bindings.ModifyByName.hints.precision}"
+                                                  shortDesc="#{bindings.ModifyByName.hints.tooltip}" id="it6">
+                                        <f:validator binding="#{bindings.ModifyByName.validator}"/>
+                                    </af:inputText>
+                                    <af:inputDate value="#{bindings.ModifyOn.inputValue}"
+                                                  label="#{bindings.ModifyOn.hints.label}"
+                                                  required="#{bindings.ModifyOn.hints.mandatory}"
+                                                  columns="#{bindings.ModifyOn.hints.displayWidth}"
+                                                  shortDesc="#{bindings.ModifyOn.hints.tooltip}" id="id2">
+                                        <f:validator binding="#{bindings.ModifyOn.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.ModifyOn.format}"/>
+                                    </af:inputDate>
+                                    <af:inputText value="#{bindings.Version.inputValue}"
+                                                  label="#{bindings.Version.hints.label}"
+                                                  required="#{bindings.Version.hints.mandatory}"
+                                                  columns="#{bindings.Version.hints.displayWidth}"
+                                                  maximumLength="#{bindings.Version.hints.precision}"
+                                                  shortDesc="#{bindings.Version.hints.tooltip}" id="it7">
+                                        <f:validator binding="#{bindings.Version.validator}"/>
+                                        <af:convertNumber groupingUsed="false" pattern="#{bindings.Version.format}"/>
+                                    </af:inputText>
+                                </af:panelFormLayout>
+                                <af:spacer width="10" height="10" id="s6"/>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                            <f:facet name="menus"/>
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t2">
+                                    <af:button actionListener="#{bindings.CreateInsert.execute}" text="新增"
+                                               disabled="#{!bindings.CreateInsert.enabled}" id="b5"/>
+                                </af:toolbar>
+                            </f:facet>
+                            <f:facet name="statusbar"/>
+                            <af:table value="#{bindings.JobSubCategory1.collectionModel}" var="row"
+                                      rows="#{bindings.JobSubCategory1.rangeSize}"
+                                      emptyText="#{bindings.JobSubCategory1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      rowBandingInterval="0" fetchSize="#{bindings.JobSubCategory1.rangeSize}"
+                                      filterModel="#{bindings.JobSubCategory1Query.queryDescriptor}"
+                                      queryListener="#{bindings.JobSubCategory1Query.processQuery}" filterVisible="true"
+                                      varStatus="vs" id="t1"
+                                      selectedRowKeys="#{bindings.JobSubCategory1.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.JobSubCategory1.collectionModel.makeCurrent}"
+                                      rowSelection="single" partialTriggers="l1 ::b5">
+                                <af:column id="c10" width="30" sortable="true" filterable="true">
+                                    <af:link actionListener="#{bindings.Delete.execute}" text="删除"
+                                             disabled="#{!bindings.Delete.enabled}" id="l1"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.JobSubCategory1.hints.CategoryId.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.JobSubCategory1.hints.CategoryId.label}" id="c9">
+                                    <af:selectOneChoice value="#{row.bindings.CategoryId.inputValue}"
+                                                        label="#{row.bindings.CategoryId.label}"
+                                                        required="#{bindings.JobSubCategory1.hints.CategoryId.mandatory}"
+                                                        shortDesc="#{bindings.JobSubCategory1.hints.CategoryId.tooltip}"
+                                                        id="soc1">
+                                        <f:selectItems value="#{row.bindings.CategoryId.items}" id="si1"/>
+                                        <f:validator binding="#{row.bindings.CategoryId.validator}"/>
+                                    </af:selectOneChoice>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.JobSubCategory1.hints.Name.name}" filterable="true"
+                                           sortable="true" headerText="#{bindings.JobSubCategory1.hints.Name.label}"
+                                           id="c2">
+                                    <af:inputText value="#{row.bindings.Name.inputValue}"
+                                                  label="#{bindings.JobSubCategory1.hints.Name.label}"
+                                                  required="#{bindings.JobSubCategory1.hints.Name.mandatory}"
+                                                  columns="#{bindings.JobSubCategory1.hints.Name.displayWidth}"
+                                                  maximumLength="#{bindings.JobSubCategory1.hints.Name.precision}"
+                                                  shortDesc="#{bindings.JobSubCategory1.hints.Name.tooltip}" id="it11">
+                                        <f:validator binding="#{row.bindings.Name.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.JobSubCategory1.hints.NameCn.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.JobSubCategory1.hints.NameCn.label}" id="c5">
+                                    <af:inputText value="#{row.bindings.NameCn.inputValue}"
+                                                  label="#{bindings.JobSubCategory1.hints.NameCn.label}"
+                                                  required="#{bindings.JobSubCategory1.hints.NameCn.mandatory}"
+                                                  columns="#{bindings.JobSubCategory1.hints.NameCn.displayWidth}"
+                                                  maximumLength="#{bindings.JobSubCategory1.hints.NameCn.precision}"
+                                                  shortDesc="#{bindings.JobSubCategory1.hints.NameCn.tooltip}" id="it9">
+                                        <f:validator binding="#{row.bindings.NameCn.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.JobSubCategory1.hints.Description.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.JobSubCategory1.hints.Description.label}" id="c4">
+                                    <af:inputText value="#{row.bindings.Description.inputValue}"
+                                                  label="#{bindings.JobSubCategory1.hints.Description.label}"
+                                                  required="#{bindings.JobSubCategory1.hints.Description.mandatory}"
+                                                  columns="#{bindings.JobSubCategory1.hints.Description.displayWidth}"
+                                                  maximumLength="#{bindings.JobSubCategory1.hints.Description.precision}"
+                                                  shortDesc="#{bindings.JobSubCategory1.hints.Description.tooltip}"
+                                                  id="it10" rows="3">
+                                        <f:validator binding="#{row.bindings.Description.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.JobSubCategory1.hints.CreateByName.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.JobSubCategory1.hints.CreateByName.label}" id="c7">
+                                    <af:inputText value="#{row.bindings.CreateByName.inputValue}"
+                                                  label="#{bindings.JobSubCategory1.hints.CreateByName.label}"
+                                                  required="#{bindings.JobSubCategory1.hints.CreateByName.mandatory}"
+                                                  columns="#{bindings.JobSubCategory1.hints.CreateByName.displayWidth}"
+                                                  maximumLength="#{bindings.JobSubCategory1.hints.CreateByName.precision}"
+                                                  shortDesc="#{bindings.JobSubCategory1.hints.CreateByName.tooltip}"
+                                                  id="it13">
+                                        <f:validator binding="#{row.bindings.CreateByName.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.JobSubCategory1.hints.CreateOn.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.JobSubCategory1.hints.CreateOn.label}" id="c8">
+                                    <f:facet name="filter">
+                                        <af:inputDate value="#{bindings.JobSubCategory1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.CreateOn.value}"
+                                                      id="id6">
+                                            <af:convertDateTime pattern="#{bindings.JobSubCategory1.hints.CreateOn.format}"/>
+                                        </af:inputDate>
+                                    </f:facet>
+                                    <af:inputDate value="#{row.bindings.CreateOn.inputValue}"
+                                                  label="#{bindings.JobSubCategory1.hints.CreateOn.label}"
+                                                  required="#{bindings.JobSubCategory1.hints.CreateOn.mandatory}"
+                                                  columns="#{bindings.JobSubCategory1.hints.CreateOn.displayWidth}"
+                                                  shortDesc="#{bindings.JobSubCategory1.hints.CreateOn.tooltip}"
+                                                  id="id3">
+                                        <f:validator binding="#{row.bindings.CreateOn.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.JobSubCategory1.hints.CreateOn.format}"/>
+                                    </af:inputDate>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.JobSubCategory1.hints.ModifyByName.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.JobSubCategory1.hints.ModifyByName.label}" id="c6">
+                                    <af:inputText value="#{row.bindings.ModifyByName.inputValue}"
+                                                  label="#{bindings.JobSubCategory1.hints.ModifyByName.label}"
+                                                  required="#{bindings.JobSubCategory1.hints.ModifyByName.mandatory}"
+                                                  columns="#{bindings.JobSubCategory1.hints.ModifyByName.displayWidth}"
+                                                  maximumLength="#{bindings.JobSubCategory1.hints.ModifyByName.precision}"
+                                                  shortDesc="#{bindings.JobSubCategory1.hints.ModifyByName.tooltip}"
+                                                  id="it12">
+                                        <f:validator binding="#{row.bindings.ModifyByName.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.JobSubCategory1.hints.ModifyOn.name}"
+                                           filterable="true" sortable="true"
+                                           headerText="#{bindings.JobSubCategory1.hints.ModifyOn.label}" id="c3">
+                                    <f:facet name="filter">
+                                        <af:inputDate value="#{bindings.JobSubCategory1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ModifyOn.value}"
+                                                      id="id4">
+                                            <af:convertDateTime pattern="#{bindings.JobSubCategory1.hints.ModifyOn.format}"/>
+                                        </af:inputDate>
+                                    </f:facet>
+                                    <af:inputDate value="#{row.bindings.ModifyOn.inputValue}"
+                                                  label="#{bindings.JobSubCategory1.hints.ModifyOn.label}"
+                                                  required="#{bindings.JobSubCategory1.hints.ModifyOn.mandatory}"
+                                                  columns="#{bindings.JobSubCategory1.hints.ModifyOn.displayWidth}"
+                                                  shortDesc="#{bindings.JobSubCategory1.hints.ModifyOn.tooltip}"
+                                                  id="id5">
+                                        <f:validator binding="#{row.bindings.ModifyOn.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.JobSubCategory1.hints.ModifyOn.format}"/>
+                                    </af:inputDate>
+                                </af:column>
+                            </af:table>
+                        </af:panelCollection>
+                    </af:panelBorderLayout>
+                </f:facet>
+                <f:facet name="start"/>
+                <f:facet name="end"/>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

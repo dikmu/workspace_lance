@@ -72,6 +72,9 @@
   <ViewUsage
     Name="Skills2"
     ViewObjectName="com.lance.model.vo.SkillsVO"/>
+  <ViewUsage
+    Name="JobTemplate4"
+    ViewObjectName="com.lance.model.vo.JobTemplateVO"/>
   <ViewLinkUsage
     Name="JobTemplateJobCategoryFk1VL1"
     ViewLinkObjectName="com.lance.model.vl.JobTemplateJobCategoryFk1VL"
@@ -131,6 +134,12 @@
     ViewLinkObjectName="com.lance.model.vl.SkillsSkillSuperTypeFk1VL"
     SrcViewUsageName="com.lance.model.LanceAdminAM.SkillSuperType1"
     DstViewUsageName="com.lance.model.LanceAdminAM.Skills1"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="JobSubCategory_JobTemplateVL1"
+    ViewLinkObjectName="com.lance.model.vl.JobSubCategory_JobTemplateVL"
+    SrcViewUsageName="com.lance.model.LanceAdminAM.JobSubCategory1"
+    DstViewUsageName="com.lance.model.LanceAdminAM.JobTemplate4"
     Reversed="false"/>
   <ClientInterface
     Name="__clientInterface">

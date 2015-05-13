@@ -461,7 +461,6 @@ function init_click(){
         //                    obj.button("reset");
                         });     
                     }else{  
-                         alert('---');
                         $(".step1").fadeOut(function(){$(".step2").fadeIn();$(".apply_temp").hide();$(".step_sp").removeClass("one").removeClass("two").removeClass("three").addClass("two");});
                         
                         $(".step-xh small").removeClass("lan-font-green");

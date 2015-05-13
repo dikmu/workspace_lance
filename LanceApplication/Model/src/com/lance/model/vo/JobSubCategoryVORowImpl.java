@@ -41,8 +41,10 @@ public class JobSubCategoryVORowImpl extends BaseViewRowImpl {
         ModifyByName,
         JobSubCategorySubmit,
         JobSubCategoryExperts,
+        JobTemplate,
         UUserVO1,
-        UUserVO2;
+        UUserVO2,
+        JobCategoryVO1;
         static AttributesEnum[] vals = null;
         ;
         private static final int firstIndex = 0;
@@ -82,8 +84,10 @@ public class JobSubCategoryVORowImpl extends BaseViewRowImpl {
     public static final int MODIFYBYNAME = AttributesEnum.ModifyByName.index();
     public static final int JOBSUBCATEGORYSUBMIT = AttributesEnum.JobSubCategorySubmit.index();
     public static final int JOBSUBCATEGORYEXPERTS = AttributesEnum.JobSubCategoryExperts.index();
+    public static final int JOBTEMPLATE = AttributesEnum.JobTemplate.index();
     public static final int UUSERVO1 = AttributesEnum.UUserVO1.index();
     public static final int UUSERVO2 = AttributesEnum.UUserVO2.index();
+    public static final int JOBCATEGORYVO1 = AttributesEnum.JobCategoryVO1.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -251,6 +255,13 @@ public class JobSubCategoryVORowImpl extends BaseViewRowImpl {
     }
 
     /**
+     * Gets the associated <code>RowIterator</code> using master-detail link JobTemplate.
+     */
+    public RowIterator getJobTemplate() {
+        return (RowIterator) getAttributeInternal(JOBTEMPLATE);
+    }
+
+    /**
      * Gets the view accessor <code>RowSet</code> UUserVO1.
      */
     public RowSet getUUserVO1() {
@@ -262,6 +273,13 @@ public class JobSubCategoryVORowImpl extends BaseViewRowImpl {
      */
     public RowSet getUUserVO2() {
         return (RowSet) getAttributeInternal(UUSERVO2);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> JobCategoryVO1.
+     */
+    public RowSet getJobCategoryVO1() {
+        return (RowSet) getAttributeInternal(JOBCATEGORYVO1);
     }
 }
 

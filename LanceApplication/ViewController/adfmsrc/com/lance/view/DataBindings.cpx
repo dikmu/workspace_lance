@@ -46,6 +46,8 @@
     <page path="/manage/fregment/category/RemoveCategory.jsff" usageId="com_lance_view_RemoveCategoryPageDef"/>
     <page path="/WEB-INF/task/manage/category/lan-viewcategory-task.xml#lan-edit-category-task@findJobSubCategoryById"
           usageId="com_lance_view_lan_viewcategory_task_lan_edit_category_task_findJobSubCategoryByIdPageDef"/>
+    <page path="/AdminPage/CategoryAdmin.jsf" usageId="com_lance_view_CategoryAdminPageDef"/>
+    <page path="/AdminPage/CategoryTemplateAdmin.jsf" usageId="com_lance_view_CategoryTemplateAdminPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="com_lance_view_TestPageDef" path="com.lance.view.pageDefs.TestPageDef"/>
@@ -87,6 +89,8 @@
     <page id="com_lance_view_RemoveCategoryPageDef" path="manage.fregment.category.RemoveCategoryPageDef"/>
     <page id="com_lance_view_lan_viewcategory_task_lan_edit_category_task_findJobSubCategoryByIdPageDef"
           path="task.manage.category.lan_viewcategory_task_lan_edit_category_task_findJobSubCategoryByIdPageDef"/>
+    <page id="com_lance_view_CategoryAdminPageDef" path="AdminPage.CategoryAdminPageDef"/>
+    <page id="com_lance_view_CategoryTemplateAdminPageDef" path="AdminPage.CategoryTemplateAdminPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
      <BC4JDataControl id="TemplateAMDataControl" Package="org.agileofm.template.model"

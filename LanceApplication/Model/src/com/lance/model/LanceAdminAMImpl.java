@@ -355,5 +355,21 @@ public class LanceAdminAMImpl extends BaseApplicationModuleImpl implements Lance
     public SkillsVOImpl getSkills2() {
         return (SkillsVOImpl) findViewObject("Skills2");
     }
+
+    /**
+     * Container's getter for JobTemplate4.
+     * @return JobTemplate4
+     */
+    public JobTemplateVOImpl getJobTemplate4() {
+        return (JobTemplateVOImpl) findViewObject("JobTemplate4");
+    }
+
+    /**
+     * Container's getter for JobSubCategory_JobTemplateVL1.
+     * @return JobSubCategory_JobTemplateVL1
+     */
+    public ViewLinkImpl getJobSubCategory_JobTemplateVL1() {
+        return (ViewLinkImpl) findViewLink("JobSubCategory_JobTemplateVL1");
+    }
 }
 

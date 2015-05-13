@@ -25,7 +25,7 @@ function setJobModel(uuid,title, price, stime, etime, acount, detail, cate1, cat
     item.find(".form").html(form == 'hourly' ? '时新' : '固定价格');
     item.find(".location").html(location);
     
-    var arr = skills.split(";"), i = 0, len = arr.length, strskills = '';
+    var arr = skills!=null? skills.split(";"):[], i = 0, len = arr.length, strskills = '';
     for(i=0;i<len;i++){
         if(arr[i] != ""){
             strskills += '<a class="btn btn-info btn-xs">' + arr[i] + '</a>';

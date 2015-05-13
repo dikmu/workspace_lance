@@ -737,6 +737,6 @@
         <script src="/lance/resources/js/core.js" type="text/javascript"></script>
         <script src="/lance/resources/js/profile.js" type="text/javascript"></script>
         <script src="/lance/resources/js/searchjob.js" type="text/javascript"></script>
-        <jsp:include page="/WEB-INF/common/BottomBar2.jsp"/>
+        <jsp:include page="/WEB-INF/common/BottomBar.jsp"/>
     </body>
 </html>
