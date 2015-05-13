@@ -227,7 +227,16 @@ $(function(){
                         if(dom.FixedLocation == 'Y'){
                             location = dom.IndexLocation;
                         }
-                        tmp = setJobModel(dom.Uuid,dom.Name, dom.FixedPayMin + '-' + dom.FixedPayMax, dom.PostJobDateStart, dom.PostJobDateEnd, 0, 
+                        var payMin = null;
+                        var payMax = null;
+                        if(dom.Postform == 'hourly'){
+                            payMin = dom.HourlyPayMin;
+                            payMax = dom.HourlyPayMax;
+                        }else{
+                            payMin = dom.FixedPayMin;
+                            payMax = dom.FixedPayMax;
+                        }
+                        tmp = setJobModel(dom.Uuid,dom.Name, payMin + '-' + payMax, dom.PostJobDateStart, dom.PostJobDateEnd, 0, 
                         dom.BriefShort, dom.IndexWorkCategorys.split('>')[0], dom.IndexWorkCategorys.split('>')[1], dom.Postform, 
                         dom.IndexSkills, 5, location);
                         pa.append(tmp);
