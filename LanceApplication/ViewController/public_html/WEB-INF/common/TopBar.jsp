@@ -33,9 +33,7 @@
                   <a href="/lance/login.htm">登陆</a></li>
              {{/if}}
              <li class="active">
-                <a class="lan-font-bold" data-toggle="dropdown" aria-expanded="false" href="#">帮助</a>
-                 
-                <span class="caret"></span>
+                <a class="lan-font-bold" href="http://zhucaiblog.sinaapp.com/" target="_blank">帮助</a>
              </li>
         </script>
     </div>
