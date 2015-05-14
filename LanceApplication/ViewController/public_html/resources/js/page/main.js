@@ -544,7 +544,7 @@ $(function(){
                     UpdateLicenMod(param);
                 }, function(){}, "text");
             }
-            
+            $("#no_add_licen").hide();
         }else{
             var pa = $(this).closest(".panel").addClass("panel-danger");
             pa.find(".panel-heading").html("添加认证信息-请输入完整的信息");
@@ -587,7 +587,7 @@ $(function(){
                     UpdateJobMod(param);
                 }, function(){}, "text");
             }
-            
+            $("#no_add_job").hide();
         }else{
             var pa = $(this).closest(".panel").addClass("panel-danger");
             pa.find(".panel-heading").html("添加项目信息-请输入完整的信息");
@@ -628,7 +628,7 @@ $(function(){
                     UpdateEduMod(param);
                 }, function(){}, "text");
             }
-            
+            $("#no_add_edu").hide();
         }else{
             var pa = $(this).closest(".panel").addClass("panel-danger");
             pa.find(".panel-heading").html("添加教育信息-请输入完整的信息");
@@ -671,6 +671,7 @@ $(function(){
                     UpdateWorkMod(param);
                 }, function(){}, "text");
             }
+            $("#no_add_work").hide();
         }else{
             var pa = $(this).closest(".panel").addClass("panel-danger");
             pa.find(".panel-heading").html("添加工作经历-请输入完整的信息");

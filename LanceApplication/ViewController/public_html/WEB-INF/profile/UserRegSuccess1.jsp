@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>注册成功</title>
         <link type="text/css" href="/lance/resources/css/bootstrap.min.css" rel="stylesheet" />
-        <link type="text/css" href="/lance/resources/css/common.css" rel="stylesheet" />
+        <link href="/lance/resources/css/common/common.css" rel="stylesheet" type="text/css" />
+        <link href="/lance/resources/css/control/main.css" rel="stylesheet" type="text/css" />
         <link type="text/css" href="/lance/resources/css/main.css" rel="stylesheet" />
         <!--[if lt IE 9]>
           <script src="resources/js/html5shiv.js"></script>
