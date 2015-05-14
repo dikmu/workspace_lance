@@ -175,10 +175,12 @@
                                     <td class=" skills"><a class="btn btn-info btn-xs">PHP</a><a class="btn btn-info btn-xs">JAVA</a><a class="btn btn-info btn-xs">HTML</a><a class="btn btn-info btn-xs">JAVASCRIPT</a></td>
                                 </tr>
                                 <tr>
-                                    <td><b>评级</b></td>
-                                    <td class="score"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></td>
+                                    <!--<td><b>评级</b></td>
+                                    <td class="score"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></td>-->
                                     <td><b>地点</b></td>
                                     <td class="location"></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </table>
                         </div>

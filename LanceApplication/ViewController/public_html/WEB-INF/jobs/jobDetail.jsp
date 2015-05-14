@@ -123,11 +123,11 @@
                                     </div>
                                     <div class="media-body">
                                         <h4 class="media-heading">客户信息  <span id="client-location"></span></h4>
+                                        <!--<span class="glyphicon glyphicon-star lan-font-yellow"></span>
                                         <span class="glyphicon glyphicon-star lan-font-yellow"></span>
                                         <span class="glyphicon glyphicon-star lan-font-yellow"></span>
                                         <span class="glyphicon glyphicon-star lan-font-yellow"></span>
-                                        <span class="glyphicon glyphicon-star lan-font-yellow"></span>
-                                        <span class="glyphicon glyphicon-star-empty lan-font-yellow"></span>
+                                        <span class="glyphicon glyphicon-star-empty lan-font-yellow"></span>-->
                                     </div>
                                 </div>
                                 
