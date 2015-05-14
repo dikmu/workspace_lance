@@ -8,6 +8,7 @@ $(function(){
         umr : false,
         psr : false,
         cmr : false,
+        dname : false,
         vcode:false
     };
     
@@ -175,12 +176,23 @@ $(function(){
     var check_company = function(){
         var company = $("#inp_comname");
         
+        var l1 = "", l2 = "";
+        if($("#rgr")[0].checked){
+            l1 = "显示名称";
+            l2 = "请输入合法的显示名称";
+        }else{
+            l1 = "公司名称";
+            l2 = "请输入合法的公司名称";
+        }
+        
+        
+        
         var mck = function(){
             if(ckresult.cmr == false)
                 company.blur();
         };
         
-        com_conFocus(company, "公司名称");
+        com_conFocus(company, l1);
         
         company.blur(function(){
             company.closest(".form-group").removeClass("has-error").removeClass("has-success").removeClass("has-feedback");
@@ -191,7 +203,7 @@ $(function(){
                 ckresult.cmr = true;
             }else{
                 company.closest(".form-group").addClass("has-error");
-                company.attr("data-content", "请输入合法的公司名称").popover("show");
+                company.attr("data-content", l2).popover("show");
             }
         });    
         
@@ -206,11 +218,14 @@ $(function(){
          };
          
         vcode.blur(function(){
-            vcode.popover("hide");
+            //vcode.popover("hide");
             vcode.closest(".form-group").removeClass("has-error").removeClass("has-success").removeClass("has-feedback");
             
             if(vcode.lanCheck('notEmpty')){
                 vcodeAjax(vcode);
+            }else{
+                vcode.attr("data-content", "请输入验证码!").popover("show");
+                vcode.closest(".form-group").addClass("has-error");
             }
         });
          
@@ -235,7 +250,7 @@ $(function(){
     };
     
     var check_form = function(btn){
-        if(ckresult.emr && ckresult.lgr && ckresult.umr && ckresult.psr && ckresult.vcode){
+        if(ckresult.emr && ckresult.lgr && ckresult.umr && ckresult.psr && ckresult.vcode && ckresult.cmr){
             btn.button('loading');
             
             var param = {
@@ -264,6 +279,7 @@ $(function(){
             c2.ck();
             c3.ck();
             c4.ck();
+            c5.ck();
             c6.ck();
         }
     };
@@ -290,54 +306,54 @@ $(function(){
     var c6 = check_vcode();
     
     var check_form2 = function(btn){
-        if(ckresult.emr && ckresult.lgr && ckresult.umr && ckresult.psr){
+        if(ckresult.emr && ckresult.lgr && ckresult.umr && ckresult.psr && ckresult.cmr && ckresult.vcode){
             
-            if(($("#rgs")[0].checked && ckresult.cmr) || $("#rgr")[0].checked ){
+           // if(($("#rgs")[0].checked && ) || $("#rgr")[0].checked ){
             
-                var compName = "";
-                if($("#rgs")[0].checked){
-                    compName = $("#inp_comname").val();
-                }
-                if(!$("#fwtk")[0].checked){
-                    
-                    $("#lbl_fwtk").popover("show");
-                    return;
-                }else{
-                    $("#lbl_fwtk").popover("hide");
-                }
-            
-                btn.button('loading');
-                
-                var param = { 
-                    "UserName" : $("#inp_lgname").val(),
-                    "Email" :  $("#inp_mail").val(),
-                    "DisplayName" : $("#inp_name").val(),
-                    "Country" : $("#sel_contury").val(),
-                    "TrueName" :  $("#inp_name").val(),
-                    "CompanyName" : compName,
-                    "Password" : $("#inp_pass").val(),
-                    "DefaultRole" : 'lancer',
-                    "vcode":$("#inp_verCode").val()
-                };
-                $.ax("post", "user", param, function(data){
-                    if(data.indexOf("err:vcode") >= 0){
-                        c6.ck();
-                        btn.button("reset");
-                    }else{
-                        toLogin($("#inp_lgname").val(),$("#inp_pass").val(),$("#inp_verCode").val(),btn);
-                    }
-                }, function(xhr, err, info){
-                    btn.button("reset");
-                }, "text");
+            var compName = "";
+            if($("#rgs")[0].checked){
+                compName = $("#inp_comname").val();
             }
+            if(!$("#fwtk")[0].checked){
+                
+                $("#lbl_fwtk").popover("show");
+                return;
+            }else{
+                $("#lbl_fwtk").popover("hide");
+            }
+        
+            btn.button('loading');
+            
+            var param = { 
+                "UserName" : $("#inp_lgname").val(),
+                "Email" :  $("#inp_mail").val(),
+                "TrueName" : $("#inp_name").val(),
+                "Country" : $("#sel_contury").val(),
+                "TrueName" :  $("#inp_name").val(),
+                "DisplayName" : compName,
+                "Password" : $("#inp_pass").val(),
+                "DefaultRole" : 'lancer',
+                "vcode":$("#inp_verCode").val()
+            };
+            $.ax("post", "user", param, function(data){
+                if(data.indexOf("err:vcode") >= 0){
+                    c6.ck();
+                    btn.button("reset");
+                }else{
+                    toLogin($("#inp_lgname").val(),$("#inp_pass").val(),$("#inp_verCode").val(),btn);
+                }
+            }, function(xhr, err, info){
+                btn.button("reset");
+            }, "text");
+            
             
         }else{
             c1.ck();
             c2.ck();
             c3.ck();
             c4.ck();
-            if($("#rgs")[0].checked)
-                c5.ck();
+            c5.ck();
+            c6.ck();
         }
     };
     
@@ -351,9 +367,9 @@ $(function(){
 $(function(){
     $("#rgr").click(function(){
         if(this.checked){
-            $("#inp_comname").attr("disabled", true).val($("#inp_name").val());
+            $("#inp_comname").attr("disabled", false).val($("#inp_name").val());
             
-            $("#lbl_name").html("显示名");
+            $("#lbl_name").html("显示用户名");
             $("#inp_comname").popover("hide").closest(".form-group").removeClass("has-error").removeClass("has-success").removeClass("has-feedback");
         }
     });
