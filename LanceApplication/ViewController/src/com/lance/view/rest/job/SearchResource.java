@@ -60,7 +60,7 @@ public class SearchResource extends BaseRestResource {
         "SpecificSkillG", "Status", "StatusDesc", "WeeklyHours", "WorkCategory", "WorkSubcategory", "PostJobDateStart",
         "PostJobDateEnd", "LocationRegion", "LocationCountry", "LocationProvince", "LocationCity", "IndexSkills",
         "IndexLocation", "IndexWorkCategorys", "SignBy", "CreateBy", "CreateOn", "ModifyBy", "ModifyOn", "Version",
-        "CreateByName", "BriefShort"
+        "CreateByName", "BriefShort","ApplyCount"
     };
 
     /**
@@ -71,7 +71,7 @@ public class SearchResource extends BaseRestResource {
         "HourlyPayMax", "HourlyPayMin", "LocationDesc", "Name", "Postform", "SpecificSkillA", "SpecificSkillB",
         "SpecificSkillC", "SpecificSkillD", "SpecificSkillE", "SpecificSkillF", "SpecificSkillG", "WeeklyHours",
         "WorkCategory", "WorkSubcategory", "PostJobDateStart", "PostJobDateEnd", "IndexSkills", "IndexLocation",
-        "IndexWorkCategorys", "SignBy", "CreateBy", "CreateOn", "ModifyBy", "ModifyOn", "Version", "CreateByName"
+        "IndexWorkCategorys", "SignBy", "CreateBy", "CreateOn", "ModifyBy", "ModifyOn", "Version", "CreateByName","ApplyCount"
     };
 
     public static final String[] ATTR_SEARCH_LANCER = {"UserName", "TrueName", "DisplayName", "Email", "Img", "Country", "CompanyId", "PhoneNumber", "Attach", "JobTitle", "Video", "Description", "WebsiteUrl", "ImNumberA", "ImTypeA", "ImNumberB", "ImTypeB", "ImNumberC", "ImTypeC", "LocationA", "LocationARegion", "LocationAProvince", "LocationACity", "LocationACountry", "LocationADetail", "LocationAIndex", "LocationB", "LocationBRegion", "LocationBProvince", "LocationBCountry", "LocationBCity", "LocationBDetail", "HourlyRate", "ChargeRate", "Overview", "ServiceDescription", "PaymentTerms", "Keywords", "AddressDisplay", "ContactInfo", "IdentityType", "IdentityNo", "Rank", "RankDesc", "CompanyName"};

@@ -236,7 +236,7 @@ $(function(){
                             payMin = dom.FixedPayMin;
                             payMax = dom.FixedPayMax;
                         }
-                        tmp = setJobModel(dom.Uuid,dom.Name, payMin + '-' + payMax, dom.PostJobDateStart, dom.PostJobDateEnd, 0, 
+                        tmp = setJobModel(dom.Uuid,dom.Name, payMin + '-' + payMax, dom.PostJobDateStart, dom.PostJobDateEnd, dom.ApplyCount, 
                         dom.BriefShort, dom.IndexWorkCategorys.split('>')[0], dom.IndexWorkCategorys.split('>')[1], dom.Postform, 
                         dom.IndexSkills, 5, location);
                         pa.append(tmp);

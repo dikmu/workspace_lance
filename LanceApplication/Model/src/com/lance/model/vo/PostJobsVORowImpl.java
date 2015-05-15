@@ -81,6 +81,7 @@ public class PostJobsVORowImpl extends BaseViewRowImpl {
         CreateByName,
         BriefShort,
         SearchRank,
+        ApplyCount,
         PostJobDiscuss,
         UUserVO1,
         SkillsVO1,
@@ -90,7 +91,8 @@ public class PostJobsVORowImpl extends BaseViewRowImpl {
         LocationCityVO1,
         JobCategoryVO1,
         JobSubCategoryVO1;
-        static AttributesEnum[] vals = null; ;
+        static AttributesEnum[] vals = null;
+        ;
         private static final int firstIndex = 0;
 
         public int index() {
@@ -162,6 +164,7 @@ public class PostJobsVORowImpl extends BaseViewRowImpl {
     public static final int CREATEBYNAME = AttributesEnum.CreateByName.index();
     public static final int BRIEFSHORT = AttributesEnum.BriefShort.index();
     public static final int SEARCHRANK = AttributesEnum.SearchRank.index();
+    public static final int APPLYCOUNT = AttributesEnum.ApplyCount.index();
     public static final int POSTJOBDISCUSS = AttributesEnum.PostJobDiscuss.index();
     public static final int UUSERVO1 = AttributesEnum.UUserVO1.index();
     public static final int SKILLSVO1 = AttributesEnum.SkillsVO1.index();
@@ -900,6 +903,22 @@ public class PostJobsVORowImpl extends BaseViewRowImpl {
      */
     public void setSearchRank(Integer value) {
         setAttributeInternal(SEARCHRANK, value);
+    }
+
+    /**
+     * Gets the attribute value for APPLY_COUNT using the alias name ApplyCount.
+     * @return the APPLY_COUNT
+     */
+    public BigDecimal getApplyCount() {
+        return (BigDecimal) getAttributeInternal(APPLYCOUNT);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for APPLY_COUNT using the alias name ApplyCount.
+     * @param value value to set the APPLY_COUNT
+     */
+    public void setApplyCount(BigDecimal value) {
+        setAttributeInternal(APPLYCOUNT, value);
     }
 
     /**

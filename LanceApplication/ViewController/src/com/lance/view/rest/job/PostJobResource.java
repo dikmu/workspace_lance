@@ -14,6 +14,8 @@ import com.lance.view.util.LUtil;
 import com.zngh.platform.front.core.model.cache.AuthCache;
 import com.zngh.platform.front.core.view.BaseRestResource;
 
+import java.math.BigDecimal;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -364,13 +366,16 @@ public class PostJobResource extends BaseRestResource {
     public String postDiscuss(@PathParam("postJobId") String jobId, JSONObject json) throws JSONException {
         LanceRestAMImpl am = LUtil.findLanceAM();
         PostJobsVOImpl vo = am.getPostJobs1();
-        findPostJobById(jobId, vo);
+        PostJobsVORowImpl prow = findPostJobById(jobId, vo);
 
         PostJobDiscussVOImpl vo2 = am.getPostJobDiscuss1();
         Row row = vo2.createRow();
         for (String attr : POST_JOB_DISCUSS_VO_ATTR_CREATE) {
             if (json.has(attr))
                 row.setAttribute(attr, json.get(attr));
+        }
+        if("Y".equals(row.getAttribute("IsApply"))){
+            prow.setApplyCount(new BigDecimal(prow.getApplyCount().intValue()+1));
         }
         vo2.insertRow(row);
         am.getDBTransaction().commit();
@@ -689,6 +694,9 @@ public class PostJobResource extends BaseRestResource {
                 discussRow.setStatusLog("此信息已被客户删除");
             } else {
                 discussRow.setStatusLog("此信息已被发布者删除");
+            }
+            if("Y".equals(discussRow.getAttribute("IsApply"))){
+                postJobRow.setApplyCount(new BigDecimal(postJobRow.getApplyCount().intValue()-1));
             }
         }
         discussIt.closeRowSetIterator();

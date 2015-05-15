@@ -388,6 +388,12 @@
     ColumnType="INTEGER"
     AliasName="VIEW_ATTR"
     SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="ApplyCount"
+    PrecisionRule="true"
+    EntityAttrName="ApplyCount"
+    EntityUsage="PostJobsEO"
+    AliasName="APPLY_COUNT"/>
   <ViewCriteria
     Name="FindByIdVC"
     ViewObjectName="com.lance.model.vo.PostJobsVO"
@@ -620,6 +626,12 @@
     ViewLink="com.lance.model.vl.PostJob_PostJobDiscussVL"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <SortCriteria>
+    <Sort
+      Attribute="Rank"/>
+    <Sort
+      Attribute="ModifyOn"/>
+  </SortCriteria>
   <SortCriteria>
     <Sort
       Attribute="Rank"/>
