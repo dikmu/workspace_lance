@@ -22,6 +22,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import oracle.adf.share.ADFContext;
+
 import oracle.jbo.Key;
 import oracle.jbo.Row;
 
@@ -101,6 +103,9 @@ public class UserSkillResource extends BaseRestResource {
 
         UserSkillVOImpl vo = am.getUserSkill1();
         Row row = vo.findByKey(new Key(new Object[] { skillId }), 1)[0];
+        if (!RestSecurityUtil.isOwner(row)) {
+            return "msg:没有足够的权限删除此用户数据";
+        }
         vo.setCurrentRow(row);
 
         vo.removeCurrentRow();

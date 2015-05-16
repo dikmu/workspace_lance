@@ -9,6 +9,8 @@ $(function(){
           success: function(data){
             if("ok" == data){
                $("#sending").html("邮件已发送!");
+            }else{
+                $("#sending").html("邮件发送失败!");
             }
         },error:function(msg){
            
@@ -30,6 +32,8 @@ $(function(){
                       success: function(data){
                         if(data.indexOf("ok") >= 0){
                             $("#act-sending").html("激活邮件已经重新发至你的邮箱："+data.split(":")[1]);
+                        }else{
+                            $("#act-sending").html(data.split(":")[1]);
                         }
                     },error:function(msg){
                        

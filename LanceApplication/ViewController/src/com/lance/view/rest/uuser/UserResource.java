@@ -17,7 +17,11 @@ import com.lance.view.util.RestSecurityUtil;
 import com.zngh.platform.front.core.model.util.UUIDGenerator;
 import com.zngh.platform.front.core.view.BaseRestResource;
 
+import java.io.UnsupportedEncodingException;
+
 import java.text.SimpleDateFormat;
+
+import javax.mail.MessagingException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -26,6 +30,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import oracle.adf.share.ADFContext;
 
 import oracle.jbo.AttributeDef;
 import oracle.jbo.LocaleContext;
@@ -231,7 +237,10 @@ public class UserResource extends BaseRestResource {
         RegEmailChkVORowImpl regEmailChkRow = (RegEmailChkVORowImpl) regEmailChkVO.createRow();
         regEmailChkRow.setUuid(uuid);
         regEmailChkRow.setUserName(userName);
-        sendActivateMail.sendActivateEmail(email, uuid, userName);
+        try {
+            sendActivateMail.sendActivateEmail(email, uuid, userName);
+        } catch (Exception e) {
+        } 
         regEmailChkVO.insertRow(regEmailChkRow);
         row.updateSearchIndex();
 
@@ -381,7 +390,7 @@ public class UserResource extends BaseRestResource {
             return "msg:找不到用户:" + userName;
         }
 
-        if (!RestSecurityUtil.isOwner(row)) {
+        if (!isOwner(row)) {
             return "msg:没有足够的权限修改此用户";
         }
         copyJsonObjectToRow(json, vo, row, ATTR_UPDATE);
@@ -389,6 +398,15 @@ public class UserResource extends BaseRestResource {
         am.getDBTransaction().commit();
         System.out.println("row changed");
         return "ok";
+    }
+    
+    public boolean isOwner(Row row) {
+        String curUser = ADFContext.getCurrent().getSecurityContext().getUserName();
+        String creator = (String) row.getAttribute("UserName");
+        if (creator.equals(curUser)) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -463,5 +481,14 @@ public class UserResource extends BaseRestResource {
             return "inp:code";
         }
         return "";
+    }
+    
+    @GET
+    @Path("status")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String checkUserStatus(){
+        LanceRestAMImpl am = LUtil.findLanceAM();
+        UUserVORowImpl row = LUtil.getUUserByName(this.findCurrentUserName(), am);
+        return row.getStatus();
     }
 }

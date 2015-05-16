@@ -47,22 +47,7 @@ function DeleteLicenMod(dat){
     cur_mod.find(".progress").show().find(".progress-bar").animate({"width" : "100%"}, 500);
     setTimeout(function(){
         cur_mod.slideUp();
-        dynamicDisplay("licen_","no_add_licen");
     }, 1100);
-}
-
-function dynamicDisplay(matchStr,id){
-  if($("div[id^="+matchStr+"]:visible").length > 0){
-      var is_visible = $("#"+id).is(":visible");
-       if(is_visible){
-          $("#"+id).hide();
-      }
-  }else{
-     var is_visible = $("#"+id).is(":visible");
-     if(!is_visible){
-         $("#"+id).show();
-      }
-  }
 }
 
 function InitJobMod(dat){

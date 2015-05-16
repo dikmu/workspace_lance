@@ -1221,7 +1221,7 @@ public class UUserVORowImpl extends BaseViewRowImpl {
             this.setLocationBIndex("");
         }
 
-        this.setIndexAll(new ClobDomain(this.getKeywords() + ";" + this.getTagline() + ";" +
+        this.setIndexAll(new ClobDomain(this.getUserName()+";"+this.getDisplayName()+";"+this.getCompanyName()+";"+ this.getKeywords() + ";" + this.getTagline() + ";" +
                                         this.getServiceDescription() + ";" + this.getOverview() + ";" +
                                         this.getLocationAIndex() + ";" + this.getLocationBIndex() + ";"+this.getIndexSkill()+";"));
     }
@@ -1240,16 +1240,18 @@ public class UUserVORowImpl extends BaseViewRowImpl {
         //            sb.append(row.getName() + ";");
         //        }
         if (StringUtils.isNotBlank(province)) {
-            LocationProvinceVORowImpl row = (LocationProvinceVORowImpl) this.getLocationProvinceVO1().getViewObject().findByKey(new Key(new Object[] {
-                                                                                                                                        province }),
-                                                                                                                                1)[0];
-            sb.append(row.getProvinceName() + ";");
+            Row[] rows = this.getLocationProvinceVO1().getViewObject().findByKey(new Key(new Object[] {province }), 1);
+            if(rows != null && rows.length > 0){
+                LocationProvinceVORowImpl row = (LocationProvinceVORowImpl) rows[0];
+                sb.append(row.getProvinceName() + ";");
+            }
         }
         if (StringUtils.isNotBlank(city)) {
-            LocationCityVORowImpl row = (LocationCityVORowImpl) this.getLocationCityVO1().getViewObject().findByKey(new Key(new Object[] {
-                                                                                                                            city }),
-                                                                                                                    1)[0];
-            sb.append(row.getCityName() + ";");
+            Row[] rows = this.getLocationCityVO1().getViewObject().findByKey(new Key(new Object[] {city }),1);
+            if(rows != null && rows.length > 0){
+                LocationCityVORowImpl row = (LocationCityVORowImpl)rows[0];
+                sb.append(row.getCityName() + ";");
+            }
         }
     }
 

@@ -7,9 +7,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>驻才网</title>
-        <link type="text/css" href="../../resources/css/bootstrap.min.css" rel="stylesheet" />
-        <link type="text/css" href="../../resources/css/common.css" rel="stylesheet" />
-        <link type="text/css" href="../../resources/css/main.css" rel="stylesheet" />
+        <link type="text/css" href="/lance/resources/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="/lance/resources/css/common/common.css" rel="stylesheet" type="text/css" />
+        <link href="/lance/resources/css/control/main.css" rel="stylesheet" type="text/css" />
+        <link type="text/css" href="/lance/resources/css/main.css" rel="stylesheet" />
         <!--[if lt IE 9]>
           <script src="resources/js/html5shiv.js"></script>
           <script src="resources/js/respond.js"></script>
@@ -27,7 +28,7 @@
         </div>
         
         <div id="t_con" class="row">
-            <jsp:include page="/WEB-INF/common/TobBar2.jsp"/>
+            <jsp:include page="/WEB-INF/common/TopBar.jsp"/>
             <div id="content" class="min-width">
                 <div class="reg-success">
                     <div class="title">
@@ -71,6 +72,6 @@
     <script src="/lance/resources/js/core.js" type="text/javascript"></script>
     <script src="/lance/resources/js/template.js" type="text/javascript"></script>
     <script src="/lance/resources/js/page/registSuccess.js" type="text/javascript"></script>
-    <jsp:include page="/WEB-INF/common/BottomBar2.jsp"/>
+    <jsp:include page="/WEB-INF/common/BottomBar.jsp"/>
 </body>
 </html>

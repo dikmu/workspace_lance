@@ -97,7 +97,7 @@ public class EmailActivateServlet extends HttpServlet {
                     if (!adfctx.getSecurityContext().isAuthenticated()) {
                         response.sendRedirect("/lance/login.htm");
                     }else{
-                        response.sendRedirect("/lance/pages/MyHome");
+                        response.sendRedirect("/lance/pages/search");
                     }
                 }
             } else {
@@ -117,15 +117,16 @@ public class EmailActivateServlet extends HttpServlet {
             JSONObject userData = null;
             if (adfctx.getSecurityContext().isAuthenticated()){
                 userData = new UserResource().findSimpleUserByName(user);
+                userData.put("logined", true);
                 String[] roles = adfctx.getSecurityContext().getUserRoles();
                 JSONArray roleArr = new JSONArray();
                 for (String role : roles) {
                     roleArr.put(role);
                 }
                 userData.put("roles", roleArr);
-            }
-            if(userData == null){
+            } else {
                 userData = new JSONObject();
+                userData.put("logined", false);
             }
             request.setAttribute("user", userData);
             request.setAttribute("data", json);

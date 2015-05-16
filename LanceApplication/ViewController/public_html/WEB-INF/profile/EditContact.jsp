@@ -49,6 +49,13 @@
                         <label for="exampleInputEmail1" class="control-label">
                             邮箱地址：</label>
                         <input readonly="readonly" value="" type="text" class="form-control sml-inp" id="inp_email" placeholder=""/>
+                        <span id="send-cnt">
+                             认证邮箱尚未激活!<a href="#" id="send-email">重新发送激活邮件</a>
+                            <span id="sending" style="display: none;color:Red;font-size:12px;">
+                               <img src="../../resources/image/loading.gif" alt="" height="16" width="16"/>
+                                邮件发送中...
+                            </span>
+                        </span>
                     </div>
                     
                     <div class="form-group <!--has-error has-feedback-->">

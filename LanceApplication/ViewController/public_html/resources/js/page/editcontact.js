@@ -51,6 +51,77 @@ $(function(){
             });
         };
         
+     jQuery.ajax({
+          url : '/lance/res/user/status', 
+          type : 'get',
+          success: function(data){
+            if(!("active" == data)){
+               $("#inp_email").removeAttr("readonly");
+            }else{
+               $("#send-cnt").remove();
+            }
+        },error:function(msg){
+           netWorkError();
+        }
+    });
+    
+     var flag = false;
+     var check_email = function(){
+        var email = $("#inp_email");
+        email.blur(function(){
+            email.closest(".form-group").removeClass("has-error").removeClass("has-success").removeClass("has-feedback");
+            email.popover("hide");
+            if(email.lanCheck('onlyEmail')){
+                emailAjax(email);
+            }else{
+                email.attr("data-content", "请输入正确的邮箱格式。").popover("show");
+                email.closest(".form-group").addClass("has-error");
+                flag = false;
+            }
+        });
+        var emailAjax = function(obj){
+            obj.attr("readonly", true);
+            
+            $.ax("get", "user/exist/email/" + obj.val(), null, function(data){
+                if(data == true){
+                    obj.attr("data-content", "该邮箱已被注册，请选择其他邮箱。").popover("show");
+                    obj.closest(".form-group").addClass("has-error");
+                }else{
+                    obj.closest(".form-group").addClass("has-success").addClass("has-feedback");
+                    flag = true;
+                }
+                obj.removeAttr("readonly");
+            }, function(){
+                obj.attr("data-content", "服务器无响应，请稍后再试。").popover("show");
+                obj.closest(".form-group").addClass("has-error");
+                obj.removeAttr("readonly");
+            });
+        };
+     };
+        check_email();
+        $("#send-email").click(function(){
+            $("#inp_email").blur();
+            if(!flag){
+                $("#sending").html("请输入正确的邮箱!");
+                return;
+            }
+            $("#sending").show();
+             jQuery.ajax({
+                  url : '/lance/res/sendMail/resend/'+$("#inp_email").val(), 
+                  type : 'get',
+                  success: function(data){
+                    if("ok" == data){
+                       $("#sending").html("邮件已发送,请前往邮箱激活!");
+                       $("#inp_email").attr("readonly",true);
+                    }else{
+                       $("#sending").html("邮件发送失败，请检查你的邮箱地址是否正确!");
+                    }
+                },error:function(msg){
+                   netWorkError();
+                }
+            });
+       });
+        
         $.ax("get", "location/province", null, function(cdata){
              var len = cdata.length, i = 0, str = "", selCityId1 = null, selCityId2 = null;
             for(i=0;i<len;i++){

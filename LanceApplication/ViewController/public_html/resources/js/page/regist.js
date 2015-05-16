@@ -175,7 +175,9 @@ $(function(){
     
     var check_company = function(){
         var company = $("#inp_comname");
-        
+        if(company.length <= 0){
+           return;
+        }
         var l1 = "", l2 = "";
         if($("#rgr")[0].checked){
             l1 = "显示名称";
@@ -250,7 +252,7 @@ $(function(){
     };
     
     var check_form = function(btn){
-        if(ckresult.emr && ckresult.lgr && ckresult.umr && ckresult.psr && ckresult.vcode && ckresult.cmr){
+        if(ckresult.emr && ckresult.lgr && ckresult.umr && ckresult.psr && ckresult.vcode){
             btn.button('loading');
             
             var param = {
@@ -279,7 +281,6 @@ $(function(){
             c2.ck();
             c3.ck();
             c4.ck();
-            c5.ck();
             c6.ck();
         }
     };
@@ -308,12 +309,6 @@ $(function(){
     var check_form2 = function(btn){
         if(ckresult.emr && ckresult.lgr && ckresult.umr && ckresult.psr && ckresult.cmr && ckresult.vcode){
             
-           // if(($("#rgs")[0].checked && ) || $("#rgr")[0].checked ){
-            
-            var compName = "";
-            if($("#rgs")[0].checked){
-                compName = $("#inp_comname").val();
-            }
             if(!$("#fwtk")[0].checked){
                 
                 $("#lbl_fwtk").popover("show");
@@ -329,12 +324,18 @@ $(function(){
                 "Email" :  $("#inp_mail").val(),
                 "TrueName" : $("#inp_name").val(),
                 "Country" : $("#sel_contury").val(),
-                "TrueName" :  $("#inp_name").val(),
-                "DisplayName" : compName,
                 "Password" : $("#inp_pass").val(),
                 "DefaultRole" : 'lancer',
                 "vcode":$("#inp_verCode").val()
             };
+            
+            if($("#rgs")[0].checked){
+                param["DisplayName"]=$("#inp_comname").val();
+                param["CompanyName"]=$("#inp_comname").val();
+            }
+            if($("#rgr")[0].checked){
+                param["DisplayName"]=$("#inp_comname").val();
+            }
             $.ax("post", "user", param, function(data){
                 if(data.indexOf("err:vcode") >= 0){
                     c6.ck();
