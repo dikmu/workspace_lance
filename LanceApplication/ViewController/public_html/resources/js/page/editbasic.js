@@ -4,6 +4,7 @@ $(function(){
         var user = data.User;
         
         $("#inp_uname").val(user.TrueName);
+        $("#inp_dname").val(user.DisplayName);
         $("#inp_tagline").val(user.Tagline);
         $("#inp_hour").val(user.HourlyRate ? user.HourlyRate : "");
         $("#inp_hour2").val(user.ChargeRate ? user.ChargeRate : "");
@@ -18,7 +19,8 @@ $(function(){
         "uname" : false,
         "tagline" : false,
         "hour" : false,
-        "overview" : false
+        "overview" : false,
+        "dname":false
     };
     
     var checkBasic = function(){
@@ -89,14 +91,28 @@ $(function(){
             }
         });
         
+        var dname = $("#inp_dname");
+        dname.blur(function(){
+            dname.popover("hide");
+            dname.closest(".form-group").removeClass("has-error").removeClass("has-success").removeClass("has-feedback");
+            
+            if(dname.lanCheck('chineseCharIntLine')){
+                dname.closest(".form-group").addClass("has-success").addClass("has-feedback");
+                basicRes.dname = true;
+            }else{
+                dname.attr("data-content", "请输入正确的用户显示名").popover("show");
+                dname.closest(".form-group").addClass("has-error");
+                basicRes.dname = false;
+            }
+        });
     };
     
     checkBasic();
     
     $("#btn_save").click(function(){
         var btn = $(this);
-        $("#inp_uname,#inp_over,#inp_hour,#inp_tagline").blur();
-        if(basicRes.uname && basicRes.tagline && basicRes.hour && basicRes.overview){
+        $("#inp_uname,#inp_dname,#inp_over,#inp_hour,#inp_tagline").blur();
+        if(basicRes.uname && basicRes.dname && basicRes.tagline && basicRes.hour && basicRes.overview){
             var param = {
                 "Keywords" : $("#inp_keywords").val(),
                 "Overview" : $("#inp_over").val(),
@@ -104,7 +120,7 @@ $(function(){
                 "ServiceDescription" : $("#inp_service").val(),
                 "Tagline" : $("#inp_tagline").val(),
                 "UserName" : User.UserName,
-                "DisplayName" : $("#inp_uname").val(),
+                "DisplayName" : $("#inp_dname").val(),
                 "TrueName" : $("#inp_uname").val(),
                 "ChargeRate" : $("#inp_hour2").val(),
                 "HourlyRate" : $("#inp_hour").val()

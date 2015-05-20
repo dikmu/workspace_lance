@@ -42,12 +42,18 @@
                  <form class="basic-form" role="form" method="post" action="#">
                     <div class="form-group <!--has-error has-feedback-->">
                         <label for="exampleInputEmail1" class="control-label">
-                            用户名：</label>
+                            用户真实名：</label>
                         <input value="" type="text" class="form-control sml-inp" id="inp_uname" placeholder=""
                             data-container="body" data-toggle="popover" data-placement="right" 
                             data-content="请输入合法的用户名" data-trigger="manual" data-animation="false"/>
                     </div>
-                    
+                    <div class="form-group <!--has-error has-feedback-->">
+                        <label for="exampleInputEmail1" class="control-label">
+                            用户显示名：</label>
+                        <input value="" type="text" class="form-control sml-inp" id="inp_dname" placeholder=""
+                            data-container="body" data-toggle="popover" data-placement="right" 
+                            data-content="请输入合法的用户名" data-trigger="manual" data-animation="false"/>
+                    </div>
                     <div class="form-group <!--has-error has-feedback-->">
                         <label for="exampleInputEmail1" class="control-label">
                             我的座右铭：</label>

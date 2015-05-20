@@ -1457,6 +1457,55 @@
       </schema>
       <systemGenerated>false</systemGenerated>
     </index>
+    <index>
+      <name>SEARCH_JOBS_INDEX1</name>
+      <columnExpressions>
+        <columnExpression>
+          <expressionSource>STATUS</expressionSource>
+        </columnExpression>
+        <columnExpression>
+          <expressionSource>JOB_VISIBILITY</expressionSource>
+        </columnExpression>
+        <columnExpression>
+          <expressionSource>WORK_CATEGORY</expressionSource>
+        </columnExpression>
+        <columnExpression>
+          <expressionSource>WORK_SUBCATEGORY</expressionSource>
+        </columnExpression>
+        <columnExpression>
+          <expressionSource>POSTFORM</expressionSource>
+        </columnExpression>
+        <columnExpression>
+          <expressionSource>INDEX_LOCATION</expressionSource>
+        </columnExpression>
+        <columnExpression>
+          <expressionSource>INDEX_SKILLS</expressionSource>
+        </columnExpression>
+        <columnExpression>
+          <expressionSource>FIXED_PAY_MIN</expressionSource>
+        </columnExpression>
+        <columnExpression>
+          <expressionSource>FIXED_PAY_MAX</expressionSource>
+        </columnExpression>
+        <columnExpression>
+          <expressionSource>HOURLY_PAY_MIN</expressionSource>
+        </columnExpression>
+        <columnExpression>
+          <expressionSource>HOURLY_PAY_MAX</expressionSource>
+        </columnExpression>
+        <columnExpression>
+          <expressionSource>CREATE_ON</expressionSource>
+        </columnExpression>
+        <columnExpression>
+          <expressionSource>POST_JOB_DATE_END</expressionSource>
+        </columnExpression>
+      </columnExpressions>
+      <indexType>NORMAL</indexType>
+      <schema>
+        <name>LANCE</name>
+      </schema>
+      <systemGenerated>false</systemGenerated>
+    </index>
   </indexes>
   <properties>
     <entry>

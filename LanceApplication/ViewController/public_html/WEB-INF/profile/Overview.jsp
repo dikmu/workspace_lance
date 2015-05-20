@@ -6,10 +6,10 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <script>
-            var User=${user};
-            var Data=${data};
-        </script>
+    <script>
+        var User=${user};
+        var Data=${data};
+    </script>
      <!-- Bootstrap -->
     <link href="\lance\resources\css\bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="\lance\resources\css\common\common.css" rel="stylesheet" type="text/css" />
@@ -58,88 +58,6 @@
 
                     <div class="sep">
                     </div>
-                    
-                    <div class="mod">
-                        <span class="lan-font-20 lan-font-green">基本信息</span>
-                        <br />
-                        <div href="#" class="lan-font-12 baseinfor">
-                            <table border="0" width="100%">
-                                <tr>
-                                    <td width="100px;">
-                                        我的期望时新：
-                                    </td>
-                                    <td align="left">
-                                        <b id="exp_money"></b>
-                                    </td>
-                                    <td width="100px;">
-                                        我的个人网站：
-                                    </td>
-                                    <td align="left">
-                                        <a id="mysite" href="#"></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td width="100px;">
-                                        可提供的服务：
-                                    </td>
-                                    <td align="left">
-                                        <span id="tgservice"></span>
-                                    </td>
-                                    <td width="100px;">
-                                        可支付的条件：
-                                    </td>
-                                    <td align="left">
-                                        <span id="paycondition" href="#"></span>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <button type="button" class="btn btn-info btn-edit" onclick="redirectPage('./EditBasic')">编辑</button>
-                    </div>
-                    
-                    <div class="sep">
-                    </div>
-                    
-                    <div class="mod">
-                        <span class="lan-font-20 lan-font-green">联系信息</span>
-                        <br />
-                        <div href="#" class="lan-font-12 contactinfor">
-                            <table border="0" width="100%">
-                                <tr>
-                                    <td width="100px;">
-                                        联系邮箱：
-                                    </td>
-                                    <td align="left">
-                                        <span id="contact_email"></span>
-                                    </td>
-                                    <td width="100px;">
-                                        联系QQ：
-                                    </td>
-                                    <td align="left">
-                                        <span id="contact_qq" href="#"></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td width="100px;">
-                                        手机号码：
-                                    </td>
-                                    <td align="left">
-                                        <span id="cellphone"></span>
-                                    </td>
-                                    <td width="100px;">
-                                        其他联系方式：
-                                    </td>
-                                    <td align="left">
-                                        <span id="contact_other"></span>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <button type="button" class="btn btn-info btn-edit" onclick="redirectPage('./EditContact')">编辑</button>
-                    </div>
-
-                    <div class="sep">
-                    </div>
 
                     <div class="mod">
                         <span class="lan-font-20 lan-font-green">我的专长</span>
@@ -164,13 +82,13 @@
                                             <span class="sr-only"></span>
                                         </div>
                                     </div>
-                                    <h4 class="list-group-item-heading"><a target="_blank" class="job-name"></a>
+                                    <h4 class="list-group-item-heading"><a target="_blank" class="job-name">百度新员工PORTAL</a>
                                         <a class="btn btn-danger btn-xs pull-right deljob">删除</a>
                                         <a href="#" class="btn btn-success btn-xs pull-right editjob">编辑</a>
                                     </h4>
                                     <p class="list-group-item-text">
-                                        <span class="job-time"></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="job-title"></span><br />
-                                        <span class="txt"></span>
+                                        <span class="job-time">2013年11月 - 2014年12月</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="job-title">本科生</span><br />
+                                        <span class="txt">弯弯角没有供出弯角没有供出弯角没有供出角没有供出弯弯角没有供出弯角没有供出弯角没有供出角没有供出弯弯角没有供出弯角没有供出弯角没有供出角没有供出</span>
                                     </p>
                                 </div>
                             </div>
@@ -192,7 +110,7 @@
                                     <div class="form-group">
                                         <label>项目周期</label>
                                         <input class="form-control txt-normal2" id="job_stime" placeholder="开始时间" />
-                                        <input class="form-control txt-normal2" id="job_etime" styyle="margin-left:2%;" placeholder="结束时间" />
+                                        <input class="form-control txt-normal2" id="job_etime" style="margin-left:2%;" placeholder="结束时间" />
                                     </div>
                                     <div class="form-group">
                                         <label class="lan-vt">项目说明</label>
@@ -223,12 +141,12 @@
                                             <span class="sr-only"></span>
                                         </div>
                                     </div>
-                                    <h4 class="list-group-item-heading"><span class="edu-school"></span>
+                                    <h4 class="list-group-item-heading"><span class="edu-school">北京工业大学</span>
                                         <a class="btn btn-danger btn-xs pull-right deledu">删除</a>
                                         <a href="#" class="btn btn-success btn-xs pull-right editedu">编辑</a>
                                     </h4>
                                     <p class="list-group-item-text">
-                                        <span class="edu-date"></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="edu-dre"></span><br />
+                                        <span class="edu-date">2013年11月 - 2014年12月</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="edu-dre">本科生</span><br />
                                         <span class="txt"></span>
                                     </p>
                                 </div>
@@ -242,8 +160,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label>在校时间</label>
-                                        <input readonly="readonly" class="form-control txt-normal2" id="edu_stime" placeholder="开始时间" />
-                                        <input readonly="readonly" class="form-control txt-normal2" id="edu_etime" style="margin-left:2%;" placeholder="结束时间" />
+                                        <input class="form-control txt-normal2" id="edu_stime" placeholder="开始时间" />
+                                        <input class="form-control txt-normal2" id="edu_etime" style="margin-left:2%;" placeholder="结束时间" />
                                     </div>
                                     <div class="form-group">
                                         <label>获颁学位</label>
@@ -280,13 +198,13 @@
                                             <span class="sr-only"></span>
                                         </div>
                                     </div>
-                                    <h4 class="list-group-item-heading"><span class="com-name"></span>
+                                    <h4 class="list-group-item-heading"><span class="com-name">公公司名称司名称</span>
                                         <a class="btn btn-danger btn-xs pull-right delwork">删除</a>
                                         <a class="btn btn-success btn-xs pull-right editwork">编辑</a>
                                     </h4>
                                     <p class="list-group-item-text">
                                         <span class="com-time"></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="com-zw">项目经理</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="com-loc">北京市通州区</span><br />
-                                        <span class="txt"></span>
+                                        <span class="txt">个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍</span>
                                     </p>
                                 </div>
                             </div>
@@ -307,8 +225,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label>在职时间</label>
-                                        <input readonly="readonly" class="form-control txt-normal2" id="work_stime" placeholder="开始时间" />
-                                        <input readonly="readonly" class="form-control txt-normal2" id="work_etime" styyle="margin-left:2%;" placeholder="结束时间" />
+                                        <input class="form-control txt-normal2" id="work_stime" placeholder="开始时间" />
+                                        <input class="form-control txt-normal2" id="work_etime" style="margin-left:2%;" placeholder="结束时间" />
                                     </div>
                                     <div class="form-group">
                                         <label class="lan-vt">职务描述</label>
@@ -348,7 +266,7 @@
                                     </h4>
                                     <p class="list-group-item-text">
                                         <span class="licen-time"></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="licen-org">认证公司：</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="licen-loc">认证号：</span><br />
-                                        <span class="txt"></span>
+                                        <span class="txt">个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍</span>
                                     </p>
                                 </div>
                             </div>
@@ -373,8 +291,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label>认证时间</label>
-                                        <input readonly="readonly" class="form-control txt-normal2" id="licen_stime" placeholder="开始时间" />
-                                        <input readonly="readonly" class="form-control txt-normal2" id="licen_etime" styyle="margin-left:2%;" placeholder="结束时间" />
+                                        <input class="form-control txt-normal2" id="licen_stime" placeholder="开始时间" />
+                                        <input class="form-control txt-normal2" id="licen_etime" style="margin-left:2%;" placeholder="结束时间" />
                                     </div>
                                     <div class="form-group">
                                         <label class="lan-vt">认证描述</label>
@@ -391,6 +309,8 @@
                         </div>
                         <button id="btn_add_licen" type="button" class="btn btn-info btn-edit">添加</button>
                     </div>
+                    
+                    
                 </div>
             </div>
 

@@ -1845,6 +1845,37 @@
   </constraints>
   <indexes>
     <index>
+      <name>SEARCH_USER_INDEX1</name>
+      <columnExpressions>
+        <columnExpression>
+          <expressionSource>STATUS</expressionSource>
+        </columnExpression>
+        <columnExpression>
+          <expressionSource>DEFAULT_ROLE</expressionSource>
+        </columnExpression>
+        <columnExpression>
+          <expressionSource>LOCATION_A_INDEX</expressionSource>
+        </columnExpression>
+        <columnExpression>
+          <expressionSource>LOCATION_B_INDEX</expressionSource>
+        </columnExpression>
+        <columnExpression>
+          <expressionSource>INDEX_SKILL</expressionSource>
+        </columnExpression>
+        <columnExpression>
+          <expressionSource>CHARGE_RATE</expressionSource>
+        </columnExpression>
+        <columnExpression>
+          <expressionSource>HOURLY_RATE</expressionSource>
+        </columnExpression>
+      </columnExpressions>
+      <indexType>NORMAL</indexType>
+      <schema>
+        <name>LANCE</name>
+      </schema>
+      <systemGenerated>false</systemGenerated>
+    </index>
+    <index>
       <name>U_USER_EMAIL_IDX</name>
       <columnExpressions>
         <columnExpression>
