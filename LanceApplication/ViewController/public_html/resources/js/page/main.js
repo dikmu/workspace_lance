@@ -1,4 +1,4 @@
-$(function(){
+﻿$(function(){
     if(!User.logined || User.UserName != Data.User.User.UserName){
         $(".btn-edit,.btn-xs").remove();
         $(".lan-main-left").remove();
@@ -47,7 +47,17 @@ function DeleteLicenMod(dat){
     cur_mod.find(".progress").show().find(".progress-bar").animate({"width" : "100%"}, 500);
     setTimeout(function(){
         cur_mod.slideUp();
+        dynamicDisplay("licens","no_add_licen");
     }, 1100);
+}
+
+function dynamicDisplay(matchStr,id){
+    var pa = $("." + matchStr + " .list-jobs");
+    if(pa.find(".list-group-item").not(".hidemod") > 0){
+        $("#"+id).hide();
+    }else{
+        $("#"+id).show();
+    }
 }
 
 function InitJobMod(dat){
@@ -93,6 +103,7 @@ function DeleteJobMod(dat){
     cur_mod.find(".progress").show().find(".progress-bar").animate({"width" : "100%"}, 500);
     setTimeout(function(){
         cur_mod.slideUp();
+        dynamicDisplay("jobs","no_add_job");
     }, 1100);
 }
 function InitEduMod(dat){
@@ -133,6 +144,7 @@ function DeleteEduMod(dat){
     cur_mod.find(".progress").show().find(".progress-bar").animate({"width" : "100%"}, 500);
     setTimeout(function(){
         cur_mod.slideUp();
+        dynamicDisplay("edus","no_add_edu");
     }, 1100);
 }
 function InitWorkMod(dat){
@@ -179,6 +191,7 @@ function DeleteWorkMod(dat){
     cur_mod.find(".progress").show().find(".progress-bar").animate({"width" : "100%"}, 500);
     setTimeout(function(){
         cur_mod.slideUp();
+        dynamicDisplay("works","no_add_work");
     }, 1100);
 }
 
@@ -489,6 +502,14 @@ $(function(){
         obj.closest(".form-group").removeClass("has-error");
         return true;
     };
+    var checkDate = function(obj){
+        if(!obj.lanCheck("onlyDate")){
+            obj.closest(".form-group").addClass("has-error");
+            return false;
+        }
+        obj.closest(".form-group").removeClass("has-error");
+        return true;
+    }
     
     $("#btn_add_licen_fin").click(function(){
         var name = $("#licen_name"), com = $("#licen_com"),
@@ -500,7 +521,8 @@ $(function(){
         result = checkEmpty(name) && checkEmpty(com) && 
                  checkEmpty(url) && checkEmpty(code) &&
                  checkEmpty(stime) && checkEmpty(etime) &&
-                 checkEmpty(rzms);
+                 checkEmpty(rzms) && checkDate(stime) &&
+                 checkDate(etime);
         
         if(result){
             var pa = $(this).closest(".panel").removeClass("panel-danger");
@@ -545,8 +567,9 @@ $(function(){
         var result = false;
         result = checkEmpty(name) && checkEmpty(stime) && 
                  checkEmpty(etime) && checkEmpty(xmsm) &&
-                 checkEmpty(title);
-        
+                 checkEmpty(title) && checkDate(stime) &&
+                 checkDate(etime);
+                 
         if(result){
             var pa = $(this).closest(".panel").removeClass("panel-danger");
             pa.find(".panel-heading").html("添加项目信息");
@@ -587,7 +610,8 @@ $(function(){
         var result = false;
         result = checkEmpty(name) && checkEmpty(stime) && 
                  checkEmpty(etime) && checkEmpty(dre) && 
-                 checkEmpty(grjj);
+                 checkEmpty(grjj) && checkDate(stime) &&
+                 checkDate(etime);
                  
         if(result){
             var pa = $(this).closest(".panel").removeClass("panel-danger");
@@ -628,7 +652,8 @@ $(function(){
         var result = false;
         result = checkEmpty(com) && checkEmpty(title) && 
                  checkEmpty(loc) && checkEmpty(stime) && 
-                 checkEmpty(etime) && checkEmpty(zw);
+                 checkEmpty(etime) && checkEmpty(zw) && 
+                 checkDate(stime) && checkDate(etime);
         if(result){
             var pa = $(this).closest(".panel").removeClass("panel-danger");
             pa.find(".panel-heading").html("添加工作经历");

@@ -17,6 +17,7 @@ $.fn.lanCheck = function (rule) {
     rules["charIntLine"] = /^[a-zA-z]\w{3,15}$/;
     rules["chineseCharIntLine"] = /^[\u0391-\uFFE5A-Za-z0-9_\s]+$/;
     rules["password"] = /^.{8,}$/;
+    rules["onlyDate"] = /^([1][7-9][0-9][0-9]|[2][0][0-9][0-9])(\-)([0][1-9]|[1][0-2])(\-)([0-2][1-9]|[3][0-1])$/g;
 
     var checkFun = function () {
         var i = 0, val = obj.val(), checkStatus = true;
