@@ -20,7 +20,7 @@ $(function(){
                 email.blur();
         };
         
-        com_conFocus(email, "邮箱用于登录，填写之后不可修改");
+        com_conFocus(email, "我们不会公开您的邮箱，并且只发送必要信息给您");
         
         email.blur(function(){
             email.closest(".form-group").removeClass("has-error").removeClass("has-success").removeClass("has-feedback");
@@ -68,13 +68,13 @@ $(function(){
                 lgname.blur();
         };
         
-        com_conFocus(lgname, "登录用户名");
+        com_conFocus(lgname, "网站登录用户名");
         
         lgname.blur(function(){
             lgname.popover("hide");
             lgname.closest(".form-group").removeClass("has-error").removeClass("has-success").removeClass("has-feedback");
             
-            if(lgname.lanCheck('charIntLine')){
+            if(lgname.lanCheck('lgname')){
                 nameAjax(lgname);
             }else{
                 lgname.attr("data-content", "登录名称只能由数字、字母组成。").popover("show");
@@ -113,7 +113,11 @@ $(function(){
                 uname.blur();
         };
         
-        com_conFocus(uname, "用户昵称，建议使用真实姓名");
+        if($("#inp_name").hasClass('company_name')){
+            com_conFocus(uname, "请输入公司名称");
+        }else{
+            com_conFocus(uname, "请使用真实姓名，只有项目合作方可见");
+        }
         
         uname.blur(function(){
             uname.closest(".form-group").removeClass("has-error").removeClass("has-success").removeClass("has-feedback");
@@ -124,7 +128,11 @@ $(function(){
                 ckresult.umr = true;
             }else{
                 uname.closest(".form-group").addClass("has-error");
-                uname.attr("data-content", "请输入正确的用户名").popover("show");
+                if($("#inp_name").hasClass('company_name')){
+                    uname.attr("data-content", "请输入正确的公司名").popover("show");
+                }else{
+                    uname.attr("data-content", "请输入正确的用户名").popover("show");
+                }
             }
         });    
         
@@ -179,7 +187,7 @@ $(function(){
            return;
         }
         var l1 = "", l2 = "";
-        if($("#rgr")[0].checked){
+        if($("#rgr")[0] && $("#rgr")[0].checked){
             l1 = "显示名称";
             l2 = "请输入合法的显示名称";
         }else{
