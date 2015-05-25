@@ -109,6 +109,9 @@ public class SendActivateMail extends BaseRestResource{
 //    }
 
     public void sendActivateEmail(String userEmail, String validateCode, String uid) throws UnsupportedEncodingException, MessagingException {
+        if(userEmail.lastIndexOf("test.com")>=0){
+            return;
+        }
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.163.com");
         props.put("mail.smtp.auth", "true");

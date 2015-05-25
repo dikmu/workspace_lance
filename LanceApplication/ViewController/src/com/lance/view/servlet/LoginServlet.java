@@ -90,7 +90,7 @@ public class LoginServlet extends HttpServlet {
             PrintWriter out = response.getWriter();
             if(optype != null){
                 if("regist".equals(optype)){
-                   out.println("ok:/lance/pages/UserRegSuccess1"); //成功，跳转页面
+                   out.println("ok:/lance/pages/profile/Overview"); //成功，跳转页面
                 }
             }else{
                 out.println("ok:/lance/pages/search"); //成功，跳转页面

@@ -296,12 +296,10 @@ $(function(){
     $("#btn_cregist").click(function(){
         if($("#fwtk")[0].checked){
             $("#lbl_fwtk").popover("hide");
-        var obj = $(this);
-        check_form(obj);
-            
+         var obj = $(this);
+         setTimeout(check_form(obj),500);
         }else{
-            
-            $("#lbl_fwtk").popover("show");
+           $("#lbl_fwtk").popover("show");
         }
     });
     
@@ -368,7 +366,7 @@ $(function(){
     
     $("#btn_free_regist").click(function(){
         var obj = $(this);
-        check_form2(obj);
+        setTimeout(check_form2(obj),500);
     });
     
 });

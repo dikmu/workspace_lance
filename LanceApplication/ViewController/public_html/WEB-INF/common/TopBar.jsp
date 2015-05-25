@@ -145,19 +145,16 @@
         <div class="pull-right search">
             <div class="input-group input-group-sm">
                 <span data-toggle="dropdown" role="button" aria-expanded="false" class="input-group-addon"
-                      id="sizing-addon3">自由人 
+                      id="sizing-addon3">工作 
                     <span class="caret"></span></span>
                  
                 <input type="text" class="form-control" placeholder="搜索" aria-describedby="sizing-addon3"/>
                 <ul class="dropdown-menu" role="menu">
                     <li>
-                        <a href="#">自由人</a>
-                    </li>
-                    <li>
                         <a href="#">工作</a>
                     </li>
-                    <li>
-                        <a href="#">团队</a>
+                     <li>
+                        <a href="#">自由人</a>
                     </li>
                 </ul>
             </div>
