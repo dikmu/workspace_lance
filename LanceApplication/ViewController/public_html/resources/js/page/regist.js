@@ -259,6 +259,16 @@ $(function(){
         return {ck:mck};
     };
     
+    var validate_form=function(){
+      if(!(ckresult.emr && ckresult.lgr && ckresult.umr && ckresult.psr && ckresult.vcode)){
+            c1.ck();
+            c2.ck();
+            c3.ck();
+            c4.ck();
+            c6.ck();
+      }
+    }
+    
     var check_form = function(btn){
         if(ckresult.emr && ckresult.lgr && ckresult.umr && ckresult.psr && ckresult.vcode){
             btn.button('loading');
@@ -296,8 +306,9 @@ $(function(){
     $("#btn_cregist").click(function(){
         if($("#fwtk")[0].checked){
             $("#lbl_fwtk").popover("hide");
-         var obj = $(this);
-         setTimeout(check_form(obj),500);
+             var obj = $(this);
+             validate_form();
+             check_form(obj);
         }else{
            $("#lbl_fwtk").popover("show");
         }
@@ -311,6 +322,17 @@ $(function(){
     
     var c5 = check_company();
     var c6 = check_vcode();
+    
+   var validate_form2 = function(){
+       if(!(ckresult.emr && ckresult.lgr && ckresult.umr && ckresult.psr && ckresult.cmr && ckresult.vcode)){
+            c1.ck();
+            c2.ck();
+            c3.ck();
+            c4.ck();
+            c5.ck();
+            c6.ck();
+       }
+    }
     
     var check_form2 = function(btn){
         if(ckresult.emr && ckresult.lgr && ckresult.umr && ckresult.psr && ckresult.cmr && ckresult.vcode){
@@ -366,7 +388,8 @@ $(function(){
     
     $("#btn_free_regist").click(function(){
         var obj = $(this);
-        setTimeout(check_form2(obj),500);
+        validate_form2();
+        check_form2(obj);
     });
     
 });
