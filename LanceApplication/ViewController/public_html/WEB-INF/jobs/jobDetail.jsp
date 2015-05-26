@@ -186,7 +186,7 @@
                     
                     <div class="list-mods" id="list-discuss">
                         <script id="list-discuss-sp1" type="text/html"> 
-                           {{if list.length == 0}}<div class="media-body qmedia" style="width:100%;">暂无评论</div>{{/if}}
+                           {{if list.length == 0}}<div class="media-body qmedia">暂无评论</div>{{/if}}
                            {{each list as data i}}
                              <div class="media">
                                 <div class="media-left media-middle list-img">
@@ -200,7 +200,7 @@
                                        </a>
                                    {{/if}}
                                 </div>
-                                <div class="media-body qmedia" style="width:100%;">
+                                <div class="media-body qmedia">
                                     <h4 class="media-heading lan-font-green">{{data.CreateBy}} 
                                       {{if (data.Location != null && data.Location != "")}} | {{data.Location}} {{/if}} 
                                       {{if data.Status == 'agreed' && (User.UserName==Publisher || User.UserName==data.CreateBy)}}

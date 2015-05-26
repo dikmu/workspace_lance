@@ -87,16 +87,18 @@ $(function(){
             $.each(lists, function(i, dom){
                 ids += $(dom).data('uuid') + ',';
             });
-            $.ae("您确定要删除吗？", function(){
-               $.ax("post", "user/notification/batch/delete?ids="+ids, null, function(data){
-                   if(data.indexOf("ok") >= 0){
-                       initdata();
-                   }else{
-                      alert(data.split(":")[1]);
-                   } 
-                }, function(){
-                    netWorkError();
-                }, "text");
+            $.ae("您确定要删除吗？", function(evt){
+               if(evt){
+                    $.ax("post", "user/notification/batch/delete?ids="+ids, null, function(data){
+                       if(data.indexOf("ok") >= 0){
+                           initdata();
+                       }else{
+                           $.ae(data.split(":")[1]);
+                       } 
+                    }, function(){
+                        netWorkError();
+                    }, "text"); 
+               }
             });
         }
     });

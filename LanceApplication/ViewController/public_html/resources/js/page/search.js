@@ -406,7 +406,7 @@ $(function(){
             $("#search-icon").click();
         }
     });
-    
+    $("#search-icon").css({"cursor":"pointer"});
     
     var getMothodParam = function(type, val){
         var arr_methods = method.split(';'), strTmp = '';

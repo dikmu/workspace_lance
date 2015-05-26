@@ -225,16 +225,18 @@ function disDel(jobId,publisher){
   $("#list-discuss").on("click", "button[name='dis-del']", function(){
       uuid = $(this).attr("uuid");
       if(uuid != null){
-        if(confirm("是否确认删除该留言？")){
-            jQuery.ajax({
-                  url : '/lance/res/postJob/'+jobId+'/discuss/delete/'+uuid, 
-                  type : 'post',
-                  success: function(data){
-                     initPostDiscussData(jobId,publisher);
-                },error:function(msg){
-                }
+         $.ae("是否确认删除该留言？", function(evt){
+               if(evt){
+                    jQuery.ajax({
+                          url : '/lance/res/postJob/'+jobId+'/discuss/delete/'+uuid, 
+                          type : 'post',
+                          success: function(data){
+                             initPostDiscussData(jobId,publisher);
+                        },error:function(msg){
+                        }
+                    });
+               }
             });
-        }
       }
   });
 }
