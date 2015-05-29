@@ -209,7 +209,11 @@
 
 .sea-progress{border-radius:0px;margin-bottom:0px;height:5px;position:relative;top:9px;diaplay:none;}
 
+.profile-avatar{position:relative;padding:40px 0;border:none;}
+.profile-avatar span{background:#428bca;color:#fff;position:absolute;display:none;width:100%;height:30px;line-height:30px;bottom:0px;text-align:center;cursor:pointer;}
+.profile-avatar:hover span{display:inline-block;}
 
-
-
+#list-avatar{overflow:hidden;}
+#list-avatar li{float:left;width:20%;margin:5px 10px;text-align:center;list-style:none;}
+#list-avatar li.sel a{border-color:#428bca;}
 

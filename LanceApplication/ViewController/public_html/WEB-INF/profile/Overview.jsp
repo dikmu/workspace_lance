@@ -27,7 +27,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 lan-main-left">
-                <br /><br />
+                <br />
+                <a href="#" class="thumbnail profile-avatar">
+                  <img id="useravatar" src="/lance/resources/image/avatar/normal_1.png" alt="...">
+                  <span data-toggle="modal" data-target="#modify">修改头像</span>
+                </a>
+                <br />
                 <ul class="nav nav-stacked">
                     <li role="presentation" class="active"><a href="./Overview">个人主页</a></li>
                     <li role="presentation"><a href="./EditBasic">基本信息</a></li>
@@ -310,6 +315,89 @@
                         <button id="btn_add_licen" type="button" class="btn btn-info btn-edit">添加</button>
                     </div>
                     
+                    <div class="modal fade" id="modify" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">修改个人头像</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <ul id="list-avatar">
+                                        <li class="sel">
+                                            <a data-src="normal_1" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/normal_1.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="normal_2" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/normal_2.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="normal_3" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/normal_3.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="normal_4" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/normal_4.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="normal_5" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/normal_5.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="normal_6" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/normal_6.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="normal_7" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/normal_7.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="normal_8" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/normal_8.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="normal_9" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/normal_9.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="normal_10" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/normal_10.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="normal_11" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/normal_11.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="normal_12" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/normal_12.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="normal_13" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/normal_13.png" alt="" />
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button id="save_avatar" type="button" data-loading-text="保存中" autocomplete="off" class="btn btn-primary">保存修改</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     
                 </div>
             </div>

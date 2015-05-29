@@ -143,7 +143,7 @@
             </li>-->
         </ul>
         <div class="pull-right search">
-            <div class="input-group input-group-sm">
+            <div class="input-group input-group-sm sea-type">
                 <span data-toggle="dropdown" role="button" aria-expanded="false" class="input-group-addon"
                       id="sizing-addon3">工作 
                     <span class="caret"></span></span>

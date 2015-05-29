@@ -1,8 +1,36 @@
-﻿$(function(){
+$(function(){
+    $("#list-avatar").on("click", "li", function(){
+        $("#list-avatar li").removeClass("sel");
+        $(this).addClass("sel");
+    });
+    $("#save_avatar").click(function(){
+        var sel = $("#list-avatar li.sel a").attr("data-src");
+        var btn = $(this);
+        
+        var param = {
+            "Img" : sel
+        };
+        //btn.button('loading');
+        
+        $.ax("post", "user/update/" + User.UserName, param, function(){
+            $.ae("保存成功!");
+            //btn.button("reset");
+            $("#useravatar").attr("src", "/lance/resources/image/avatar/" + sel + ".png");
+            $("#modify").modal('hide');
+        }, function(){
+            netWorkError();
+            //btn.button("reset");
+        }, "text");
+            
+    });
+});
+﻿
+$(function(){
     if(!User.logined || User.UserName != Data.User.User.UserName){
         $(".btn-edit,.btn-xs").remove();
         $(".lan-main-left").remove();
         $(".lan-main-right").removeClass("col-md-9").addClass("col-md-12").css("border-left", "none");
+        $(".profile-avatar span").remove();
     }
 });
 
@@ -205,6 +233,10 @@ $(function(){
         $(".uname").html(User.DisplayName + (Data.User.User.hasOwnProperty("JobTitle") ? '-'+Data.User.User.JobTitle : ''));
         $(".utitle").html(Data.User.User.Tagline);
         $(".uself").html(Data.User.User.Overview);
+        
+        var img = Data.User.User.Img || 'normal_1.png';
+        
+        $("#useravatar").attr("src", "/lance/resources/image/avatar/" + img + ".png");
         
         $("#exp_money").html(Data.User.User.HourlyRate || "尚未确定");
         $("#mysite").html(Data.User.User.WebsiteUrl || "尚未填写");

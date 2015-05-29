@@ -691,6 +691,7 @@ function init_chk(){
     });
 }
 
+
 $(function(){
     init_category();
     
