@@ -118,7 +118,7 @@
                                 <div class="media lan-bg-f5">
                                     <div class="media-left media-middle">
                                         <a href="#" class="thumbnail">
-                                            <img width="60px" id="thu-img" src="/lance/resources/image/jpg/login.jpg" class="media-object" alt="" />
+                                            <img width="64px" height="64px" id="thu-img" src="/lance/resources/image/avatar/normal_1.png" class="media-object" alt="" />
                                         </a>
                                     </div>
                                     <div class="media-body">
@@ -192,12 +192,12 @@
                                 <div class="media-left media-middle list-img">
                                    {{if (data.Img != null && data.Img != "")}}
                                        <a href="#" class="thumbnail">
-                                         <img width="60px" src="/lance/{{data.Img}}" class="media-object" alt="" />
+                                         <img width="64px" height="64px" src="/lance/resources/image/avatar/{{data.Img}}.png" class="media-object" alt="" />
                                        </a>
                                    {{else}}
                                       <a href="#" class="thumbnail">
-                                         <img width="60px" src="/lance/resources/image/jpg/login.jpg" class="media-object" alt="" />
-                                       </a>
+                                         <img width="64px" height="64px" src="/lance/resources/image/avatar/normal_1.png" class="media-object" alt="" />
+                                      </a>
                                    {{/if}}
                                 </div>
                                 <div class="media-body qmedia">

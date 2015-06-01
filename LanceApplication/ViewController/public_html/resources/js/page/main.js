@@ -234,7 +234,7 @@ $(function(){
         $(".utitle").html(Data.User.User.Tagline);
         $(".uself").html(Data.User.User.Overview);
         
-        var img = Data.User.User.Img || 'normal_1.png';
+        var img = Data.User.User.Img || 'normal_1';
         
         $("#useravatar").attr("src", "/lance/resources/image/avatar/" + img + ".png");
         

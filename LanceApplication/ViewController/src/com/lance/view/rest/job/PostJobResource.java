@@ -1,6 +1,7 @@
 package com.lance.view.rest.job;
 
 import com.lance.model.LanceRestAMImpl;
+import com.lance.model.user.vo.UUserVORowImpl;
 import com.lance.model.util.ConstantUtil;
 import com.lance.model.vo.PostJobDiscussVOImpl;
 import com.lance.model.vo.PostJobDiscussVORowImpl;
@@ -8,7 +9,10 @@ import com.lance.model.vo.PostJobsVOImpl;
 import com.lance.model.vo.PostJobsVORowImpl;
 import com.lance.view.rest.project.ContractResource;
 import com.lance.view.rest.uuser.CacheResource;
+import com.lance.view.rest.uuser.UserEducationResource;
+import com.lance.view.rest.uuser.UserLocationListResource;
 import com.lance.view.rest.uuser.UserResource;
+import com.lance.view.rest.uuser.UserSkillResource;
 import com.lance.view.util.LUtil;
 
 import com.zngh.platform.front.core.model.cache.AuthCache;
@@ -322,11 +326,13 @@ public class PostJobResource extends BaseRestResource {
         PostJobsVOImpl vo = am.getPostJobs1();
         PostJobsVORowImpl row = this.findPostJobById(postJobId, vo);
         JSONObject json = this.convertRowToJsonObject(row, POST_JOB_VO_ATTR_GET);
-        if(json.has("CreateBy") && AuthCache.getUserById(json.getString("CreateBy")) != null){
-            json.put("Img", AuthCache.getUserById(json.getString("CreateBy")).get("Img"));
-            JSONObject userJson = new UserResource().findUserById(json.getString("CreateBy"));
+        if(json.has("CreateBy")){
+            JSONObject userJson = findUserByNameInJsonFn(json.getString("CreateBy"),am);
             String location = userJson.has("LocationA") ? userJson.getString("LocationA") : (userJson.has("LocationB") ? userJson.getString("LocationB") : "");
             json.put("Location", location);
+            if(userJson.has("User") && userJson.getJSONObject("User").has("Img")){
+                json.put("Img", userJson.getJSONObject("User").getString("Img"));
+            }
         }
         json.put("CatName", new CacheResource().getJobCategoryNameFromCache(json.getString("WorkCategory")));
         json.put("SubCatName", new CacheResource().getJobSubCategoryNameFromCache(json.getString("WorkSubcategory")));
@@ -632,12 +638,14 @@ public class PostJobResource extends BaseRestResource {
         PostJobDiscussVOImpl vo2 = getParentDiscuss(am, jobId,type);
         for(Row r :  vo2.getAllRowsInRange()){
             JSONObject json = this.convertRowToJsonObject(vo2, r, POST_JOB_DISCUSS_VO_ATTR_READ);
-            if(AuthCache.getUserById(json.getString("CreateBy")) != null){
-                json.put("Img", AuthCache.getUserById(json.getString("CreateBy")).get("Img"));
+            if(json.has("CreateBy")){
+                JSONObject userJson = findUserByNameInJsonFn(json.getString("CreateBy"),am);
+                String location = userJson.has("LocationA") ? userJson.getString("LocationA") : (userJson.has("LocationB") ? userJson.getString("LocationB") : "");
+                json.put("Location", location);
+                if(userJson.has("User") && userJson.getJSONObject("User").has("Img")){
+                    json.put("Img", userJson.getJSONObject("User").getString("Img"));
+                }
             }
-            JSONObject userJson = new UserResource().findUserById(json.getString("CreateBy"));
-            String location = userJson.has("LocationA") ? userJson.getString("LocationA") : (userJson.has("LocationB") ? userJson.getString("LocationB") : "");
-            json.put("Location", location);
             PostJobDiscussVORowImpl _r = (PostJobDiscussVORowImpl)r;
             PostJobDiscussVOImpl cvo = getDiscussByPid(am, _r.getUuid());
             json.put("children", this.convertVoToJsonArray(cvo, POST_JOB_DISCUSS_VO_ATTR_READ));
@@ -716,6 +724,33 @@ public class PostJobResource extends BaseRestResource {
           return this.getLancerStat(am, postJobId);
         }
         return null;
+    }
+    
+    public static JSONObject findUserByNameInJsonFn(String userName, LanceRestAMImpl am) throws JSONException {
+        UUserVORowImpl row = LUtil.getUUserByName(userName, am);
+        JSONObject data = new JSONObject();
+
+        if (row == null) {
+            return data;
+        }
+        
+        String[] atrr = {"LocationA","LocationB","Img"};
+
+        JSONObject json = convertRowToJsonObject(am.getUUser1(), row, atrr);
+        data.put("User", json);
+
+        //处理位置信息
+        if (json.has("LocationA") || json.has("LocationB")) {
+            UserLocationListResource loc = new UserLocationListResource();
+            if (json.has("LocationA")) {
+                data.put("LocationA", loc.findLocation(userName, json.getString("LocationA")));
+            }
+
+            if (json.has("LocationB")) {
+                data.put("LocationB", loc.findLocation(userName, json.getString("LocationB")));
+            }
+        }
+        return data;
     }
 
     private PostJobDiscussVOImpl findDiscussByIdAndCreator(LanceRestAMImpl am, String discussId, String creator) {

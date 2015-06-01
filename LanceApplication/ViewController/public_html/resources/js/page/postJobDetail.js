@@ -34,7 +34,7 @@ function initPostJobData(jobId){
                }
             }
             if(data.hasOwnProperty("Img")){
-               $("#thu-img").attr("src",data["Img"]);
+               $("#thu-img").attr("src","/lance/resources/image/avatar/"+data["Img"]+".png");
             }
             if(data.hasOwnProperty("DurationMin")){
                 var dur = data["DurationMin"];

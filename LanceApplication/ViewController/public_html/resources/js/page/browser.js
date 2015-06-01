@@ -28,7 +28,11 @@ function InitSkill(datas){
     for(var n in datas){
         md = $('.borwser .hidemod').clone().removeClass('hidemod').css('display', 'inline-block');
         tmp = datas[n];
-        md.find("dt").html(tmp[1]);
+        if(!("未分类"==tmp[1])){
+            md.find("dt").html(tmp[1]);
+        }else{
+            md.find("dt").remove();
+        }
         if(tmp[2]){
             $.each(tmp[2], function(i, dom){
                 md.append('<dd style="float:left;display:inline-block;width:20%;margin:10px 0;" class="fleft"><a>' + (dom[0] || dom[1]) + '</a></dd>');

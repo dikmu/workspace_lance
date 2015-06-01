@@ -389,6 +389,116 @@
                                                 <img src="/lance/resources/image/avatar/normal_13.png" alt="" />
                                             </a>
                                         </li>
+                                         <li>
+                                            <a data-src="new/s1" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/new/s1.png" alt="" />
+                                            </a>
+                                        </li>
+                                         <li>
+                                            <a data-src="new/s2" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/new/s2.png" alt="" />
+                                            </a>
+                                        </li>
+                                         <li>
+                                            <a data-src="new/s3" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/new/s3.png" alt="" />
+                                            </a>
+                                        </li>
+                                         <li>
+                                            <a data-src="new/th" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/new/th.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="new/th2" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/new/th2.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="new/th3" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/new/th3.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="new/th4" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/new/th4.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="new/th5" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/new/th5.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="new/th6" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/new/th6.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="new/th7" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/new/th7.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="new/th8" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/new/th8.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="new/th9" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/new/th9.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="new/th10" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/new/th10.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="new/th11" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/new/th11.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="new/th12" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/new/th12.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="new/th13" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/new/th13.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="new/th14" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/new/th14.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="new/th15" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/new/th15.png" alt="" />
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-src="new/th16" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/new/th16.png" alt="" />
+                                            </a>
+                                        </li>
+                                         <li>
+                                            <a data-src="new/th17" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/new/th16.png" alt="" />
+                                            </a>
+                                        </li>
+                                         <li>
+                                            <a data-src="new/th18" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/new/th18.png" alt="" />
+                                            </a>
+                                        </li>
+                                         <li>
+                                            <a data-src="new/th19" href="#" class="thumbnail">
+                                                <img src="/lance/resources/image/avatar/new/th19.png" alt="" />
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="modal-footer">
