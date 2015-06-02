@@ -35,7 +35,7 @@ function InitSkill(datas){
         }
         if(tmp[2]){
             $.each(tmp[2], function(i, dom){
-                md.append('<dd style="float:left;display:inline-block;width:20%;margin:10px 0;" class="fleft"><a>' + (dom[0] || dom[1]) + '</a></dd>');
+                md.append('<dd style="float:left;display:inline-block;width:20%;margin:10px 0;" class="fleft"><a>' + dom[0] + '</a><br/>'+(dom[1] ? dom[1] : "")+'</dd>');
             });
             $('.borwser').append(md);
         }
@@ -55,9 +55,9 @@ function InitJob(datas, type){
             if(tmp[2]){
                 $.each(tmp[2], function(i, dom){
                     if(i < 15){
-                        md.append('<dd><a>' + (dom[0] || dom[1]) + '</a></dd>');
+                        md.append('<dd><a>' + dom[0] + '</a><br/>'+(dom[1] ? dom[1] : "")+'</dd>');
                     }else{
-                        md.append('<dd class="more-dd"><a>' + (dom[0] || dom[1]) + '</a></dd>');
+                        md.append('<dd class="more-dd"><a>' + dom[0] + '</a><br/>'+(dom[1] ? dom[1] : "")+'</dd>');
                     }
                     if(i == tmp[2].length - 1){
                         md.append('<dd class="more"><a>更多</a></dd>');
