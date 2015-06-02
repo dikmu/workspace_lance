@@ -67,6 +67,7 @@ public class CacheResource extends BaseRestResource {
         RowSetIterator it = vo.createRowSetIterator(null);
         String[] attrs = AuthCache.CACHED_USER_ATTRIBUTES;
         NamedCache cache = CacheUtil.getInstance(CacheUtil.KEY_AUTH_USER);
+        cache.clear();
         while (it.hasNext()) {
             row = (UUserVORowImpl) it.next();
             cacheSingleUserFn(row, cache, attrs);
@@ -100,6 +101,7 @@ public class CacheResource extends BaseRestResource {
      */
     public String cacheCategoryInfoFn(LanceRestAMImpl am) throws JSONException {
         NamedCache cache = CacheUtil.getInstance(CacheUtil.KEY_JOB_CATEGORY);
+        cache.clear();
         JSONObject json_jobType = new JSONObject();
         JobCategoryVOImpl vo1 = am.getJobCategory1();
         RowSetIterator it1 = vo1.createRowSetIterator(null);
@@ -189,6 +191,7 @@ public class CacheResource extends BaseRestResource {
     public String getJobCategoryNameFromCache(@PathParam("categoryId") String categoryId) {
         try {
             NamedCache cache = CacheUtil.getInstance(CacheUtil.KEY_JOB_CATEGORY);
+            cache.clear();
             String[] res = (String[]) cache.get(categoryId);
             if (res[1] != null && "".equals(res[1])) {
                 return res[1];
@@ -207,6 +210,7 @@ public class CacheResource extends BaseRestResource {
     public String getJobSubCategoryNameFromCache(@PathParam("subCategoryId") String subCategoryId) {
         try {
             NamedCache cache = CacheUtil.getInstance(CacheUtil.KEY_JOB_SUBCATEGORY);
+            cache.clear();
             String[] res = (String[]) cache.get(subCategoryId);
             if (res[1] != null && "".equals(res[1])) {
                 return res[1];
@@ -238,6 +242,7 @@ public class CacheResource extends BaseRestResource {
         System.out.println("cache SkillSuperType in CacheUtil.KEY_SKILL_TYPE");
         JSONObject json_SkillType = new JSONObject();
         NamedCache cache1 = CacheUtil.getInstance(CacheUtil.KEY_SKILL_TYPE);
+        cache1.clear();
         SkillSuperTypeVOImpl vo1 = am.getSkillSuperType1();
         RowSetIterator it1 = vo1.createRowSetIterator(null);
         SkillSuperTypeVORowImpl row1 = null;
@@ -259,6 +264,7 @@ public class CacheResource extends BaseRestResource {
 
         System.out.println("cache Skills in CacheUtil.KEY_SKILL");
         NamedCache cache2 = CacheUtil.getInstance(CacheUtil.KEY_SKILL);
+        cache2.clear();
         SkillsVOImpl vo2 = am.getSkills1();
         RowSetIterator it2 = vo2.createRowSetIterator(null);
         SkillsVORowImpl row2 = null;
@@ -284,6 +290,7 @@ public class CacheResource extends BaseRestResource {
         it2.closeRowSetIterator();
 
         NamedCache cache3 = CacheUtil.getInstance("lance.browse.skills");
+        cache3.clear();
         cache3.put("skills", json_SkillType.toString());
 
         return "ok";

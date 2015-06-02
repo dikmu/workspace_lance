@@ -25,27 +25,27 @@ public class AuthListener implements ServletContextListener {
 
     private ServletContext context = null;
     private int failedCount = 0;
-    private static Timer timer = null;
-    //    private Timer timer2 = null;
+    private static Timer timer1 = null;
+    private Timer timer2 = null;
     //    private Timer timer3 = null;
     //    private String host3 = null;
 
     public void contextInitialized(ServletContextEvent event) {
         context = event.getServletContext();
         initUserInfoCache(event);
+        hourlyRefreshUserInfoCache(event);
     }
 
     /**
      * 启动时调用刷新用户到缓存接口
-     * 
+     *
      *
      * @param event
      */
     public void initUserInfoCache(ServletContextEvent event) {
         System.out.println("Coherence开始缓存用户信息");
-        timer = new Timer();
-        TimerTask tt = new TimerTask() {
-            private boolean inited = false;
+        timer1 = new Timer();
+        final TimerTask tt = new TimerTask() {
 
             @Override
             public void run() {
@@ -53,19 +53,34 @@ public class AuthListener implements ServletContextListener {
                 //如果刷新成功，则改为10分钟刷新一次
                 if (refreshUserInfoCache()) {
                     //                if (refreshUserInfoCache() && refreshInitConfigMap()) {
-                    timer.cancel();
+                    timer1.cancel();
+                    System.out.println("timmer1 stop");
                 } else {
                     System.out.println("将在10秒钟内重试...");
                     failedCount++;
                     if (failedCount > 20) { //禁用
-                        timer.cancel();
-                        //                        timer2.cancel();
+                        timer1.cancel();
                         System.out.println("连续失败20次，停止从缓存刷新");
                     }
                 }
             }
         };
-        timer.schedule(tt, 10000, 10000); //从启动开始，10秒钟刷新一次
+        timer1.schedule(tt, 10000, 10000); //从启动开始，10秒钟刷新一次
+    }
+
+    public void hourlyRefreshUserInfoCache(ServletContextEvent event) {
+        System.out.println("Coherence缓存用户信息");
+        timer2 = new Timer();
+        final TimerTask tt = new TimerTask() {
+
+            @Override
+            public void run() {
+                System.out.println("timmer2 run");
+                refreshUserInfoCache();
+                System.out.println("timmer2 will run in 1 hour");
+            }
+        };
+        timer2.schedule(tt, 3600000, 3600000); //从第一个小时开始，1小时刷新一次
     }
 
     public boolean refreshUserInfoCache() {
@@ -124,7 +139,7 @@ public class AuthListener implements ServletContextListener {
     }
 
     public void contextDestroyed(ServletContextEvent event) {
-        timer.cancel();
+        timer1.cancel();
         //        timer2.cancel();
         context = event.getServletContext();
     }
