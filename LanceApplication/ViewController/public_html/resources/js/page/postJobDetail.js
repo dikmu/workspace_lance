@@ -12,6 +12,7 @@ $(function () {
 function initPostJobData(jobId){
   jQuery.ajax({
         url : '/lance/res/postJob/'+ jobId, type : 'get', success : function (data) {
+            $(".jobtitle").html(data.Name);
             $("#job-msg-area").html(template('job-msg-sp1',{'status' : data["Postform"]}));
             var skills=new Array();
             var attrs =new Array("A","B","C","D","E","F","G");

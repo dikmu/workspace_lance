@@ -42,6 +42,7 @@
                 </div>
                 
                 <div>
+                    <h2 class="lan-font-green jobtitle"></h2>
                     <ol class="breadcrumb">
                         <li><a href="#" id="cat_name"></a></li>
                         <li><a href="#" id="subcat_name"></a></li>
