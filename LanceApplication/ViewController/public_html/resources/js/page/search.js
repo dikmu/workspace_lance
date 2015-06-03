@@ -698,10 +698,18 @@ $(function(){
             $('.sea-result-info').hide();
             _STYPE = 'PEOPLE';
             method = 'search/contractors';
+            
+            $(".persons .mod").not(".hidemod").remove();
+            $(".get-more").data("page", 1);
+            
             _INITPERSON('');
         }else if(type == 'jobs'){
             _STYPE = 'JOB';
             method = 'search/jobs';
+            
+            $(".jobs .mod").not(".hidemod").remove();
+            $(".get-more").data("page", 1);
+            
             _INITJOBS('');
         }else if(type == 'thumbs'){
             _STYPE = 'THUMB';

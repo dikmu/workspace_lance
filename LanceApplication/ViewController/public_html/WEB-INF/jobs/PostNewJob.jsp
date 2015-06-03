@@ -72,7 +72,7 @@
                     <div class="panel panel-default skill-sea post-container">
                         <div class="panel-heading ">
                             <h3 class="panel-title lan-font-12">
-                                <input id="inp_key_cate" disabled="disabled" type="text" class="form-control" value="请先选择工作的分类" />
+                                <input id="inp_key_cate" type="text" class="form-control" value="请先选择工作的分类" />
                             </h3>
                         </div>
                         <div class="panel-body list-search">
