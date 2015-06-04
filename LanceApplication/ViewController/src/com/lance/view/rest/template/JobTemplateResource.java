@@ -27,7 +27,7 @@ import org.codehaus.jettison.json.JSONException;
 @Path("jobTemplate")
 public class JobTemplateResource extends BaseRestResource {
     public static final String[] ATTR_GET_JOB_CATEGORY = { "Uuid", "NameEn", "NameCn", "Display" };
-    public static final String[] ATTR_GET_JOB_SUB_CATEGORY = { "Uuid", "Name", "CategoryId" };
+    public static final String[] ATTR_GET_JOB_SUB_CATEGORY = { "Uuid", "Name","NameCn", "CategoryId" };
     public static final String[] ATTR_GET_JOB_TEMPLATE = {
         "Uuid", "JobCategoryId", "NameEn", "NameCn", "DescriptionCn", "DescriptionEn", "Tips", "Type"
     };

@@ -30,7 +30,7 @@
                         <span id="inputSuccess5Status" class="sr-only">(success)</span>
                     </div>
                     <div>
-                        <button data-cls="persons" data-title="所有的自由人" type="button" class="btn btn-link lan-font-black lan-font-16 sel-tab-type">自由人</button>
+                        <button data-cls="persons" data-title="所有的职业者" type="button" class="btn btn-link lan-font-black lan-font-16 sel-tab-type">自由职业者</button>
                         <button data-cls="jobs" data-title="所有的工作" type="button" class="btn btn-link lan-font-black lan-font-16 sel-tab-type select">工作</button>
                         <!--<button data-cls="thumbs" data-title="所有的作品" type="button" class="btn btn-link lan-font-black lan-font-16 sel-tab-type">作品展示</button>-->
                         

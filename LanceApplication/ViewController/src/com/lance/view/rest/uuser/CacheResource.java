@@ -191,9 +191,8 @@ public class CacheResource extends BaseRestResource {
     public String getJobCategoryNameFromCache(@PathParam("categoryId") String categoryId) {
         try {
             NamedCache cache = CacheUtil.getInstance(CacheUtil.KEY_JOB_CATEGORY);
-            cache.clear();
             String[] res = (String[]) cache.get(categoryId);
-            if (res[1] != null && "".equals(res[1])) {
+            if (res[1] != null && !"".equals(res[1])) {
                 return res[1];
             } else {
                 return res[0];
@@ -210,9 +209,8 @@ public class CacheResource extends BaseRestResource {
     public String getJobSubCategoryNameFromCache(@PathParam("subCategoryId") String subCategoryId) {
         try {
             NamedCache cache = CacheUtil.getInstance(CacheUtil.KEY_JOB_SUBCATEGORY);
-            cache.clear();
             String[] res = (String[]) cache.get(subCategoryId);
-            if (res[1] != null && "".equals(res[1])) {
+            if (res[1] != null && !"".equals(res[1])) {
                 return res[1];
             } else {
                 return res[0];

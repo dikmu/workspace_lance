@@ -76,7 +76,11 @@ function initPostJobData(jobId){
            }
             for(var key in data){
                 if($("#"+key).length > 0){
-                    $("#"+key).html(data[key]);
+                    if("Brief" == key){
+                       $("#"+key).html("<pre>"+data[key]+"</pre>"); 
+                    }else{
+                       $("#"+key).html(data[key]); 
+                    }
                 }
             }
             //判断按钮加载
@@ -85,12 +89,24 @@ function initPostJobData(jobId){
                 $("#btn-area").html(template('btn-area-sp1',{'show' : "N"}));
                 $("#radio-area").html(template('radio-area-sp1',{'pid' : "client","u_sta":!User.logined}));
                 stat(jobId,"client");
+                $("#inf-cnt").html("查看哪些自由职业者对您的项目感兴趣。<br/>" +
+                "对申请人 进行回复留言、加入备选、同意申请的操作后，您的联系信息才会开放给申请人。");
+                $("#cu-cnt").html("<a href='/lance/pages/profile/Overview?uid="+data["CreateBy"]+"'>客户信息</a>");
             }else{
                 if(User.logined){
                     $("#btn-area").show();
                     $("#btn-area").html(template('btn-area-sp1',{'show' : "Y"}));
                     $("#radio-area").html(template('radio-area-sp1',{'pid' : "lancer","u_sta":!User.logined}));
                     stat(jobId,"lancer");
+                    $("#inf-cnt").html("您可在此查看及申请工作，还可向发布信息者进行提问。<br/>" +
+                    "您可在申请时提出自己认为合理的价格和可以进入项目的时间。<br/>" +
+                    "为保护您的隐私，您的用户名、公司名信息将在第一次回复后显示给被回复者" +
+                    "只有信息发布者能够查看您的报价信息");
+                    if(data.hasOwnProperty("viewGrant") && "true"==data["viewGrant"]){
+                        $("#cu-cnt").html("<a href='/lance/pages/profile/Overview?uid="+(data['CreateBy'])+"'>客户信息</a>");
+                        console.log($("#cu-cnt").html());
+                        console.log(data['CreateBy']);
+                    }
                 }
             }
             

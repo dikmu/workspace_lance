@@ -311,7 +311,7 @@ $(function(){
                     }
                 }
                 if(curPage == 1){
-                    $(".all-count").html('<b class="lbl-search-title">所有的自由人</b>（' + data.estimated + ' 个）');
+                    $(".all-count").html('<b class="lbl-search-title">所有的自由职业者</b>（' + data.estimated + ' 个）');
                 }
                 
                 $("#input_search").val('');

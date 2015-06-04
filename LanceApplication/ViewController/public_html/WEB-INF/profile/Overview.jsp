@@ -106,7 +106,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>项目地址</label>
-                                        <input class="form-control txt-normal" id="job_address" placeholder="请输入项目身份" />
+                                        <input class="form-control txt-normal" id="job_address" placeholder="请输入项目地址" />
                                     </div>
                                     <div class="form-group">
                                         <label>选择身份</label>
@@ -271,7 +271,7 @@
                                     </h4>
                                     <p class="list-group-item-text">
                                         <span class="licen-time"></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="licen-org">认证公司：</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="licen-loc">认证号：</span><br />
-                                        <span class="txt">个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍</span>
+                                        <span class="txt"></span>
                                     </p>
                                 </div>
                             </div>

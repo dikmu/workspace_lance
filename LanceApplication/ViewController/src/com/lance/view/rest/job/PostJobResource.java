@@ -336,6 +336,11 @@ public class PostJobResource extends BaseRestResource {
         }
         json.put("CatName", new CacheResource().getJobCategoryNameFromCache(json.getString("WorkCategory")));
         json.put("SubCatName", new CacheResource().getJobSubCategoryNameFromCache(json.getString("WorkSubcategory")));
+        if(json.has("CreateBy") && this.findCurrentUserName().equals(json.getString("CreateBy"))){
+            json.put("viewGrant", "true");
+        }else{
+            json.put("viewGrant", checkCurUserIsAgreed(postJobId));
+        }
         return json;
     }
 
@@ -652,6 +657,17 @@ public class PostJobResource extends BaseRestResource {
             arr.put(json);
         }
         return arr;
+    }
+    
+    public String checkCurUserIsAgreed(String jobId){
+         String sql = "select count(p.UUID) co from POST_JOB_DISCUSS p where p.STATUS='"+ConstantUtil.DISCUSS_STATUS_AGREED+"' and p.IS_APPLY='Y' and p.CREATE_BY='"+this.findCurrentUserName()+"' and p.POST_JOB_ID='"+jobId+"'";
+         LanceRestAMImpl am = LUtil.findLanceAM();
+         ViewObjectImpl vo = am.createDynamicViewObject("QueryPostJobLanDisVO", sql);
+         if(vo != null && vo.first() != null){
+             int t = Integer.parseInt(vo.first().getAttribute("CO").toString());
+             return (t>0?"true":"false");
+         }
+        return "false";
     }
 
     /**

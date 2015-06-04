@@ -34,11 +34,11 @@
                 <a href="/lance/pages/search"><span aria-hidden="true">&larr;</span> 返回搜索工作列表</a>
                 <br /><br />
                 
-                <div class="alert alert-info" role="alert">
-                    您可以在此查看及申请工作，还可以向发布信息者进行提问。您可在申请时提出自己认为合理的价格以及可以进入项目的时间。
-                    <br /><br />
-                    <!--<strong>关于报价信息</strong><br />
-                    SVIP账户可以查看VIP与普通用户的报价信息；VIP账户可以查看普通用户发布的报价信息；只有被申请甲方能查看SVIP用户发布的报价信息。-->
+                <div class="alert alert-info" role="alert" id="inf-cnt">
+                    您可在此查看及申请工作，还可向发布信息者进行提问。<br/>
+                    您可在申请时提出自己认为合理的价格和可以进入项目的时间。<br/>
+                    为保护您的隐私，您的用户名、公司名信息将在第一次回复后显示给被回复者
+                    只有信息发布者能够查看您的报价信息
                 </div>
                 
                 <div>
@@ -123,7 +123,7 @@
                                         </a>
                                     </div>
                                     <div class="media-body">
-                                        <h4 class="media-heading">客户信息  <span id="client-location"></span></h4>
+                                        <h4 class="media-heading"><span id="cu-cnt">客户信息</span>  <span id="client-location"></span></h4>
                                         <!--<span class="glyphicon glyphicon-star lan-font-yellow"></span>
                                         <span class="glyphicon glyphicon-star lan-font-yellow"></span>
                                         <span class="glyphicon glyphicon-star lan-font-yellow"></span>
@@ -303,7 +303,7 @@
                      <div class="form-group">
                         <label for="inp_comments" class="control-label">请输入回复内容：</label>
                         <textarea class="form-control" rows="3" id="replay-content"></textarea>
-                    </div>
+                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

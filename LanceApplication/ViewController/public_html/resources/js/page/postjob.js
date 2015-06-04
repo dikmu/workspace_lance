@@ -2,7 +2,7 @@ function init_category(){
     $.ax("get", "jobTemplate/jobCategory", null, function(data){
         var len = data.length, i = 0, str = "";
         for(i=0;i<len;i++){
-            str += '<option value="'+data[i].Uuid+'">'+data[i].NameEn+'</option>';
+            str += '<option value="'+data[i].Uuid+'">'+(data[i].NameCn ? data[i].NameCn : data[i].NameEn)+'</option>';
         }
         $("#cate-lev1").append(str);
         
@@ -19,7 +19,7 @@ function init_category(){
             $.ax("get", "jobTemplate/jobSubCategory/" + value, null, function(data){
                 var len = data.length, i = 0, str = "";
                 for(i=0;i<len;i++){
-                    str += '<option value="'+data[i].Uuid+'">'+data[i].Name+'</option>';
+                    str += '<option value="'+data[i].Uuid+'">'+(data[i].NameCn ? data[i].NameCn : data[i].Name)+'</option>';
                 }
                 $("#cate-lev2 option").not(".mod").remove();
                 $("#cate-lev2").append(str);
