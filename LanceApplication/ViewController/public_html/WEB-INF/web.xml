@@ -289,7 +289,7 @@
     <listener-class>com.lance.view.servlet.AuthListener</listener-class>
   </listener>
   <welcome-file-list>
-    <welcome-file>/pages/MyHome</welcome-file>
+    <welcome-file>/pages/search</welcome-file>
   </welcome-file-list>
   <login-config>
     <auth-method>FORM</auth-method>

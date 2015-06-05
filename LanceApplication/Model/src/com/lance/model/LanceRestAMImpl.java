@@ -40,7 +40,6 @@ import com.zngh.platform.front.core.model.BaseApplicationModuleImpl;
 
 import com.zngh.platform.front.core.model.BaseViewObjectImpl;
 
-import oracle.jbo.server.ApplicationModuleImpl;
 import oracle.jbo.server.ViewLinkImpl;
 import oracle.jbo.server.ViewObjectImpl;
 // ---------------------------------------------------------------------
@@ -500,6 +499,14 @@ public class LanceRestAMImpl extends BaseApplicationModuleImpl {
      */
     public UserProjectHistoryVOImpl getUserProjectHistory1() {
         return (UserProjectHistoryVOImpl) findViewObject("UserProjectHistory1");
+    }
+
+    /**
+     * Container's getter for LanceDiscuss1.
+     * @return LanceDiscuss1
+     */
+    public BaseViewObjectImpl getLanceDiscuss1() {
+        return (BaseViewObjectImpl) findViewObject("LanceDiscuss1");
     }
 }
 

@@ -150,11 +150,11 @@ function checkForm(){
         udetail.popover("hide");
         udetail.closest(".form-group").removeClass("has-error").removeClass("has-success").removeClass("has-feedback");
         
-        if(udetail.val() != "" && udetail.val().length > 50){
+        if(udetail.val() != "" && udetail.val().length > 10){
             udetail.closest(".form-group").addClass("has-success").addClass("has-feedback");
             basicRes.content = true;
         }else{
-            udetail.attr("data-content", "工作内容不能少于50字").popover("show");
+            udetail.attr("data-content", "工作内容不能少于10字").popover("show");
             udetail.closest(".form-group").addClass("has-error");
             basicRes.content = false;
         }

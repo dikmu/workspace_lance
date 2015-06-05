@@ -28,7 +28,11 @@
       ViewObjectName="com.lance.model.vo.SpreadHeardFromVO"/>
     <ViewUsage
       Name="JobCategory1"
-      ViewObjectName="com.lance.model.vo.JobCategoryVO"/>
+      ViewObjectName="com.lance.model.vo.JobCategoryVO">
+        <ViewCriteriaUsage
+            Name="FindAvaliableVC"
+            FullName="com.lance.model.vo.JobCategoryVO.FindAvaliableVC"/>
+    </ViewUsage>
     <ViewUsage
       Name="JobSubCategory1"
       ViewObjectName="com.lance.model.vo.JobSubCategoryVO"/>
@@ -132,6 +136,9 @@
     <ViewUsage
         Name="UserProjectHistory1"
         ViewObjectName="com.lance.model.vo.UserProjectHistoryVO"/>
+    <ViewUsage
+        Name="LanceDiscuss1"
+        ViewObjectName="com.lance.model.vo.LanceDiscussVO"/>
     <ViewLinkUsage
       Name="JobCategory_SubCategoryVL1"
       ViewLinkObjectName="com.lance.model.vl.JobCategory_SubCategoryVL"

@@ -345,13 +345,13 @@ $(function () {
     $("#inp_detail").limitWord(500);
     
     var chk_jobname = false, chk_jobdesc = false;
-    $("#inp_jobname").checkInput("工作名称", /^[\u0391-\uFFE5A-Za-z0-9]+$/, "工作名称只能输入中文和字母" ,function () {
+    $("#inp_jobname").checkInput("工作名称", /^[\u0391-\uFFE5A-Za-z0-9\s]+$/, "工作名称只能输入中文和字母" ,function () {
         chk_jobname = true;
     }, function(){
         chk_jobname = false;
     });
     $("#inp_detail").blur(function(){
-        if($(this).val().length < 50){
+        if($(this).val().length < 10){
             $(this).css("border-color", "#f00").parent().find(".error").html("工作描述至少输入50字。");
             chk_jobdesc = false;
         }else{
