@@ -13,3 +13,26 @@
         </div>
     </div>
 </div>
+
+<div class="feedback">
+    <span class="ico_fk"></span>
+    <div class="head">意见反馈</div>
+    <div class="form">
+        <p>
+            <label>网站URL：</label>
+            <input readonly="readonly" id="fb_url" type="text" value="" />
+        </p>
+        <p>
+            <label>联系方式：</label>
+            <input maxlength="60" id="fb_conct" type="text" value="" />
+        </p>
+        <p>
+            <label>意见反馈：</label>
+            <textarea maxlength="2000" id="fb_content" cols="" rows=""></textarea>
+        </p>
+        <p>
+            <span id="fb_err" class="error"></span>
+            <a id="btn_fb" class="btn btn-success">确定</a>
+        </p>
+    </div>
+</div>

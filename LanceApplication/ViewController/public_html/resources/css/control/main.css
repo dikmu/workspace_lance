@@ -217,3 +217,15 @@
 #list-avatar li{float:left;width:20%;margin:5px 10px;text-align:center;list-style:none;}
 #list-avatar li.sel a{border-color:#428bca;}
 
+.feedback{position:fixed;right:0px;top:60px;width:0px;height:367px;background:#f3f3f4;}
+.feedback .head{height:40px;background:#efefef;line-height:40px;text-align:center;color:#676a6c;font-size:12px;font-weight:bold;}
+.feedback .form p{margin:10px 0 20px 15px;}
+.feedback .form label{color:#666a6c;font-size:12px;font-weight:normal;}
+.feedback .form input{width:195px;height:25px;border:solid 1px #e0e0e0;font-size:12px;}
+.feedback .form textarea{width:195px;height:83px;border:solid 1px;border:solid 1px #e0e0e0;font-size:12px;}
+.feedback .form .btn{padding:3px 12px;}
+.feedback .form .error{display:inline-block;font-size:12px;color:#d9534f;width:138px;}
+
+.ico_fk{background:url(../../image/fk.png) no-repeat 0 0;width:35px;height:30px;position:absolute;display:inline-block;cursor:pointer;left:-35px;}
+.ico_fk.sel,.ico_fk:hover{background-position:0 -33px;}
+

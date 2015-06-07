@@ -27,6 +27,14 @@
     <br />
     <div class="container newjob">
         <div class="row">
+        
+             <div class="alert alert-info" role="alert" id="inf-cnt">
+                在此页面发布招聘需求信息。<br />
+                信息发布后其他人无法看到你的个人信息及联系方式。<br />
+                需求发布后，只有您回复留言或同意申请后，访问者才能看到您的信息。<br />
+                信息会在“ 发布工作的时间”到期后自动失效。
+            </div>
+            
             <div class="page-header">
                 <h1 class="step-xh">
                     <span class="step_sp one"></span>
@@ -39,6 +47,8 @@
             </div>
             
             <form class="step1 basic-form col-md-6" role="form" method="post" action="#">
+                
+                
                 <div class="form-group <!--has-error has-feedback-->">
                     <label for="exampleInputEmail1" class="control-label">
                         工作名称：</label>
