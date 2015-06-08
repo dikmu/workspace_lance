@@ -26,6 +26,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import oracle.jbo.Row;
@@ -541,6 +542,38 @@ public class PostJobResource extends BaseRestResource {
         }else if (row2.getCreateBy().equals(this.findCurrentUserName())) {
             System.err.println("用户试图同意自己的申请" + this.findCurrentUserName());
             return "err:请勿将自己加入备选";
+        }
+        if("ok".equals(am.commit())){
+            return "ok";
+        }
+        return "err:保存失败!";
+    }
+    
+    @POST
+    @Path("cancel/{postJobId}/{discussId}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.TEXT_PLAIN)
+    public String cancelApplyDiscuss(@PathParam("postJobId") String jobId, @PathParam("discussId") String discussId){
+        //获取postJob
+        LanceRestAMImpl am = LUtil.findLanceAM();
+        PostJobsVOImpl vo = am.getPostJobs1();
+        findPostJobById(jobId, vo);
+        //获取申请Discuss
+        PostJobDiscussVOImpl vo2 = am.getPostJobDiscuss1();
+        vo2.setApplyViewCriteriaName("FindByIdVC");
+        vo2.setpId(discussId);
+        vo2.executeQuery();
+        PostJobDiscussVORowImpl row2 = (PostJobDiscussVORowImpl) vo2.first();
+        vo2.removeApplyViewCriteriaName("FindByIdVC");
+        
+        if (!(ConstantUtil.DISCUSS_STATUS_OPTION.equals(row2.getStatus()) || ConstantUtil.DISCUSS_STATUS_AGREED.equals(row2.getStatus()))) {
+            System.err.println("这不是一个申请或者备选,无法做取消备选或取消申请操作");
+            return "err:这不是一个申请或者备选,无法做取消备选或取消申请操作";
+        }   
+        PostJobsVORowImpl pjr = (PostJobsVORowImpl)vo.getCurrentRow();
+        if(pjr.getCreateBy().equals(this.findCurrentUserName())){
+            row2.setStatus(ConstantUtil.DISCUSS_STATUS_DISPLAY);
+            row2.setStatusLog("显示");
         }
         if("ok".equals(am.commit())){
             return "ok";

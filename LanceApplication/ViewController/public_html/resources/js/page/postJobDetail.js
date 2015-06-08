@@ -11,7 +11,7 @@ $(function () {
 //初始化招聘信息数据
 function initPostJobData(jobId){
   jQuery.ajax({
-        url : '/lance/res/postJob/'+ jobId, type : 'get', success : function (data) {
+        url : '/lance/res/postJob/'+ jobId+'?random='+Math.random(), type : 'get', success : function (data) {
             $(".jobtitle").html(data.Name);
             $("#job-msg-area").html(template('job-msg-sp1',{'status' : data["Postform"]}));
             var skills=new Array();
@@ -84,20 +84,23 @@ function initPostJobData(jobId){
                 }
             }
             //判断按钮加载
+            var role = null;
             if(User.logined && User.UserName == data["CreateBy"]){
-                $("#btn-area").hide();
-                $("#btn-area").html(template('btn-area-sp1',{'show' : "N"}));
+                $("#btn-area").show();
+                $("#btn-area").html(template('btn-area-sp1',{'show' : (data["Status"]=='deleted'?"deleted":"N")}));
                 $("#radio-area").html(template('radio-area-sp1',{'pid' : "client","u_sta":!User.logined}));
                 stat(jobId,"client");
+                role = "client";
                 $("#inf-cnt").html("查看哪些自由职业者对您的项目感兴趣。<br/>" +
                 "对申请人 进行回复留言、加入备选、同意申请的操作后，您的联系信息才会开放给申请人。");
                 $("#cu-cnt").html("<a href='/lance/pages/profile/Overview?uid="+data["CreateBy"]+"'>客户信息</a>");
             }else{
                 if(User.logined){
                     $("#btn-area").show();
-                    $("#btn-area").html(template('btn-area-sp1',{'show' : "Y"}));
+                    $("#btn-area").html(template('btn-area-sp1',{'show' : (data["Status"]=='deleted'?"deleted":"Y")}));
                     $("#radio-area").html(template('radio-area-sp1',{'pid' : "lancer","u_sta":!User.logined}));
                     stat(jobId,"lancer");
+                    role = "lancer";
                     $("#inf-cnt").html("您可在此查看及申请工作，还可向发布信息者进行提问。<br/>" +
                     "您可在申请时提出自己认为合理的价格和可以进入项目的时间。<br/>" +
                     "为保护您的隐私，您的用户名、公司名信息将在第一次回复后显示给被回复者" +
@@ -109,15 +112,15 @@ function initPostJobData(jobId){
                     }
                 }
             }
-            
-            quesSubmit(jobId,data["CreateBy"]);
-            replaySubmit(jobId,data["CreateBy"]);
-            disDel(jobId,data["CreateBy"]);
-            jfjgChange(jobId,true,data["CreateBy"]);
-            submitApply(jobId,data["CreateBy"]);
-            initPostDiscussData(jobId,data["CreateBy"]);
-            optionApply(jobId,data["CreateBy"]);
-            agree(jobId,data["CreateBy"]);
+            quesSubmit(data["Status"],jobId,data["CreateBy"]);
+            replaySubmit(data["Status"],jobId,data["CreateBy"]);
+            disDel(data["Status"],jobId,data["CreateBy"],role);
+            jfjgChange(data["Status"],jobId,true,data["CreateBy"]);
+            submitApply(data["Status"],jobId,data["CreateBy"]);
+            initPostDiscussData(data["Status"],jobId,data["CreateBy"]);
+            optionApply(data["Status"],jobId,data["CreateBy"]);
+            agree(data["Status"],jobId,data["CreateBy"]);
+            cancel(data["Status"],jobId,data["CreateBy"]);
         },
         error : function (msg) {
         }
@@ -125,10 +128,10 @@ function initPostJobData(jobId){
 }
 
 //初始化提问申请列表
-function initPostDiscussData(jobId,publisher){
+function initPostDiscussData(status,jobId,publisher){
     jQuery.ajax({
         url : '/lance/res/postJob/'+jobId+'/discuss?random='+Math.random(), type : 'get', success : function (data) {
-           $("#list-discuss").html(template('list-discuss-sp1',{'list' : data,"User":User,"Publisher":publisher}));
+           $("#list-discuss").html(template('list-discuss-sp1',{'list' : data,"User":User,"Publisher":publisher,"status":status}));
         },
         error : function (msg) {
         }
@@ -141,10 +144,10 @@ function isNum1(str){
 }
 
 //初始化提问申请列表
-function initPostDiscussData2(jobId,publisher,type){
+function initPostDiscussData2(status,jobId,publisher,type){
     jQuery.ajax({
         url : '/lance/res/postJob/'+jobId+'/'+type+'/discuss?random='+Math.random(), type : 'get', success : function (data) {
-           $("#list-discuss").html(template('list-discuss-sp1',{'list' : data,"User":User,"Publisher":publisher}));
+           $("#list-discuss").html(template('list-discuss-sp1',{'list' : data,"User":User,"Publisher":publisher,"Status":status}));
         },
         error : function (msg) {
         }
@@ -152,7 +155,7 @@ function initPostDiscussData2(jobId,publisher,type){
 }
 
 //留言
-function quesSubmit(jobId,publisher){
+function quesSubmit(status,jobId,publisher){
   $("#ques-submit").click(function(){
      var ckCt = $("#ques-content").lanCheck('notEmpty');
      var paCt = $("#ques-content").closest('.form-group');
@@ -170,7 +173,7 @@ function quesSubmit(jobId,publisher){
           data:jQuery.toJSON(param),
           success: function(data){
              $("#post_ques").modal('hide');
-             initPostDiscussData(jobId,publisher);
+             initPostDiscussData(status,jobId,publisher);
         },error:function(msg){
         }
     });
@@ -178,11 +181,15 @@ function quesSubmit(jobId,publisher){
 }
 
 //留言回复
-function replaySubmit(jobId,publisher){
+function replaySubmit(status,jobId,publisher){
   var uuid = null;
   $(".panel-footer").on("click", "button[name='btn_note']", function(){
       if(!User.logined){
-         alert("请登录后留言!");
+         $.ae("请登录后留言!", function(evt){
+            if(evt){
+               window.location.href="/lance/login.htm";
+            }
+         });
          return;
       }
       var paCt = $("#ques-content").closest('.form-group');
@@ -194,7 +201,11 @@ function replaySubmit(jobId,publisher){
  
   $(".panel-footer").on("click", "button[name='btn_apply']", function(){
       if(!User.logined){
-         alert("请登录后再发起申请!");
+         $.ae("请登录后再发起申请!", function(evt){
+            if(evt){
+               window.location.href="/lance/login.htm";
+            }
+         });
          return;
       }
       $("#post_apply").modal('show');
@@ -230,14 +241,32 @@ function replaySubmit(jobId,publisher){
           data:jQuery.toJSON(param),
           success: function(data){
              $("#ques_modal").modal('hide');
-             initPostDiscussData(jobId,publisher);
+             initPostDiscussData(status,jobId,publisher);
         },error:function(msg){
         }
     });
   });
+  
+  $(".panel-footer").on("click", "button[name='btn_del']", function(){
+     $.ae("是否确认要删除该招聘信息？", function(evt){
+        if(evt){
+             jQuery.ajax({
+                  url : '/lance/res/postJob/delete/'+jobId, 
+                  type : 'post',
+                  success: function(data){
+                     initPostJobData(jobId);
+                },error:function(msg){
+                }
+            });
+        }
+     });
+  });
 }
 
-function disDel(jobId,publisher){
+function disDel(status,jobId,publisher,role){
+  if(role == null){
+     return;
+  }
   var uuid = null;
   $("#list-discuss").on("click", "button[name='dis-del']", function(){
       uuid = $(this).attr("uuid");
@@ -248,18 +277,19 @@ function disDel(jobId,publisher){
                           url : '/lance/res/postJob/'+jobId+'/discuss/delete/'+uuid, 
                           type : 'post',
                           success: function(data){
-                             initPostDiscussData(jobId,publisher);
+                             initPostDiscussData(status,jobId,publisher);
+                             stat(jobId,role);
                         },error:function(msg){
                         }
                     });
                }
-            });
+         });
       }
   });
 }
 
 //加入备选
-function optionApply(jobId,publisher){
+function optionApply(status,jobId,publisher){
   var uuid = null;
   $("#list-discuss").on("click", "button[name='btn-option']", function(){
       uuid = $(this).attr("uuid");
@@ -269,7 +299,8 @@ function optionApply(jobId,publisher){
               type : 'post',
               success: function(data){
                  if(data.indexOf("ok") >= 0){
-                     initPostDiscussData(jobId,publisher);
+                     initPostDiscussData(status,jobId,publisher);
+                     stat(jobId,"client");
                  }else{
 //                     alert(data.split(":")[1]);
                  }
@@ -281,7 +312,7 @@ function optionApply(jobId,publisher){
 }
 
 //同意操作 
-function agree(jobId,publisher){
+function agree(status,jobId,publisher){
   var uuid = null;
   $("#list-discuss").on("click", "button[name='btn-agree']", function(){
       uuid = $(this).attr("uuid");
@@ -294,7 +325,8 @@ function agree(jobId,publisher){
               data:jQuery.toJSON(param),
               success: function(data){
                  if(data.msg.indexOf("ok") >= 0){
-                     initPostDiscussData(jobId,publisher);
+                     initPostDiscussData(status,jobId,publisher);
+                     stat(jobId,"client");
                  }else{
                      alert(data.msg.split(":")[1]);
                  }
@@ -305,7 +337,51 @@ function agree(jobId,publisher){
   });
 }
 
-function jfjgChange(jobId,init,publisher){
+//取消操作 
+function cancel(status,jobId,publisher){
+  var uuid = null;//btn-cancel-option
+  //取消申请
+  $("#list-discuss").on("click", "button[name='btn-cancel-agree']", function(){
+      uuid = $(this).attr("uuid");
+      if(uuid != null){
+         $.ae("确认取消该已同意的申请吗？", function(evt){
+            if(evt){
+               cancelHandle(status,jobId,publisher,uuid);
+            }
+         });
+      }
+  });
+  //取消备选
+  $("#list-discuss").on("click", "button[name='btn-cancel-option']", function(){
+      uuid = $(this).attr("uuid");
+      if(uuid != null){
+         $.ae("确认取消该备选吗？", function(evt){
+            if(evt){
+               cancelHandle(jobId,publisher,uuid);
+            }
+         });
+      }
+  });
+  
+}
+
+function cancelHandle(status,jobId,publisher,uuid){
+   jQuery.ajax({
+          url : '/lance/res/postJob/cancel/'+jobId+'/'+uuid, 
+          type : 'post',
+          success: function(data){
+             if(data.indexOf("ok") >= 0){
+                 initPostDiscussData(status,jobId,publisher);
+                 stat(jobId,"client");
+             }else{
+                 alert(data.split(":")[1]);
+             }
+        },error:function(msg){
+        }
+    });
+}
+
+function jfjgChange(status,jobId,init,publisher){
    
    $("input[name='jkfs']").change(function(){
         if(this.checked){
@@ -340,15 +416,15 @@ function jfjgChange(jobId,init,publisher){
     $("input[name='wtlb']").change(function(){
         if(this.checked){
             if("all" == $(this).val()){
-               initPostDiscussData2(jobId,publisher,"all");
+               initPostDiscussData2(status,jobId,publisher,"all");
             }else if("apply" == $(this).val()){
-               initPostDiscussData2(jobId,publisher,"apply");
+               initPostDiscussData2(status,jobId,publisher,"apply");
             }else if("second" == $(this).val()){
-               initPostDiscussData2(jobId,publisher,"second");
+               initPostDiscussData2(status,jobId,publisher,"second");
             }else if("owner" == $(this).val()){
-               initPostDiscussData2(jobId,publisher,"owner");
+               initPostDiscussData2(status,jobId,publisher,"owner");
             }else if("agree" == $(this).val()){
-               initPostDiscussData2(jobId,publisher,"agree");
+               initPostDiscussData2(status,jobId,publisher,"agree");
             }
         }
     });
@@ -369,7 +445,7 @@ function jfjgChange(jobId,init,publisher){
     }
 }
 
-function submitApply(jobId,publisher){
+function submitApply(status,jobId,publisher){
   $("#apply-submit").click(function(){
      if(checkApply()){
        var paraStr = "";
@@ -389,7 +465,7 @@ function submitApply(jobId,publisher){
           contentType : 'application/json',
           data:param,
           success: function(data){
-            initPostDiscussData(jobId,publisher);
+            initPostDiscussData(status,jobId,publisher);
             $("#post_apply").modal('hide');
         },error:function(msg){
         }
@@ -536,7 +612,7 @@ function checkApply(){
 
 function stat(jobId,type){
     jQuery.ajax({
-          url : '/lance/res/postJob/'+jobId+'/stat/'+type, 
+          url : '/lance/res/postJob/'+jobId+'/stat/'+type+'?random='+Math.random(), 
           type : 'get',
           success: function(data){
             if("lancer" == type){

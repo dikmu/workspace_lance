@@ -119,7 +119,7 @@
                                 <div class="media lan-bg-f5">
                                     <div class="media-left media-middle">
                                         <a href="#" class="thumbnail">
-                                            <img width="64px" height="64px" id="thu-img" src="/lance/resources/image/avatar/normal_1.png" class="media-object" alt="" />
+                                           <img width="64px" height="64px" id="thu-img" src="/lance/resources/image/avatar/normal_1.png" class="media-object" alt="" />
                                         </a>
                                     </div>
                                     <div class="media-body">
@@ -150,7 +150,11 @@
                             <script id="btn-area-sp1" type="text/html">
                                 {{if show=="Y"}} 
                                    <button type="button" class="btn btn-warning btn-sm" name="btn_note">留言</button>
-                                   <button type="button" class="btn btn-success btn-sm" name="btn_apply">申请</button> 
+                                   <button type="button" class="btn btn-success btn-sm" name="btn_apply">申请</button>
+                                {{else if show=="N"}}
+                                   <button type="button" class="btn btn-danger btn-xs" name="btn_del">删除</button>
+                                {{else if show=="deleted"}}
+                                    <span class="tip-span">该招聘信息已删除</span>
                                 {{/if}}
                             </script>
                         </div>
@@ -231,30 +235,35 @@
                                         </div>
                                     {{/if}}
                                     <div>
-                                        {{if (User.UserName==Publisher && data.IsApply=='Y')}}
-                                           {{if data.Status == 'display'}}
-                                              <button type="button" name="btn-agree" uuid="{{data.Uuid}}" class="btn btn-success btn-xs">接受</button>
-                                              <button type="button" name="btn-option" uuid="{{data.Uuid}}" class="btn btn-success btn-xs">加入备选</button>
-                                              <button type="button" class="btn btn-danger btn-xs" uuid="{{data.Uuid}}" name="dis-del">删除</button>
-                                           {{else if data.Status == 'option'}}
-                                              <button type="button" name="btn-agree" uuid="{{data.Uuid}}" class="btn btn-success btn-xs">接受</button>
-                                              <button type="button" class="btn btn-danger btn-xs" uuid="{{data.Uuid}}" name="dis-del">删除</button>
-                                           {{/if}}
-                                        {{else if (User.UserName==Publisher && data.IsApply=='N')}}
-                                           {{if data.children.length > 0}}
-                                             <button type="button" class="btn btn-success btn-xs" uuid="{{data.Uuid}}" name="ques-replay">回复</button>
-                                           {{else}}
-                                              <button type="button" class="btn btn-danger btn-xs" uuid="{{data.Uuid}}" name="dis-del">删除</button>
-                                              <button type="button" class="btn btn-success btn-xs" uuid="{{data.Uuid}}" name="ques-replay">回复</button>
-                                           {{/if}}
-                                        {{else if (User.UserName!=Publisher && data.CreateBy==User.UserName && (data.IsApply=='N' || data.IsApply=='Y'))}}
-                                            {{if data.children.length == 0}}
+                                        {{if status=='posted'}}
+                                            {{if (User.UserName==Publisher && data.IsApply=='Y')}}
                                                {{if data.Status == 'display'}}
+                                                  <button type="button" name="btn-agree" uuid="{{data.Uuid}}" class="btn btn-success btn-xs">接受</button>
+                                                  <button type="button" name="btn-option" uuid="{{data.Uuid}}" class="btn btn-success btn-xs">加入备选</button>
                                                   <button type="button" class="btn btn-danger btn-xs" uuid="{{data.Uuid}}" name="dis-del">删除</button>
+                                               {{else if data.Status == 'option'}}
+                                                  <button type="button" name="btn-agree" uuid="{{data.Uuid}}" class="btn btn-success btn-xs">接受</button>
+                                                  <button type="button" name="btn-cancel-option" uuid="{{data.Uuid}}" class="btn btn-success btn-xs">取消备选</button>
+                                                  <button type="button" class="btn btn-danger btn-xs" uuid="{{data.Uuid}}" name="dis-del">删除</button>
+                                               {{else if data.Status == 'agreed'}}
+                                                  <button type="button" name="btn-cancel-agree" uuid="{{data.Uuid}}" class="btn btn-success btn-xs">取消已接受的申请</button>
                                                {{/if}}
-                                           {{else}}
-                                              <button type="button" class="btn btn-success btn-xs" uuid="{{data.Uuid}}" name="ques-replay">留言</button>
-                                           {{/if}}
+                                            {{else if (User.UserName==Publisher && data.IsApply=='N')}}
+                                               {{if data.children.length > 0}}
+                                                 <button type="button" class="btn btn-success btn-xs" uuid="{{data.Uuid}}" name="ques-replay">回复</button>
+                                               {{else}}
+                                                  <button type="button" class="btn btn-danger btn-xs" uuid="{{data.Uuid}}" name="dis-del">删除</button>
+                                                  <button type="button" class="btn btn-success btn-xs" uuid="{{data.Uuid}}" name="ques-replay">回复</button>
+                                               {{/if}}
+                                            {{else if (User.UserName!=Publisher && data.CreateBy==User.UserName && (data.IsApply=='N' || data.IsApply=='Y'))}}
+                                                {{if data.children.length == 0}}
+                                                   {{if data.Status == 'display'}}
+                                                      <button type="button" class="btn btn-danger btn-xs" uuid="{{data.Uuid}}" name="dis-del">删除</button>
+                                                   {{/if}}
+                                               {{else}}
+                                                  <button type="button" class="btn btn-success btn-xs" uuid="{{data.Uuid}}" name="ques-replay">留言</button>
+                                               {{/if}}
+                                            {{/if}}
                                         {{/if}}
                                     </div>
                                     {{each data.children as cr i}}
@@ -269,11 +278,13 @@
                                             <span class="pull-right">{{cr.CreateOn}}</span><br/>
                                             &nbsp;&nbsp;&nbsp;&nbsp;{{cr.Content}}
                                             <div style="float:right;">
-                                                {{if ((data.CreateBy==User.UserName || cr.CreateBy==User.UserName) && data.IsApply=='N')}}
-                                                    <button type="button" class="btn btn-danger btn-xs" uuid="{{cr.Uuid}}" name="dis-del">删除</button>
-                                                {{else if (data.CreateBy==User.UserName && cr.CreateBy!=User.UserName && data.IsApply=='N')}}
-                                                    <button type="button" class="btn btn-success btn-xs" uuid="{{data.Uuid}}" name="ques-replay">回复</button>
-                                                {{/if}}
+                                               {{if status=='posted'}}
+                                                    {{if ((data.CreateBy==User.UserName || cr.CreateBy==User.UserName) && data.IsApply=='N')}}
+                                                        <button type="button" class="btn btn-danger btn-xs" uuid="{{cr.Uuid}}" name="dis-del">删除</button>
+                                                    {{else if (data.CreateBy==User.UserName && cr.CreateBy!=User.UserName && data.IsApply=='N')}}
+                                                        <button type="button" class="btn btn-success btn-xs" uuid="{{data.Uuid}}" name="ques-replay">回复</button>
+                                                    {{/if}}
+                                               {{/if}}
                                             </div>
                                         </div>
                                     {{/each}}
