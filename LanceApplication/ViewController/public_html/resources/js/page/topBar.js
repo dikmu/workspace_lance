@@ -28,7 +28,7 @@ $(function(){
     });
 
     var url = window.location.href;
-    $("#fb_url").val(url);
+    //$("#fb_url").val(url);
     
     $("#btn_fb").click(function(){
         var con = $("#fb_conct"), content = $("#fb_content"), err = $("#fb_err");

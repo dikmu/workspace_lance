@@ -18,9 +18,9 @@
     <span class="ico_fk"></span>
     <div class="head">意见反馈</div>
     <div class="form">
-        <p>
-            <label>网站URL：</label>
-            <input readonly="readonly" id="fb_url" type="text" value="" />
+        <br />
+        <p class="tip">
+            <label>感谢您的反馈，我们将尽快联系您.</label>
         </p>
         <p>
             <label>联系方式：</label>
