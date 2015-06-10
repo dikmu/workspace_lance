@@ -24,7 +24,7 @@ $(function(){
             
     });
 });
-﻿
+
 $(function(){
     if(!User.logined || User.UserName != Data.User.User.UserName){
         $(".btn-edit,.btn-xs").remove();
@@ -230,7 +230,7 @@ $(function(){
     
     
     var initUser = function(){
-        $(".uname").html(User.DisplayName + (Data.User.User.hasOwnProperty("JobTitle") ? '-'+Data.User.User.JobTitle : ''));
+        $(".uname").html(Data.User.User.DisplayName + (Data.User.User.hasOwnProperty("JobTitle") ? '-'+Data.User.User.JobTitle : ''));
         $(".utitle").html(Data.User.User.Tagline);
         $(".uself").html(Data.User.User.Overview);
         
@@ -249,11 +249,11 @@ $(function(){
         $("#contact_other").html(Data.User.User.ImNumberC || "尚未填写");
         
         var locDetail = "";
-        if(User.LocationAIndex !=null){
-            locDetail+="地址1："+User.LocationAIndex+" "+Data.User.User.LocationADetail+"<br>";
+        if(Data.User.User.LocationAIndex !=null){
+            locDetail+="地址1："+Data.User.User.LocationAIndex+" "+Data.User.User.LocationADetail+"<br>";
         }
-        if(User.LocationBIndex !=null){
-            locDetail+="地址2："+User.LocationBIndex+" "+Data.User.User.LocationBDetail;
+        if(Data.User.User.LocationBIndex !=null){
+            locDetail+="地址2："+Data.User.User.LocationBIndex+" "+Data.User.User.LocationBDetail;
         }
         if(locDetail){
             locDetail = locDetail.replace(/;/g, ' ');
@@ -263,8 +263,7 @@ $(function(){
         }
         
         var skill = Data.User.Skill;
-        
-        if(skill.length > 0){
+        if(skill && skill.length > 0){
             var i = 0, len = skill.length;
             for(i=0;i<len;i++){
                 $(".uskill").append('<span class="label label-primary">' + skill[i].Name +'</span>');
@@ -281,7 +280,7 @@ $(function(){
     
     initHeader();
     initUser();
-    
+   
     $(".jobs .no-add").hover(function(){
         $(this).html("点击添加项目经历");
     }, function(){
@@ -294,13 +293,13 @@ $(function(){
         $(this).html("您还没有添加教育信息");
     });
     
-     $(".works .no-add").hover(function(){
+    $(".works .no-add").hover(function(){
         $(this).html("点击添加工作经历");
     }, function(){
         $(this).html("您还没有添加工作经历");
     });
     
-     $(".licens .no-add").hover(function(){
+    $(".licens .no-add").hover(function(){
         $(this).html("点击添加认证信息");
     }, function(){
         $(this).html("您还没有添加认证信息");
@@ -465,7 +464,7 @@ $(function(){
 
 $(function(){
     var init_licens = function(){
-        $.ax("get", "user/license/all/"+ User.UserName+"?r="+Math.random(), null, function(data){
+        $.ax("get", "user/license/all/"+ Data.User.User.UserName+"?r="+Math.random(), null, function(data){
             if(data.length > 0){
                 $("#no_add_licen").hide();
                 $.each(data, function(i, dom){
@@ -479,7 +478,7 @@ $(function(){
     init_licens();
 
     var init_works = function(){
-        $.ax("get", "user/comp/all/"+ User.UserName+"?r="+Math.random(), null, function(data){
+        $.ax("get", "user/comp/all/"+ Data.User.User.UserName+"?r="+Math.random(), null, function(data){
             if(data.length > 0){
                 $("#no_add_work").hide();
                 $.each(data, function(i, dom){
@@ -507,7 +506,7 @@ $(function(){
     init_edus();
     
     var init_jobs = function(){
-        $.ax("get", "user/proj/all/" + User.UserName+"?r="+Math.random(), null, function(data){
+        $.ax("get", "user/proj/all/" + Data.User.User.UserName+"?r="+Math.random(), null, function(data){
             if(data.length > 0){
                 $("#no_add_job").hide();
                 $.each(data, function(i, dom){
