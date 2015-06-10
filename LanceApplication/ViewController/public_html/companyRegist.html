@@ -78,6 +78,15 @@
                         <span class="glyphicon glyphicon-ok form-control-feedback"></span>
                     </div>
                     <div class="form-group">
+                        <label id="lbl_name" for="inp_comname" class="control-label">
+                            推荐人</label>
+                        <input type="text" class="form-control" id="inp_referrer" placeholder=""
+                            data-container="body" data-toggle="popover" data-placement="right" 
+                            data-content="请输入推荐人登录名" data-trigger="manual" data-animation="false"
+                        />
+                        <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+                    </div>
+                    <div class="form-group">
                         <label for="inp_verCode" class="control-label">请输入验证码</label><br/>
                         <input value="" style="width:50%;display:inline-block;" type="text" id="inp_verCode" placeholder="" class="form-control" /><br/>
                         <img src="/lance/authimageservlet" alt="验证码" id="code_img"/>&nbsp;<a id="change_img">看不清?</a>

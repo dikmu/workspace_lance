@@ -673,6 +673,18 @@
       <Attr Name="_DisplaySize" Value="1200"/>
     </DesignTime>
   </Attribute>
+  <Attribute
+    Name="Referrer"
+    Precision="60"
+    ColumnName="REFERRER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="U_USER">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </Attribute>
   <AccessorAttribute
     Name="UserSkill"
     Association="com.lance.model.user.as.UserSkillUUserFk1AS"

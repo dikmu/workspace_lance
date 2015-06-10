@@ -97,6 +97,7 @@ public class UUserVORowImpl extends BaseViewRowImpl {
         DefaultRole,
         Status,
         IndexSkill,
+        Referrer,
         UserSkill,
         UserEducation,
         UserLocationList,
@@ -190,6 +191,7 @@ public class UUserVORowImpl extends BaseViewRowImpl {
     public static final int DEFAULTROLE = AttributesEnum.DefaultRole.index();
     public static final int STATUS = AttributesEnum.Status.index();
     public static final int INDEXSKILL = AttributesEnum.IndexSkill.index();
+    public static final int REFERRER = AttributesEnum.Referrer.index();
     public static final int USERSKILL = AttributesEnum.UserSkill.index();
     public static final int USEREDUCATION = AttributesEnum.UserEducation.index();
     public static final int USERLOCATIONLIST = AttributesEnum.UserLocationList.index();
@@ -1128,6 +1130,22 @@ public class UUserVORowImpl extends BaseViewRowImpl {
      */
     public void setIndexSkill(String value) {
         setAttributeInternal(INDEXSKILL, value);
+    }
+
+    /**
+     * Gets the attribute value for REFERRER using the alias name Referrer.
+     * @return the REFERRER
+     */
+    public String getReferrer() {
+        return (String) getAttributeInternal(REFERRER);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for REFERRER using the alias name Referrer.
+     * @param value value to set the REFERRER
+     */
+    public void setReferrer(String value) {
+        setAttributeInternal(REFERRER, value);
     }
 
     /**

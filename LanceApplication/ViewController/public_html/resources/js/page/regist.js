@@ -280,7 +280,8 @@ $(function(){
                 "UserName" : $("#inp_lgname").val(),
                 "Password" : $("#inp_pass").val(),
                 "DefaultRole" : "client",
-                "vcode":$("#inp_verCode").val()
+                "vcode":$("#inp_verCode").val(),
+                "Referrer":$("#inp_referrer").val()
             };
             $.ax("post", "user", param, function(data){
 //                location.href="/lance/pages/UserRegSuccess1/"+data;
@@ -354,7 +355,8 @@ $(function(){
                 "Country" : $("#sel_contury").val(),
                 "Password" : $("#inp_pass").val(),
                 "DefaultRole" : 'lancer',
-                "vcode":$("#inp_verCode").val()
+                "vcode":$("#inp_verCode").val(),
+                "Referrer":$("#inp_referrer").val()
             };
             
             if($("#rgs")[0].checked){

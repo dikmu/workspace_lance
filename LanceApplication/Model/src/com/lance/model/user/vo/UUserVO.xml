@@ -68,7 +68,8 @@
        UUserEO.CAN_BE_SEARCH, 
        UUserEO.DEFAULT_ROLE, 
        UUserEO.STATUS, 
-       UUserEO.INDEX_SKILL"
+       UUserEO.INDEX_SKILL, 
+       UUserEO.REFERRER"
   FromList="U_USER UUserEO"
   OrderBy="UUserEO.RANK,UUserEO.MODIFY_ON">
   <DesignTime>
@@ -517,6 +518,12 @@
     EntityAttrName="IndexSkill"
     EntityUsage="UUserEO"
     AliasName="INDEX_SKILL"/>
+  <ViewAttribute
+    Name="Referrer"
+    PrecisionRule="true"
+    EntityAttrName="Referrer"
+    EntityUsage="UUserEO"
+    AliasName="REFERRER"/>
   <ViewCriteria
     Name="FindByUserNameVC"
     ViewObjectName="com.lance.model.user.vo.UUserVO"

@@ -32,6 +32,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import oracle.adf.share.ADFContext;
@@ -121,7 +122,7 @@ public class UserResource extends BaseRestResource {
         "LocationADetail", "LocationBRegion", "LocationBCountry", "LocationBProvince", "LocationBCity",
         "LocationBDetail", "Tagline", "HourlyRate", "ChargeRate", "Overview", "ServiceDescription", "PaymentTerms",
         "Keywords", "AddressDisplay", "ContactInfo", "CreateBy", "CreateOn", "ModifyBy", "ModifyOn", "Version",
-        "LastLoginTime", "CompanyName", "CanBeSearch", "DefaultRole"
+        "LastLoginTime", "CompanyName", "CanBeSearch", "DefaultRole","Referrer"
     };
 
 
@@ -136,7 +137,7 @@ public class UserResource extends BaseRestResource {
         "ImNumberC", "ImTypeC", "LocationARegion", "LocationACountry", "LocationAProvince", "LocationACity",
         "LocationADetail", "LocationBRegion", "LocationBCountry", "LocationBProvince", "LocationBCity",
         "LocationBDetail", "Tagline", "HourlyRate", "ChargeRate", "Overview", "ServiceDescription", "PaymentTerms",
-        "Keywords", "AddressDisplay", "ContactInfo", "CompanyName", "CanBeSearch", "DefaultRole"
+        "Keywords", "AddressDisplay", "ContactInfo", "CompanyName", "CanBeSearch", "DefaultRole","Referrer"
     };
 
     public static final String[] ATTR_UPDATE = {
@@ -145,7 +146,7 @@ public class UserResource extends BaseRestResource {
         "LocationARegion", "LocationACountry", "LocationAProvince", "LocationACity", "LocationADetail",
         "LocationBRegion", "LocationBCountry", "LocationBProvince", "LocationBCity", "LocationBDetail", "Tagline",
         "HourlyRate", "ChargeRate", "Overview", "ServiceDescription", "PaymentTerms", "Keywords", "AddressDisplay",
-        "ContactInfo", "LastLoginTime", "CompanyName", "CanBeSearch", "DefaultRole"
+        "ContactInfo", "LastLoginTime", "CompanyName", "CanBeSearch", "DefaultRole","Referrer"
     };
 
     public static final String[] ATTR_GET = {
@@ -155,7 +156,7 @@ public class UserResource extends BaseRestResource {
         "LocationBRegion", "LocationBCountry", "LocationBProvince", "LocationBCity", "LocationBDetail",
         "LocationAIndex", "LocationBIndex", "Tagline", "HourlyRate", "ChargeRate", "Overview", "ServiceDescription",
         "PaymentTerms", "Keywords", "AddressDisplay", "ContactInfo", "CreateBy", "CreateOn", "ModifyBy", "ModifyOn",
-        "Version", "LastLoginTime", "CompanyName", "CanBeSearch", "DefaultRole"
+        "Version", "LastLoginTime", "CompanyName", "CanBeSearch", "DefaultRole","Referrer"
     };
 
     public static final String[] ATTR_GET_A = {
@@ -574,5 +575,12 @@ public class UserResource extends BaseRestResource {
             return "ok";
         }
         return "err:修改密码失败";
+    }
+    
+    @POST
+    @Path("test")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String test(@QueryParam("st")String st,String str,String str2) throws JSONException {
+       return "success:st:"+st+"--str--:"+str+"--str2--:"+str2;
     }
 }
