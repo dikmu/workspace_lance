@@ -20,6 +20,7 @@ import com.lance.model.vo.LocationProvinceVOImpl;
 import com.lance.model.vo.PostJobDiscussVOImpl;
 import com.lance.model.vo.PostJobsVOImpl;
 import com.lance.model.vo.RegEmailChkVOImpl;
+import com.lance.model.vo.RetrievePasswordVOImpl;
 import com.lance.model.vo.SkillSuperTypeVOImpl;
 import com.lance.model.vo.SkillsVOImpl;
 import com.lance.model.vo.SpreadHeardFromVOImpl;
@@ -499,6 +500,13 @@ public class LanceRestAMImpl extends BaseApplicationModuleImpl {
      */
     public UserProjectHistoryVOImpl getUserProjectHistory1() {
         return (UserProjectHistoryVOImpl) findViewObject("UserProjectHistory1");
+    }
+ /**
+     * Container's getter for RetrievePassword1.
+     * @return RetrievePassword1
+     */
+    public RetrievePasswordVOImpl getRetrievePassword1() {
+        return (RetrievePasswordVOImpl) findViewObject("RetrievePassword1");
     }
 
     /**

@@ -67,11 +67,11 @@
                     <label for="exampleInputEmail1" class="control-label">
                         选择工作的分类：</label><br />
                     <select id="cate-lev1" class="form-control job_cate">
-                        <option value="-1">选择分类</option>
+                       <option value="-1">选择分类</option>
                     </select>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <select id="cate-lev2" class="form-control job_cate">
-                        <option value="-1">选择子分类</option>
+                    <select id="cate-lev2" class="form-control job_cate" style="width:216px;">
+                       <option value="-1">选择子分类</option>
                     </select>
                 </div>
                 

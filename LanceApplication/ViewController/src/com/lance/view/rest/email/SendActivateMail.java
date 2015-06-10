@@ -112,16 +112,6 @@ public class SendActivateMail extends BaseRestResource{
         if(userEmail.lastIndexOf("test.com")>=0){
             return;
         }
-        Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.163.com");
-        props.put("mail.smtp.auth", "true");
-        PopupAuthenticator auth = new PopupAuthenticator();
-        Session session = Session.getInstance(props, auth);
-        session.setDebug(true);
-        MimeMessage message = new MimeMessage(session);
-        Address addressFrom = new InternetAddress(PopupAuthenticator.mailuser + "@163.com", "驻才网");
-        Address addressTo = new InternetAddress(userEmail, ""); //接收邮箱和用户
-        ///邮件的内容  validateCode通过MD5加密
         StringBuffer sb = new StringBuffer("点击下面链接激活账号，48小时生效，否则重新注册账号，链接只能使用一次，请尽快激活！</br>");
         sb.append("<a href=\""+ConstantUtil.ROOT_HTTP_URL+"/page/email/active?uid=");
         sb.append(uid);
@@ -132,9 +122,23 @@ public class SendActivateMail extends BaseRestResource{
         sb.append("&validateCode=");
         sb.append(validateCode);
         sb.append("</a>");
-        message.setContent(sb.toString(), "text/html;charset=utf-8");
+        sendEmail(userEmail, "欢迎您注册驻才网，请激活您的驻才用户名",sb.toString());
+    }
+    
+    public void sendEmail(String userEmail,String subject,String content) throws UnsupportedEncodingException,
+                                                                                    MessagingException {
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.163.com");
+        props.put("mail.smtp.auth", "true");
+        PopupAuthenticator auth = new PopupAuthenticator();
+        Session session = Session.getInstance(props, auth);
+        session.setDebug(true);
+        MimeMessage message = new MimeMessage(session);
+        Address addressFrom = new InternetAddress(PopupAuthenticator.mailuser + "@163.com", "驻才网");
+        Address addressTo = new InternetAddress(userEmail, ""); //接收邮箱和用户
+        message.setContent(content, "text/html;charset=utf-8");
         // message.setText(sb.toString());
-        message.setSubject("欢迎您注册驻才网，请激活您的驻才用户名");
+        message.setSubject(subject);
         message.setFrom(addressFrom);
         message.addRecipient(Message.RecipientType.TO, addressTo);
         message.saveChanges();
@@ -142,7 +146,7 @@ public class SendActivateMail extends BaseRestResource{
         transport.connect("smtp.163.com", PopupAuthenticator.mailuser, PopupAuthenticator.password);
         transport.send(message);
         transport.close();
-        System.out.println("发送成功");
+        System.out.println("发送成功");    
     }
     
     /**

@@ -61,6 +61,10 @@
     <servlet-name>AuthImageServlet</servlet-name>
     <servlet-class>com.lance.view.servlet.AuthImageServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>RetrieveServlet</servlet-name>
+    <servlet-class>com.lance.view.servlet.RetrieveServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>/faces/*</url-pattern>
@@ -120,6 +124,10 @@
   <servlet-mapping>
     <servlet-name>AuthImageServlet</servlet-name>
     <url-pattern>/authimageservlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RetrieveServlet</servlet-name>
+    <url-pattern>/password/retrieve</url-pattern>
   </servlet-mapping>
   <filter>
     <filter-name>JpsFilter</filter-name>
@@ -198,7 +206,7 @@
   </filter-mapping>
   <filter-mapping>
     <filter-name>adfBindings</filter-name>
-    <servlet-name>DirectServlet</servlet-name>
+    <servlet-name>RetrieveServlet</servlet-name>
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>REQUEST</dispatcher>
   </filter-mapping>

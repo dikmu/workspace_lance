@@ -107,8 +107,6 @@ function initPostJobData(jobId){
                     "只有信息发布者能够查看您的报价信息");
                     if(data.hasOwnProperty("viewGrant") && "true"==data["viewGrant"]){
                         $("#cu-cnt").html("<a href='/lance/pages/profile/Overview?uid="+(data['CreateBy'])+"'>客户信息</a>");
-                        console.log($("#cu-cnt").html());
-                        console.log(data['CreateBy']);
                     }
                 }
             }

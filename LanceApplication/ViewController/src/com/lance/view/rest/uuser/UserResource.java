@@ -9,11 +9,14 @@ import com.lance.model.user.vo.UserRoleGrantsVORowImpl;
 import com.lance.model.util.ConstantUtil;
 import com.lance.model.vo.RegEmailChkVOImpl;
 import com.lance.model.vo.RegEmailChkVORowImpl;
+import com.lance.model.vo.RetrievePasswordVOImpl;
+import com.lance.model.vo.RetrievePasswordVORowImpl;
 import com.lance.view.rest.email.SendActivateMail;
 import com.lance.view.util.LUtil;
 
 import com.lance.view.util.RestSecurityUtil;
 
+import com.zngh.platform.front.core.model.BaseViewObjectImpl;
 import com.zngh.platform.front.core.model.util.UUIDGenerator;
 import com.zngh.platform.front.core.view.BaseRestResource;
 
@@ -490,5 +493,86 @@ public class UserResource extends BaseRestResource {
         LanceRestAMImpl am = LUtil.findLanceAM();
         UUserVORowImpl row = LUtil.getUUserByName(this.findCurrentUserName(), am);
         return row.getStatus();
+    }
+    
+    @GET
+    @Path("exist/{uname}/{vcode}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String checkUserIsExist(@PathParam("uname") String uname,@PathParam("vcode") String vcode){
+        String _vcode = (String)this.request.getSession().getAttribute("verifyCode");
+        if(!vcode.equalsIgnoreCase(_vcode)){
+            return "err:验证码错误"; 
+        } 
+        LanceRestAMImpl am = LUtil.findLanceAM();
+        UUserVOImpl vo = am.getUUser1();
+        vo.setApplyViewCriteriaName("findByEmailOrNameVC");
+        vo.setpEmail(uname);
+        vo.setpUserName(uname);
+        vo.executeQuery();
+        vo.removeApplyViewCriteriaName("findByEmailOrNameVC");
+        if(vo.first() != null){
+            UUserVORowImpl ur = (UUserVORowImpl)vo.first();
+            String email = ur.getEmail();
+            try {
+                SendActivateMail sendActivateMail = new SendActivateMail();
+                //创建查找密码记录
+                String uuid = createRetrieveLog(am, ur.getUserName());
+                StringBuffer sb = new StringBuffer("<b>尊敬的"+ur.getUserName()+"，您好:</b><br/>");
+                sb.append("您在驻才网（www.zhucai.me）点击了“忘记密码”按钮，故系统自动为您发送了这封邮件。您可以点击以下链接修改您的密码:<br/>");
+                sb.append("<a href="+ConstantUtil.ROOT_HTTP_URL+"/password/retrieve?uid="+uuid+">");
+                sb.append(ConstantUtil.ROOT_HTTP_URL+"/password/retrieve?uid="+uuid);
+                sb.append("</a><br/>");
+                sb.append("此链接有效期为两个小时，请在两小时内点击链接进行修改。如果您不需要修改密码，或者您从未点击过“忘记密码”按钮，请忽略本邮件。");
+                sendActivateMail.sendEmail(email, "忘记密码提示(www.zhucai.me)", sb.toString());
+                am.commit();
+            } catch (UnsupportedEncodingException uee) {
+                // TODO: Add catch code
+                uee.printStackTrace();
+            } catch (MessagingException me) {
+                // TODO: Add catch code
+                me.printStackTrace();
+            }
+            return (email.substring(0,1)+"*****"+email.substring(email.indexOf("@")-1,email.indexOf("@"))+email.substring(email.indexOf("@"),email.length()));
+        }
+        return "err:账户名不存在，请检查你的账户名!";
+    }
+    
+    private String createRetrieveLog(LanceRestAMImpl am,String uname){
+        RetrievePasswordVOImpl vo = am.getRetrievePassword1();
+        RetrievePasswordVORowImpl row = (RetrievePasswordVORowImpl)vo.createRow();
+        row.setAttribute("UserName",uname);
+        vo.insertRow(row);
+       return row.getUuid();
+    }
+    
+    public RetrievePasswordVORowImpl checkRetriveLog(String uuid){
+        LanceRestAMImpl am = LUtil.findLanceAM();
+        RetrievePasswordVOImpl vo = am.getRetrievePassword1();
+        vo.setApplyViewCriteriaName("findRetrievePasswordVC");
+        vo.setpuid(uuid);
+        vo.executeQuery();
+        vo.removeApplyViewCriteriaName("findRetrievePasswordVC");
+        if(vo.first() != null){
+            return (RetrievePasswordVORowImpl)vo.first();
+        }
+       return null;
+    }
+    
+    @POST
+    @Path("reset/password")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String resetPassWord(JSONObject json) throws JSONException {
+        String u_key = (String)this.request.getSession().getAttribute("u-key");
+        if(!json.has("u-key") || !json.getString("u-key").equalsIgnoreCase(u_key)){
+            return "err:无法正常修改密码!";
+        }
+        LanceRestAMImpl am = LUtil.findLanceAM();
+        UUserVORowImpl row = LUtil.getUUserByName(json.getString("uname"), am);
+        row.setPassword(json.getString("password"));
+        if("ok".equals(am.commit())){
+            return "ok";
+        }
+        return "err:修改密码失败";
     }
 }

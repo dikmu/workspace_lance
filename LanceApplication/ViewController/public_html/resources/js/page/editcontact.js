@@ -71,6 +71,9 @@ $(function(){
         email.blur(function(){
             email.closest(".form-group").removeClass("has-error").removeClass("has-success").removeClass("has-feedback");
             email.popover("hide");
+            if(user.Email == email.val()){
+                return;
+            }
             if(email.lanCheck('onlyEmail')){
                 emailAjax(email);
             }else{
@@ -81,7 +84,6 @@ $(function(){
         });
         var emailAjax = function(obj){
             obj.attr("readonly", true);
-            
             $.ax("get", "user/exist/email/" + obj.val(), null, function(data){
                 if(data == true){
                     obj.attr("data-content", "该邮箱已被注册，请选择其他邮箱。").popover("show");
