@@ -211,7 +211,7 @@
 .list-group-item .progress{margin-bottom:5px;border-radius:0px;height:3px;}
 .list-group-item .btn-danger{margin-left:5px;height:20px;}
 
-.sea-progress{border-radius:0px;margin-bottom:0px;height:5px;position:relative;top:9px;diaplay:none;}
+.sea-progress{border-radius:0px;margin-bottom:0px;height:5px;position:relative;top:9px;}
 
 .profile-avatar{position:relative;padding:40px 0;border:none;}
 .profile-avatar span{background:#428bca;color:#fff;position:absolute;display:none;width:100%;height:30px;line-height:30px;bottom:0px;text-align:center;cursor:pointer;}

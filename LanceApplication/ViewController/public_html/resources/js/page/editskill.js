@@ -93,17 +93,17 @@ null);
             $.ae("技能最多添加10条");
             return;
         }
-        
-        //ajax
-        $.ax("post", "user/skill/batch/" + User.UserName, add_post_param, function (cdata) {
-            
-            $.ae("添加成功", function(){location.reload();});
-            
-        },
-        function () {
-            netWorkError();
-        },
-"text");
+        if(new_add_Str != ""){
+            //ajax
+            $.ax("post", "user/skill/batch/" + User.UserName, add_post_param, function (cdata) {
+                
+                $.ae("添加成功", function(){location.reload();});
+                
+            },
+            function () {
+                netWorkError();
+            }, "text");
+        }
     });
 
 });

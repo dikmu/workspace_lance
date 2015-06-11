@@ -1,13 +1,26 @@
 //progress bar animate
 function startProgress(){
+    var bar = $(".sea-progress").show().find(".progress-bar");
+    
+    $(".sea-progress .progress-bar").stop().animate({width : "80%"}, 1000, function(){});
+}
+function startProgress2(){
     var bar = $(".sea-progress").show().find(".progress-bar").css("width", "0%");
-    bar.animate({"width" : "80%"}, 50, function(){});
+    
+    $(".sea-progress .progress-bar").animate({width : "30%"}, 1000, function(){});
+}
+function endProgress2(callback){
+    var bar = $(".sea-progress .progress-bar");
+    bar.stop().animate({"width" : "50%"}, 1000, function(){
+        callback();
+    });
 }
 function endProgress(callback){
     var bar = $(".sea-progress .progress-bar");
-    bar.stop().animate({"width" : "100%"}, 100, function(){
+    bar.stop().animate({"width" : "100%"}, 1000, function(){
         $(".sea-progress").fadeOut();
         callback();
+        bar.css("width", "0%");
     });
 }
 function setJobModel(uuid,title, price, stime, etime, acount, detail, cate1, cate2, form, skills, score, location){
@@ -95,6 +108,8 @@ function initParam(){
     }
 }
 
+var InitFirstLeft = null;
+
 //设置搜索条件信息
 function setCategory(){
     var setCate = function(datas){
@@ -156,17 +171,27 @@ function setCategory(){
         }
     });
     
-    startProgress();
-    $.ax('get', 'search/left/datas', null, function(data){
-        var cates = data.cateory, skills = data.skills, country = data.country;
-        
+    var tmpData = null;
+    InitFirstLeft = function(){
+        var cates = tmpData.cateory, skills = tmpData.skills, country = tmpData.country;
         setCate(cates);
         setSkills(skills);
+    };
+    
+    startProgress2();
+    $.ax('get', 'search/left/datas', null, function(data){
+        tmpData = data;
+        endProgress2(function(){
+            var cates = data.cateory, skills = data.skills, country = data.country;
         
-        initParam();
-        
-        $(".search-jobs").fadeIn();
-        
+            startProgress();
+            //setCate(cates);
+            //setSkills(skills);
+            
+            initParam();
+            
+            $(".search-jobs").fadeIn();
+        });
     }, function(){});
 }
 //全局变量 JOB PEOPLE THUMB
@@ -210,6 +235,9 @@ $(function(){
                 if(param != 'more'){
                     $(".wait").hide();
                     $(".con").show();
+                }
+                if(param == 'first'){
+                    InitFirstLeft();
                 }
             
                 var pa = $(".jobs"), tmp = null, location = '远程办公';

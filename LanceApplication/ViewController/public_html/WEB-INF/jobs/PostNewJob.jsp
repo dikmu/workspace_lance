@@ -53,7 +53,7 @@
                     <label for="exampleInputEmail1" class="control-label">
                         工作名称：</label>
                     <input value="" type="text" class="form-control" id="inp_jobname" placeholder=""
-                        data-container="body" data-toggle="popover" data-placement="right" 
+                        data-container="body" data-toggle="popover" data-placement="right" maxlength="100"
                         data-content="请输入合法的用户名" data-trigger="manual" data-animation="false"/>
                 </div>
                 <div class="form-group <!--has-error has-feedback-->">

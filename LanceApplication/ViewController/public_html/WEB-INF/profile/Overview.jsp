@@ -26,7 +26,7 @@
     <jsp:include page="/WEB-INF/common/TopBar.jsp" />
     <div class="container">
         <div class="row">
-            <div class="col-md-3 lan-main-left">
+            <div class="col-md-3 lan-main-left" style="display:none;">
                 <br />
                 <a href="#" class="thumbnail profile-avatar">
                   <img id="useravatar" src="/lance/resources/image/avatar/normal_1.png" alt="...">
@@ -38,9 +38,10 @@
                     <li role="presentation"><a href="./EditBasic">基本信息</a></li>
                     <li role="presentation"><a href="./EditContact">联系信息</a></li>
                     <li role="presentation"><a href="./EditSkill">我的技能</a></li>
+                    <li role="presentation"><a href="./EditSkill">我的公司信息</a></li>
                 </ul>
             </div>
-            <div class="col-md-9 lan-main-right">
+            <div class="col-md-12 lan-main-right">
                 <div class="alert alert-info" role="alert">
                     <span class="lan-font-22 lan-font-green uname"></span>
                     <br />

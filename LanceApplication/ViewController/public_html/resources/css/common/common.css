@@ -100,6 +100,8 @@
     color:#fff;
 }
 
+.progress-bar{transition:none;}
+
 .btn-success:hover{
 background:#004486;
 }

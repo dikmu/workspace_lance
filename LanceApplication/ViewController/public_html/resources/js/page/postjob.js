@@ -135,7 +135,7 @@ function checkForm(){
         uname.popover("hide");
         uname.closest(".form-group").removeClass("has-error").removeClass("has-success").removeClass("has-feedback");
         
-        if(uname.lanCheck('chineseCharIntLine')){
+        if(uname.lanCheck('notEmpty')){
             uname.closest(".form-group").addClass("has-success").addClass("has-feedback");
             basicRes.title = true;
         }else{

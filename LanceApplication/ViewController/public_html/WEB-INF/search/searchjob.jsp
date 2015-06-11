@@ -34,13 +34,13 @@
                         <button data-cls="jobs" data-title="所有的工作" type="button" class="btn btn-link lan-font-black lan-font-16 sel-tab-type select">工作</button>
                         <!--<button data-cls="thumbs" data-title="所有的作品" type="button" class="btn btn-link lan-font-black lan-font-16 sel-tab-type">作品展示</button>-->
                         
-                        <a type="button" class="btn btn-success btn-middle pull-right" href="/lance/pages/jobs/PostNewJob">发布工作信息</a>
+                        <a id="post_jobnew" type="button" class="btn btn-success btn-middle pull-right" href="/lance/pages/jobs/PostNewJob">发布工作信息</a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="progress sea-progress">
-            <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+            <div class="progress-bar progress-bar-success" role="progressbar"  style="width: 0%">
                 <span class="sr-only"></span>
             </div>
         </div>

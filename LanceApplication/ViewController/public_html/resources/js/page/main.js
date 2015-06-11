@@ -31,6 +31,10 @@ $(function(){
         $(".lan-main-left").remove();
         $(".lan-main-right").removeClass("col-md-9").addClass("col-md-12").css("border-left", "none");
         $(".profile-avatar span").remove();
+        $(".no-add").remove();
+    }else{
+        $(".lan-main-right").removeClass("col-md-12").addClass("col-md-9").css("border-left", "none");
+        $(".lan-main-left").show();
     }
 });
 
