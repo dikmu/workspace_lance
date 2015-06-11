@@ -8,7 +8,11 @@
              </a>
             </div>
             <div class="col-md-10">
-                <div class="copyright">备案编号：1764617&nbsp;&nbsp;&nbsp;&nbsp; 站长邮箱：muhongdi@qq.com</div>
+                    <div class="copyright">
+                    备案编号：1764617&nbsp;&nbsp;&nbsp;&nbsp; 站长邮箱：muhongdi@qq.com &nbsp;&nbsp;&nbsp;&nbsp; 驻才网官方QQ:2802164728<br> 
+                    上线日期：2015年6月11日  &nbsp;&nbsp;&nbsp;&nbsp; 功能还在测试中，欢迎在页面右上角提出您的宝贵意见。<br> 
+                    真实需求，欢迎留言进一步沟通
+                    </div>
             </div>
         </div>
     </div>

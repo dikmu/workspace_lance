@@ -103,8 +103,8 @@ function initPostJobData(jobId){
                     role = "lancer";
                     $("#inf-cnt").html("您可在此查看及申请工作，还可向发布信息者进行提问。<br/>" +
                     "您可在申请时提出自己认为合理的价格和可以进入项目的时间。<br/>" +
-                    "为保护您的隐私，您的用户名、公司名信息将在第一次回复后显示给被回复者" +
-                    "只有信息发布者能够查看您的报价信息");
+                    "只有信息发布者能够查看您的报价信息。<br/>" +
+                    "为保护隐私，您的用户名、公司名信息将在第一次回复后显示给被回复者。");
                     if(data.hasOwnProperty("viewGrant") && "true"==data["viewGrant"]){
                         $("#cu-cnt").html("<a href='/lance/pages/profile/Overview?uid="+(data['CreateBy'])+"'>客户信息</a>");
                     }

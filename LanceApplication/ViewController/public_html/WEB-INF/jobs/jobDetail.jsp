@@ -8,6 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <title>首页</title>
+        <!--<meta name="keywords" content="HTML,ASP,PHP,SQL">-->
         <!-- Bootstrap -->
         <link href="/lance/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link type="text/css" href="/lance/resources/js/jqueryui/jquery-ui.css" rel="stylesheet" />
@@ -35,10 +36,9 @@
                 <br /><br />
                 
                 <div class="alert alert-info" role="alert" id="inf-cnt">
-                    您可在此查看及申请工作，还可向发布信息者进行提问。<br/>
-                    您可在申请时提出自己认为合理的价格和可以进入项目的时间。<br/>
-                    为保护您的隐私，您的用户名、公司名信息将在第一次回复后显示给被回复者
+                    为保护隐私，您的用户名、公司名信息将在第一次回复后显示给被回复者 <br/>
                     只有信息发布者能够查看您的报价信息
+                    您可在申请时提出自己认为合理的价格和可以进入项目的时间。<br/>
                 </div>
                 
                 <div>
