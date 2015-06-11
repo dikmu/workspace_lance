@@ -2,6 +2,8 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <html>
     <head>
+        <title>驻才网</title>
+        <meta name="keywords" content="高薪招聘,独立顾问,自由顾问,兼职">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link type="text/css" href="/lance/resources/css/bootstrap.min.css" rel="stylesheet"/>
         <link type="text/css" href="/lance/resources/css/common.css" rel="stylesheet"/>

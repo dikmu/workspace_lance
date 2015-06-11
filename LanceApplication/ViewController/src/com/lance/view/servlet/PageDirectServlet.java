@@ -48,7 +48,7 @@ public class PageDirectServlet extends HttpServlet {
         try {
             //如果用户访问的是登录后(受保护)界面
             if (uri.startsWith("/lance/pages/search") || uri.startsWith("/lance/pages/jobDetail") ||
-                uri.startsWith("/lance/pages/browse") || uri.startsWith("/lance/pages/profile/Overview") ||
+                uri.startsWith("/lance/pages/browse") || uri.startsWith("/lance/pages/profile/Overview") ||uri.startsWith("/lance/pages/profile/CompanyProfile")||
                 uri.equals("/lance/pages/profile/retrieve")) {
                 //不做登陆拦截
 
@@ -85,7 +85,20 @@ public class PageDirectServlet extends HttpServlet {
                 }
                 toPage(request, response, "/WEB-INF/profile/Overview.jsp", data);
     
-            } else if ("/lance/pages/profile/EditBasic".equals(uri)) {
+            }else if("/lance/pages/profile/CompanyProfile".equals(uri)){
+                String uid = request.getParameter("uid");
+                JSONObject data = new JSONObject();
+                if(uid != null){
+                    data.put("User", new UserResource().findUserById(uid));
+                }else{
+                    if (!adfctx.getSecurityContext().isAuthenticated()) {
+                        response.sendRedirect("/lance/login.htm");
+                    }
+                    data.put("User", new UserResource().findUserById(user)); 
+                }
+                toPage(request, response, "/WEB-INF/profile/CompanyProfile.jsp", data);
+                
+            }else if ("/lance/pages/profile/EditBasic".equals(uri)) {
                 JSONObject data = new JSONObject();
                 data.put("User", new UserResource().findUserById(user));
                 toPage(request, response, "/WEB-INF/profile/EditBasic.jsp", data);

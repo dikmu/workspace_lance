@@ -30,7 +30,7 @@
                 </li>
              {{else}}
                  <li>
-                  <a href="/lance/login.htm">登陆</a></li>
+                  <a href="/lance/login.htm">登录</a></li>
              {{/if}}
              <li class="active">
                 <a class="lan-font-bold" href="http://help.zhucai.me/" target="_blank">帮助</a>
