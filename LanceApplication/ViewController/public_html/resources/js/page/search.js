@@ -294,7 +294,7 @@ $(function(){
                     
                     $.each(data.data, function(i, dom){
                     
-                        tmp = setPersonModel(dom.DisplayName,dom.TrueName, dom.JobTitle, dom.LocationAIndex || '暂未填写', dom.HourlyRate || '暂未填写', 0, 
+                        tmp = setPersonModel(dom.UserName,dom.DisplayName, dom.JobTitle, dom.LocationAIndex || '暂未填写', dom.HourlyRate || '暂未填写', 0, 
                         0, dom.Overview || '暂未填写', dom.skills || '', dom.Img || "normal_1");
                         
                         pa.append(tmp);
