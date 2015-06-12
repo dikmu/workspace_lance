@@ -12,6 +12,9 @@ import com.lance.model.vo.SkillsVOImpl;
 import com.lance.view.rest.location.CountryResource;
 import com.lance.view.util.LUtil;
 
+import com.tangosol.net.NamedCache;
+
+import com.zngh.platform.front.core.model.cache.CacheUtil;
 import com.zngh.platform.front.core.view.BaseRestResource;
 
 import javax.ws.rs.Consumes;
@@ -71,7 +74,7 @@ public class SearchResource extends BaseRestResource {
         "HourlyPayMax", "HourlyPayMin", "LocationDesc", "Name", "Postform", "SpecificSkillA", "SpecificSkillB",
         "SpecificSkillC", "SpecificSkillD", "SpecificSkillE", "SpecificSkillF", "SpecificSkillG", "WeeklyHours",
         "WorkCategory", "WorkSubcategory", "PostJobDateStart", "PostJobDateEnd", "IndexSkills", "IndexLocation",
-        "IndexWorkCategorys", "SignBy", "CreateBy", "CreateOn", "ModifyBy", "ModifyOn", "Version", "CreateByName","ApplyCount"
+        "IndexWorkCategorys", "SignBy", "CreateBy", "CreateOn", "ModifyBy", "ModifyOn", "Version", "CreateByName","ApplyCount","WorkCategoryCn","WorkSubcategoryCn"
     };
 
     public static final String[] ATTR_SEARCH_LANCER = {"UserName", "TrueName", "DisplayName", "Email", "Img", "Country", "CompanyId", "PhoneNumber", "Attach", "JobTitle", "Video", "Description", "WebsiteUrl", "ImNumberA", "ImTypeA", "ImNumberB", "ImTypeB", "ImNumberC", "ImTypeC", "LocationA", "LocationARegion", "LocationAProvince", "LocationACity", "LocationACountry", "LocationADetail", "LocationAIndex", "LocationB", "LocationBRegion", "LocationBProvince", "LocationBCountry", "LocationBCity", "LocationBDetail", "HourlyRate", "ChargeRate", "Overview", "ServiceDescription", "PaymentTerms", "Keywords", "AddressDisplay", "ContactInfo", "IdentityType", "IdentityNo", "Rank", "RankDesc", "CompanyName"};
@@ -318,7 +321,6 @@ public class SearchResource extends BaseRestResource {
         return this.packViewObject(vo, null, null, POST_JOB_SEARCH_FIELD);
     }
 
-
     /**
      * 寻找Lancer
      * 模糊查询，开头匹配UserName（输入2个字符后开始查询）
@@ -546,10 +548,8 @@ public class SearchResource extends BaseRestResource {
     @Path("/JobCat")
     @Consumes(MediaType.APPLICATION_JSON)
     public JSONArray getJobCategory() throws JSONException {
-        LanceRestAMImpl am = LUtil.findLanceAM();
-        JobCategoryVOImpl vo1 = am.getJobCategory1();
-        String[] attrs = {"Uuid","NameEn","NameCn"};
-       return this.convertVoToJsonArray(vo1, attrs);
+        NamedCache cache = CacheUtil.getInstance("lance.search.jobCategory");
+        return new JSONArray((String)cache.get("search.jobCategory"));
     }
     
     /**
@@ -575,13 +575,8 @@ public class SearchResource extends BaseRestResource {
     @Path("skills")
     @Consumes(MediaType.APPLICATION_JSON)
     public JSONArray getSkills() throws JSONException {
-        LanceRestAMImpl am = LUtil.findLanceAM();
-        SkillsVOImpl vo = am.getSkills1();
-        vo.setWhereClause(null);
-        vo.setOrderByClause("Name");
-        vo.executeQuery();
-        String[] attrs = {"Uuid","Name","NameCn"};
-       return this.convertVoToJsonArray(vo, attrs);
+        NamedCache cache = CacheUtil.getInstance("lance.search.skills");
+        return new JSONArray((String)cache.get("search.skills"));
     } 
     
     @GET

@@ -4,6 +4,9 @@ import com.lance.model.LanceRestAMImpl;
 import com.lance.model.vvo.LocationCountryVVOImpl;
 import com.lance.view.util.LUtil;
 
+import com.tangosol.net.NamedCache;
+
+import com.zngh.platform.front.core.model.cache.CacheUtil;
 import com.zngh.platform.front.core.view.BaseRestResource;
 
 import javax.ws.rs.GET;
@@ -49,8 +52,10 @@ public class CountryResource extends BaseRestResource {
     @GET
     @Path("list")
     public JSONArray getAllCountry() throws JSONException {
-        LanceRestAMImpl am = LUtil.findLanceAM();
-        LocationCountryVVOImpl vo = am.getLocationCountryV2();
-        return this.convertVoToJsonArray(vo, this.ATTR_GET);
+        NamedCache cache = CacheUtil.getInstance("lance.search.country");
+        return new JSONArray((String)cache.get("search.country"));
+//        LanceRestAMImpl am = LUtil.findLanceAM();
+//        LocationCountryVVOImpl vo = am.getLocationCountryV2();
+//        return this.convertVoToJsonArray(vo, this.ATTR_GET);
     }
 }

@@ -1,10 +1,15 @@
 package com.lance.model.vo;
 
 import com.lance.model.LanceRestAMImpl;
+import com.lance.model.eo.PostJobsEOImpl;
 import com.lance.model.util.LocationUtil;
+
+import com.tangosol.net.NamedCache;
 
 import com.zngh.platform.front.core.model.BaseEntityImpl;
 import com.zngh.platform.front.core.model.BaseViewRowImpl;
+
+import com.zngh.platform.front.core.model.cache.CacheUtil;
 
 import java.math.BigDecimal;
 
@@ -82,6 +87,8 @@ public class PostJobsVORowImpl extends BaseViewRowImpl {
         BriefShort,
         SearchRank,
         ApplyCount,
+        WorkCategoryCn,
+        WorkSubcategoryCn,
         PostJobDiscuss,
         UUserVO1,
         SkillsVO1,
@@ -165,6 +172,8 @@ public class PostJobsVORowImpl extends BaseViewRowImpl {
     public static final int BRIEFSHORT = AttributesEnum.BriefShort.index();
     public static final int SEARCHRANK = AttributesEnum.SearchRank.index();
     public static final int APPLYCOUNT = AttributesEnum.ApplyCount.index();
+    public static final int WORKCATEGORYCN = AttributesEnum.WorkCategoryCn.index();
+    public static final int WORKSUBCATEGORYCN = AttributesEnum.WorkSubcategoryCn.index();
     public static final int POSTJOBDISCUSS = AttributesEnum.PostJobDiscuss.index();
     public static final int UUSERVO1 = AttributesEnum.UUserVO1.index();
     public static final int SKILLSVO1 = AttributesEnum.SkillsVO1.index();
@@ -185,8 +194,8 @@ public class PostJobsVORowImpl extends BaseViewRowImpl {
      * Gets PostJobsEO entity object.
      * @return the PostJobsEO
      */
-    public BaseEntityImpl getPostJobsEO() {
-        return (BaseEntityImpl) getEntity(ENTITY_POSTJOBSEO);
+    public PostJobsEOImpl getPostJobsEO() {
+        return (PostJobsEOImpl) getEntity(ENTITY_POSTJOBSEO);
     }
 
     /**
@@ -919,6 +928,42 @@ public class PostJobsVORowImpl extends BaseViewRowImpl {
      */
     public void setApplyCount(BigDecimal value) {
         setAttributeInternal(APPLYCOUNT, value);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute WorkCategoryCn.
+     * @return the WorkCategoryCn
+     */
+    public String getWorkCategoryCn() {
+        NamedCache cache = CacheUtil.getInstance(CacheUtil.KEY_JOB_CATEGORY);
+        String[] res = (String[]) cache.get(this.getWorkCategory());
+        if(res == null){
+            return this.getWorkCategory();
+        }
+        if (res[1] != null && !"".equals(res[1])) {
+            return res[1];
+        } else {
+            return res[0];
+        }
+//        return (String) getAttributeInternal(WORKCATEGORYCN);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute WorkSubcategoryCn.
+     * @return the WorkSubcategoryCn
+     */
+    public String getWorkSubcategoryCn() {
+        NamedCache cache = CacheUtil.getInstance(CacheUtil.KEY_JOB_SUBCATEGORY);
+        String[] res = (String[]) cache.get(this.getWorkSubcategory());
+        if(res == null){
+            return this.getWorkSubcategory();
+        }
+        if (res[1] != null && !"".equals(res[1])) {
+            return res[1];
+        } else {
+            return res[0];
+        }
+//        return (String) getAttributeInternal(WORKSUBCATEGORYCN);
     }
 
     /**

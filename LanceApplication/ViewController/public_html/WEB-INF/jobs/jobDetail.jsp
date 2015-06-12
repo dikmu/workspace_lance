@@ -364,9 +364,6 @@
                         
                         谁能查看我的申请<br />
                         被申请人<br />
-                        SVIP账户可查看VIP与普通账户发布的报价信息。<br />
-                        VIP账户可查看普通账户发布的报价信息。<br />
-                        只有被申请甲方能查看SVIP账户发布的报价信息。<br />
                     </div>
                     
                     <form class="form-inline" action="#" method="post" role="form">
@@ -453,7 +450,7 @@
                         <br />
                         <br />
                         <div class="form-group">
-                            <label for="inp_name" class="control-label">附加描述（可选）</label>
+                            <label for="inp_name" class="control-label">附加描述</label>
                             <br />
                             <textarea class="form-control" id="apply-content" rows="3" style="width:557px;"></textarea>
                         </div>

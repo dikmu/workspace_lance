@@ -35,7 +35,7 @@ function setJobModel(uuid,title, price, stime, etime, acount, detail, cate1, cat
     item.find(".cate1").html('工作分类：' + cate1);
     item.find(".cate2").html('工作分类：' + cate2);
     
-    item.find(".form").html(form == 'hourly' ? '时新' : '固定价格');
+    item.find(".form").html(form == 'hourly' ? '时薪' : '固定价格');
     item.find(".location").html(location);
     
     var arr = skills!=null? skills.split(";"):[], i = 0, len = arr.length, strskills = '';
@@ -117,7 +117,7 @@ function setCategory(){
         $.each(datas, function(i, dom){
             if(i < 5){
                 tmpName = dom.NameCn == "" ? dom.NameEn : dom.NameCn;
-                str = '<dd><a data-val="' + tmpName + '" class="btn btn-link">' + tmpName + '</a></dd>';
+                str = '<dd><a data-val="' + dom.Uuid + '" class="btn btn-link">' + tmpName + '</a></dd>';
                 $('#cates').append(str);
             }
             if(i == 5){
@@ -125,7 +125,7 @@ function setCategory(){
             }
             if(i >= 5 && i < 11){
                 tmpName = dom.NameCn == "" ? dom.NameEn : dom.NameCn;
-                str = '<dd class="hidemod"><a data-val="' + tmpName + '" class="btn btn-link">' + tmpName + '</a></dd>';
+                str = '<dd class="hidemod"><a data-val="' + dom.Uuid + '" class="btn btn-link">' + tmpName + '</a></dd>';
                 $('#cates .more').parent().before(str);
             }
         });
@@ -266,7 +266,7 @@ $(function(){
                             payMax = dom.FixedPayMax;
                         }
                         tmp = setJobModel(dom.Uuid,dom.Name, payMin + '-' + payMax, dom.PostJobDateStart, dom.PostJobDateEnd, dom.ApplyCount, 
-                        dom.BriefShort, dom.IndexWorkCategorys.split('>')[0], dom.IndexWorkCategorys.split('>')[1], dom.Postform, 
+                        dom.BriefShort, dom.WorkCategoryCn, dom.WorkSubcategoryCn, dom.Postform, 
                         dom.IndexSkills, 5, location);
                         pa.append(tmp);
                     });

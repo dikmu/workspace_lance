@@ -394,6 +394,28 @@
     EntityAttrName="ApplyCount"
     EntityUsage="PostJobsEO"
     AliasName="APPLY_COUNT"/>
+  <ViewAttribute
+    Name="WorkCategoryCn"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="WorkSubcategoryCn"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
   <ViewCriteria
     Name="FindByIdVC"
     ViewObjectName="com.lance.model.vo.PostJobsVO"

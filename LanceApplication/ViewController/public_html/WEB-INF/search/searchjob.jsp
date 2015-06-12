@@ -126,14 +126,14 @@
                         </dd>
                     </dl>
                     
-                    <dl class="lan-dl">
+                    <dl class="lan-dl" style="display:none;">
                         <dt><a class="btn btn-link sel">所有评级</a></dt>
                         <dd><a class="btn btn-link">最低5级</a></dd>
                         <dd><a class="btn btn-link">最低4级</a></dd>
                         <dd><a class="btn btn-link">最低3级</a></dd>
                     </dl>
                     
-                    <dl class="lan-dl">
+                    <dl class="lan-dl" style="display:none;">
                         <dt><a class="btn btn-link sel">已有项目反馈数</a></dt>
                         <dd><a class="btn btn-link">最少5个</a></dd>
                         <dd><a class="btn btn-link">最少4个</a></dd>

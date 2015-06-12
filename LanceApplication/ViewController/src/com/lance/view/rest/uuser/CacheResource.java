@@ -11,6 +11,7 @@ import com.lance.model.vo.SkillSuperTypeVOImpl;
 import com.lance.model.vo.SkillSuperTypeVORowImpl;
 import com.lance.model.vo.SkillsVOImpl;
 import com.lance.model.vo.SkillsVORowImpl;
+import com.lance.model.vvo.LocationCountryVVOImpl;
 import com.lance.view.util.LUtil;
 
 import com.tangosol.net.NamedCache;
@@ -48,6 +49,8 @@ public class CacheResource extends BaseRestResource {
         cacheUserInfoFn(am);
         cacheCategoryInfoFn(am);
         cacheSkillsFn(am);
+        cacheCountrysFn();
+        cacheCountrysFn();
         return "done";
     }
 
@@ -119,6 +122,9 @@ public class CacheResource extends BaseRestResource {
             json_jobType.put(row1.getUuid(), data);
         }
         it1.closeRowSetIterator();
+        
+        NamedCache cache4 = CacheUtil.getInstance("lance.search.jobCategory");
+        cache4.put("search.jobCategory", this.convertVoToJsonArray(vo1, new String[]{"Uuid","NameEn","NameCn"}).toString());
 
         addNoTypeJobCategory(json_jobType);
 
@@ -286,12 +292,26 @@ public class CacheResource extends BaseRestResource {
             arr.put(data);
         }
         it2.closeRowSetIterator();
-
+        
+        NamedCache cache4 = CacheUtil.getInstance("lance.search.skills");
+        cache4.put("search.skills", this.convertVoToJsonArray(vo2, new String[]{"Uuid","Name","NameCn"}).toString());
+        
         NamedCache cache3 = CacheUtil.getInstance("lance.browse.skills");
         cache3.clear();
         cache3.put("skills", json_SkillType.toString());
 
         return "ok";
+    }
+    
+    public void cacheCountrysFn(){
+        try {
+            NamedCache cache = CacheUtil.getInstance("lance.search.country");
+            cache.put("search.country", this.convertVoToJsonArray(LUtil.findLanceAM().getLocationCountryV2(), new String[] {
+                                                                            "Uuid", "Name", "NameLoc"}).toString());
+        } catch (Exception e) {
+            // TODO: Add catch code
+            e.printStackTrace();
+        }
     }
 
     private void addNullTypeSkill(JSONObject json_SkillType) throws JSONException {
