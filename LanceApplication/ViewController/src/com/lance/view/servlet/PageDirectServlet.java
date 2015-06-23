@@ -1,6 +1,7 @@
 package com.lance.view.servlet;
 
 //import com.lance.view.rest.user.LancerProfileResource;
+import com.lance.view.rest.job.PostJobResource;
 import com.lance.view.rest.job.SearchResource;
 import com.lance.view.rest.search.BrowseResource;
 import com.lance.view.rest.uuser.LookupsResource;
@@ -128,6 +129,11 @@ public class PageDirectServlet extends HttpServlet {
                 String param = uri.substring(uri.lastIndexOf("/") + 1, uri.length());
                 JSONObject json = new JSONObject();
                 json.put("jobId", param);
+                PostJobResource pjr = new PostJobResource();
+                JSONObject job = pjr.getPostJob(param);
+                json.put("Job", job);
+                json.put("JobDiscuss", pjr.getJobDiscuss(param));
+                request.setAttribute("jobName", job.getString("Name"));
                 toPage(request, response, "/WEB-INF/jobs/jobDetail.jsp", json);
             } else if (uri.startsWith("/lance/pages/MyMessage")) {
                 JSONObject json = new JSONObject();

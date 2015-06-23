@@ -10,8 +10,9 @@ $(function () {
 
 //初始化招聘信息数据
 function initPostJobData(jobId){
-  jQuery.ajax({
-        url : '/lance/res/postJob/'+ jobId+'?random='+Math.random(), type : 'get', success : function (data) {
+//  jQuery.ajax({
+//        url : '/lance/res/postJob/'+ jobId+'?random='+Math.random(), type : 'get', success : function (data) {
+            var data= Data.Job;
             $(".jobtitle").html(data.Name);
             $("#job-msg-area").html(template('job-msg-sp1',{'status' : data["Postform"]}));
             var skills=new Array();
@@ -119,21 +120,23 @@ function initPostJobData(jobId){
             optionApply(data["Status"],jobId,data["CreateBy"]);
             agree(data["Status"],jobId,data["CreateBy"]);
             cancel(data["Status"],jobId,data["CreateBy"]);
-        },
-        error : function (msg) {
-        }
-   });
+//        },
+//        error : function (msg) {
+//        }
+//   });
 }
 
 //初始化提问申请列表
 function initPostDiscussData(status,jobId,publisher){
-    jQuery.ajax({
-        url : '/lance/res/postJob/'+jobId+'/discuss?random='+Math.random(), type : 'get', success : function (data) {
-           $("#list-discuss").html(template('list-discuss-sp1',{'list' : data,"User":User,"Publisher":publisher,"status":status}));
-        },
-        error : function (msg) {
-        }
-   });
+
+$("#list-discuss").html(template('list-discuss-sp1',{'list' : Data.JobDiscuss,"User":User,"Publisher":publisher,"status":status}));
+//    jQuery.ajax({
+//        url : '/lance/res/postJob/'+jobId+'/discuss?random='+Math.random(), type : 'get', success : function (data) {
+//           $("#list-discuss").html(template('list-discuss-sp1',{'list' : data,"User":User,"Publisher":publisher,"status":status}));
+//        },
+//        error : function (msg) {
+//        }
+//   });
 }
 
 function isNum1(str){
