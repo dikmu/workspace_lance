@@ -12,9 +12,13 @@
   BindingStyle="OracleName"
   CustomQuery="false"
   SelectAllAttributes="false"
-  RowClass="com.zngh.platform.front.core.model.BaseViewRowImpl"
-  ComponentClass="com.zngh.platform.front.core.model.BaseViewObjectImpl"
+  RowClass="com.lance.model.user.vo.UserNotificationVORowImpl"
+  ComponentClass="com.lance.model.user.vo.UserNotificationVOImpl"
   PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
   <EntityUsage
     Name="UserNotificationEO"
     Entity="com.lance.model.user.eo.UserNotificationEO"/>
@@ -90,6 +94,20 @@
     EntityUsage="UserNotificationEO"
     AliasName="VERSION"
     IsUpdateable="false"/>
+  <ViewAttribute
+    Name="DisplayName"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <RecalcCondition
+      trustMode="untrusted"><![CDATA[true]]></RecalcCondition>
+  </ViewAttribute>
   <ViewCriteria
     Name="FindUnreadVC"
     ViewObjectName="com.lance.model.user.vo.UserNotificationVO"

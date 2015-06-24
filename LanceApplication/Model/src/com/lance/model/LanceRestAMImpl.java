@@ -4,6 +4,7 @@ import com.lance.model.user.vo.UUserVOImpl;
 import com.lance.model.user.vo.UUserVORowImpl;
 import com.lance.model.user.vo.UserEducationVOImpl;
 import com.lance.model.user.vo.UserLocationListVOImpl;
+import com.lance.model.user.vo.UserNotificationVOImpl;
 import com.lance.model.user.vo.UserRoleGrantsVOImpl;
 import com.lance.model.user.vo.UserSkillVOImpl;
 import com.lance.model.vo.CompanyVOImpl;
@@ -450,8 +451,8 @@ public class LanceRestAMImpl extends BaseApplicationModuleImpl {
      * Container's getter for UserNotification1.
      * @return UserNotification1
      */
-    public BaseViewObjectImpl getUserNotification1() {
-        return (BaseViewObjectImpl) findViewObject("UserNotification1");
+    public UserNotificationVOImpl getUserNotification1() {
+        return (UserNotificationVOImpl) findViewObject("UserNotification1");
     }
 
     /**
@@ -466,8 +467,8 @@ public class LanceRestAMImpl extends BaseApplicationModuleImpl {
      * Container's getter for UserNotification2.
      * @return UserNotification2
      */
-    public BaseViewObjectImpl getUserNotificationUnread() {
-        return (BaseViewObjectImpl) findViewObject("UserNotificationUnread");
+    public UserNotificationVOImpl getUserNotificationUnread() {
+        return (UserNotificationVOImpl) findViewObject("UserNotificationUnread");
     }
 
     /**

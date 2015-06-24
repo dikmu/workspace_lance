@@ -12,7 +12,7 @@ $(function(){
             tmp.find(".read").html(dom.Read=='Y' ? '已读' : '未读');
             tmp.find(".title").html(dom.Title);
             tmp.find(".txt").html(dom.Content);
-            tmp.find(".type").html(dom.Type);
+            tmp.find(".type").html(dom.CreateBy=="anonymous" ? "系统消息" : dom.DisplayName);
             if(dom.Read == 'Y'){
                 tmp.addClass("active");
             }

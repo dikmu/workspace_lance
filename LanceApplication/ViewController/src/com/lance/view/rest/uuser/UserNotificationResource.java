@@ -2,11 +2,19 @@ package com.lance.view.rest.uuser;
 
 import com.lance.model.LanceRestAMImpl;
 import com.lance.model.user.vo.UUserVOImpl;
+import com.lance.model.user.vo.UUserVORowImpl;
+import com.lance.model.util.ConstantUtil;
+import com.lance.view.rest.email.SendActivateMail;
 import com.lance.view.util.LUtil;
 import com.lance.view.util.RestSecurityUtil;
 
+import com.zngh.platform.front.core.model.cache.AuthCache;
 import com.zngh.platform.front.core.view.BaseRestResource;
 import com.zngh.platform.front.core.view.RestUtil;
+
+import java.io.UnsupportedEncodingException;
+
+import javax.mail.MessagingException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -66,12 +74,12 @@ public class UserNotificationResource extends BaseRestResource {
 
     public static final String[] ATTR_GET = {
         "Uuid", "Title", "Content", "UserName", "Type", "Read", "CreateBy", "CreateOn", "ModifyBy", "ModifyOn",
-        "Version"
+        "Version","DisplayName"
     };
 
     public static final String[] ATTR_UPDATE = { "Title", "Content", "Type", "Read" };
 
-    public static final String[] ATTR_CREATE = { "Title", "Content", "Type" };
+    public static final String[] ATTR_CREATE = { "Title", "Content", "Type"};
 
     public static final boolean CAN_DELETE = true;
 
@@ -102,17 +110,22 @@ public class UserNotificationResource extends BaseRestResource {
         return (String) row.getAttribute("Uuid");
     }
 
-    public void findCurrentUserRow(String userName, LanceRestAMImpl am) {
+    public UUserVORowImpl findCurrentUserRow(String userName, LanceRestAMImpl am) {
         UUserVOImpl vo = am.getUUser1();
         if (vo.getCurrentRow() != null && vo.getCurrentRow().getAttribute("UserName").equals(userName)) {
-            return;
+            return (UUserVORowImpl)vo.getCurrentRow();
         }
         vo.setApplyViewCriteriaName("FindByUserNameVC");
         vo.setpUserName(userName);
         vo.executeQuery();
         vo.removeApplyViewCriteriaName("FindByUserNameVC");
-        vo.setCurrentRow(vo.first());
+        if(vo.first() != null){
+            vo.setCurrentRow(vo.first());
+        }else{
+            return null;
+        }
         System.out.println(vo.first().getAttribute("UserName"));
+        return (UUserVORowImpl)vo.getCurrentRow();
     }
 
     //------------------------------以下是标准代码--------------------------
@@ -215,11 +228,15 @@ public class UserNotificationResource extends BaseRestResource {
     @POST
     @Path("{userName}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public String createUserNotification(JSONObject json) throws JSONException {
+    public String createUserNotification(JSONObject json,@PathParam("userName")String userName) throws JSONException, UnsupportedEncodingException,
+                                                                 MessagingException {
         LOGGER.log(LOGGER.NOTIFICATION, "create UserNotification");
-        String userName = this.findCurrentUserName();
+//        String userName = this.findCurrentUserName();
         LanceRestAMImpl am = LUtil.findLanceAM();
-        findCurrentUserRow(userName, am);
+        UUserVORowImpl uvr = findCurrentUserRow(userName, am);
+        if(uvr == null){
+           return "error:该用户["+userName+"]不存在!";
+        }
         ViewObjectImpl vo = getUserNotificationFromAM(am);
         RowImpl row = LUtil.createInsertRow(vo);
         RestUtil.copyJsonObjectToRow(json, vo, row, this.ATTR_CREATE);
@@ -230,7 +247,20 @@ public class UserNotificationResource extends BaseRestResource {
         }
         String res = returnParamAfterCreate(row);
         LOGGER.log(LOGGER.NOTIFICATION, "UserNotification created by return :" + res);
+        
+        if(json.has("sendMail") && "Y".equals(json.getString("sendMail"))){
+            sendMail(uvr, json.getString("Content"),(String)row.getAttribute("CreateBy"));
+        }        
         return res;
+    }
+    
+    private void sendMail(UUserVORowImpl ur,String content,String creator) throws UnsupportedEncodingException, MessagingException {
+        SendActivateMail sendActivateMail = new SendActivateMail();
+        //创建查找密码记录
+        StringBuffer sb = new StringBuffer("<b>尊敬的"+ur.getUserName()+"，您好:</b><br/>");
+        sb.append("【"+AuthCache.getUserDisplayNameByUserId(creator)+"】在驻才网(www.zhucai.me)向你发送了消息，消息内容如下：<br/>");
+        sb.append("<pre>"+content+"</pre>");
+        sendActivateMail.sendEmail(ur.getEmail(), "驻才网消息提醒(www.zhucai.me)", sb.toString());
     }
     
     public String sendUserNotification(JSONObject json) throws JSONException {
@@ -333,7 +363,7 @@ public class UserNotificationResource extends BaseRestResource {
         LanceRestAMImpl am = LUtil.findLanceAM();
         findCurrentUserRow(userName, am);
         ViewObjectImpl vo = am.getUserNotificationUnread();
-        String count = "" + vo.getRowCount();
+        String count = "" + vo.getEstimatedRowCount();
         return count;
     }
 
