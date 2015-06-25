@@ -55,27 +55,27 @@
                                         {{if status=="fixed"}}
                                              <tr>
                                                 <td>
-                                                    <span class="glyphicon glyphicon-time"></span> 项目总价：<span id="Fixed-Pay"></span>
+                                                    <span class="glyphicon glyphicon-time"></span> 项目总价：<span class="Fixed-Pay"></span>
                                                 </td>
                                                  <td>
                                                     <span class="glyphicon glyphicon-time"></span> 计费方式：固定价格
                                                 </td>
                                                 <td>
-                                                    <span class="glyphicon glyphicon-time"></span> 工作地点：<span id="IndexLocation"></span>
+                                                    <span class="glyphicon glyphicon-time"></span> 工作地点：<span class="IndexLocation"></span>
                                                 </td>
                                                  <td>
-                                                    <span class="glyphicon glyphicon-time"></span> 发布时间：<span id="CreateOn">2015-01-23</span>
+                                                    <span class="glyphicon glyphicon-time"></span> 项目开始时间：<span class="PostJobDateStart"></span>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                  <span class="glyphicon glyphicon-time"></span> 办公方式：<span id="FixedLocation"></span>
+                                                  <span class="glyphicon glyphicon-time"></span> 办公方式：<span class="FixedLocation"></span>
                                                 </td>
                                                 <td>
-                                                  <span class="glyphicon glyphicon-time"></span> 项目开始时间：<span id="PostJobDateStart"></span>
+                                                  <span class="glyphicon glyphicon-time"></span> 招聘开始时间：<span class="CreateOn"></span>
                                                 </td>
                                                 <td>
-                                                   <span class="glyphicon glyphicon-time"></span> 项目结束时间：<span id="PostJobDateEnd"></span>
+                                                   <span class="glyphicon glyphicon-time"></span> 招聘结束时间：<span class="PostJobDateEnd"></span>
                                                 </td>
                                                 <td>
                                                    
@@ -84,29 +84,30 @@
                                          {{else if status=="hourly"}} 
                                              <tr>
                                                 <td>
-                                                    <span class="glyphicon glyphicon-time"></span> 价格：<span id="hourly-Pay"></span>
+                                                    <span class="glyphicon glyphicon-time"></span> 价格：<span class="hourly-Pay"></span>
                                                 </td>
                                                 <td>
-                                                    <span class="glyphicon glyphicon-time"></span> 工作周期：<span id="Duration"></span>
+                                                    <span class="glyphicon glyphicon-time"></span> 办公方式：<span class="FixedLocation"></span>
                                                 </td>
                                                 <td>
-                                                    <span class="glyphicon glyphicon-time"></span> 工作地点：<span id="IndexLocation"></span>
+                                                    <span class="glyphicon glyphicon-time"></span> 工作地点：<span class="IndexLocation"></span>
                                                 </td>
                                                 <td>
-                                                    <span class="glyphicon glyphicon-time"></span> 发布时间：<span id="CreateOn">2015-01-23</span>
+                                                    <span class="glyphicon glyphicon-time"></span> 项目开始时间：<span class="PostJobDateStart"></span>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <span class="glyphicon glyphicon-time"></span> 每周工作时间：<span id="Weekly-Hours"></span>
+                                                    <span class="glyphicon glyphicon-time"></span> 工作周期：<span class="Duration"></span>
                                                 </td>
                                                 <td>
-                                                    <span class="glyphicon glyphicon-time"></span> 项目开始时间：<span id="PostJobDateStart"></span>
+                                                    <span class="glyphicon glyphicon-time"></span> 每周工作时间：<span class="Weekly-Hours"></span>
                                                 </td>
                                                 <td>
-                                                    <span class="glyphicon glyphicon-time"></span> 项目结束时间：<span id="PostJobDateEnd"></span>
+                                                    <span class="glyphicon glyphicon-time"></span> 招聘开始时间：<span class="CreateOn"></span>
                                                 </td>
                                                 <td>
+                                                    <span class="glyphicon glyphicon-time"></span> 招聘结束时间：<span class="PostJobDateEnd"></span>
                                                 </td>
                                              </tr>
                                            {{/if}}
@@ -132,7 +133,7 @@
                                 </div>
                                 
                                 <p class="pre-txt">
-                                   <span id="Brief"></span>
+                                   <span class="Brief"></span>
                                 </p>
                                 <br /><br /><br />
                                 <div class="exp-skill" id="skill-cnt">

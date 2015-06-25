@@ -191,7 +191,7 @@
                             
                             <br />
                             <label for="exampleInputEmail1" class="control-label">
-                            发布工作的时间：</label><br />
+                            招聘信息有效期：</label><br />
                             <select id="add_days" class="form-control lan-dis-iblock sml-sel">
                                 <option value="15">15天</option>
                                 <option value="30">30天</option>
@@ -201,7 +201,7 @@
                             
                             <br /><br />
                             <label for="exampleInputEmail1" class="control-label">
-                            工作的时间开始时间：</label>
+                            项目开始时间：</label>
                             <div class="radio">
                                 <label>
                                     <input checked="checked" type="radio" name="radtime" id="jim" value="option2">
@@ -217,7 +217,6 @@
                             <input value="" type="text" class="form-control sml-inp lan-dis-iblock pull-left inp_date" id="startTime" placeholder=""
                                 data-container="body" data-toggle="popover" data-placement="right" style="margin-top:-9px;margin-left:10px;height:30px;width:150px;"
                                 data-content="" data-trigger="manual" data-animation="false"/>
-                            
                         </div>
                     </div>
                     

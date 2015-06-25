@@ -43,7 +43,7 @@ function initPostJobData(jobId){
                 if(data.hasOwnProperty("DurationMax")){
                     dur = dur +"~"+ data["DurationMax"]+"周";
                 }
-                $("#Duration").html(dur);
+                $(".Duration").html(dur);
             }
             
             if(data.hasOwnProperty("HourlyPayMin")){
@@ -51,7 +51,7 @@ function initPostJobData(jobId){
                 if(data.hasOwnProperty("HourlyPayMax")){
                     dur1 = "￥"+dur1 +"~"+ data["HourlyPayMax"]+"元/小时";
                 }
-                $("#hourly-Pay").html(dur1);
+                $(".hourly-Pay").html(dur1);
             }
             
             if(data.hasOwnProperty("FixedPayMin")){
@@ -59,14 +59,14 @@ function initPostJobData(jobId){
                 if(data.hasOwnProperty("FixedPayMax")){
                     dur = "￥"+pay +"~"+ data["FixedPayMax"]+"元";
                 }
-                $("#Fixed-Pay").html(dur);
+                $(".Fixed-Pay").html(dur);
             }
            
            if(data.hasOwnProperty("WeeklyHours")){
-                $("#Weekly-Hours").html(data["WeeklyHours"]+"小时");
+                $(".Weekly-Hours").html(data["WeeklyHours"]+"小时");
             }
            if(data.hasOwnProperty("Location") && !("" == data["Location"])){
-                $("#client-location").html(" | "+data["Location"]);
+                $(".client-location").html(" | "+data["Location"]);
            }
            if(data.hasOwnProperty("WorkCategory")){
                $("#cat_name").html(data["CatName"]);
@@ -76,11 +76,11 @@ function initPostJobData(jobId){
                $("#subcat_name").html(data["SubCatName"]);
            }
             for(var key in data){
-                if($("#"+key).length > 0){
+                if($("."+key).length > 0){
                     if("Brief" == key){
-                       $("#"+key).html("<pre>"+data[key]+"</pre>"); 
+                       $("."+key).html("<pre>"+data[key]+"</pre>"); 
                     }else{
-                       $("#"+key).html(data[key]); 
+                       $("."+key).html(data[key]); 
                     }
                 }
             }
