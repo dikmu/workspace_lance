@@ -2,7 +2,7 @@
 <div class="lan-header-main">
     <div class="container">
         <a href="/lance/pages/search">
-        <img class="pull-left logo" src="\lance\resources\image\common\logo.png" alt=""/></a>
+        <img class="pull-left logo" src="/lance/resources/image/common/logo.png" alt=""/></a>
         <ol class="breadcrumb pull-right" id="top_bc"></ol>
         <script id="bc-cnt-sp1" type="text/html">
              {{if logined == 'true'}}

@@ -11,9 +11,9 @@
         var Data=${data};
     </script>
      <!-- Bootstrap -->
-    <link href="\lance\resources\css\bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="\lance\resources\css\common\common.css" rel="stylesheet" type="text/css" />
-    <link href="\lance\resources\css\control\main.css" rel="stylesheet" type="text/css" />
+    <link href="/lance/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/lance/resources/css/common/common.css" rel="stylesheet" type="text/css" />
+    <link href="/lance/resources/css/control/main.css" rel="stylesheet" type="text/css" />
     <link type="text/css" href="/lance/resources/js/jqueryui/jquery-ui.css" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

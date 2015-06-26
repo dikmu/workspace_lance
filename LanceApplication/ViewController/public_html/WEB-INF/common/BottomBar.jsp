@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-2">
              <a href="/lance/pages/search">
-                <img src="\lance\resources\image\common\logo.png" alt=""/>
+                <img src="/lance/resources/image/common/logo.png" alt=""/>
              </a>
             </div>
             <div class="col-md-10">
