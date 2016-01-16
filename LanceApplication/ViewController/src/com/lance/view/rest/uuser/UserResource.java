@@ -129,7 +129,7 @@ public class UserResource extends BaseRestResource {
     //todo 完善字段
 
     /**
-     * DefaultRole:默认角色，可输入：client,lancer 。仅创建时带入，不支持修改
+     * DefaultRole:默认角色，可输入：client,lancer 
      */
     public static final String[] ATTR_CREATE = {
         "UserName", "TrueName", "DisplayName", "Email", "Password", "Img", "Country", "CompanyId", "PhoneNumber",

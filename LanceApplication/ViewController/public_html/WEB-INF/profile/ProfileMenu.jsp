@@ -13,7 +13,7 @@
             <a href="#">Portfolio</a>
         </li>
         <li class="nav-li sel">
-            <a href="/lance/pages/profile/EditSkill">Skills</a>
+            <a href="/lance/pages/profile/lancer/EditSkill">Skills</a>
         </li>
         <li class="nav-li">
             <a href="#">Resume/C.V.</a>
@@ -22,7 +22,7 @@
             <div class="sep">&nbsp;</div>
         </li>
         <li class="nav-li">
-            <a href="/lance/pages/profile/EditContact">Contact Info</a>
+            <a href="/lance/pages/profile/lancer/EditContact">Contact Info</a>
         </li>
         <li class="nav-li">
             <a href="#">Privacy Settings</a>

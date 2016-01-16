@@ -34,11 +34,11 @@
                 </a>
                 <br />
                 <ul class="nav nav-stacked">
-                    <li role="presentation" class="active"><a href="./Overview">个人主页</a></li>
+                    <li role="presentation" class="active"><a href="./Profile">个人主页</a></li>
                     <li role="presentation"><a href="./EditBasic">基本信息</a></li>
                     <li role="presentation"><a href="./EditContact">联系信息</a></li>
                     <li role="presentation"><a href="./EditSkill">我的技能</a></li>
-                    <li role="presentation"><a href="./EditSkill">我的公司信息</a></li>
+                    <li role="presentation"><a href="./CompanyProfile">公司主页</a></li>
                 </ul>
             </div>
             <div class="col-md-12 lan-main-right">

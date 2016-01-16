@@ -2,7 +2,6 @@ package com.lance.view.servlet;
 
 //import com.lance.view.rest.user.LancerProfileResource;
 import com.lance.view.rest.job.PostJobResource;
-import com.lance.view.rest.job.SearchResource;
 import com.lance.view.rest.search.BrowseResource;
 import com.lance.view.rest.uuser.LookupsResource;
 import com.lance.view.rest.uuser.UserEducationResource;
@@ -49,7 +48,8 @@ public class PageDirectServlet extends HttpServlet {
         try {
             //如果用户访问的是登录后(受保护)界面
             if (uri.startsWith("/lance/pages/search") || uri.startsWith("/lance/pages/jobDetail") ||
-                uri.startsWith("/lance/pages/browse") || uri.startsWith("/lance/pages/profile/Overview") ||uri.startsWith("/lance/pages/profile/CompanyProfile")||
+                uri.startsWith("/lance/pages/browse") || uri.startsWith("/lance/pages/profile/Overview") ||
+                uri.startsWith("/lance/pages/profile/client/CompanyProfile") ||
                 uri.equals("/lance/pages/profile/retrieve")) {
                 //不做登陆拦截
 
@@ -59,6 +59,7 @@ public class PageDirectServlet extends HttpServlet {
                 }
             }
             String user = adfctx.getSecurityContext().getUserPrincipal().getName();
+
             if (uri.startsWith("/lance/pages/search")) {
                 JSONObject data = new JSONObject();
                 //获取值集——公司性质
@@ -69,50 +70,103 @@ public class PageDirectServlet extends HttpServlet {
                 toPage(request, response, "/WEB-INF/search/searchjob.jsp", data);
 
             } else if ("/lance/pages/DefaultPage".equals(uri) || "/lance/pages/Search".equals(uri)) {
-                JSONArray data = new JSONArray();
-                data.put(new SearchResource().searchLatestPosted());
-                toPage(request, response, "/WEB-INF/search/searchjob.jsp", data);
+                //                JSONArray data = new JSONArray();
+                //                data.put(new SearchResource().searchLatestPosted());
+                //                toPage(request, response, "/WEB-INF/search/searchjob.jsp", data);
+                //                toPage(request, response, "/lance/pages/profile/Overview", data,true);
+                //如果是个人，供应商账号，跳转至个人主页
+
+                //登录成功后跳转到个人主页
+                toPage(request, response, "/lance/pages/profile/Overview", new JSONArray(), true);
 
             } else if ("/lance/pages/profile/Overview".equals(uri)) {
                 String uid = request.getParameter("uid");
                 JSONObject data = new JSONObject();
-                if(uid != null){
-                    data.put("User", new UserResource().findUserById(uid));
-                }else{
+                JSONObject userJson = null;
+                if (uid != null) {
+                    userJson = new UserResource().findUserById(uid);
+                    data.put("User", userJson);
+                } else {
                     if (!adfctx.getSecurityContext().isAuthenticated()) {
                         response.sendRedirect("/lance/login.htm");
                     }
-                    data.put("User", new UserResource().findUserById(user)); 
+                    userJson = new UserResource().findUserById(user);
+                    data.put("User", userJson);
                 }
-                toPage(request, response, "/WEB-INF/profile/Overview.jsp", data);
-    
-            }else if("/lance/pages/profile/CompanyProfile".equals(uri)){
+
+                if ("client".equals(userJson.getJSONObject("User").getString("DefaultRole"))) {
+                    //如果是公司账号，跳转至公司主页
+                    toPage(request, response, "/lance/pages/profile/client/Profile", data, true);
+                } else {
+                    //如果是个人，供应商账号，跳转至个人主页
+                    toPage(request, response, "/lance/pages/profile/lancer/Profile", data, true);
+                }
+            }
+            //Client主页
+            else if ("/lance/pages/profile/client/Profile".equals(uri)) {
                 String uid = request.getParameter("uid");
                 JSONObject data = new JSONObject();
-                if(uid != null){
+                if (uid != null) {
                     data.put("User", new UserResource().findUserById(uid));
-                }else{
+                } else {
                     if (!adfctx.getSecurityContext().isAuthenticated()) {
                         response.sendRedirect("/lance/login.htm");
                     }
-                    data.put("User", new UserResource().findUserById(user)); 
+                    data.put("User", new UserResource().findUserById(user));
                 }
-                toPage(request, response, "/WEB-INF/profile/CompanyProfile.jsp", data);
-                
-            }else if ("/lance/pages/profile/EditBasic".equals(uri)) {
-                JSONObject data = new JSONObject();
-                data.put("User", new UserResource().findUserById(user));
-                toPage(request, response, "/WEB-INF/profile/EditBasic.jsp", data);
+                toPage(request, response, "/WEB-INF/profile/client/Profile.jsp", data);
 
-            } else if ("/lance/pages/profile/EditSkill".equals(uri)) {
+            }
+            //Client PostJob维护
+            else if ("/lance/pages/profile/client/EditPostJob".equals(uri)) {
                 JSONObject data = new JSONObject();
                 data.put("User", new UserResource().findUserById(user));
-                toPage(request, response, "/WEB-INF/profile/EditSkill.jsp", data);
+                toPage(request, response, "/WEB-INF/profile/client/EditPostJob.jsp", data);
 
-            } else if ("/lance/pages/profile/EditContact".equals(uri)) {
+            }
+            //Client 编辑基本信息
+            else if ("/lance/pages/profile/client/EditBasic".equals(uri)) {
                 JSONObject data = new JSONObject();
                 data.put("User", new UserResource().findUserById(user));
-                toPage(request, response, "/WEB-INF/profile/EditContact.jsp", data);
+                toPage(request, response, "/WEB-INF/profile/client/EditBasic.jsp", data);
+
+            }
+            //Client 编辑联系信息
+            else if ("/lance/pages/profile/client/EditContact".equals(uri)) {
+                JSONObject data = new JSONObject();
+                data.put("User", new UserResource().findUserById(user));
+                toPage(request, response, "/WEB-INF/profile/client/EditContact.jsp", data);
+
+            }
+            //Lancer 主页
+            else if ("/lance/pages/profile/lancer/Profile".equals(uri)) {
+                String uid = request.getParameter("uid");
+                JSONObject data = new JSONObject();
+                if (uid != null) {
+                    data.put("User", new UserResource().findUserById(uid));
+                } else {
+                    if (!adfctx.getSecurityContext().isAuthenticated()) {
+                        response.sendRedirect("/lance/login.htm");
+                    }
+                    data.put("User", new UserResource().findUserById(user));
+                }
+                toPage(request, response, "/WEB-INF/profile/lancer/Profile.jsp", data);
+            }
+            //Lancer 编辑基本信息
+            else if ("/lance/pages/profile/lancer/EditBasic".equals(uri)) {
+                JSONObject data = new JSONObject();
+                data.put("User", new UserResource().findUserById(user));
+                toPage(request, response, "/WEB-INF/profile/lancer/EditBasic.jsp", data);
+
+            } else if ("/lance/pages/profile/lancer/EditSkill".equals(uri)) {
+                JSONObject data = new JSONObject();
+                data.put("User", new UserResource().findUserById(user));
+                toPage(request, response, "/WEB-INF/profile/lancer/EditSkill.jsp", data);
+
+            } else if ("/lance/pages/profile/lancer/EditContact".equals(uri)) {
+                JSONObject data = new JSONObject();
+                data.put("User", new UserResource().findUserById(user));
+                toPage(request, response, "/WEB-INF/profile/lancer/EditContact.jsp", data);
 
             } else if ("/lance/pages/jobs/PostNewJob".equals(uri)) {
                 toPage(request, response, "/WEB-INF/jobs/PostNewJob.jsp", new JSONObject());
@@ -166,9 +220,28 @@ public class PageDirectServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-    
+
     public void toPage(HttpServletRequest request, HttpServletResponse response, String page,
                        JSONObject data) throws ServletException, IOException {
+        toPage(request, response, page, data, false);
+    }
+
+    public void toPage(HttpServletRequest request, HttpServletResponse response, String page,
+                       JSONArray arr) throws ServletException, IOException {
+        toPage(request, response, page, arr, false);
+    }
+
+    /**
+     * 跳转到指定界面
+     * @param request
+     * @param response
+     * @param page 页面文件路径
+     * @param data json
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void toPage(HttpServletRequest request, HttpServletResponse response, String page, JSONObject data,
+                       boolean changeUrl) throws ServletException, IOException {
         try {
             ADFContext adfctx = ADFContext.getCurrent();
             JSONObject userData = null;
@@ -196,11 +269,24 @@ public class PageDirectServlet extends HttpServlet {
         //不改变URL的跳转，且可以携带Request参数
         System.out.println("即将跳转界面 with json：");
         System.out.println("即将跳转界面到" + page);
-        request.getRequestDispatcher(page).forward(request, response);
+        if (!changeUrl) {
+            request.getRequestDispatcher(page).forward(request, response);
+        } else {
+            response.sendRedirect(page);
+        }
     }
 
-    public void toPage(HttpServletRequest request, HttpServletResponse response, String page,
-                       JSONArray arr) throws ServletException, IOException {
+    /**
+     * 跳转到指定界面
+     * @param request
+     * @param response
+     * @param page 页面文件路径
+     * @param arr json
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void toPage(HttpServletRequest request, HttpServletResponse response, String page, JSONArray arr,
+                       boolean changeUrl) throws ServletException, IOException {
         try {
             ADFContext adfctx = ADFContext.getCurrent();
             JSONObject userData = null;
@@ -229,7 +315,11 @@ public class PageDirectServlet extends HttpServlet {
         //不改变URL的跳转，且可以携带Request参数
         System.out.println("即将跳转界面 with json：");
         System.out.println("即将跳转界面到" + page);
-        request.getRequestDispatcher(page).forward(request, response);
+        if (!changeUrl) {
+            request.getRequestDispatcher(page).forward(request, response);
+        } else {
+            response.sendRedirect(page);
+        }
     }
 
 

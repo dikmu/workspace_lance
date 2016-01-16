@@ -466,6 +466,10 @@
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
+            <url n="id" path="ADF_Library_Dependencies.library"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
             <value n="id" v="LanTemplate.jar"/>
             <value n="isJDK" v="false"/>
          </hash>

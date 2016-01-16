@@ -93,7 +93,8 @@ public class LoginServlet extends HttpServlet {
                    out.println("ok:/lance/pages/profile/Overview"); //成功，跳转页面
                 }
             }else{
-                out.println("ok:/lance/pages/search"); //成功，跳转页面
+//                out.println("ok:/lance/pages/search"); //成功，跳转页面
+                out.println("ok:/lance/pages/profile/Overview"); //成功，跳转页面
             }
             out.close(); 
             return;

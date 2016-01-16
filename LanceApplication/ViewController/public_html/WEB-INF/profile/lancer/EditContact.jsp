@@ -26,7 +26,7 @@
 
                 <br /><br />
                 <ul class="nav nav-stacked">
-                    <li role="presentation"><a href="./Overview">个人主页</a></li>
+                    <li role="presentation"><a href="./Profile">个人主页</a></li>
                     <li role="presentation"><a href="./EditBasic">基本信息</a></li>
                     <li role="presentation" class="active"><a href="./EditContact">联系信息</a></li>
                     <li role="presentation"><a href="./EditSkill">我的技能</a></li>

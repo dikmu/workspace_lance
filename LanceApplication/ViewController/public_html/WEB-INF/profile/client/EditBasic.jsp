@@ -29,84 +29,46 @@
 
                 <br /><br />
                 <ul class="nav nav-stacked">
-                    <li role="presentation"><a href="./Overview">个人主页</a></li>
+                    <li role="presentation"><a href="./Profile">公司主页</a></li>
                     <li role="presentation" class="active"><a href="./EditBasic">基本信息</a></li>
                     <li role="presentation"><a href="./EditContact">联系信息</a></li>
-                    <li role="presentation"><a href="./EditSkill">我的技能</a></li>
+                    <li role="presentation"><a href="./EditPostJob">已发工作信息</a></li>
                 </ul>
             </div>
             <div class="col-md-9 lan-main-right">
                 <div class="page-header">
-                    <h1><small>个人基本信息</small></h1>
+                    <h1><small>公司基本信息</small></h1>
                 </div>
                  <form class="basic-form" role="form" method="post" action="#">
                     <div class="form-group <!--has-error has-feedback-->">
                         <label for="exampleInputEmail1" class="control-label">
-                            用户真实名：</label>
+                            公司真实名：</label>
                         <input value="" type="text" class="form-control sml-inp" id="inp_uname" placeholder=""
                             data-container="body" data-toggle="popover" data-placement="right" 
-                            data-content="请输入合法的用户名" data-trigger="manual" data-animation="false"/>
+                            data-content="请输入合法的公司名" data-trigger="manual" data-animation="false"/>
                     </div>
                     <div class="form-group <!--has-error has-feedback-->">
                         <label for="exampleInputEmail1" class="control-label">
-                            用户显示名：</label>
+                            公司显示名：</label>
                         <input value="" type="text" class="form-control sml-inp" id="inp_dname" placeholder=""
                             data-container="body" data-toggle="popover" data-placement="right" 
-                            data-content="请输入合法的用户名" data-trigger="manual" data-animation="false"/>
-                    </div>
-                    <div class="form-group <!--has-error has-feedback-->">
-                        <label for="exampleInputEmail1" class="control-label">
-                            我的座右铭：</label>
-                        <input value="" type="text" class="form-control sml-inp" id="inp_tagline" placeholder=""
-                            data-container="body" data-toggle="popover" data-placement="right" 
-                            data-content="请输入座右铭" data-trigger="manual" data-animation="false"/>
+                            data-content="请输入合法的显示名" data-trigger="manual" data-animation="false"/>
                     </div>
                     
                     <div class="form-group <!--has-error has-feedback-->">
                         <label for="exampleInputEmail1" class="control-label">
-                            我的时薪价格（元/小时）：</label>
-                        <input value="" type="text" class="form-control sml-inp" id="inp_hour" placeholder=""
-                            data-container="body" data-toggle="popover" data-placement="right" 
-                            data-content="请输入正确的数字" data-trigger="manual" data-animation="false"/>
-                    </div>
-                    <!--<div class="form-group">
-                        <label for="exampleInputEmail1" class="control-label">
-                            驻才网向客户提出的时薪价格（元/小时）：</label>
-                        <input readonly value="" type="text" class="form-control sml-inp" id="inp_hour2" placeholder="" />
-                    </div>-->
-                    
-                    <div class="form-group <!--has-error has-feedback-->">
-                        <label for="exampleInputEmail1" class="control-label">
-                            我的个人网站：</label>
+                            公司网站：</label>
                         <input value="" type="text" class="form-control sml-inp" id="inp_website" placeholder=""
                             data-container="body" data-toggle="popover" data-placement="right" 
-                            data-content="请输入我的个人网址" data-trigger="manual" data-animation="false"/>
+                            data-content="请输入公司网站" data-trigger="manual" data-animation="false"/>
                     </div>
                     
                     <div class="form-group <!--has-error has-feedback-->">
                         <label for="exampleInputEmail1" class="control-label">
-                            我的个人描述：</label>
-                        <textarea class="form-control" rows="3" id="inp_over"
+                            公司描述：</label>
+                        <textarea class="form-control" rows="10" id="inp_over"
                             data-container="body" data-toggle="popover" data-placement="right" 
-                            data-content="请输入我的个人描述" data-trigger="manual" data-animation="false"></textarea>
-                    </div>
-                    
-                    <div class="form-group <!--has-error has-feedback-->">
-                        <label for="exampleInputEmail1" class="control-label">
-                            我可以提供的服务描述：</label>
-                        <textarea class="form-control" id="inp_service" rows="3"></textarea>
-                    </div>
-                    
-                    <div class="form-group <!--has-error has-feedback-->">
-                        <label for="exampleInputEmail1" class="control-label">
-                            我可以接受的支付条件描述：</label>
-                        <textarea class="form-control" id="inp_payment" rows="3"></textarea>
-                    </div>
-                    
-                    <div class="form-group <!--has-error has-feedback-->">
-                        <label for="exampleInputEmail1" class="control-label">
-                            我的关键词描述（逗号分隔）：</label>
-                        <textarea class="form-control" id="inp_keywords" rows="3"></textarea>
+                            data-content="请输入公司描述" data-trigger="manual" data-animation="false"></textarea>
                     </div>
                     
                     <button autocomplete="off" data-loading-text="保存中..." id="btn_save" type="button" class="btn btn-primary">确定</button>
