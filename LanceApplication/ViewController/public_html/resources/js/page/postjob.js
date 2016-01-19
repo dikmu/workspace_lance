@@ -409,17 +409,17 @@ function init_click(){
     };
     
     var setOption = function(m_param){
-        if($("#jpublic")[0].checked){
-            m_param.JobVisibility = "public";
-            if($("#chk_search")[0].checked){
-                m_param.AllowSearchEngines = "Y";
-            }else{
-                m_param.AllowSearchEngines = "N";
-            }
-        }
-        if($("#jprivate")[0].checked){
-            m_param.JobVisibility = "private";
-        }
+//        if($("#jpublic")[0].checked){
+//            m_param.JobVisibility = "public";
+//            if($("#chk_search")[0].checked){
+//                m_param.AllowSearchEngines = "Y";
+//            }else{
+//                m_param.AllowSearchEngines = "N";
+//            }
+//        }
+//        if($("#jprivate")[0].checked){
+//            m_param.JobVisibility = "private";
+//        }
         //set location
         if($("#job_xc")[0].checked){
             m_param.FixedLocation = "Y";
@@ -432,6 +432,20 @@ function init_click(){
         }else{
             m_param.FixedLocation = 'N';
         }
+        //set email frequance
+        if($("#epush_day")[0].checked){
+            m_param.SubscribeFrequency="week";
+        }else if($("#epush_week")[0].checked){
+            m_param.SubscribeFrequency="day";
+        }else if($("#epush_no")[0].checked){
+            m_param.SubscribeFrequency="no";
+        }
+        if($("#epush_freq")[0].checked){
+            m_param.SubscribeUpdate="Y";
+        }else {
+            m_param.SubscribeUpdate="N";
+        }
+        
         return m_param;
     };
     

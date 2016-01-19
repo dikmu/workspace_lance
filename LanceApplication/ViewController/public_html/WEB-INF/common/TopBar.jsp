@@ -47,16 +47,16 @@
     <div class="container">
         <ul class="nav navbar-nav pull-left">
             <li class="active">
-                <a href="/lance/pages/search">我的驻才网
+                    <a href="/lance/pages/profile/Overview">我的驻才网
                     <span class="sr-only">(current)</span></a>
             </li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">找人
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                    <li>
+                    <!--<li>
                         <a href="/lance/pages/Search">搜索</a>
-                    </li>
+                    </li>-->
                     <li>
                         <a href="/lance/pages/browse">浏览</a>
                     </li>
@@ -79,9 +79,9 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">找项目
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                    <li>
+                    <!--<li>
                         <a href="/lance/pages/Search">搜索</a>
-                    </li>
+                    </li>-->
                     <li>
                         <a href="/lance/pages/browse">浏览</a>
                     </li>
@@ -100,6 +100,7 @@
                     </li>-->
                 </ul>
             </li>
+           
             <!--<li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">管理
                     <span class="caret"></span></a>
@@ -143,7 +144,7 @@
             </li>-->
         </ul>
         <div class="pull-right search">
-            <div class="input-group input-group-sm sea-type">
+            <!--<div class="input-group input-group-sm sea-type">
                 <span data-toggle="dropdown" role="button" aria-expanded="false" class="input-group-addon"
                       id="sizing-addon3">工作 
                     <span class="caret"></span></span>
@@ -158,7 +159,7 @@
                     </li>
                 </ul>
             </div>
-            <a type="button" class="btn btn-primary btn-small" href="/lance/pages/search">搜索</a>
+            <a type="button" class="btn btn-primary btn-small" href="/lance/pages/search">搜索</a>-->
              
             <a type="button" class="btn btn-success btn-middle" href="/lance/pages/jobs/PostNewJob">发布工作信息</a>
         </div>

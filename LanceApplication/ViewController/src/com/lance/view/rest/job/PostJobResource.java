@@ -82,6 +82,8 @@ public class PostJobResource extends BaseRestResource {
          ModifyOn,Precision:0,JavaType:java.sql.Timestamp
          Version,Precision:0,JavaType:oracle.jbo.domain.Number
          CreateByName,Precision:50,JavaType:java.lang.String  发布人显示名
+         SubscribeFrequency,Precision:4,JavaType:java.lang.String 简历订阅频率：week;day;no
+         SubscribeUpdate,Precision:1,JavaType:java.lang.String 简历(需求)更新后再次推送：Y/N
      */
     public static final String[] POST_JOB_VO_ATTR_ALL = {
         "Uuid", "AllowSearchEngines", "Attach", "Brief", "DurationMax", "DurationMin", "FixedLocation", "FixedPayMax",
@@ -90,7 +92,7 @@ public class PostJobResource extends BaseRestResource {
         "SpecificSkillG", "Status", "StatusDesc", "WeeklyHours", "WorkCategory", "WorkSubcategory", "PostJobDateStart",
         "PostJobDateEnd", "LocationRegion", "LocationCountry", "LocationProvince", "LocationCity", "IndexSkills",
         "IndexLocation", "IndexWorkCategorys", "SignBy", "CreateBy", "CreateOn", "ModifyBy", "ModifyOn", "Version",
-        "CreateByName"
+        "CreateByName","SubscribeFrequency","SubscribeUpdate"
     };
 
 
@@ -102,7 +104,7 @@ public class PostJobResource extends BaseRestResource {
         "SpecificSkillC", "SpecificSkillD", "SpecificSkillE", "SpecificSkillF", "SpecificSkillG", "Status",
         "WeeklyHours", "WorkCategory", "WorkSubcategory", "PostJobDateStart", "PostJobDateEnd", "LocationCity",
         "LocationCountry", "LocationProvince", "LocationRegion", "CreateBy", "CreateOn", "ModifyBy", "ModifyOn",
-        "Version", "CreateByName"
+        "Version", "CreateByName","SubscribeFrequency","SubscribeUpdate"
     };
 
     public static final String[] POST_JOB_VO_ATTR_UPDATE = {
@@ -110,7 +112,7 @@ public class PostJobResource extends BaseRestResource {
         "FixedPayMin", "HourlyPayMax", "HourlyPayMin", "JobVisibility", "LocationDesc", "Name", "Postform",
         "SpecificSkillA", "SpecificSkillB", "SpecificSkillC", "SpecificSkillD", "SpecificSkillE", "SpecificSkillF",
         "SpecificSkillG", "Status", "WeeklyHours", "WorkCategory", "WorkSubcategory", "PostJobDateStart",
-        "PostJobDateEnd", "LocationRegion", "LocationCity", "LocationCountry", "LocationProvince"
+        "PostJobDateEnd", "LocationRegion", "LocationCity", "LocationCountry", "LocationProvince","SubscribeFrequency","SubscribeUpdate"
     };
 
     /**

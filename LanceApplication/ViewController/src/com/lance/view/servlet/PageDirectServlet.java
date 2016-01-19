@@ -53,6 +53,8 @@ public class PageDirectServlet extends HttpServlet {
                 uri.equals("/lance/pages/profile/retrieve")) {
                 //不做登陆拦截
 
+
+
             } else if (uri.startsWith("/lance/pages/")) {
                 if (!adfctx.getSecurityContext().isAuthenticated()) {
                     response.sendRedirect("/lance/login.htm");
@@ -62,12 +64,17 @@ public class PageDirectServlet extends HttpServlet {
 
             if (uri.startsWith("/lance/pages/search")) {
                 JSONObject data = new JSONObject();
-                //获取值集——公司性质
-                data.put("Lookup_CompanyPorperty", new LookupsResource().getLookupsByType("CompanyProperty"));
-                //获取值集——公司规模
-                data.put("Lookup_CompNumGrade", new LookupsResource().getLookupsByType("CompNumGrade"));
 
-                toPage(request, response, "/WEB-INF/search/searchjob.jsp", data);
+                if (adfctx.getSecurityContext().isUserInRole("Admin")) {
+                    //获取值集——公司性质
+                    data.put("Lookup_CompanyPorperty", new LookupsResource().getLookupsByType("CompanyProperty"));
+                    //获取值集——公司规模
+                    data.put("Lookup_CompNumGrade", new LookupsResource().getLookupsByType("CompNumGrade"));
+
+                    toPage(request, response, "/WEB-INF/search/searchjob.jsp", data);
+                } else {
+                    toPage(request, response, "/static/err/authFailed.html", data);
+                }
 
             } else if ("/lance/pages/DefaultPage".equals(uri) || "/lance/pages/Search".equals(uri)) {
                 //                JSONArray data = new JSONArray();
@@ -168,6 +175,11 @@ public class PageDirectServlet extends HttpServlet {
                 data.put("User", new UserResource().findUserById(user));
                 toPage(request, response, "/WEB-INF/profile/lancer/EditContact.jsp", data);
 
+            } else if ("/lance/pages/profile/lancer/EmailPush".equals(uri)) {
+                JSONObject data = new JSONObject();
+                data.put("User", new UserResource().findUserById(user));
+                toPage(request, response, "/WEB-INF/profile/lancer/EmailPush.jsp", data);
+
             } else if ("/lance/pages/jobs/PostNewJob".equals(uri)) {
                 toPage(request, response, "/WEB-INF/jobs/PostNewJob.jsp", new JSONObject());
 
@@ -207,6 +219,10 @@ public class PageDirectServlet extends HttpServlet {
                 toPage(request, response, "/WEB-INF/profile/EditJobHistory.jsp", uer.findAllUserEducation(user));
             } else if ("/lance/pages/profile/retrieve".equals(uri)) {
                 toPage(request, response, "/WEB-INF/profile/retrievePw.jsp", new JSONObject());
+            }
+            //邮件订阅
+            else if ("/lance/pages/search/EmailPush".equals(uri)) {
+                toPage(request, response, "/WEB-INF/search/EmailPush.jsp", new JSONObject());
             }
             //            else if (uri.startsWith("/lance/pages/project/Contract/")) { //uri:http://localhost:7101/lance/pages/project/Contact/157e69a513f942c7bb895e7dddd01a56
             //                //读取合同

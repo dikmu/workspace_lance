@@ -32,7 +32,8 @@
                 在此页面发布招聘需求信息。<br />
                 信息发布后其他人无法看到你的个人信息及联系方式。<br />
                 需求发布后，只有您回复留言或同意申请后，访问者才能看到您的信息。<br />
-                信息会在“ 发布工作的时间”到期后自动失效。
+                信息会在“ 发布工作的时间”到期后自动失效。<br />
+                系统会推送具有相应技能的“人员简历”到您的邮箱。
             </div>
             
             <div class="page-header">
@@ -141,12 +142,12 @@
                     <br />
                     <div class="form-group">
                          <label for="exampleInputEmail1" class="control-label">
-                            设置工作地点（可选）：</label><br />
+                            其它设置（可选）：</label><br />
                         <div class="well well-sm lan-ov-hid">
-                            <div class="radio">
+                            <!--<div class="radio">
                                 <label>
                                     <input type="radio" name="radvisible" id="jpublic" value="option1" checked>
-                                    公开—才才网所有用户都可以看到我的位置信息
+                                    公开—才才网所有用户都可以看到我的信息
                                 </label>
                             </div>
                             <div class="checkbox" id="jpublic_chk" style="margin-left:21px;">
@@ -162,7 +163,7 @@
                                 </label>
                             </div>
                             
-                            <br />
+                            <br />-->
                             <label for="exampleInputEmail1" class="control-label">
                             工作地点：</label><br />
                             <div class="radio">
@@ -217,6 +218,41 @@
                             <input value="" type="text" class="form-control sml-inp lan-dis-iblock pull-left inp_date" id="startTime" placeholder=""
                                 data-container="body" data-toggle="popover" data-placement="right" style="margin-top:-9px;margin-left:10px;height:30px;width:150px;"
                                 data-content="" data-trigger="manual" data-animation="false"/>
+                                                            
+                            <br /><br />
+                            <label for="exampleInputEmail1" class="control-label">
+                            简历邮件推送频率：</label><br />
+                            <div class="radio">
+                                <label>
+                                    <input id="epush_day" name="epush" type="radio" value=""  checked="checked"/>
+                                     每天一次
+                                </label>
+                            </div>
+                            
+                            <div class="radio">
+                                <label>
+                                    <input id="epush_week" name="epush" type="radio" value=""/>
+                                    每周一次
+                                </label>
+                            </div>
+                            
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="epush" id="epush_no">
+                                    不推送给任何人，仅自己和我指定的人可以看到信息
+                                </label>
+                            </div>
+                            
+                            <div class="checkbox">
+                                <label>
+                                    <input id="epush_freq" type="checkbox" value="" checked="checked" />
+                                    简历更新后可重新推送
+                                </label>
+                            </div>
+                            
+                            <br/>
+                            
+                            
                         </div>
                     </div>
                     

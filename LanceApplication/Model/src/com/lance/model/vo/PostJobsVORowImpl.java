@@ -89,6 +89,8 @@ public class PostJobsVORowImpl extends BaseViewRowImpl {
         ApplyCount,
         WorkCategoryCn,
         WorkSubcategoryCn,
+        SubscribeFrequency,
+        SubscribeUpdate,
         PostJobDiscuss,
         UUserVO1,
         SkillsVO1,
@@ -174,6 +176,8 @@ public class PostJobsVORowImpl extends BaseViewRowImpl {
     public static final int APPLYCOUNT = AttributesEnum.ApplyCount.index();
     public static final int WORKCATEGORYCN = AttributesEnum.WorkCategoryCn.index();
     public static final int WORKSUBCATEGORYCN = AttributesEnum.WorkSubcategoryCn.index();
+    public static final int SUBSCRIBEFREQUENCY = AttributesEnum.SubscribeFrequency.index();
+    public static final int SUBSCRIBEUPDATE = AttributesEnum.SubscribeUpdate.index();
     public static final int POSTJOBDISCUSS = AttributesEnum.PostJobDiscuss.index();
     public static final int UUSERVO1 = AttributesEnum.UUserVO1.index();
     public static final int SKILLSVO1 = AttributesEnum.SkillsVO1.index();
@@ -967,6 +971,38 @@ public class PostJobsVORowImpl extends BaseViewRowImpl {
     }
 
     /**
+     * Gets the attribute value for SUBSCRIBE_FREQUENCY using the alias name SubscribeFrequency.
+     * @return the SUBSCRIBE_FREQUENCY
+     */
+    public String getSubscribeFrequency() {
+        return (String) getAttributeInternal(SUBSCRIBEFREQUENCY);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for SUBSCRIBE_FREQUENCY using the alias name SubscribeFrequency.
+     * @param value value to set the SUBSCRIBE_FREQUENCY
+     */
+    public void setSubscribeFrequency(String value) {
+        setAttributeInternal(SUBSCRIBEFREQUENCY, value);
+    }
+
+    /**
+     * Gets the attribute value for SUBSCRIBE_UPDATE using the alias name SubscribeUpdate.
+     * @return the SUBSCRIBE_UPDATE
+     */
+    public String getSubscribeUpdate() {
+        return (String) getAttributeInternal(SUBSCRIBEUPDATE);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for SUBSCRIBE_UPDATE using the alias name SubscribeUpdate.
+     * @param value value to set the SUBSCRIBE_UPDATE
+     */
+    public void setSubscribeUpdate(String value) {
+        setAttributeInternal(SUBSCRIBEUPDATE, value);
+    }
+
+    /**
      * Gets the attribute value for MODIFY_BY using the alias name ModifyBy.
      * @return the MODIFY_BY
      */
@@ -979,8 +1015,8 @@ public class PostJobsVORowImpl extends BaseViewRowImpl {
      * Gets the attribute value for MODIFY_ON using the alias name ModifyOn.
      * @return the MODIFY_ON
      */
-    public Timestamp getModifyOn() {
-        return (Timestamp) getAttributeInternal(MODIFYON);
+    public Date getModifyOn() {
+        return (Date) getAttributeInternal(MODIFYON);
     }
 
 

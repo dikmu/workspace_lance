@@ -67,7 +67,9 @@ public class PostJobsEOImpl extends BaseEntityImpl {
         IndexAllMetaInfo,
         Rank,
         RankDesc,
-        ApplyCount;
+        ApplyCount,
+        SubscribeUpdate,
+        SubscribeFrequency;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
 
@@ -90,6 +92,8 @@ public class PostJobsEOImpl extends BaseEntityImpl {
             return vals;
         }
     }
+
+
     public static final int UUID = AttributesEnum.Uuid.index();
     public static final int NAME = AttributesEnum.Name.index();
     public static final int BRIEF = AttributesEnum.Brief.index();
@@ -136,12 +140,22 @@ public class PostJobsEOImpl extends BaseEntityImpl {
     public static final int RANK = AttributesEnum.Rank.index();
     public static final int RANKDESC = AttributesEnum.RankDesc.index();
     public static final int APPLYCOUNT = AttributesEnum.ApplyCount.index();
+    public static final int SUBSCRIBEUPDATE = AttributesEnum.SubscribeUpdate.index();
+    public static final int SUBSCRIBEFREQUENCY = AttributesEnum.SubscribeFrequency.index();
 
     /**
      * This is the default constructor (do not remove).
      */
     public PostJobsEOImpl() {
     }
+
+    /**
+     * @return the definition object for this instance class.
+     */
+    public static synchronized EntityDefImpl getDefinitionObject() {
+        return EntityDefImpl.findDefObject("com.lance.model.eo.PostJobsEO");
+    }
+
 
     /**
      * Gets the attribute value for Uuid, using the alias name Uuid.
@@ -667,8 +681,8 @@ public class PostJobsEOImpl extends BaseEntityImpl {
      * Gets the attribute value for ModifyOn, using the alias name ModifyOn.
      * @return the value of ModifyOn
      */
-    public Timestamp getModifyOn() {
-        return (Timestamp) getAttributeInternal(MODIFYON);
+    public Date getModifyOn() {
+        return (Date) getAttributeInternal(MODIFYON);
     }
 
     /**
@@ -840,6 +854,39 @@ public class PostJobsEOImpl extends BaseEntityImpl {
     }
 
     /**
+     * Gets the attribute value for SubscribeUpdate, using the alias name SubscribeUpdate.
+     * @return the value of SubscribeUpdate
+     */
+    public String getSubscribeUpdate() {
+        return (String) getAttributeInternal(SUBSCRIBEUPDATE);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for SubscribeUpdate.
+     * @param value value to set the SubscribeUpdate
+     */
+    public void setSubscribeUpdate(String value) {
+        setAttributeInternal(SUBSCRIBEUPDATE, value);
+    }
+
+    /**
+     * Gets the attribute value for SubscribeFrequency, using the alias name SubscribeFrequency.
+     * @return the value of SubscribeFrequency
+     */
+    public String getSubscribeFrequency() {
+        return (String) getAttributeInternal(SUBSCRIBEFREQUENCY);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for SubscribeFrequency.
+     * @param value value to set the SubscribeFrequency
+     */
+    public void setSubscribeFrequency(String value) {
+        setAttributeInternal(SUBSCRIBEFREQUENCY, value);
+    }
+
+
+    /**
      * @param uuid key constituent
 
      * @return a Key object based on given key constituents.
@@ -848,13 +895,6 @@ public class PostJobsEOImpl extends BaseEntityImpl {
         return new Key(new Object[] { uuid });
     }
 
-    /**
-     * @return the definition object for this instance class.
-     */
-    public static synchronized EntityDefImpl getDefinitionObject() {
-        return EntityDefImpl.findDefObject("com.lance.model.eo.PostJobsEO");
-    }
-    
     @Override
     public void lock() {
         try {

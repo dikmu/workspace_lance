@@ -4,7 +4,7 @@
 <ViewObject
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="PostJobsVO"
-  Version="12.1.3.2.36"
+  Version="12.1.3.10.8"
   InheritPersonalization="merge"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -416,6 +416,18 @@
     ColumnType="VARCHAR2"
     AliasName="VIEW_ATTR"
     SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="SubscribeFrequency"
+    PrecisionRule="true"
+    EntityAttrName="SubscribeFrequency"
+    EntityUsage="PostJobsEO"
+    AliasName="SUBSCRIBE_FREQUENCY"/>
+  <ViewAttribute
+    Name="SubscribeUpdate"
+    PrecisionRule="true"
+    EntityAttrName="SubscribeUpdate"
+    EntityUsage="PostJobsEO"
+    AliasName="SUBSCRIBE_UPDATE"/>
   <ViewCriteria
     Name="FindByIdVC"
     ViewObjectName="com.lance.model.vo.PostJobsVO"
@@ -648,6 +660,12 @@
     ViewLink="com.lance.model.vl.PostJob_PostJobDiscussVL"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <SortCriteria>
+    <Sort
+      Attribute="Rank"/>
+    <Sort
+      Attribute="ModifyOn"/>
+  </SortCriteria>
   <SortCriteria>
     <Sort
       Attribute="Rank"/>

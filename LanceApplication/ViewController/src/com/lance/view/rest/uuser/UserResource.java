@@ -90,6 +90,8 @@ import org.codehaus.jettison.json.JSONObject;
     CompanyName,Precision:255,JavaType:java.lang.String
     CanBeSearch,Precision:0,JavaType:java.math.BigDecimal  是否可被搜索到（隐私）
     DefaultRole,Precision:20,JavaType:java.lang.String    默认角色（用于跳转到相应主页）  client,lancer,contract
+    SubscribeFrequency,Precision:4,JavaType:java.lang.String 邮件订阅频率：week;day;no
+    SubscribeUpdate,Precision:1,JavaType:java.lang.String 邮件(需求)更新后再次推送：Y/N
 
     地址ID示例
      北京：1 0 1 1
@@ -122,7 +124,7 @@ public class UserResource extends BaseRestResource {
         "LocationADetail", "LocationBRegion", "LocationBCountry", "LocationBProvince", "LocationBCity",
         "LocationBDetail", "Tagline", "HourlyRate", "ChargeRate", "Overview", "ServiceDescription", "PaymentTerms",
         "Keywords", "AddressDisplay", "ContactInfo", "CreateBy", "CreateOn", "ModifyBy", "ModifyOn", "Version",
-        "LastLoginTime", "CompanyName", "CanBeSearch", "DefaultRole","Referrer"
+        "LastLoginTime", "CompanyName", "CanBeSearch", "DefaultRole","Referrer","SubscribeFrequency","SubscribeUpdate"
     };
 
 
@@ -146,7 +148,7 @@ public class UserResource extends BaseRestResource {
         "LocationARegion", "LocationACountry", "LocationAProvince", "LocationACity", "LocationADetail",
         "LocationBRegion", "LocationBCountry", "LocationBProvince", "LocationBCity", "LocationBDetail", "Tagline",
         "HourlyRate", "ChargeRate", "Overview", "ServiceDescription", "PaymentTerms", "Keywords", "AddressDisplay",
-        "ContactInfo", "LastLoginTime", "CompanyName", "CanBeSearch", "DefaultRole","Referrer"
+        "ContactInfo", "LastLoginTime", "CompanyName", "CanBeSearch", "DefaultRole","Referrer","SubscribeFrequency","SubscribeUpdate"
     };
 
     public static final String[] ATTR_GET = {
@@ -156,7 +158,7 @@ public class UserResource extends BaseRestResource {
         "LocationBRegion", "LocationBCountry", "LocationBProvince", "LocationBCity", "LocationBDetail",
         "LocationAIndex", "LocationBIndex", "Tagline", "HourlyRate", "ChargeRate", "Overview", "ServiceDescription",
         "PaymentTerms", "Keywords", "AddressDisplay", "ContactInfo", "CreateBy", "CreateOn", "ModifyBy", "ModifyOn",
-        "Version", "LastLoginTime", "CompanyName", "CanBeSearch", "DefaultRole","Referrer"
+        "Version", "LastLoginTime", "CompanyName", "CanBeSearch", "DefaultRole","Referrer","SubscribeFrequency","SubscribeUpdate"
     };
 
     public static final String[] ATTR_GET_A = {

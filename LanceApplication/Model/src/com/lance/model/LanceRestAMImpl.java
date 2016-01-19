@@ -26,6 +26,7 @@ import com.lance.model.vo.SkillSuperTypeVOImpl;
 import com.lance.model.vo.SkillsVOImpl;
 import com.lance.model.vo.SpreadHeardFromVOImpl;
 import com.lance.model.vo.UserCompanyHistoryVOImpl;
+import com.lance.model.vo.UserEmailPushVOImpl;
 import com.lance.model.vo.UserLicenseVOImpl;
 import com.lance.model.vo.UserProjectHistoryVOImpl;
 import com.lance.model.vvo.ContractClientReportVVOImpl;
@@ -517,5 +518,7 @@ public class LanceRestAMImpl extends BaseApplicationModuleImpl {
     public BaseViewObjectImpl getLanceDiscuss1() {
         return (BaseViewObjectImpl) findViewObject("LanceDiscuss1");
     }
+
+
 }
 

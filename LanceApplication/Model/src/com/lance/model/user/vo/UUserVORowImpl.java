@@ -98,6 +98,8 @@ public class UUserVORowImpl extends BaseViewRowImpl {
         Status,
         IndexSkill,
         Referrer,
+        SubscribeFrequency,
+        SubscribeUpdate,
         UserSkill,
         UserEducation,
         UserLocationList,
@@ -192,6 +194,8 @@ public class UUserVORowImpl extends BaseViewRowImpl {
     public static final int STATUS = AttributesEnum.Status.index();
     public static final int INDEXSKILL = AttributesEnum.IndexSkill.index();
     public static final int REFERRER = AttributesEnum.Referrer.index();
+    public static final int SUBSCRIBEFREQUENCY = AttributesEnum.SubscribeFrequency.index();
+    public static final int SUBSCRIBEUPDATE = AttributesEnum.SubscribeUpdate.index();
     public static final int USERSKILL = AttributesEnum.UserSkill.index();
     public static final int USEREDUCATION = AttributesEnum.UserEducation.index();
     public static final int USERLOCATIONLIST = AttributesEnum.UserLocationList.index();
@@ -1149,6 +1153,38 @@ public class UUserVORowImpl extends BaseViewRowImpl {
     }
 
     /**
+     * Gets the attribute value for SUBSCRIBE_FREQUENCY using the alias name SubscribeFrequency.
+     * @return the SUBSCRIBE_FREQUENCY
+     */
+    public String getSubscribeFrequency() {
+        return (String) getAttributeInternal(SUBSCRIBEFREQUENCY);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for SUBSCRIBE_FREQUENCY using the alias name SubscribeFrequency.
+     * @param value value to set the SUBSCRIBE_FREQUENCY
+     */
+    public void setSubscribeFrequency(String value) {
+        setAttributeInternal(SUBSCRIBEFREQUENCY, value);
+    }
+
+    /**
+     * Gets the attribute value for SUBSCRIBE_UPDATE using the alias name SubscribeUpdate.
+     * @return the SUBSCRIBE_UPDATE
+     */
+    public String getSubscribeUpdate() {
+        return (String) getAttributeInternal(SUBSCRIBEUPDATE);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for SUBSCRIBE_UPDATE using the alias name SubscribeUpdate.
+     * @param value value to set the SUBSCRIBE_UPDATE
+     */
+    public void setSubscribeUpdate(String value) {
+        setAttributeInternal(SUBSCRIBEUPDATE, value);
+    }
+
+    /**
      * Gets the associated <code>RowIterator</code> using master-detail link UserSkill.
      */
     public RowIterator getUserSkill() {
@@ -1190,6 +1226,7 @@ public class UUserVORowImpl extends BaseViewRowImpl {
     public RowIterator getUserNotification() {
         return (RowIterator) getAttributeInternal(USERNOTIFICATION);
     }
+
 
     /**
      * Gets the view accessor <code>RowSet</code> LocationRegionVO1.

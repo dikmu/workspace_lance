@@ -31,6 +31,7 @@
                     <li role="presentation"><a href="./EditBasic">基本信息</a></li>
                     <li role="presentation"><a href="./EditContact">联系信息</a></li>
                     <li role="presentation" class="active"><a href="./EditSkill">我的技能</a></li>
+                    <li role="presentation"><a href="./EmailPush">邮件设置</a></li>
                 </ul>
             </div>
             <div class="col-md-9 lan-main-right">
@@ -39,6 +40,7 @@
                 </div>
                 <div class="alert alert-info" role="alert">
                     添加个人技能为了驻才网给您推荐合适的工作机会，同时也可以让公司很容易的看上你。<br />
+                    系统会推送具有相应技能需求的工作信息到您的邮箱。<br />
                     <br />
                     <b>最多添加10条。</b>
                 </div>
@@ -64,8 +66,10 @@
                     </tbody>
                 </table>
                 
-            </div>
-            
+                
+                 </div>
+               </div>     
+                            
             <div class="modal fade" id="addSkill" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">

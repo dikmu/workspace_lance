@@ -7,7 +7,7 @@ import com.zngh.platform.front.core.model.BaseViewObjectImpl;
 // ---    Custom code may be added to this class.
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
-public class UUserVOImpl extends BaseViewObjectImpl {
+public class UUserVOImpl extends com.zngh.platform.front.core.model.BaseViewObjectImpl {
     /**
      * This is the default constructor (do not remove).
      */
