@@ -8,5 +8,7 @@
             var Data=${data};
         </script>
     </head>
-    <body></body>
+    <body>
+    
+    </body>
 </html>

@@ -139,7 +139,7 @@ function checkForm(){
             uname.closest(".form-group").addClass("has-success").addClass("has-feedback");
             basicRes.title = true;
         }else{
-            uname.attr("data-content", "请输入工作标题").popover("show");
+            uname.attr("data-content", "例：对外项目，招聘独立IT架构师").popover("show");
             uname.closest(".form-group").addClass("has-error");
             basicRes.title = false;
         }

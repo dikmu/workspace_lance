@@ -3,15 +3,15 @@
     <div class="container">
         <div class="row">
             <div class="col-md-2">
-             <a href="/lance/pages/search">
+             <a href="#">
                 <img src="/lance/resources/image/common/logo.png" alt=""/>
              </a>
             </div>
             <div class="col-md-10">
                     <div class="copyright">
-                    备案编号：1764617&nbsp;&nbsp;&nbsp;&nbsp; 站长邮箱：muhongdi@qq.com &nbsp;&nbsp;&nbsp;&nbsp; 驻才网官方QQ:2802164728<br> 
-                    上线日期：2015年6月11日  &nbsp;&nbsp;&nbsp;&nbsp; 功能还在测试中，欢迎在页面右上角提出您的宝贵意见。<br> 
-                    本站所发皆为真实项目需求，欢迎留言进一步沟通。<br>
+                    备案编号：1764617&nbsp;&nbsp;&nbsp;&nbsp; 站长邮箱：muhongdi@qq.com &nbsp;&nbsp;&nbsp;&nbsp; 站长QQ:149997704<br> 
+                    <br> 
+                    <br>
                     <span style="color:red">为保护客户隐私，只有当您得到需求发布方的回复后，才可看到需求方信息。</span>
                     </div>
             </div>
